@@ -1,0 +1,25 @@
+Adding this chat widget to your website only takes a few steps:
+
+1. Import amazon-connect-chat-interface.js and amazon-connect-chat-websockets.js. Both of these files were copied into your S3 bucket that hosts the website created by this CloudFormation Template
+    <script src="amazon-connect-chat-interface.js"></script>
+    <script src="amazon-connect-chat-websocket.js"></script>
+
+2. Initialize the Chat Interface on page load:
+    $(document).ready((a) => {
+        connect.ChatInterface.init({
+            containerId: 'root' // This is the id of the container where you want the widget to reside
+        });
+    });
+
+3. Start the chat based on a user action. You will want to add fields for the customer name and username because those fields are used in the Lambda function that was created.
+    connect.ChatInterface.initiateChat({
+        name: customerName,
+        username: username,
+        region: ${region},
+        apiGatewayEndpoint: "https://${apiId}.execute-api.${region}.amazonaws.com/Prod",
+        contactAttributes: JSON.stringify({
+            "customerName": customerName
+        }),
+        contactFlowId: "${contactFlowId}",
+        instanceId: "${instanceId}"
+    }, successHandler, failureHandler)
