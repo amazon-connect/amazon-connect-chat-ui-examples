@@ -21,7 +21,7 @@ const https = require('https');
 const url = require('url');
 const WebsiteHelper = require('./websiteHelper.js');
 const MetricsHelper = require('./metricsHelper.js');
-const UUID =  require ("uuid/v4");
+const crypto =  require ("crypto");
 
 /**
  * Request handler.
@@ -44,7 +44,7 @@ exports.handler = (event, context, callback) => {
 
             let _metric = {
                 Solution: event.ResourceProperties.solutionId,
-                UUID: event.ResourceProperties.UUID,
+                UUID: crypto.randomBytes(16).toString('hex'),
                 TimeStamp: dateString,
                 Data: {
                     Version: event.ResourceProperties.version,
