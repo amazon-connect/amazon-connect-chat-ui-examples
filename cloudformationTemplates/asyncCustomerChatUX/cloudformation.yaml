@@ -57,15 +57,32 @@ Parameters:
 Resources:
 
   #### Lambda #####
+  ChatSDKLayer:
+    Type: AWS::Lambda::LayerVersion
+    Properties:
+      CompatibleRuntimes:
+        - "nodejs10.x"
+        - "nodejs8.10"
+      Content:
+        S3Bucket:
+          !Join
+            - '.'
+            - - !Ref 'AWS::Region'
+              - !FindInMap [FunctionMap, Configuration, S3Bucket]
+        S3Key: !Join ["", [!FindInMap [FunctionMap, Configuration, S3Key], 'ChatSDK.zip']]
+      Description: The AWS SDK including Amazon Connect Chat APIs.
+  
   InitiateChatLambda:
     Type: "AWS::Lambda::Function"
     Properties:
       Description:  AWS Lambda Function to initiate the chat with the end user
       Handler: "startChatContact.handler"
       Role: !GetAtt InitiateChatLambdaExecutionRole.Arn
-      Runtime: "nodejs8.10"
+      Runtime: "nodejs10.x"
       MemorySize: 128
       Timeout: 30
+      Layers:
+        - !Ref ChatSDKLayer
       Environment:
         Variables:
           INSTANCE_ID: !Ref instanceId
@@ -127,7 +144,7 @@ Resources:
       Description:  AWS Lambda Function to update the DDB with the S3 location of the chat transcript
       Handler: "updateChatDdbWithS3Key.handler"
       Role: !GetAtt UpdateDdbWithS3LocationLambdaExecutionRole.Arn
-      Runtime: "nodejs8.10"
+      Runtime: "nodejs10.x"
       MemorySize: 128
       Timeout: 30
       Environment:
@@ -199,7 +216,7 @@ Resources:
               - !FindInMap [FunctionMap, Configuration, S3Bucket]
         S3Key: !Join ["", [!FindInMap [FunctionMap, Configuration, S3Key], 's3-notification-lambda.zip']]
       Timeout: 30
-      Runtime: "nodejs8.10"
+      Runtime: "nodejs10.x"
 
   S3BucketConfigurationLambdaExecutionRole:
     Type: "AWS::IAM::Role"
@@ -329,7 +346,7 @@ Resources:
       Handler: customResourceHelper.handler
       MemorySize: 256
       Role: !GetAtt CustomResourceHelperIamRole.Arn
-      Runtime: nodejs8.10
+      Runtime: nodejs10.x
       Timeout: 300
 
   CustomResourceHelperIamRole:
@@ -555,7 +572,7 @@ Resources:
         AWS Lambda Function that will create the chat UX and upload it to the S3 bucket
       Handler: "websiteCreator.handler"
       Role: !GetAtt ChatUXCreatorRole.Arn
-      Runtime: "nodejs8.10"
+      Runtime: "nodejs10.x"
       MemorySize: 256
       Timeout: 120
       Code:

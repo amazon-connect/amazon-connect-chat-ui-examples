@@ -329,7 +329,7 @@
                     if (chatSession.transcript.length > 0) {
                         var transcriptItem = chatSession.transcript[chatSession.transcript.length - 1];
                         if (transcriptItem.transportDetails.direction === "Incoming") {
-                            var chatDescription = "This is a demo of interacting with a Lex bot.";
+                            var chatDescription = "This is a demo of a customer chat experience.";
                             var name = transcriptItem.displayName;
                             if (["prod", "$LATEST", "AI Assistant", "SYSTEM_MESSAGE", "System Message"].indexOf(name) === -1) {
                                 chatDescription = "You are now chatting with " + name;

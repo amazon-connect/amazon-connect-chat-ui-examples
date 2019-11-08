@@ -40,15 +40,32 @@ Outputs:
 Resources:
 
   #### Lambda #####
+  ChatSDKLayer:
+    Type: AWS::Lambda::LayerVersion
+    Properties:
+      CompatibleRuntimes:
+        - "nodejs10.x"
+        - "nodejs8.10"
+      Content:
+        S3Bucket:
+          !Join
+            - '.'
+            - - !Ref 'AWS::Region'
+              - !FindInMap [FunctionMap, Configuration, S3Bucket]
+        S3Key: !Join ["", [!FindInMap [FunctionMap, Configuration, S3Key], 'ChatSDK.zip']]
+      Description: The AWS SDK including Amazon Connect Chat APIs.
+
   StartChatLambda:
     Type: "AWS::Lambda::Function"
     Properties:
       Description:  AWS Lambda Function to initiate the chat with the end user
       Handler: "startChatContact.handler"
       Role: !GetAtt StartChatLambdaExecutionRole.Arn
-      Runtime: "nodejs8.10"
+      Runtime: "nodejs10.x"
       MemorySize: 128
       Timeout: 30
+      Layers:
+        - !Ref ChatSDKLayer
       Environment:
         Variables:
           INSTANCE_ID: !Ref instanceId
@@ -191,7 +208,7 @@ Resources:
       Handler: customResourceHelper.handler
       MemorySize: 256
       Role: !GetAtt CustomResourceHelperIamRole.Arn
-      Runtime: nodejs8.10
+      Runtime: nodejs10.x
       Timeout: 300
 
   CustomResourceHelperIamRole:

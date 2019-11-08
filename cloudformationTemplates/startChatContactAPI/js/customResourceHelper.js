@@ -19,7 +19,7 @@ console.log('Loading function');
 const https = require('https');
 const url = require('url');
 const MetricsHelper = require('./metricsHelper.js');
-const UUID =  require ("uuid/v4");
+const crypto =  require ("crypto");
 
 /**
  * Request handler.
@@ -68,7 +68,7 @@ exports.handler = (event, context, callback) => {
         if (event.ResourceProperties.customAction === 'createUuid') {
             responseStatus = 'SUCCESS';
             responseData = {
-                UUID: UUID()
+                UUID: crypto.randomBytes(16).toString('hex')
             };
             sendResponse(event, callback, context.logStreamName, responseStatus, responseData);
 
