@@ -23,10 +23,6 @@ Parameters:
       Enter the (globally unique) name you would like to use for the Amazon S3 bucket where we will store the website contents.
       This template will fail to deploy if the bucket name you chose is currently in use.
     AllowedPattern: '(?=^.{3,63}$)(?!^(\d+\.)+\d+$)(^(([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])\.)*([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])$)'
-  websiteFilePrefix:
-    Type: String
-    Default:  website/
-    Description:  The Amazon S3 prefix where the website files will be saved (must end in "/")
   contactFlowId:
     Type: String
     Default: 12345678-1234-1234-1234-123456789012
@@ -41,12 +37,12 @@ Parameters:
     Type: String
     Default: "chat-transcript-s3-bucket"
     Description: >
-      Enter the name of the bucket that holds the chat transcripts for your Amazon Connect instance. You can find this in the Amazon Connect console when viewing the Data Storage section in your isntance details. E.g. If your instance has connect-xxx/connect/instanceName/ChatTranscripts, enter 'connect-xxx'
+      Enter the name of the bucket that holds the chat transcripts for your Amazon Connect instance. You can find this in the Amazon Connect console when viewing the Data Storage section in your instance details. E.g. If your instance has connect-xxx/connect/instanceName/ChatTranscripts, enter 'connect-xxx'
     AllowedPattern: '(?=^.{3,63}$)(?!^(\d+\.)+\d+$)(^(([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])\.)*([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])$)'
   transcriptPath:
     Type: String
     Description: >
-        The path in the S3 bucket that contains the chat transcripts. You can find this in the Amazon Connect console when viewing the Data Storage section in your isntance details. E.g. If your instance has connect-xxx/connect/instanceName/ChatTranscripts, enter 'connect/instanceName/ChatTranscripts'
+        The path in the S3 bucket that contains the chat transcripts. You can find this in the Amazon Connect console when viewing the Data Storage section in your instance details. E.g. If your instance has connect-xxx/connect/instanceName/ChatTranscripts, enter 'connect/instanceName/ChatTranscripts'
     Default: connect/instanceName/ChatTranscripts
   cloudFrontPriceClass:
     Type: String
@@ -57,32 +53,6 @@ Parameters:
       - PriceClass_All
     ConstraintDescription: "Allowed Price Classes PriceClass_100 PriceClass_200 and PriceClass_All"
     Description: Specify the CloudFront price class. See https://aws.amazon.com/cloudfront/pricing/ for a description of each price class.
-  chatContactDynamoDbTable:
-    Type: String
-    Description: Name of the new table to store the contact data related to chats.
-    Default: chatContactData
-    
-
-Outputs:
-  cloudFrontDistribution:
-    Description:  The domain name of the CloudFront Distribution to host the chat website
-    Value: !GetAtt CloudFrontDistribution.DomainName
-  initiateChatLambda:
-    Description:  The ARN of the Lambda function created to initiate chat
-    Value: !GetAtt InitiateChatLambda.Arn
-  apiGatewayEndoint:
-    Description:  The ARN of the API Gateway endpoint that triggers the Lambda function to initiate the chat
-    Value: !Ref ApiGatewayRestAPI
-  InitiateChatLambdaExecutionRole:
-    Description:  The ARN of the IAM role used by the Lambda function to initiate the chat
-    Value: !GetAtt InitiateChatLambdaExecutionRole.Arn
-  websiteS3Bucket:
-    Description:  The ARN of the S3 Bucket used to host the website
-    Value: !GetAtt CreateWebsiteS3Bucket.Arn
-  chatContactDynamoDbTable:
-    Description: Name of the new table to store the contact data related to chats.
-    Value: !Ref chatContactDataTable
-
 
 Resources:
 
@@ -102,7 +72,7 @@ Resources:
           CONTACT_FLOW_ID: !Ref contactFlowId
           CF_DISTRIBUTION: !GetAtt CloudFrontDistribution.DomainName
           SOLUTION_ID: !FindInMap [FunctionMap, Configuration, SolutionID]
-          CHAT_DATA_TABLE: !Ref chatContactDynamoDbTable
+          CHAT_DATA_TABLE: !Ref chatContactDataTable
       Code:
         S3Bucket:
           !Join
@@ -148,8 +118,8 @@ Resources:
                   - 'dynamodb:UpdateItem'
                   - 'dynamodb:PutItem'
                 Resource:
-                  - !Sub "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${chatContactDynamoDbTable}"
-                  - !Sub "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${chatContactDynamoDbTable}/index/*"
+                  - !GetAtt chatContactDataTable.Arn
+                  - !Sub "${chatContactDataTable.Arn}/index/*"
   
   UpdateDdbWithS3LocationLambda:
     Type: "AWS::Lambda::Function"
@@ -163,7 +133,7 @@ Resources:
       Environment:
         Variables:
           S3_BUCKET_NAME: !Ref AmazonConnectS3BucketName
-          CHAT_DATA_TABLE: !Ref chatContactDynamoDbTable
+          CHAT_DATA_TABLE: !Ref chatContactDataTable
       Code:
         S3Bucket:
           !Join
@@ -194,7 +164,7 @@ Resources:
                 Action:
                   - 'dynamodb:UpdateItem'
                 Resource:
-                  - !Sub "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${chatContactDynamoDbTable}"
+                  - !GetAtt chatContactDataTable.Arn
               - Effect: "Allow"
                 Action:
                   - 'logs:CreateLogGroup'
@@ -214,8 +184,7 @@ Resources:
       Bucket: !Ref AmazonConnectS3BucketName
       Prefix: !Ref transcriptPath
       LambdaFunctionArn: !GetAtt UpdateDdbWithS3LocationLambda.Arn
-          
-  
+
   S3BucketConfigurationLambda:
     Type: AWS::Lambda::Function
     Properties:
@@ -266,7 +235,7 @@ Resources:
       SourceArn: !Sub "arn:aws:s3:::${AmazonConnectS3BucketName}"
 
   #### DynamoDb ####
-  chatContactDataTable: 
+  chatContactDataTable:
     Type: AWS::DynamoDB::Table
     Properties: 
       AttributeDefinitions: 
@@ -284,9 +253,8 @@ Resources:
           AttributeName: "contactId"
           KeyType: "HASH"
       ProvisionedThroughput: 
-        ReadCapacityUnits: "5"
-        WriteCapacityUnits: "5"
-      TableName: !Ref chatContactDynamoDbTable
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
       GlobalSecondaryIndexes: 
         - 
           IndexName: "userDisplayHash-nextContactId-index"
@@ -300,8 +268,8 @@ Resources:
           Projection:
             ProjectionType: "ALL"
           ProvisionedThroughput: 
-            ReadCapacityUnits: "5"
-            WriteCapacityUnits: "5"
+            ReadCapacityUnits: 5
+            WriteCapacityUnits: 5
       TimeToLiveSpecification:
         AttributeName: "date"
         Enabled: true
@@ -334,9 +302,6 @@ Resources:
 
   s3BucketPolicy:
     Type: AWS::S3::BucketPolicy
-    DependsOn:
-      - CreateWebsiteS3Bucket
-      - CloudFrontDistributionAccessIdentity
     Properties:
       Bucket: !Ref CreateWebsiteS3Bucket
       PolicyDocument:
@@ -461,7 +426,6 @@ Resources:
     Type: AWS::CloudFront::Distribution
     DependsOn:
       - CustomResourceHelper
-      - CreateWebsiteS3Bucket
     Properties:
       DistributionConfig:
         Origins:
@@ -478,11 +442,11 @@ Resources:
                 - ''
                 - - 'origin-access-identity/cloudfront/'
                   - !Ref CloudFrontDistributionAccessIdentity
-        Enabled: 'true'
+        Enabled: true
         Logging:
           Bucket: !GetAtt CreateWebsiteS3Bucket.DomainName
           Prefix: 'logs/'
-          IncludeCookies: 'true'
+          IncludeCookies: true
         Comment: CloudFront for AI Powered Speech Analytics
         DefaultRootObject: index.html
         DefaultCacheBehavior:
@@ -536,19 +500,17 @@ Resources:
       Integration:
         IntegrationHttpMethod: "POST"
         Type: "AWS_PROXY"
-        Uri: !Sub
-          - "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations"
-          - lambdaArn: !GetAtt InitiateChatLambda.Arn
+        Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${InitiateChatLambda.Arn}/invocations"
         PassthroughBehavior: WHEN_NO_MATCH
       ResourceId:  !GetAtt ApiGatewayRestAPI.RootResourceId
       RestApiId: !Ref ApiGatewayRestAPI
       MethodResponses:
-        - StatusCode: 200
+        - StatusCode: "200"
           ResponseParameters:
             method.response.header.Access-Control-Allow-Origin: true
           ResponseModels:
             application/json: Empty
-        - StatusCode: 500
+        - StatusCode: "500"
           ResponseParameters:
             method.response.header.Access-Control-Allow-Origin: true
           ResponseModels:
@@ -652,3 +614,23 @@ Resources:
                   - "s3:PutObject"
                 Resource:
                   - !Sub ${CreateWebsiteS3Bucket.Arn}/*
+
+Outputs:
+  cloudFrontDistribution:
+    Description:  The domain name of the CloudFront Distribution to host the chat website
+    Value: !GetAtt CloudFrontDistribution.DomainName
+  initiateChatLambda:
+    Description:  The ARN of the Lambda function created to initiate chat
+    Value: !GetAtt InitiateChatLambda.Arn
+  apiGatewayEndpoint:
+    Description:  The ARN of the API Gateway endpoint that triggers the Lambda function to initiate the chat
+    Value: !Ref ApiGatewayRestAPI
+  InitiateChatLambdaExecutionRole:
+    Description:  The ARN of the IAM role used by the Lambda function to initiate the chat
+    Value: !GetAtt InitiateChatLambdaExecutionRole.Arn
+  websiteS3Bucket:
+    Description:  The ARN of the S3 Bucket used to host the website
+    Value: !GetAtt CreateWebsiteS3Bucket.Arn
+  chatContactDataTable:
+    Description: Name of the new table to store the contact data related to chats.
+    Value: !Ref chatContactDataTable
