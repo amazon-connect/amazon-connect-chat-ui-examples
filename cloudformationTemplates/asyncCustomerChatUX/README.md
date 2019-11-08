@@ -30,7 +30,7 @@ If you are using an existing instance, you may need to make a few changes to you
 | eu-central-1 (Frankfurt) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://eu-central-1.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=asyncCustomerChatUX&templateURL=https://s3-eu-central-1.amazonaws.com/eu-central-1.amazon-connect-advanced-customer-chat-cfn/cloudformation.yaml) |
 
 1) Go into your instance and go to the Contact Flows page. Create a new contact flow and select 'Import flow' from the upper right hand corner. Import the 'Basic Chat Disconnect Flow' from the 'contactFlows/' in this repo and click 'Publish'. Follow the same steps for the 'Basic Chat Flow'.
-2) Deploy the CloudFormation template from `https://s3-\[region\].amazonaws.com/\[region\].amazon-connect-advanced-customer-chat-cfn/cloudformation.yaml`
+2) Deploy the CloudFormation template from `https://s3-[region].amazonaws.com/[region].amazon-connect-advanced-customer-chat-cfn/cloudformation.yaml`
     - Replace the url with the appropriate region.
     - Read each field in the CloudFormation Template to know what to provide
 3) Once the CloudFront distribution is ready, test!
