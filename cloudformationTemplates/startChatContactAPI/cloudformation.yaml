@@ -135,12 +135,12 @@ Resources:
       ResourceId:  !GetAtt ApiGatewayRestAPI.RootResourceId
       RestApiId: !Ref ApiGatewayRestAPI
       MethodResponses:
-        - StatusCode: 200
+        - StatusCode: "200"
           ResponseParameters:
             method.response.header.Access-Control-Allow-Origin: true
           ResponseModels:
             application/json: Empty
-        - StatusCode: 500
+        - StatusCode: "500"
           ResponseParameters:
             method.response.header.Access-Control-Allow-Origin: true
           ResponseModels:
