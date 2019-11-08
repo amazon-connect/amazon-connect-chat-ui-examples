@@ -447,7 +447,7 @@ Resources:
           Bucket: !GetAtt CreateWebsiteS3Bucket.DomainName
           Prefix: 'logs/'
           IncludeCookies: true
-        Comment: CloudFront for AI Powered Speech Analytics
+        Comment: CloudFront for Chat UI
         DefaultRootObject: index.html
         DefaultCacheBehavior:
           AllowedMethods:
