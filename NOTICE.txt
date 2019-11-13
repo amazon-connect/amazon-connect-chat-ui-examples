@@ -1,0 +1,1 @@
+View the NOTICE.txt file under each project to see the third party software used for each solution.

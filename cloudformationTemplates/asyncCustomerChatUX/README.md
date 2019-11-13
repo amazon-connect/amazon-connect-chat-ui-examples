@@ -32,7 +32,12 @@ If you are using an existing instance, you may need to make a few changes to you
 1) Go into your instance and go to the Contact Flows page. Create a new contact flow and select 'Import flow' from the upper right hand corner. Import the 'Basic Chat Disconnect Flow' from the 'contactFlows/' in this repo and click 'Publish'. Follow the same steps for the 'Basic Chat Flow'.
 2) Deploy the CloudFormation template from `https://s3-[region].amazonaws.com/[region].amazon-connect-advanced-customer-chat-cfn/cloudformation.yaml`
     - Replace the url with the appropriate region.
-    - Read each field in the CloudFormation Template to know what to provide
+    - Read each field in the CloudFormation template and make the necessary updates
+        - `WebsiteS3BucketName`: this should be the name of a *new* bucket that will be created on your behalf to store the website contents
+        - `contactFlowId`: This is the id of the 'Basic Chat Flow' you imported in step 1. You can find the contact flow id when viewing the contact flow. For example, if the arn for your flow is 'arn:aws:connect:us-west-2:123456789012:instance/11111111-1111-1111-1111-111111111111/contact-flow/22222222-2222-2222-2222-222222222222', the contact flow id is '22222222-2222-2222-2222-222222222222'
+        - `instanceId`: This is the id of the instance you want to use. You can find this on the Amazon Connect console or when viewing the contact flow. For example, if the arn for your flow is 'arn:aws:connect:us-west-2:123456789012:instance/11111111-1111-1111-1111-111111111111/contact-flow/22222222-2222-2222-2222-222222222222', the instance id is '11111111-1111-1111-1111-111111111111'
+        - `AmazonConnectS3BucketName`: This is the bucket that holds the chat transcripts for your Amazon Connect instance. You can find this in the Amazon Connect console when viewing the Data Storage section in your instance details. E.g. If your instance has connect-xxx/connect/instanceName/ChatTranscripts, enter 'connect-xxx' 
+        - `transcriptPath`: This is the path in the S3 bucket that contains the chat transcripts. You can find this in the Amazon Connect console when viewing the Data Storage section in your instance details. E.g. If your instance has connect-xxx/connect/instanceName/ChatTranscripts, enter 'connect/instanceName/ChatTranscripts'
 3) Once the CloudFront distribution is ready, test!
     - Go to CloudFront and open the URL of the CloudFront Distribution that wast created. If you get an error saying it cannot read the file from S3, the CDN is not ready. It could take over an hour to be ready.
     - For the agent CCP, open the CCP url from Amazon Connect and change the `/ccp` portion of the URL to `/ccp-v2`
