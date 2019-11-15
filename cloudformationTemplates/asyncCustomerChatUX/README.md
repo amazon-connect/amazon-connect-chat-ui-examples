@@ -79,3 +79,9 @@ If you want to add this widget to your website instead of using the prebuilt UI,
       instanceId: "${instanceId}"
     },successHandler, failureHandler)
     ```
+
+## Troubleshooting
+
+- After deploying the stack if you see an S3 permission error when viewing the CloudFront url, it means the domain is not ready yet. The CDN can take up to an hour to be ready.
+- If you are able to initiate the first chat, but subsequent chats are not working (the chat widget just loads), make sure the S3 trigger is set up properly. When a chat is complete, the transcript is placed into the S3 bucket specified in the instance details in the Amazon Connect console. Verify that the location in the Amazon Connect console is the same as what you provided in the  CloudFormation parameters `AmazonConnectS3BucketName` and `transcriptPath`. If this trigger is not set up properly, the DynamoDB table with the contact details is not updated to denote that the chat has ended and the Lambda function will continue to pull the ended chat's details instead of creating a new one. Another workaround to this is to clear the DynamoDB table.
+
