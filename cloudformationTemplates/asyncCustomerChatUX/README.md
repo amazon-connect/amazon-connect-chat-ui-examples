@@ -19,42 +19,49 @@ If you are using an existing instance, you may need to make a few changes to you
 2) Enable Chat in your Routing Profile. Go into your instance's website and go to the Routing Profiles section. Edit the Routing Profile for your agent and add the Basic Queue to the profile with the chat channel enabled.
 ![screenshot of enabling chat on a routing profile](images/chatRoutingProfile.png)
 
-### Steps
+### Set Up Steps
 
-| Region | Launch Button |
-| ------ | ------------- |
-| us-east-1 (N. Virginia) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=asyncCustomerChatUX&templateURL=https://s3-us-east-1.amazonaws.com/us-east-1.amazon-connect-advanced-customer-chat-cfn/cloudformation.yaml) |
-| us-west-2 (Oregon) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://us-west-2.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=asyncCustomerChatUX&templateURL=https://s3-us-west-2.amazonaws.com/us-west-2.amazon-connect-advanced-customer-chat-cfn/cloudformation.yaml) |
-| ap-southeast-2 (Sydney) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://ap-southeast-2.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=asyncCustomerChatUX&templateURL=https://s3-ap-southeast-2.amazonaws.com/ap-southeast-2.amazon-connect-advanced-customer-chat-cfn/cloudformation.yaml) |
-| ap-northeast-1 (Tokyo) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://ap-northeast-1.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=asyncCustomerChatUX&templateURL=https://s3-ap-northeast-1.amazonaws.com/ap-northeast-1.amazon-connect-advanced-customer-chat-cfn/cloudformation.yaml) |
-| eu-central-1 (Frankfurt) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://eu-central-1.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=asyncCustomerChatUX&templateURL=https://s3-eu-central-1.amazonaws.com/eu-central-1.amazon-connect-advanced-customer-chat-cfn/cloudformation.yaml) |
+1) Go into your Amazon Connect instance and go to the Contact Flows page. Create a new contact flow and select 'Import flow' from the upper right hand corner. Import the 'Basic Chat Disconnect Flow' from the 'contactFlows/' in this repo and click 'Publish'. Follow the same steps for the 'Basic Chat Flow'.
 
-1) Go into your instance and go to the Contact Flows page. Create a new contact flow and select 'Import flow' from the upper right hand corner. Import the 'Basic Chat Disconnect Flow' from the 'contactFlows/' in this repo and click 'Publish'. Follow the same steps for the 'Basic Chat Flow'.
-2) Deploy the CloudFormation template from `https://s3-[region].amazonaws.com/[region].amazon-connect-advanced-customer-chat-cfn/cloudformation.yaml`
-    - Replace the url with the appropriate region.
-    - Read each field in the CloudFormation template and make the necessary updates
+2) Deploy the CloudFormation template from on of the regions below.
+    - When updating the parameters, each field in the CloudFormation template and make the necessary updates
         - `WebsiteS3BucketName`: this should be the name of a *new* bucket that will be created on your behalf to store the website contents
-        - `contactFlowId`: This is the id of the 'Basic Chat Flow' you imported in step 1. You can find the contact flow id when viewing the contact flow. For example, if the arn for your flow is 'arn:aws:connect:us-west-2:123456789012:instance/11111111-1111-1111-1111-111111111111/contact-flow/22222222-2222-2222-2222-222222222222', the contact flow id is '22222222-2222-2222-2222-222222222222'
-        - `instanceId`: This is the id of the instance you want to use. You can find this on the Amazon Connect console or when viewing the contact flow. For example, if the arn for your flow is 'arn:aws:connect:us-west-2:123456789012:instance/11111111-1111-1111-1111-111111111111/contact-flow/22222222-2222-2222-2222-222222222222', the instance id is '11111111-1111-1111-1111-111111111111'
+        - `contactFlowId`: This is the id of the 'Basic Chat Flow' you imported in step 1. You can find the contact flow id when viewing the contact flow and clicking on the 'Additional information' link. For example, if the arn for your flow is 'arn:aws:connect:us-west-2:123456789012:instance/11111111-1111-1111-1111-111111111111/contact-flow/22222222-2222-2222-2222-222222222222', the contact flow id is '22222222-2222-2222-2222-222222222222'
+        - `instanceId`: This is the id of the Amazon Connect instance you want to use. You can find this on the Amazon Connect console or when viewing the contact flow. For example, if the arn for your flow is 'arn:aws:connect:us-west-2:123456789012:instance/11111111-1111-1111-1111-111111111111/contact-flow/22222222-2222-2222-2222-222222222222', the instance id is '11111111-1111-1111-1111-111111111111'
         - `AmazonConnectS3BucketName`: This is the bucket that holds the chat transcripts for your Amazon Connect instance. You can find this in the Amazon Connect console when viewing the Data Storage section in your instance details. E.g. If your instance has connect-xxx/connect/instanceName/ChatTranscripts, enter 'connect-xxx' 
         - `transcriptPath`: This is the path in the S3 bucket that contains the chat transcripts. You can find this in the Amazon Connect console when viewing the Data Storage section in your instance details. E.g. If your instance has connect-xxx/connect/instanceName/ChatTranscripts, enter 'connect/instanceName/ChatTranscripts'
-3) Once the CloudFront distribution is ready, test!
-    - Go to CloudFront and open the URL of the CloudFront Distribution that wast created. If you get an error saying it cannot read the file from S3, the CDN is not ready. It could take over an hour to be ready.
-    - For the agent CCP, open the CCP url from Amazon Connect and change the `/ccp` portion of the URL to `/ccp-v2`
-    - When entering the username, enter the username of the agent you would like to speak to. The Contact Flow connects the user to the agent specified in the username field.
+    - You do not need to make any change on the next two pages of the CloudFormation stack launch, but you will need to check the box to allow CloudFormation to create these resources for you.
+        
+        | Region | Launch Button |
+        | ------ | ------------- |
+        | us-east-1 (N. Virginia) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=asyncCustomerChatUX&templateURL=https://s3.amazonaws.com/us-east-1.amazon-connect-advanced-customer-chat-cfn/cloudformation.yaml) |
+        | us-west-2 (Oregon) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://us-west-2.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=asyncCustomerChatUX&templateURL=https://s3-us-west-2.amazonaws.com/us-west-2.amazon-connect-advanced-customer-chat-cfn/cloudformation.yaml) |
+        | ap-southeast-2 (Sydney) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://ap-southeast-2.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=asyncCustomerChatUX&templateURL=https://s3-ap-southeast-2.amazonaws.com/ap-southeast-2.amazon-connect-advanced-customer-chat-cfn/cloudformation.yaml) |
+        | ap-northeast-1 (Tokyo) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://ap-northeast-1.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=asyncCustomerChatUX&templateURL=https://s3-ap-northeast-1.amazonaws.com/ap-northeast-1.amazon-connect-advanced-customer-chat-cfn/cloudformation.yaml) |
+        | eu-central-1 (Frankfurt) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://eu-central-1.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=asyncCustomerChatUX&templateURL=https://s3-eu-central-1.amazonaws.com/eu-central-1.amazon-connect-advanced-customer-chat-cfn/cloudformation.yaml) |
+        
+### Testing Steps
+        
+ Once the CloudFront distribution is ready, test!
+ 
+1) Go to CloudFront URL that was created. You can find the CloudFront URL under the `Outputs` tab of the CloudFormation stack by the key `cloudFrontDistribution`.  If you get an Access Denied error saying it cannot read the file from S3, the CDN is not ready. It could take over an hour to be ready.
+2) For the agent CCP, open the CCP url from Amazon Connect and change the `/ccp` portion of the URL to `/ccp-v2`
+3) When entering the username on your CloudFront web page, enter the username of the agent you would like to speak to. The Contact Flow connects the user to the agent specified in the username field. If a user with the username cannot be found, it puts you in the Basic Queue.
 
 ## Adding this chat widget to your website
 
-If you want to add this widget to your website instead of using the prebuilt UI, here are the steps to do so:
+If you want to add the customer chat widget to your website instead of using the CloudFront web page, here are the steps to do so:
 
-1. In your website's html code, import 'amazon-connect-chat-interface.js' and 'amazon-connect-chat-websockets.js'. Both of these files were copied into your S3 bucket that hosts the website created by this CloudFormation template.
+1. Update the CORS configuration in Lambda to refer to your new website. In Lambda, go to the initiateChatLambda function and update the `Access-Control-Allow-Origin` field in the success and failure responses to be your website's URL.
+
+2. In your website's html code, import 'amazon-connect-chat-interface.js' and 'amazon-connect-chat-websockets.js'. Both of these files were copied into your S3 bucket that hosts the website created by this CloudFormation template.
 
     ```html
     <script src="amazon-connect-chat-interface.js"></script>
     <script src="amazon-connect-chat-websockets.js"></script>
     ```
 
-2. Initialize the Chat Interface on page load:
+3. Initialize the Chat Interface on page load:
 
     ```js
     $(document).ready((a) => {
@@ -64,7 +71,7 @@ If you want to add this widget to your website instead of using the prebuilt UI,
     });
     ```
 
-3. Start the chat based on a user action. You will want to add fields for the customer name and username because those fields are used in the Lambda function that was created.
+4. Start the chat based on a user action. You will want to add fields for the customer name and username because those fields are used in the Lambda function that was created.
 
     ```js
     connect.ChatInterface.initiateChat({
