@@ -63,7 +63,7 @@ let websiteHelper = (function() {
         console.log(['UUID :', uuid ].join(' '));
         console.log(['dashboardUsage :', dashboardUsage ].join(' '));
 
-        var files = ["js/amazon-connect-chat-interface.js", "js/amazon-connect-chat-websocket.js", "css/style.css"];
+        var files = ["js/amazon-connect-chat-interface.js", "css/style.css"];
         // Copy a list of files from source to destination bucket: index.html, css/*, 2 chunk files, other .js files?
         if (!destS3KeyPrefix.endsWith("/")) {
             destS3KeyPrefix = destS3KeyPrefix + "/";

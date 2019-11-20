@@ -30,7 +30,7 @@ If you are using an existing instance, you may need to make a few changes to you
         - `instanceId`: This is the id of the Amazon Connect instance you want to use. You can find this on the Amazon Connect console or when viewing the contact flow. For example, if the arn for your flow is 'arn:aws:connect:us-west-2:123456789012:instance/11111111-1111-1111-1111-111111111111/contact-flow/22222222-2222-2222-2222-222222222222', the instance id is '11111111-1111-1111-1111-111111111111'
         - `AmazonConnectS3BucketName`: This is the bucket that holds the chat transcripts for your Amazon Connect instance. You can find this in the Amazon Connect console when viewing the Data Storage section in your instance details. E.g. If your instance has connect-xxx/connect/instanceName/ChatTranscripts, enter 'connect-xxx' 
         - `transcriptPath`: This is the path in the S3 bucket that contains the chat transcripts. You can find this in the Amazon Connect console when viewing the Data Storage section in your instance details. E.g. If your instance has connect-xxx/connect/instanceName/ChatTranscripts, enter 'connect/instanceName/ChatTranscripts'
-    - You do not need to make any change on the next two pages of the CloudFormation stack launch, but you will need to check the box to allow CloudFormation to create these resources for you.
+    - You do not need to make any change on the next two pages of the CloudFormation stack launch, but you will need to check the box to acknowledge that IAM resources will be created.
         
         | Region | Launch Button |
         | ------ | ------------- |
@@ -50,15 +50,14 @@ If you are using an existing instance, you may need to make a few changes to you
 
 ## Adding this chat widget to your website
 
-If you want to add the customer chat widget to your website instead of using the CloudFront web page, here are the steps to do so:
+If you want to add the customer chat widget (that is available in the Test Chat experience in the Amazon Connect website) to your website instead of using the CloudFront web page, here are the steps to do so:
 
 1. Update the CORS configuration in Lambda to refer to your new website. In Lambda, go to the initiateChatLambda function and update the `Access-Control-Allow-Origin` field in the success and failure responses to be your website's URL.
 
-2. In your website's html code, import 'amazon-connect-chat-interface.js' and 'amazon-connect-chat-websockets.js'. Both of these files were copied into your S3 bucket that hosts the website created by this CloudFormation template.
+2. In your website's html code, import 'amazon-connect-chat-interface.js'. This file was copied into your S3 bucket that hosts the website created by this CloudFormation template.
 
     ```html
     <script src="amazon-connect-chat-interface.js"></script>
-    <script src="amazon-connect-chat-websockets.js"></script>
     ```
 
 3. Initialize the Chat Interface on page load:
