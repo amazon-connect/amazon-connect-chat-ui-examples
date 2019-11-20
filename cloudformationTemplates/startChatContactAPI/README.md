@@ -30,10 +30,10 @@ If you are using an existing instance, you may need to make a few changes to you
     - Enter the Contact Flow id and Instance Id that you would like to test with. These are added as Lambda environment variables.
         - `contactFlowId`: You can find the contact flow id when viewing a contact flow. For example, if the arn for your flow is 'arn:aws:connect:us-west-2:123456789012:instance/11111111-1111-1111-1111-111111111111/contact-flow/22222222-2222-2222-2222-222222222222', the contact flow id is '22222222-2222-2222-2222-222222222222'
         - `instanceId`: This is the id of the instance you want to use. You can find this on the Amazon Connect console or when viewing the contact flow. For example, if the arn for your flow is 'arn:aws:connect:us-west-2:123456789012:instance/11111111-1111-1111-1111-111111111111/contact-flow/22222222-2222-2222-2222-222222222222', the instance id is '11111111-1111-1111-1111-111111111111'
-    2) Once the stack has launched you can call the API from your website. Follow the steps below to see how you can call this API using our pre-built chat widget or by building out your own UX.
+2) Once the stack has launched you can call the API from your website. Follow the steps below to see how you can call this API using our pre-built chat widget or by building out your own UX.
     
 ## Prebuilt Chat Widget
-If you want to add the customer chat widget (that is available in the Test Chat experience in the Amazon Connect website) to your website, here are the steps to do so:
+If you want to add the customer chat widget (that is available in the Test Chat experience in the Amazon Connect website) to your website, here are the steps to do so. You can also refer to the `widgetIndex.html` file in this repo to see an example of how to use the widget.
 
 1. In your website's html code, import the 'amazon-connect-chat-interface.js' file from this repo.
 
@@ -41,7 +41,7 @@ If you want to add the customer chat widget (that is available in the Test Chat 
     <script src="amazon-connect-chat-interface.js"></script>
     ```
 
-2. Initialize the Chat Interface on page load:
+2. Initialize the Chat Interface on page load. Note: you need to update this to include the root id of the div where the customer chat widget will live.
 
     ```js
     $(document).ready((a) => {
@@ -51,7 +51,7 @@ If you want to add the customer chat widget (that is available in the Test Chat 
     });
     ```
 
-3. Start the chat based on a user action. You will want to add fields for the customer name and username because those fields are used in the Lambda function that was created.
+3. Start the chat based on a user action. You will want to add fields for the customer name and username because those fields are used in the Lambda function that was created. Note: you need to update this to include the API Gateway endpoint that was created in the CloudFormation stack.
 
     ```js
     connect.ChatInterface.initiateChat({

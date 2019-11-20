@@ -63,7 +63,7 @@ function buildSuccessfulResponse(result) {
             'Access-Control-Allow-Headers':'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'
         },
         body: JSON.stringify({
-            data: result
+            data: { startChatResult: result }
         })
     };
     console.log("RESPONSE" + JSON.stringify(response));

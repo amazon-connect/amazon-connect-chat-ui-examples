@@ -111,7 +111,7 @@
                             console.log("Success!");
                             console.log(JSON.stringify(result));
                             session = connect.ChatSession.create({
-                                chatDetails: result.data,
+                                chatDetails: result.data.startChatResult,
                                 type: "CUSTOMER"
                             });
                         },
