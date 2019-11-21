@@ -66,7 +66,7 @@ Note: you will want to show the widget only when there is a conversation in prog
 
 ## Creating your own Chat UX
 
-If instead you want to build your own Chat widget instead of use our prebuilt one, follow these directions. There is an example file `customBuildIndex.html` that shows you how to call [Amazon Connect Chat JS]( https://github.com/amazon-connect/amazon-connect-chat-js) to send messages between the agent and customer.
+If instead you want to build your own Chat widget instead of use our prebuilt one, follow these directions. There is an example file `customBuildIndex.html` that shows you how to call [Amazon Connect Chat JS](https://github.com/amazon-connect/amazon-connect-chat-js) to send messages between the agent and customer.
 
 There are two main steps: 
 1) Call your lambda function to start the chat

@@ -13,6 +13,14 @@ At the moment, these are the solutions in this repo:
 2) **[cloudformationTemplates/startChatContactAPI](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/cloudformationTemplates/startChatContactAPI)**
     The Start Chat Contact API solution creates a simple API to start the chat from the customer side. Use this solution if you want to custom build your customer chat widget. There is also an example html file in this repo that shows you how to make subsequent calls to Chat JS to send messages between the customer and agent after the chat is started.
     
+## Resources
+
+Here are a few resources to help you implement chat in your contact center:
+- [Amazon Connect ChatJS](https://github.com/amazon-connect/amazon-connect-chat-js)
+- [Amazon Connect Streams](https://github.com/aws/amazon-connect-streams)
+- Amazon Connect Service SDK
+- Amazon Connect Participant Service SDK
+    
 ## Enabling Chat in an Existing Amazon Connect Contact Center
 
 If your instance was created before the release of the chat feature, here's an overview of what you need to do to enable chat, as well as what has changed.
