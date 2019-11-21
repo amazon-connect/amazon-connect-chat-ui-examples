@@ -8,7 +8,7 @@ Adding chat to your website is possible with a few easy steps. This solutions sp
 
 You need an Amazon Connect instance to deploy this [CloudFormation](https://aws.amazon.com/cloudformation/) template. You can use an existing one or create a new one by following our onboarding guide [here](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-get-started.html).
 
-If you are using an existing instance, you may need to make a few changes to your instance to enable Chat. Follow the steps here to see what changes you need to make.
+If you are using an existing instance, you may need to make a few changes to your instance to enable Chat. Follow the steps [here](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/README.md#enabling-chat-in-an-existing-amazon-connect-contact-center) to see what changes you need to make.
 
 ### Steps
 

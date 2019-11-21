@@ -25,7 +25,10 @@ If your instance was created before the release of the chat feature, here's an o
     5. Choose Save. Now people who are assigned to that security profile will be able to use the simulated chat experience.
  
     *Note: Another option is to create a new security profile specifically for testing chat and assign testers to that profile.*
-2. Your existing contacts flows will also work for chat! You just need to update them to specify how you want them to work. 
+![screenshot of enabling chat on a security profile](images/securityProfile.png)
+2. Enable Chat in your Routing Profile. Go into your instance's website and go to the Routing Profiles section. Edit the Routing Profile for your agent and add the Basic Queue to the profile with the chat channel enabled.
+![screenshot of enabling chat on a routing profile](images/chatRoutingProfile.png)
+3. Your existing contacts flows will also work for chat! You just need to update them to specify how you want them to work. 
     We've added the following action blocks:
     - [Wait](https://docs.aws.amazon.com/connect/latest/adminguide/contact-blocks.html#wait)
     - [Set disconnect flow](https://docs.aws.amazon.com/connect/latest/adminguide/contact-blocks.html#set-disconnect-flow)
@@ -35,19 +38,17 @@ If your instance was created before the release of the chat feature, here's an o
     - [Get customer input](https://docs.aws.amazon.com/connect/latest/adminguide/contact-blocks.html#get-customer-input)
     - [Store customer input](https://docs.aws.amazon.com/connect/latest/adminguide/contact-blocks.html#store-customer-input)
     - [Set recording behavior](https://docs.aws.amazon.com/connect/latest/adminguide/contact-blocks.html#set-recording-behavior)
-3. Your metric reports and the contact trace records will now reflect chat as a channel. Note the following metrics:
+4. Your metric reports and the contact trace records will now reflect chat as a channel. Note the following metrics:
     - [Agent Activity](https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#agent-activity-state-real-time): This metric used to be named Agent Status. Existing reports that used Agent Status as the column name will start using Agent Activity as the column name.
     - [Availability](https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time): This metric has a new definition to account for chat. The change has no impact on metrics for voice calls.
     - [Capacity](https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#capacity-real-time): This is a new real-time metric.
     - [Contact State](https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#contact-state-real-time): This metric has a few changes so the states are better aligned to what the agent sees in the updated CCP.
     
     Check out the Real-time Metrics Definitions and Historical Metrics Definitions. These articles have been updated to reflect the addition of chat.
-4. If your business is using Amazon Lex bots in your contact center, and your Amazon Connect instance was created before October 18, 2018, we recommend doing the following step to ensure your service-linked role has "lex:PostText" permissions:
-    - Add a new Amazon Lex bot (and then you can remove it). The act of adding the Amazon Lex bot will automatically update your permissions.
 5. Enable Chat Transcripts in the Amazon Connect console by viewing your instance settings and clicking on the 'Data Storage' section and adding an S3 bucket in the 'Chat Transcripts' section.
-![screenshot of enabling chat transcripts](images/chatTranscript.png)
-6. Enable Chat in your Routing Profile. Go into your instance's website and go to the Routing Profiles section. Edit the Routing Profile for your agent and add the Basic Queue to the profile with the chat channel enabled.
-![screenshot of enabling chat on a routing profile](images/chatRoutingProfile.png)
+    ![screenshot of enabling chat transcripts](images/chatTranscript.png)
+6. If your business is using Amazon Lex bots in your contact center, and your Amazon Connect instance was created before October 18, 2018, we recommend doing the following step to ensure your service-linked role has "lex:PostText" permissions:
+    - Add a new Amazon Lex bot (and then you can remove it). The act of adding the Amazon Lex bot will automatically update your permissions.
 7. When you're ready to deploy the updated CCP, give the URL for it to those agents who are going handle voice and chat contacts, or only chat contacts. Those agents who are only handling voice contacts can continue using the original CCP. To learn more about the updated CCP interface, see [Chat with Contacts](https://docs.aws.amazon.com/connect/latest/adminguide/work-with-chats.html).
 8. For instances created prior to 10/12/2018, the Test Chat experience in the Amazon Connect website is not available. Please follow instructions in the  [asyncCustomerChatUX solution](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/cloudformationTemplates/asyncCustomerChatUX) to deploy your own sample customer UI and test chat.
 
