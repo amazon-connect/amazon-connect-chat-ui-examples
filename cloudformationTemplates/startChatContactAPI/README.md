@@ -8,12 +8,7 @@ Adding chat to your website is possible with a few easy steps. This solutions sp
 
 You need an Amazon Connect instance to deploy this [CloudFormation](https://aws.amazon.com/cloudformation/) template. You can use an existing one or create a new one by following our onboarding guide [here](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-get-started.html).
 
-If you are using an existing instance, you may need to make a few changes to your instance to enable Chat.
-
-1) Enable Chat Transcripts in the Amazon Connect console by viewing your instance settings and clicking on the 'Data Storage' section and adding an S3 bucket in the 'Chat Transcripts' section.
-![screenshot of enabling chat transcripts](images/chatTranscript.png)
-2) Enable Chat in your Routing Profile. Go into your instance's website and go to the Routing Profiles section. Edit the Routing Profile for your agent and add the Basic Queue to the profile with the chat channel enabled.
-![screenshot of enabling chat on a routing profile](images/chatRoutingProfile.png)
+If you are using an existing instance, you may need to make a few changes to your instance to enable Chat. Follow the steps here to see what changes you need to make.
 
 ### Steps
 
@@ -34,6 +29,8 @@ If you are using an existing instance, you may need to make a few changes to you
     
 ## Prebuilt Chat Widget
 If you want to add the customer chat widget (that is available in the Test Chat experience in the Amazon Connect website) to your website, here are the steps to do so. You can also refer to the `widgetIndex.html` file in this repo to see an example of how to use the widget.
+
+Note: you will want to show the widget only when there is a conversation in progress. If the widget is visible when there is no conversation, you will just see a loading spinner.
 
 1. In your website's html code, import the 'amazon-connect-chat-interface.js' file from this repo.
 
