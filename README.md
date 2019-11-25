@@ -23,6 +23,7 @@ Here are a few resources to help you implement chat in your contact center:
 - [iOS Mobile SDK](https://github.com/aws-amplify/aws-sdk-ios)
     - [Amazon Connect Participant Service](https://cocoapods.org/pods/AWSConnectParticipant)
     - [Amazon Connect Service](https://cocoapods.org/pods/AWSConnect)
+- [Android SDK](https://github.com/aws-amplify/aws-sdk-android)
     
 ## Enabling Chat in an Existing Amazon Connect Contact Center
 
