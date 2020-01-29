@@ -35,8 +35,8 @@ exports.handler = (event, context, callback) => {
         var s3Key = previousConnectionData.s3Key;
         var hasTokenExpired = false;
         if (previousConnectionData.date) {
-            console.log("prev date: " + previousConnectionData.date + " vs. now: " + Date.now());
-            hasTokenExpired = (Date.now() - previousConnectionData.date) > 86400000;
+            console.log("prev date: " + previousConnectionData.date + " vs. now: " + getCurrentTime());
+            hasTokenExpired = (getCurrentTime() - previousConnectionData.date) > 86400;
         }
 
         if ("NONE" == s3Key && previousConnectionData.currentContactId != "INITIAL_CHAT" && !hasTokenExpired) {
@@ -97,6 +97,7 @@ function startChatContact(contactFlowId, username, body, instanceId) {
 }
 
 function getPreviousContactData(userId, displayName) {
+    // Searches for Chat with the Next Contact ID as CURRENT_CHAT
     return new Promise(function (resolve, reject) {
         var params = {
             TableName: process.env.CHAT_DATA_TABLE,
@@ -176,7 +177,7 @@ function putNewConnectionData(previousContactId, startChatResult, userId, displa
                 'nextContactId': 'CURRENT_CHAT',
                 's3Key': 'NONE',
                 'startChatResult': JSON.stringify(startChatResult),
-                'date': Date.now()
+                'date': getCurrentTime()
             }
         };
 
@@ -225,4 +226,8 @@ function buildResponseFailed(err) {
         })
     };
     return response;
+}
+
+function getCurrentTime() {
+    return Math.floor(Date.now() / 1000);
 }
