@@ -4,16 +4,13 @@ AWSTemplateFormatVersion: '2010-09-09'
 
 Description: >
   "Customer chat solution for Amazon Connect"
-  
+
 Mappings:
   FunctionMap:
     Configuration:
       S3Bucket: "amazon-connect-advanced-customer-chat-cfn"
       S3Key: "deployment/"
       SolutionID: "AC0001"
-  Send:
-    AnonymousUsage:
-      Data: "Yes"
 
 Parameters:
   WebsiteS3BucketName:
@@ -53,6 +50,16 @@ Parameters:
       - PriceClass_All
     ConstraintDescription: "Allowed Price Classes PriceClass_100 PriceClass_200 and PriceClass_All"
     Description: Specify the CloudFront price class. See https://aws.amazon.com/cloudfront/pricing/ for a description of each price class.
+  allowAnonymousUsageMetrics:
+    Type: String
+    Default: "Yes"
+    AllowedValues:
+      - "Yes"
+      - "No"
+    Description: Send usage metrics about this CloudFormation stack to AWS
+
+Conditions:
+  AnonymousUsageMetrics: !Equals [ !Ref allowAnonymousUsageMetrics, "Yes"]
 
 Resources:
 
@@ -71,7 +78,7 @@ Resources:
               - !FindInMap [FunctionMap, Configuration, S3Bucket]
         S3Key: !Join ["", [!FindInMap [FunctionMap, Configuration, S3Key], 'ChatSDK.zip']]
       Description: The AWS SDK including Amazon Connect Chat APIs.
-  
+
   InitiateChatLambda:
     Type: "AWS::Lambda::Function"
     Properties:
@@ -137,7 +144,7 @@ Resources:
                 Resource:
                   - !GetAtt chatContactDataTable.Arn
                   - !Sub "${chatContactDataTable.Arn}/index/*"
-  
+
   UpdateDdbWithS3LocationLambda:
     Type: "AWS::Lambda::Function"
     Properties:
@@ -254,37 +261,37 @@ Resources:
   #### DynamoDb ####
   chatContactDataTable:
     Type: AWS::DynamoDB::Table
-    Properties: 
-      AttributeDefinitions: 
-        - 
+    Properties:
+      AttributeDefinitions:
+        -
           AttributeName: "contactId"
           AttributeType: "S"
-        - 
+        -
           AttributeName: "nextContactId"
           AttributeType: "S"
-        - 
+        -
           AttributeName: "userDisplayHash"
           AttributeType: "S"
-      KeySchema: 
-        - 
+      KeySchema:
+        -
           AttributeName: "contactId"
           KeyType: "HASH"
-      ProvisionedThroughput: 
+      ProvisionedThroughput:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
-      GlobalSecondaryIndexes: 
-        - 
+      GlobalSecondaryIndexes:
+        -
           IndexName: "userDisplayHash-nextContactId-index"
-          KeySchema: 
-            - 
+          KeySchema:
+            -
               AttributeName: "userDisplayHash"
               KeyType: "HASH"
-            - 
+            -
               AttributeName: "nextContactId"
               KeyType: "RANGE"
           Projection:
             ProjectionType: "ALL"
-          ProvisionedThroughput: 
+          ProvisionedThroughput:
             ReadCapacityUnits: 5
             WriteCapacityUnits: 5
       TimeToLiveSpecification:
@@ -412,18 +419,19 @@ Resources:
       destS3Bucket: !Ref WebsiteS3BucketName
       destS3KeyPrefix: contents/
       UUID: !GetAtt SolutionUuid.UUID
-      data: !FindInMap [Send, AnonymousUsage, Data]
+      data: !Ref allowAnonymousUsageMetrics
       solutionId: !FindInMap [FunctionMap, Configuration, SolutionID]
 
   SolutionAnonymousMetric:
     Type: "Custom::LoadLambda"
+    Condition: AnonymousUsageMetrics
     Properties:
       ServiceToken: !GetAtt CustomResourceHelper.Arn
       Region: !Ref AWS::Region
       solutionId: !FindInMap ["FunctionMap", "Configuration", "SolutionID"]
       UUID: !GetAtt SolutionUuid.UUID
       version: "1"
-      anonymousData: !FindInMap ["Send", "AnonymousUsage", "Data"]
+      anonymousData: !Ref allowAnonymousUsageMetrics
       customAction: "sendMetric"
 
   SolutionUuid:

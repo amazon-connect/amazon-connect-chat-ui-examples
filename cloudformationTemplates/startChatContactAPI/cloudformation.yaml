@@ -10,9 +10,6 @@ Mappings:
       S3Bucket: "start-chat-contact-api-cfn"
       S3Key: "deployment/"
       SolutionID: "AC0002"
-  Send:
-    AnonymousUsage:
-      Data: "Yes"
 
 Parameters:
   contactFlowId:
@@ -25,6 +22,16 @@ Parameters:
     Default: 12345678-1234-1234-1234-123456789012
     Description: The instance id of the Amazon Connect instance that the customer will interact with while chatting
     AllowedPattern: '\w{8}-\w{4}-\w{4}-\w{4}-\w{12}'
+  allowAnonymousUsageMetrics:
+    Type: String
+    Default: "Yes"
+    AllowedValues:
+      - "Yes"
+      - "No"
+    Description: Send usage metrics about this CloudFormation stack to AWS
+
+Conditions:
+  AnonymousUsageMetrics: !Equals [ !Ref allowAnonymousUsageMetrics, "Yes"]
 
 Outputs:
   StartChatLambda:
@@ -252,6 +259,7 @@ Resources:
 
   SolutionAnonymousMetric:
     Type: "Custom::LoadLambda"
+    Condition: AnonymousUsageMetrics
     Properties:
       ServiceToken:
         Fn::GetAtt:
@@ -262,7 +270,7 @@ Resources:
       solutionId: !FindInMap ["FunctionMap", "Configuration", "SolutionID"]
       UUID: !GetAtt SolutionUuid.UUID
       version: "1"
-      anonymousData: !FindInMap ["Send", "AnonymousUsage", "Data"]
+      anonymousData: !Ref allowAnonymousUsageMetrics
       customAction: "sendMetric"
 
   SolutionUuid:
