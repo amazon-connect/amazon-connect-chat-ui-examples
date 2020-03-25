@@ -11,9 +11,6 @@ Mappings:
       S3Bucket: "amazon-connect-advanced-customer-chat-cfn"
       S3Key: "deployment/"
       SolutionID: "AC0001"
-  Send:
-    AnonymousUsage:
-      Data: "Yes"
 
 Parameters:
   WebsiteS3BucketName:

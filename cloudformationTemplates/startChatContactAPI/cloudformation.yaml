@@ -10,9 +10,6 @@ Mappings:
       S3Bucket: "start-chat-contact-api-cfn"
       S3Key: "deployment/"
       SolutionID: "AC0002"
-  Send:
-    AnonymousUsage:
-      Data: "Yes"
 
 Parameters:
   contactFlowId:
