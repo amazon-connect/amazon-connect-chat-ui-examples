@@ -7,11 +7,13 @@ Before working on projects in this repo, we suggest taking time to follow [the p
 ## Solutions
 
 At the moment, these are the solutions in this repo:
-
-1) **[cloudformationTemplates/asyncCustomerChatUX](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/cloudformationTemplates/asyncCustomerChatUX)**
+ 1) **Get started with Chat** - **[CloudFormationTemplates/startChatContactAPI](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/cloudformationTemplates/startChatContactAPI)**
+    Use this solution to create a web widget with Amazon Connect Chat.
+    The Start Chat Contact API solution creates a simple API to start the chat from the customer side. Use this solution to get started with Amazon Connect Chat. 
+    
+2) **[CloudFormationTemplates/asyncCustomerChatUX](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/cloudformationTemplates/asyncCustomerChatUX)**
     The Async Customer Chat solution spins up a website that uses a pre-built chat widget for the customer side. It also contains AWS resources that help enable the asynchronous chat experience across devices.
-2) **[cloudformationTemplates/startChatContactAPI](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/cloudformationTemplates/startChatContactAPI)**
-    The Start Chat Contact API solution creates a simple API to start the chat from the customer side. Use this solution if you want to custom build your customer chat widget. There is also an example html file in this repo that shows you how to make subsequent calls to Chat JS to send messages between the customer and agent after the chat is started.
+
     
 ## Resources
 

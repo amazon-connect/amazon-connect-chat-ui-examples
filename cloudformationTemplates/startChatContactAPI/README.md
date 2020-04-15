@@ -1,83 +1,202 @@
 # Overview
 
-Adding chat to your website is possible with a few easy steps. This solutions spins up an [Amazon API Gateway](https://aws.amazon.com/api-gateway/) endpoint that triggers an [AWS Lambda](https://aws.amazon.com/lambda/) function. This Lambda function invokes the [Amazon Connect](https://aws.amazon.com/connect/) Service [StartChatContact](https://docs.aws.amazon.com/en_pv/connect/latest/APIReference/API_StartChatContact.html) API and returns the result from that call. Once you have the StartChatContact API you can either pass that response to the prebuilt widget to get a quick implementation going or you can build your own customer chat experience by using the [Amazon Connect Chat JS]( https://github.com/amazon-connect/amazon-connect-chatjs)  library. 
+Adding chat to your website is possible with a few easy steps. This solutions spins up an [Amazon API Gateway](https://aws.amazon.com/api-gateway/) endpoint that triggers an [AWS Lambda](https://aws.amazon.com/lambda/) function. This Lambda function invokes the [Amazon Connect](https://aws.amazon.com/connect/) Service [StartChatContact](https://docs.aws.amazon.com/en_pv/connect/latest/APIReference/API_StartChatContact.html) API and returns the result from that call. You could use the below pre built widget to get up and going. This solution is built on top of [Chat JS](https://github.com/amazon-connect/amazon-connect-chat-ui-examples.git). 
 
-## CloudFormation Deployment Steps
+## [Getting started with Pre Built Widget](#Getting-started-with-Pre-Built-Widget)
+## [Getting started with a Custom Widget](#Getting-Started-with-a-Custom-Widget)
 
 ### Pre-requisites
 
-You need an Amazon Connect instance to deploy this [CloudFormation](https://aws.amazon.com/cloudformation/) template. You can use an existing one or create a new one by following our onboarding guide [here](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-get-started.html).
+1. Create an Amazon Connect Instance by signing up [here](https://aws.amazon.com/connect/).
+You need an Amazon Connect instance to deploy the below [CloudFormation](https://aws.amazon.com/cloudformation/) template. You can use an existing one or create a new one by following our onboarding guide [here](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-get-started.html).
 
-If you are using an existing instance, you may need to make a few changes to your instance to enable Chat. Follow the steps [here](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/README.md#enabling-chat-in-an-existing-amazon-connect-contact-center) to see what changes you need to make.
+    If you are using an existing instance, you may need to make a few changes to your instance to enable Chat. Follow the steps [here](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/README.md#enabling-chat-in-an-existing-amazon-connect-contact-center) to see what changes you need to make.
 
-### Steps
+2. Once you create an Amazon Connect Instance, create a new contact flow, by picking **Sample queue customer** contact flow and **publish it**
 
-| Region | Launch Button |
-| ------ | ------------- |
-| us-east-1 (N. Virginia) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=startChatContactAPI&templateURL=https://s3.amazonaws.com/us-east-1.start-chat-contact-api-cfn/cloudformation.yaml) |
-| us-west-2 (Oregon) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://us-west-2.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=startChatContactAPI&templateURL=https://s3-us-west-2.amazonaws.com/us-west-2.start-chat-contact-api-cfn/cloudformation.yaml) |
-| ap-southeast-2 (Sydney) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://ap-southeast-2.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=startChatContactAPI&templateURL=https://s3-ap-southeast-2.amazonaws.com/ap-southeast-2.start-chat-contact-api-cfn/cloudformation.yaml) |
-| ap-northeast-1 (Tokyo) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://ap-northeast-1.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=startChatContactAPI&templateURL=https://s3-ap-northeast-1.amazonaws.com/ap-northeast-1.start-chat-contact-api-cfn/cloudformation.yaml) |
-| eu-central-1 (Frankfurt) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://eu-central-1.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=startChatContactAPI&templateURL=https://s3-eu-central-1.amazonaws.com/eu-central-1.start-chat-contact-api-cfn/cloudformation.yaml) |
-| eu-west-2 (London) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://eu-west-2.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=startChatContactAPI&templateURL=https://s3-eu-west-2.amazonaws.com/eu-west-2.start-chat-contact-api-cfn/cloudformation.yaml) |
-| ap-southeast-1 (Singapore) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://ap-southeast-1.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=startChatContactAPI&templateURL=https://s3-ap-southeast-1.amazonaws.com/ap-southeast-1.start-chat-contact-api-cfn/cloudformation.yaml) |
+    ![Create Contact Flow](images/createContactFlow.png) 
+
+3. Publish a CloudFormation template using one of the regions you prefer below. 
+
+    | Region | Launch Button |
+    | ------ | ------------- |
+    | us-east-1 (N. Virginia) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=startChatContactAPI&templateURL=https://s3.amazonaws.com/us-east-1.start-chat-contact-api-cfn/cloudformation.yaml) |
+    | us-west-2 (Oregon) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://us-west-2.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=startChatContactAPI&templateURL=https://s3-us-west-2.amazonaws.com/us-west-2.start-chat-contact-api-cfn/cloudformation.yaml) |
+    | ap-southeast-2 (Sydney) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://ap-southeast-2.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=startChatContactAPI&templateURL=https://s3-ap-southeast-2.amazonaws.com/ap-southeast-2.start-chat-contact-api-cfn/cloudformation.yaml) |
+    | ap-northeast-1 (Tokyo) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://ap-northeast-1.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=startChatContactAPI&templateURL=https://s3-ap-northeast-1.amazonaws.com/ap-northeast-1.start-chat-contact-api-cfn/cloudformation.yaml) |
+    | eu-central-1 (Frankfurt) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://eu-central-1.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=startChatContactAPI&templateURL=https://s3-eu-central-1.amazonaws.com/eu-central-1.start-chat-contact-api-cfn/cloudformation.yaml) |
+    | eu-west-2 (London) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://eu-west-2.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=startChatContactAPI&templateURL=https://s3-eu-west-2.amazonaws.com/eu-west-2.start-chat-contact-api-cfn/cloudformation.yaml) |
+    | ap-southeast-1 (Singapore) | [![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://ap-southeast-1.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=startChatContactAPI&templateURL=https://s3-ap-southeast-1.amazonaws.com/ap-southeast-1.start-chat-contact-api-cfn/cloudformation.yaml) |
 
 
-1) Deploy the CloudFormation template from one of the links above.
-    - Enter the Contact Flow id and Instance Id that you would like to test with. These are added as Lambda environment variables.
-        - `contactFlowId`: You can find the contact flow id when viewing a contact flow. For example, if the arn for your flow is 'arn:aws:connect:us-west-2:123456789012:instance/11111111-1111-1111-1111-111111111111/contact-flow/22222222-2222-2222-2222-222222222222', the contact flow id is '22222222-2222-2222-2222-222222222222'
-        - `instanceId`: This is the id of the instance you want to use. You can find this on the Amazon Connect console or when viewing the contact flow. For example, if the arn for your flow is 'arn:aws:connect:us-west-2:123456789012:instance/11111111-1111-1111-1111-111111111111/contact-flow/22222222-2222-2222-2222-222222222222', the instance id is '11111111-1111-1111-1111-111111111111'
-2) Once the stack has launched you can call the API from your website. Follow the steps below to see how you can call this API using our pre-built chat widget or by building out your own UX.
-    
-## Prebuilt Chat Widget
-If you want to add the customer chat widget (that is available in the Test Chat experience in the Amazon Connect website) to your website, here are the steps to do so. You can also refer to the `widgetIndex.html` file in this repo to see an example of how to use the widget.
+4. Update the CloudFormation template with details from your connect instance.
+    - Fetch the Contact ID and Instance ID from your Connect instance by going to your contact flows and selecting **Sample queue customer** and clicking on **Show additional flow information** on top left. 
+    - `contactFlowId` / `instanceId`: You can find the contact flow id and instance id when viewing a contact flow. For example, if the arn for your flow is 'arn:aws:connect:us-west-2:123456789012:instance/xxxx2222-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/xxxx1111-xxxx-xxxx-xxxx-xxxxxxxxxxxx', the contact flow id is 'xxxx1111-xxxx-xxxx-xxxx-xxxxxxxxxxxx' and instance id is xxxx2222-xxxx-xxxx-xxxx-xxxxxxxxxxxx.
 
-Note: you will want to show the widget only when there is a conversation in progress. If the widget is visible when there is no conversation, you will just see a loading spinner.
+        ![Contact Flow Id's](images/updateContactFlowIds.png)
 
-1. In your website's html code, import the 'amazon-connect-chat-interface.js' file from this repo.
+    - Go to your [CloudFormation stack](https://us-west-2.console.aws.amazon.com/cloudformation/home) by clicking on Stacks and then startChatContactAPI on the left hand side. Update the Contact Flow ID and the Instance ID in your cloud formation stack
+    ![Update Cloud Formation Stack](images/updateCloudFormationStack.png)
+    -   These are added as Lambda environment variables.
+
+## Getting started with Pre Built Widget
+
+You can refer to the [`widgetIndex.html`](widgetIndex.html) file in this repo to see an example of how to use the widget.
+
+1. In your website's html code, import the 'amazon-connect-chat-interface.js' file from this repo. Also import jQuery
+    ```html
+        <script src="amazon-connect-chat-interface.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    ```
+
+2. Create a `div` with id of `root`. 
+    ```html
+    <div id="chat">
+    </div>
+    ```
+3. Get your API Gateway URL by going to your AWS Console and going to API Gateway product
+
+    ![API Gateway](images/apiGatewayUrl.png) 
+
+4. Paste the below code in the body section in your html file and ***Update the 4 TODO fields***
 
     ```html
-    <script src="amazon-connect-chat-interface.js"></script>
-    ```
+    <div>
+        <section class="section-main" id="section-main" style="position: absolute; float: left; width: 50%;">
+            <header>
+                <h1>Amazon Connect - Custom Implementation of Customer Chat</h1>
+            </header>
 
-2. Initialize the Chat Interface on page load. Note: you need to update this to include the root id of the div where the customer chat widget will live.
+            <form name="contactDetails" id="contactDetails" style="padding-top: 30px">
+                <fieldset>
+                    <div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <label for="firstName"
+                                            style="width: 128px; padding-right: 25px; padding-bottom: 10px;">Solution
+                                            Example:</label>
+                                    </td>
+                                    <td>
+                                        <input name="firstName" type="text" id="firstName" placeholder="First Name"
+                                            style="width:161px;">
+                                    </td>
+                                    <td style="padding-left: 10px;">
+                                        <input type="submit" style="padding-left: 10px;" class="submit" id="startChat"
+                                            value="Start Chat"></input>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+        <section class="section-chat" id="section-chat" style="display: none; float: right; width: 50%;">
+            <div id="chat"></div>
+        </section>
+    </div>
 
-    ```js
-    $(document).ready((a) => {
-      connect.ChatInterface.init({
-        containerId: 'root' // This is the id of the container where you want the widget to reside
+    <script>
+        $(document).ready((a) => {
+                connect.ChatInterface.init({
+                    containerId: 'chat' // This is the id of the container where you want the widget to reside
+                });
+            });
         });
-    });
+
+        $(function () {
+            $('#contactDetails').submit(function (e) {
+                e.preventDefault();
+
+                customerName = $('#firstName').val();
+                if (!customerName) {
+                    alert('you must enter a name & username');
+                    document.getElementById("contactDetails").reset();
+                } else {
+                    var contactFlowId = "xxxx1111-xxxx-xxxx-xxxx-xxxxxxxxxxxx"; // TODO: Fill in
+                    var instanceId = "xxxx2222-xxxx-xxxx-xxxx-xxxxxxxxxxxx"; // TODO: Fill in
+                    var apiGatewayEndpoint = "https://${apiId}.execute-api.${region}.amazonaws.com/Prod"; // TODO: Fill in with the API Gateway endpoint created by your CloudFormation template
+
+                    console.log("this is the first name: " + customerName);
+                    document.getElementById("contactDetails").reset();
+
+                    connect.ChatInterface.initiateChat({
+                        name: customerName,
+                        region: "", // TODO: Fill in
+                        apiGatewayEndpoint: apiGatewayEndpoint,
+                        contactAttributes: JSON.stringify({
+                            "customerName": customerName
+                        }),
+                        contactFlowId: contactFlowId,
+                        instanceId: instanceId
+                    },successHandler, failureHandler);
+
+            $(function () {
+                $('#contactDetails').submit(function (e) {
+                    e.preventDefault();
+                    var contactFlowId = "xxxx1111-xxxx-xxxx-xxxx-xxxxxxxxxxxx"; // TODO: Fill in
+                    var instanceId = "xxxx2222-xxxx-xxxx-xxxx-xxxxxxxxxxxx"; // TODO: Fill in
+                    var apiGatewayEndpoint = "https://${apiId}.execute-api.${region}.amazonaws.com/Prod"; // TODO: Fill in with the API Gateway endpoint created by your CloudFormation template
+                    var regionName = "us-west-2" // TODO: Fill in
+
+                    customerName = $('#firstName').val();
+                    if (!customerName) {
+                        alert('you must enter a name & username');
+                        document.getElementById("contactDetails").reset();
+                    } else {
+              
+                        console.log("this is the first name: " + customerName);
+                        document.getElementById("contactDetails").reset();
+
+                        connect.ChatInterface.initiateChat({
+                            name: customerName,
+                            region: regionName,
+                            apiGatewayEndpoint: apiGatewayEndpoint,
+                            contactAttributes: JSON.stringify({
+                                "customerName": customerName
+                            }),
+                            contactFlowId: contactFlowId,
+                            instanceId: instanceId
+                        },successHandler, failureHandler);
+
+                    }
+                });
+            });
+        });
+
+        function successHandler(chatSession) {
+            console.log("success!");
+            $('#section-chat').fadeIn(400);
+
+            chatSession.onChatDisconnected(function(data) {
+                $('#section-chat').hide('slide');
+            });
+        }
+
+        function failureHandler(error) {
+            console.log("There was an error: ");
+            console.log(error);
+        }
+    </script>
     ```
+5. Type your name and click on start chat. And then Go to your connect contact center https://<YourContactCenterName>.awsapps.com/connect/home and click on "Test Chat". Change your agent status as available to test the chat workflow
 
-3. Start the chat based on a user action. You will want to add fields for the customer name and username because those fields are used in the Lambda function that was created. Note: you need to update this to include the API Gateway endpoint that was created in the CloudFormation stack. To see examples of the success and failure handlers, refer to the [example implementation](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/cloudformationTemplates/asyncCustomerChatUX/website/index.html#L283).
+    ![Test Chat](images/testChat.png) 
 
-    ```js
-    connect.ChatInterface.initiateChat({
-      name: customerName,
-      username: username,
-      region: ${region},
-      apiGatewayEndpoint: "https://${apiId}.execute-api.${region}.amazonaws.com/Prod",
-      contactAttributes: JSON.stringify({
-        "customerName": customerName
-      }),
-      contactFlowId: "${contactFlowId}",
-      instanceId: "${instanceId}"
-    },successHandler, failureHandler)
-    ```
+6. That's it! Now you should be able to test AWS Connect Chat experience.
 
-## Creating your own Chat UX
+## Getting Started with a Custom Widget
 
 If you want to build your own Chat widget instead of using our prebuilt one, follow these step by step directions. If you want to see a complete example of how to use [ChatJS](https://github.com/amazon-connect/amazon-connect-chat-js), look at the  `customBuildIndex.html` file.
 
 1) First, you need deploy the backend API as instructed above.
 2) Once your stack is deployed, go to the [API Gateway console](https://console.aws.amazon.com/apigateway/home), select the API, go to the Stages menu item, and select the `Prod` stage. You will then see the `Invoke URL`. This is the URL you will invoke to start the chat.
-![api gateway url diagram](images/apiGatewayUrl.png)
-3) Gather the contact flow ID and contact flow ID you want to use. If you don't have a contact flow, use the `Sample inbound flow` one in your instance that is created by default. You can find these IDs when viewing a contact flow. For example, if the arn for your flow is `arn:aws:connect:us-west-2:123456789012:instance/11111111-1111-1111-1111-111111111111/contact-flow/22222222-2222-2222-2222-222222222222`, the instance ID is `11111111-1111-1111-1111-111111111111` and the contact flow ID is `22222222-2222-2222-2222-222222222222`
-![contact flow ids diagram](images/contactFlowIds.png)
-4) Download the [compiled ChatJS source](https://github.com/amazon-connect/amazon-connect-chatjs/blob/master/dist/amazon-connect-chat.js) and save it locally.
-5) Create an `index.html` file in the same directory as the ChatJS source
-6) Set up your `index.html` file by importing ChatJS and creating the html elements you will use. These include an entry for the customer's name, a chat content input field, an area for the chat transcript to show up, and buttons to start the chat, get the transcript, send a typing event, and end the chat. 
+    <picture ?>
+3) Download the [compiled ChatJS source](https://github.com/amazon-connect/amazon-connect-chatjs/blob/master/dist/amazon-connect-chat.js) and save it locally.
+4) Create an `index.html` file in the same directory as the ChatJS source
+5) Set up your `index.html` file by importing ChatJS and creating the html elements you will use. These include an entry for the customer's name, a chat content input field, an area for the chat transcript to show up, and buttons to start the chat, get the transcript, send a typing event, and end the chat. 
 
 ```html
 <!DOCTYPE html>
@@ -133,7 +252,7 @@ If you want to build your own Chat widget instead of using our prebuilt one, fol
     </script>
 </body>
 ```
-7) Once you have the outline ready, the first step is to set up the chat session. Add the below code to set the global config in the `<script>` section of your `index.html` file. You are also creating a global variable, `session`, that will be initialized at a later step.
+6) Once you have the outline ready, the first step is to set up the chat session. Add the below code to set the global config in the `<script>` section of your `index.html` file. You are also creating a global variable, `session`, that will be initialized at a later step.
 
 ```js
 var session;
@@ -143,7 +262,7 @@ connect.ChatSession.setGlobalConfig({
 });
 ```
 
-8) Next, you will call the [StartChatContact API](https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html) in the Amazon Connect Service. This call to StartChatContact is made through the API that was deployed by the stack. You need to fill in a few fields here: contact flow id, instance id, and the API Gateway endpoint. Add this code after the function to set the global config. 
+7) Next, you will call the [StartChatContact API](https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html) in the Amazon Connect Service. This call to StartChatContact is made through the API that was deployed by the stack. You need to fill in a few fields here: contact flow id, instance id, and the API Gateway endpoint. Add this code after the function to set the global config.
 
 ```js
 $(function () {
@@ -186,8 +305,8 @@ $(function () {
     });
 });
 ```
-9) At this point you can test your implementation by opening your index.html file, entering a name, and clicking `Start Chat`. If you inspect the console of your browser, you should see a success log.
-10) Now that you can successfully call ACS.StartChatContact(), you need to complete the chat initialization by making a call to ChatJS to establish the chat session. You will do this in the success function after your ajax call to start the chat. Pass the result from the call to start chat to ChatJS and ChatJS will handle the rest of the steps to establish the connection.
+8) At this point you can test your implementation by opening your index.html file, entering a name, and clicking `Start Chat`. If you inspect the console of your browser, you should see a success log.
+9) Now that you can successfully call ACS.StartChatContact(), you need to complete the chat initialization by making a call to ChatJS to establish the chat session. You will do this in the success function after your ajax call to start the chat. Pass the result from the call to start chat to ChatJS and ChatJS will handle the rest of the steps to establish the connection.
 
 ```js
 success: function(result) {
@@ -199,7 +318,7 @@ success: function(result) {
     });
 },
 ```
-11) Once the session is created, you need to give function definitions for the APIs available in ChatJS that respond to events and messages. You can define the functions within the `complete` function after the ajax call. Your ajax call will now look like this:
+10) Once the session is created, you need to give function definitions for the APIs available in ChatJS that respond to events and messages. You can define the functions within the `complete` function after the ajax call. Your ajax call will now look like this:
 
 ```js
 $.ajax({
@@ -246,7 +365,7 @@ $.ajax({
     }
 });
 ```
-12) Now that the reactive functions have definitions, the final step is to add definitions for all the APIs that can be triggered by the customer. Add this functions under the ajax call within the `<script>` section.
+11) Now that the reactive functions have definitions, the final step is to add definitions for all the APIs that can be triggered by the customer. Add this functions under the ajax call within the `<script>` section.
 
 ```js
 $(document).ready((a) => {
@@ -300,4 +419,4 @@ function sendTypingEvent() {
 }
 ```
 
-13) That's it! Now if you test your index.html file all of the buttons should work and if you inspect the console you will see logs for the events being sent and received through ChatJs.
+12) That's it! Now if you test your index.html file all of the buttons should work and if you inspect the console you will see logs for the events being sent and received through ChatJs.
