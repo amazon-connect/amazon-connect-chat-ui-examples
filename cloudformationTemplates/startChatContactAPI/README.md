@@ -56,9 +56,11 @@ You can refer to the `widgetIndex.html` file in this repo to see an example of h
     <div id="root">
     </div>
     ```
-3. Paste the below code as a script section in your html file. 
+3. Get your API Gateway URL by going to your AWS Console and going to API Gateway product
 
-    ***Note*** Update the 3 TODO fields
+    ![API Gateway](images/apiGatewayUrl.png) 
+
+4. Paste the below code as a script section in your html file and ***Update the 3 TODO fields***
 
     ```js
     <script>
@@ -114,11 +116,11 @@ You can refer to the `widgetIndex.html` file in this repo to see an example of h
             }
         </script>
     ```
-4. Type your name and click on start chat. And then Go to your connect contact center https://<YourContactCenterName>.awsapps.com/connect/home and click on "Test Chat". Change your agent status as available to test the chat workflow
+5. Type your name and click on start chat. And then Go to your connect contact center https://<YourContactCenterName>.awsapps.com/connect/home and click on "Test Chat". Change your agent status as available to test the chat workflow
 
     ![Test Chat](images/testChat.png) 
 
-5. That's it! Now you should be able to test AWS Connect Chat experience.
+6. That's it! Now you should be able to test AWS Connect Chat experience.
 
 ## Getting Started with a Custom Widget
 
