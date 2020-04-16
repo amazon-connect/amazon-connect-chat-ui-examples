@@ -16,9 +16,7 @@ You need an Amazon Connect instance to deploy the below [CloudFormation](https:/
 
     ![Create Contact Flow](images/createContactFlow.png) 
 
-3. Publish a cloud formation template using one of the regions you prefer below. 
-    
-    Steps
+3. Publish a CloudFormation template using one of the regions you prefer below. 
 
     | Region | Launch Button |
     | ------ | ------------- |
@@ -43,7 +41,7 @@ You need an Amazon Connect instance to deploy the below [CloudFormation](https:/
 
 ## Getting started with Pre Built Widget
 
-You can refer to the `widgetIndex.html` file in this repo to see an example of how to use the widget.
+You can refer to the [`widgetIndex.html`](widgetIndex.html) file in this repo to see an example of how to use the widget.
 
 1. In your website's html code, import the 'amazon-connect-chat-interface.js' file from this repo. Also import jQuery
     ```html
@@ -62,11 +60,49 @@ You can refer to the `widgetIndex.html` file in this repo to see an example of h
 
 4. Paste the below code as a script section in your html file and ***Update the 4 TODO fields***
 
-    ```js
+    ```html
+        <div>
+            <section class="section-main" id="section-main" style="position: absolute; float: left; width: 50%;">
+                <header>
+                    <h1>Amazon Connect - Custom Implementation of Customer Chat</h1>
+                </header>
+
+                <form name="contactDetails" id="contactDetails" style="padding-top: 30px">
+                    <fieldset>
+                        <div>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <label for="firstName"
+                                                style="width: 128px; padding-right: 25px; padding-bottom: 10px;">Solution
+                                                Example:</label>
+                                        </td>
+                                        <td>
+                                            <input name="firstName" type="text" id="firstName" placeholder="First Name"
+                                                style="width:161px;">
+                                        </td>
+                                        <td style="padding-left: 10px;">
+                                            <input type="submit" style="padding-left: 10px;" class="submit" id="startChat"
+                                                value="Start Chat"></input>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+                </form>
+            </section>
+            <section class="section-chat" id="section-chat" style="display: none; float: right; width: 50%;">
+                <div id="root"></div>
+            </section>
+    </div>
+
     <script>
         $(document).ready((a) => {
-            connect.ChatInterface.init({
-                containerId: 'chat' // This is the id of the container where you want the widget to reside
+                connect.ChatInterface.init({
+                    containerId: 'root' // This is the id of the container where you want the widget to reside
+                });
             });
         });
 
@@ -97,7 +133,36 @@ You can refer to the `widgetIndex.html` file in this repo to see an example of h
                         instanceId: instanceId
                     },successHandler, failureHandler);
 
-                }
+            $(function () {
+                $('#contactDetails').submit(function (e) {
+                    e.preventDefault();
+                    var contactFlowId = "xxxx1111-xxxx-xxxx-xxxx-xxxxxxxxxxxx"; // TODO: Fill in
+                    var instanceId = "xxxx2222-xxxx-xxxx-xxxx-xxxxxxxxxxxx"; // TODO: Fill in
+                    var apiGatewayEndpoint = "https://${apiId}.execute-api.${region}.amazonaws.com/Prod"; // TODO: Fill in with the API Gateway endpoint created by your CloudFormation template
+                    var regionName = "us-west-2" // TODO: Fill in
+
+                    customerName = $('#firstName').val();
+                    if (!customerName) {
+                        alert('you must enter a name & username');
+                        document.getElementById("contactDetails").reset();
+                    } else {
+              
+                        console.log("this is the first name: " + customerName);
+                        document.getElementById("contactDetails").reset();
+
+                        connect.ChatInterface.initiateChat({
+                            name: customerName,
+                            region: regionName,
+                            apiGatewayEndpoint: apiGatewayEndpoint,
+                            contactAttributes: JSON.stringify({
+                                "customerName": customerName
+                            }),
+                            contactFlowId: contactFlowId,
+                            instanceId: instanceId
+                        },successHandler, failureHandler);
+
+                    }
+                });
             });
         });
 
