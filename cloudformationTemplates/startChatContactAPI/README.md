@@ -58,7 +58,7 @@ You can refer to the [`widgetIndex.html`](widgetIndex.html) file in this repo to
 
     ![API Gateway](images/apiGatewayUrl.png) 
 
-4. Paste the below code as a script section in your html file and ***Update the 4 TODO fields***
+4. Paste the below code in the body section in your html file and ***Update the 4 TODO fields***
 
     ```html
         <div>
