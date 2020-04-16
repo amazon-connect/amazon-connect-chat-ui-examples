@@ -16,7 +16,7 @@ You need an Amazon Connect instance to deploy the below [CloudFormation](https:/
 
     ![Create Contact Flow](images/createContactFlow.png) 
 
-3. Publish a CloudFormation template using one of the regions you prefer below. 
+3. Deploy a CloudFormation template using one of the regions you prefer below. 
 
     | Region | Launch Button |
     | ------ | ------------- |
@@ -45,8 +45,8 @@ You can refer to the [`widgetIndex.html`](widgetIndex.html) file in this repo to
 
 1. In your website's html code, import the 'amazon-connect-chat-interface.js' file from this repo. Also import jQuery
     ```html
-        <script src="amazon-connect-chat-interface.js"></script>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="amazon-connect-chat-interface.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     ```
 
 2. Create a `div` with id of `root`. 
@@ -99,58 +99,58 @@ You can refer to the [`widgetIndex.html`](widgetIndex.html) file in this repo to
     </div>
 
     <script>
-            $(document).ready((a) => {
-                connect.ChatInterface.init({
-                    containerId: 'root' // This is the id of the container where you want the widget to reside
-                });
+        $(document).ready((a) => {
+            connect.ChatInterface.init({
+                containerId: 'root' // This is the id of the container where you want the widget to reside
             });
+        });
 
-            $(function () {
-                $('#contactDetails').submit(function (e) {
-                    e.preventDefault();
-                    var contactFlowId = "xxxx1111-xxxx-xxxx-xxxx-xxxxxxxxxxxx"; // TODO: Fill in
-                    var instanceId = "xxxx2222-xxxx-xxxx-xxxx-xxxxxxxxxxxx"; // TODO: Fill in
-                    var apiGatewayEndpoint = "https://${apiId}.execute-api.${region}.amazonaws.com/Prod"; // TODO: Fill in with the API Gateway endpoint created by your CloudFormation template
-                    var regionName = "us-west-2" // TODO: Fill in
+        $(function () {
+            $('#contactDetails').submit(function (e) {
+                e.preventDefault();
+                var contactFlowId = "xxxx1111-xxxx-xxxx-xxxx-xxxxxxxxxxxx"; // TODO: Fill in
+                var instanceId = "xxxx2222-xxxx-xxxx-xxxx-xxxxxxxxxxxx"; // TODO: Fill in
+                var apiGatewayEndpoint = "https://${apiId}.execute-api.${region}.amazonaws.com/Prod"; // TODO: Fill in with the API Gateway endpoint created by your CloudFormation template
+                var regionName = "us-west-2" // TODO: Fill in
 
-                    customerName = $('#firstName').val();
-                    if (!customerName) {
-                        alert('you must enter a name & username');
-                        document.getElementById("contactDetails").reset();
-                    } else {
-              
-                        console.log("this is the first name: " + customerName);
-                        document.getElementById("contactDetails").reset();
+                customerName = $('#firstName').val();
+                if (!customerName) {
+                    alert('you must enter a name & username');
+                    document.getElementById("contactDetails").reset();
+                } else {
+            
+                    console.log("this is the first name: " + customerName);
+                    document.getElementById("contactDetails").reset();
 
-                        connect.ChatInterface.initiateChat({
-                            name: customerName,
-                            region: regionName,
-                            apiGatewayEndpoint: apiGatewayEndpoint,
-                            contactAttributes: JSON.stringify({
-                                "customerName": customerName
-                            }),
-                            contactFlowId: contactFlowId,
-                            instanceId: instanceId
-                        },successHandler, failureHandler);
+                    connect.ChatInterface.initiateChat({
+                        name: customerName,
+                        region: regionName,
+                        apiGatewayEndpoint: apiGatewayEndpoint,
+                        contactAttributes: JSON.stringify({
+                            "customerName": customerName
+                        }),
+                        contactFlowId: contactFlowId,
+                        instanceId: instanceId
+                    },successHandler, failureHandler);
 
-                    }
-                });
+                }
             });
+        });
 
-            function successHandler(chatSession) {
-                console.log("success!");
-                $('#section-chat').fadeIn(400);
+        function successHandler(chatSession) {
+            console.log("success!");
+            $('#section-chat').fadeIn(400);
 
-                chatSession.onChatDisconnected(function(data) {
-                    $('#section-chat').hide('slide');
-                });
-            }
+            chatSession.onChatDisconnected(function(data) {
+                $('#section-chat').hide('slide');
+            });
+        }
 
-            function failureHandler(error) {
-                console.log("There was an error: ");
-                console.log(error);
-            }
-        </script>
+        function failureHandler(error) {
+            console.log("There was an error: ");
+            console.log(error);
+        }
+    </script>
     ```
 5. Type your name and click on start chat. And then Go to your connect contact center https://<YourContactCenterName>.awsapps.com/connect/home and click on "Test Chat". Change your agent status as available to test the chat workflow
 
