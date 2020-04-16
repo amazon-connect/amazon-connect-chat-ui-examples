@@ -31,7 +31,7 @@ You need an Amazon Connect instance to deploy the below [CloudFormation](https:/
 
 4. Update the CloudFormation template with details from your connect instance.
     - Fetch the Contact ID and Instance ID from your Connect instance by going to your contact flows and selecting **Sample queue customer** and clicking on **Show additional flow information** on top left. 
-    - `contactFlowId` \ `instanceId`: You can find the contact flow id and instance id when viewing a contact flow. For example, if the arn for your flow is 'arn:aws:connect:us-west-2:123456789012:instance/11111111-1111-1111-1111-111111111111/contact-flow/22222222-2222-2222-2222-222222222222', the contact flow id is '22222222-2222-2222-2222-222222222222' and instance id is 11111111-1111-1111-1111-111111111111
+    - `contactFlowId` \ `instanceId`: You can find the contact flow id and instance id when viewing a contact flow. For example, if the arn for your flow is 'arn:aws:connect:us-west-2:123456789012:instance/xxxx2222-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/xxxx1111-xxxx-xxxx-xxxx-xxxxxxxxxxxx', the contact flow id is 'xxxx1111-xxxx-xxxx-xxxx-xxxxxxxxxxxx' and instance id is xxxx2222-xxxx-xxxx-xxxx-xxxxxxxxxxxx.
 
         ![Contact Flow Id's](images/updateContactFlowIds.png)
 
