@@ -60,7 +60,7 @@ You can refer to the `widgetIndex.html` file in this repo to see an example of h
 
     ![API Gateway](images/apiGatewayUrl.png) 
 
-4. Paste the below code as a script section in your html file and ***Update the 3 TODO fields***
+4. Paste the below code as a script section in your html file and ***Update the 4 TODO fields***
 
     ```js
     <script>
