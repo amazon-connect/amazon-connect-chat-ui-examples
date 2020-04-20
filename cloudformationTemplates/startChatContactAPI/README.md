@@ -100,9 +100,8 @@ You can refer to the [`widgetIndex.html`](widgetIndex.html) file in this repo to
 
     <script>
         $(document).ready((a) => {
-                connect.ChatInterface.init({
-                    containerId: 'chat' // This is the id of the container where you want the widget to reside
-                });
+            connect.ChatInterface.init({
+                containerId: 'chat' // This is the id of the container where you want the widget to reside
             });
         });
 
