@@ -48,6 +48,9 @@ You can refer to the [`widgetIndex.html`](widgetIndex.html) file in this repo to
         <script src="amazon-connect-chat-interface.js"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     ```
+3. Get your API Gateway URL by going to your AWS Console and going to API Gateway product
+
+    ![API Gateway](images/apiGatewayUrl.png) 
 
 2. Create a `div` with id of `root`. 
     ```html
