@@ -1,6 +1,6 @@
 # Steps to test in dev 
-1. Choose your AWS account and region. Create an S3 bucket in your AWS account and upload contents of the `my-cfn-bucket` folder in your bucket. Note: when you create the S3 bucket, append the region name and a . to the bucket name. (eg. us-west-2.<bucket-name>)
-2. In the `cloudformation.yaml`, update the field `S3Bucket` in the `Mapping` section on line 9. Note: This is the <bucket-name> from step 1.
+1. Choose your AWS account and region. Create an S3 bucket in your AWS account and upload contents of the `my-cfn-bucket` folder in your bucket. Note: when you create the S3 bucket, append the region name and a . to the bucket name. (eg. us-west-2.`<bucket-name>`)
+2. In the `cloudformation.yaml`, update the field `S3Bucket` in the `Mapping` section on line 9. Note: This is the `<bucket-name>` from step 1.
 3. Deploy the CloudFormation template in your AWS account/region combination from step 1. 
 4. Test the solution by adding URLs like `www.aws.com` in your chat window.
 
