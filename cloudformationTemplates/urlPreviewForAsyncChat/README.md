@@ -1,3 +1,14 @@
+# Steps to test in dev 
+1. Choose your AWS account and region. Create an S3 bucket in your AWS account and upload contents of the `my-cfn-bucket` folder in your bucket.
+2. In the `cloudformation.yaml`, update the field `S3Bucket` the `Mapping` section on line 9. This should be the same bucket from step 1.
+3. Deploy the CloudFormation template in your AWS account/region combination from step 1. 
+4. Test the solution by adding URLs like `www.aws.com` in your chat window.
+
+#TODO
+Update readme for URL preview
+
+
+
 # Overview
 
 This solution creates a simple website that enables a customer to start a chat with a pre-built widget. The end user enters their name and the username of the agent they would like to speak with and they'll then be put into that agent's queue. The stack creates a website hosted in [Amazon S3](https://aws.amazon.com/s3/) that is served by [Amazon CloudFront](https://aws.amazon.com/cloudfront/). The website calls an [Amazon API Gateway](https://aws.amazon.com/api-gateway/) endpoint that triggers an [AWS Lambda](https://aws.amazon.com/lambda/) function. This Lambda function invokes the [Amazon Connect](https://aws.amazon.com/connect/) Service [StartChatContact](https://docs.aws.amazon.com/en_pv/connect/latest/APIReference/API_StartChatContact.html) API, stores the result in [Amazon DynamoDB](https://aws.amazon.com/dynamodb/), and returns the result to the front end.
