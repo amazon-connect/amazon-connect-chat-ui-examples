@@ -1,12 +1,14 @@
+# Resources: lambda, iam role for lambda, s3 bucket for website, cdn, api gateway, iam role to log api gateway
+
 AWSTemplateFormatVersion: '2010-09-09'
 
 Description: >
-  "Customer chat solution with URL preview for Amazon Connect"
+  "Customer chat solution for Amazon Connect"
 
 Mappings:
   FunctionMap:
     Configuration:
-      S3Bucket: "khasnis-csat-demos-2" #TODO: CHANGE for prod - Only in us-west-2 rn
+      S3Bucket: "khasnis-csat-demos-2" #TODO: CHANGE for prod
       S3Key: "deployment/"
       SolutionID: "AC0003"
 
@@ -666,7 +668,7 @@ Resources:
       ParentId: !GetAtt ApiGatewayRestAPI.RootResourceId
       PathPart: getUrlPreview
 
-  LambdaApiGatewayInvokePermission: #DONE
+  LambdaUrlPreviewInvokePermission: #DONE
     Type: AWS::Lambda::Permission
     Properties:
       Action: "lambda:InvokeFunction"
