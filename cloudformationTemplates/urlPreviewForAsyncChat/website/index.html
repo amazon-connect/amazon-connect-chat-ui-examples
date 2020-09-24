@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Amazon Connect Chat Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<body>
+    <style>
+        #ccpContainer {
+            width: 200px;
+            height: 525px;
+            overflow: hidden;
+            float: left;
+            margin-left: 22px;
+            padding: 10px;
+
+        }
+
+        nav {
+            width: 690px;
+        }
+
+        .section-main {
+
+            padding: 10px;
+            max-width: 669px;
+            height: 511px;
+            margin-left: 22px;
+            float: left;
+            overflow: auto;
+            /* width: 100%;
+            height: 100%; */
+            position: absolute;
+            /* top: 0; */
+            display: table-cell;
+            left: 0;
+
+        }
+
+        .section-chat {
+
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            /* top: 0; */
+            left: 710px;
+            display: table-cell;
+            padding: 3px;
+            max-width: 365px;
+            height: 525px;
+            margin-left: 3px;
+            float: left;
+            overflow: auto;
+            border-radius: 5px 5px 45px 5px;
+
+        }
+
+        #root {
+            overflow: auto;
+
+        }
+
+        #root>div {
+            overflow-y: auto;
+            overflow-x: hidden;
+            width: 330px;
+            height: 485px;
+            font-size: 14px;
+        }
+
+        #startChat {
+            width: auto;
+            cursor: pointer;
+            position: relative;
+            border: 1px solid #282828;
+            color: #fff;
+            padding: 1px 15px;
+            text-decoration: none;
+            font-size: 1.1em;
+            background: #555;
+            background: -webkit-gradient(linear, left bottom, left top, color-stop(0.12, rgb(60, 60, 60)), color-stop(1, rgb(85, 85, 85)));
+            background: -moz-linear-gradient(center bottom, rgb(60, 60, 60) 12%, rgb(85, 85, 85) 100%);
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
+            -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+            -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+            text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+        }
+
+        .centered {
+            text-align: center;
+        }
+
+        .spinner.loading {
+            display: none;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .loading-text {
+            width: 90px;
+            position: absolute;
+            top: 245px;
+            left: 137px;
+            text-align: center;
+        }
+
+
+        .spinner.loading:before {
+            content: "";
+            height: 110px;
+            width: 110px;
+            margin: -15px auto auto -15px;
+            position: absolute;
+            top: 218px;
+            left: 143px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #2180c0 #ccc #ccc;
+            border-radius: 100%;
+            animation: rotation .7s infinite linear;
+        }
+
+        @keyframes rotation {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(359deg);
+            }
+        }
+
+        ol.normal {
+            list-style-type: disc;
+            padding-left: 50px;
+        }
+
+        .wrap {
+            white-space: nowrap;
+
+        }
+
+        .header-wrapper {
+            background: #3F5773;
+            text-align: center;
+            padding: 10px;
+            color: #fff;
+            border-radius: 3px; 
+        }
+                                
+        .welcome-text { 
+            margin: 10px;
+            padding-right: 40px;
+            padding-left: 10px;
+            display: inline;
+        }
+
+        .footer-actions {
+            background: #eee;
+            height: 85px;
+        }
+
+        .button-wrapper {
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            height: 100%;
+            align-items: center;
+            border-radius: 5px;
+        }
+
+        .button-wrapper > button {
+            min-width: 85px;
+            margin: 6px;
+            font-weight: bold;
+        }
+
+        .action-button {
+            width: 43%;
+            line-height: 1.465;
+            font-weight: normal;
+            white-space: nowrap;
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            text-align: center;
+            vertical-align: middle;
+            padding-right: 10px;
+            padding-left: 10px;
+            font-family: AmazonEmber_Md, Helvetica, sans-serif;
+            display: inline-flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            max-width: 260px;
+            padding-top: 0.45rem;
+            padding-bottom: 0.45rem;
+            font-size: 0.875rem;
+            box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 3px 0px;
+            border-width: 0px;
+            border-style: solid;
+            background: linear-gradient(rgb(208, 2, 27), rgb(208, 2, 27) 80%, rgb(233, 2, 30));
+            border-color: rgb(208, 2, 27);
+        }
+    </style>
+
+    <div class="wrap">
+        <section class="section-main" id="section-main">
+            <header>
+                <h1 align="center" style="font-size: 1.5em">Amazon Connect Omni-Channel Demo</h1>
+            </header>
+
+            <form name="contactDetails" id="contactDetails" style="padding-top: 30px">
+                <fieldset>
+                    <div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input name="firstName" type="text" id="firstName" placeholder="First Name"
+                                            style="width:161px;">
+                                    </td>
+                                    <td>
+                                        <input name="username" type="text" id="username" placeholder="Username"
+                                            style="width:161px;">
+                                    </td>
+                                    <td style="padding-left: 10px;">
+                                        <input type="submit" style="padding-left: 10px;" class="submit" id="startChat"
+                                            value="Start Chat"></input>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <div>
+
+                    </div>
+                </fieldset>
+            </form>
+
+        </section>
+
+        <script>
+            $(document).ready((a) => {
+                connect.ChatInterface.init({
+                    containerId: 'root',
+                    headerConfig: {
+                        isHTML: true,
+                        render: () => {
+                            return  (`
+                                <div class="header-wrapper">
+                                    <h2 class="welcome-text">Chat Demo</h2>
+                                    <p id="chatDescription">You can modify this header or use the default.</p>
+                                </div>
+                            `)
+                        }
+                    }
+                });
+            });
+
+            $(function () {
+                $('#contactDetails').submit(function (e) {
+                    e.preventDefault();
+
+                    var customerName = $('#firstName').val();
+                    var username = $('#username').val();
+                    if (!customerName || !username) {
+                        alert('you must enter a name & username');
+                        document.getElementById("contactDetails").reset();
+                    } else {
+
+                        console.log("this is the first name:" + customerName);
+                        console.log("this is the username: " + username);
+                        document.getElementById("contactDetails").reset();
+                        connect.ChatInterface.initiateChat({
+                            name: customerName,
+                            username: username,
+                            region: "${region}",
+                            apiGatewayEndpoint: "https://${apiId}.execute-api.${region}.amazonaws.com/Prod",
+                            contactAttributes: JSON.stringify({
+                                "customerName": customerName
+                            }),
+                            contactFlowId: "${contactFlowId}",
+                            instanceId: "${instanceId}"
+                        }, successHandler, failureHandler)
+
+                        $('#firstName').blur();
+                        $('#username').blur();
+                        document.getElementById("startChat").disabled = true;
+                        document.getElementById("firstName").disabled = true;
+                        document.getElementById("username").disabled = true;
+                        $("#nav").css("width", "1063");
+                        $('#chatWrapper').hide();
+                        $("#section-chat").show("slide");
+                        $("#section-chat").draggable({
+                            handle: ".header-wrapper"
+                        });
+                        $("#divSpinner").delay(310).fadeIn();
+                    }
+
+                });
+            });
+
+            //Chat Management
+
+
+            function successHandler(chatSession) {
+                window.chatSession = chatSession;
+
+                // chat connected
+
+                $("#divSpinner").fadeOut(200);
+                $('#chatWrapper').fadeIn(400);
+
+                //Change the incoming data set
+                chatSession.incomingItemDecorator = function (item) {
+                    if (["SYSTEM_MESSAGE"].indexOf(item.displayName) !== -1) {
+                        item.displayName = "System Message";
+                    }
+
+                    if (chatSession.transcript.length > 0) {
+                        var transcriptItem = chatSession.transcript[chatSession.transcript.length - 1];
+                        if (transcriptItem.transportDetails.direction === "Incoming") {
+                            var chatDescription = "This is a demo of a customer chat experience.";
+                            var name = transcriptItem.displayName;
+                            if (["prod", "$LATEST", "AI Assistant", "SYSTEM_MESSAGE", "System Message"].indexOf(name) === -1) {
+                                chatDescription = "You are now chatting with " + name;
+                            }
+                            document.getElementById("chatDescription").innerHTML = chatDescription;
+                        }
+                    }
+
+                    return item;
+                }
+
+                chatSession.onIncoming(function (data) {
+                    console.log("incoming message:|| " + JSON.stringify(data));
+                });
+
+                chatSession.onOutgoing(function (data) {
+                    //  console.log("outgoing message: " + JSON.stringify(data));
+                });
+
+                chatSession.onChatDisconnected(function (data) {
+                    resetForm();
+                });
+
+                connect.ChatInterface.init({
+                    containerId: 'root',
+                    headerConfig: {
+                        isHTML: true,
+                        render: () => {
+                            return  (`
+                                <div class="header-wrapper">
+                                    <h2 class="welcome-text">Chat Demo</h2>
+                                    <p id="chatDescription">You can modify this header or use the default.</p>
+                                </div>
+                            `)
+                        }
+                    }
+                });
+            }
+
+
+
+            function failureHandler(error) {
+                // chat failed
+                console.log("failed", error);
+            }
+
+            function resetForm() {
+                document.getElementById("startChat").disabled = false;
+                document.getElementById("firstName").disabled = false;
+                document.getElementById("username").disabled = false;
+                $("#section-chat").removeAttr('style');
+                $("#nav").css("width", "690");
+                $("#section-chat").hide("slide");
+                document.getElementById("contactDetails").reset();
+            }
+        </script>
+
+        <section class="section-chat" id="section-chat" style="display: none">
+
+
+
+            <div id="chatWrapper">
+                <div id="root"></div>
+            </div>
+            <div class="centered">
+                <div id="divSpinner" class="spinner loading">
+                    <div class="loading-text">Loading</div>
+                </div>
+
+                <script>
+                    ! function (l) {
+                        function e(e) {
+                            for (var r, t, n = e[0], o = e[1], u = e[2], f = 0, i = []; f < n.length; f++) t = n[f], p[
+                                    t] &&
+                                i.push(
+                                    p[t][0]), p[t] = 0;
+                            for (r in o) Object.prototype.hasOwnProperty.call(o, r) && (l[r] = o[r]);
+                            for (s && s(e); i.length;) i.shift()();
+                            return c.push.apply(c, u || []), a()
+                        }
+
+                        function a() {
+                            for (var e, r = 0; r < c.length; r++) {
+                                for (var t = c[r], n = !0, o = 1; o < t.length; o++) {
+                                    var u = t[o];
+                                    0 !== p[u] && (n = !1)
+                                }
+                                n && (c.splice(r--, 1), e = f(f.s = t[0]))
+                            }
+                            return e
+                        }
+                        var t = {},
+                            p = {
+                                1: 0
+                            },
+                            c = [];
+
+                        function f(e) {
+                            if (t[e]) return t[e].exports;
+                            var r = t[e] = {
+                                i: e,
+                                l: !1,
+                                exports: {}
+                            };
+                            return l[e].call(r.exports, r, r.exports, f), r.l = !0, r.exports
+                        }
+                        f.m = l, f.c = t, f.d = function (e, r, t) {
+                            f.o(e, r) || Object.defineProperty(e, r, {
+                                enumerable: !0,
+                                get: t
+                            })
+                        }, f.r = function (e) {
+                            "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol
+                                .toStringTag, {
+                                    value: "Module"
+                                }), Object.defineProperty(e, "__esModule", {
+                                value: !0
+                            })
+                        }, f.t = function (r, e) {
+                            if (1 & e && (r = f(r)), 8 & e) return r;
+                            if (4 & e && "object" == typeof r && r && r.__esModule) return r;
+                            var t = Object.create(null);
+                            if (f.r(t), Object.defineProperty(t, "default", {
+                                    enumerable: !0,
+                                    value: r
+                                }), 2 & e && "string" != typeof r)
+                                for (var n in r) f.d(t, n, function (e) {
+                                    return r[e]
+                                }.bind(null, n));
+                            return t
+                        }, f.n = function (e) {
+                            var r = e && e.__esModule ? function () {
+                                return e.default
+                            } : function () {
+                                return e
+                            };
+                            return f.d(r, "a", r), r
+                        }, f.o = function (e, r) {
+                            return Object.prototype.hasOwnProperty.call(e, r)
+                        }, f.p = "./";
+                        var r = window.webpackJsonp = window.webpackJsonp || [],
+                            n = r.push.bind(r);
+                        r.push = e, r = r.slice();
+                        for (var o = 0; o < r.length; o++) e(r[o]);
+                        var s = n;
+                        a()
+                    }([])
+                </script>
+
+                <script src="js/amazon-connect-chat-interface.js"></script>
+        </section>
+    </div>
+
+
+
+</body>
+
+</html>
