@@ -22,7 +22,8 @@ jobs:
       - uses: actions/checkout@v2
   
       # Update static S3 site for chatbot testing
-      - uses: jakejarvis/s3-sync-action@v0.5.1
+      - name: S3 Deploy
+        uses: jakejarvis/s3-sync-action@v0.5.1
         with:
           args: --delete
         env:
@@ -30,3 +31,9 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           SOURCE_DIR: 'StaticUITestSite' 
+
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_CHANNEL: ci-cd-notifications
