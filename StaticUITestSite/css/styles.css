@@ -20,16 +20,15 @@ CHAT BOOT MESSENGER
 .chat_on {
     position: fixed;
     z-index: 10;
-    width: 3.5pc;
-    height: 3.5pc;
+    width: 4pc;
+    height: 4pc;
     right: 15px;
     bottom:20px;
-    background-color: #fff;
+    background-color: #fff0;
     color: #fff;
     border-radius: 100%;
     text-align: center;
     padding: 0px;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
     cursor: pointer;
     display: block;
 }
