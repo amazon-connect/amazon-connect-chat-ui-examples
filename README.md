@@ -1,3 +1,10 @@
+#Tactic Edge Chatbot
+We forked this repo from an AWS provided solution.
+
+CI/CD is setup to https://chatbot.tedevops.com/ for testing out the chatbot.
+
+![CICD](https://github.com/AlieraHealthcare/amazon-connect-lex-chat-ui/workflows/CICD/badge.svg)
+
 # Amazon Connect Chat UI Examples
 
 This repo contains examples on how to implement the customer side of Amazon Connect chat. Please refer to the README under each solution to see the complete details as to what each solution does and how to deploy it.
