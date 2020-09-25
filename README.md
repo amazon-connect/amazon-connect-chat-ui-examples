@@ -3,7 +3,7 @@ We forked this repo from an AWS provided solution.
 
 CI/CD is setup to https://chatbot.tedevops.com/ for testing out the chatbot.
 
-![Lex-Chatbot-Demo-Site-CICD](https://github.com/AlieraHealthcare/amazon-connect-lex-chat-ui/workflows/Lex-Chatbot-Deom-Site-CICD/badge.svg)
+![Lex-Chatbot-Demo-Site-CICD](https://github.com/AlieraHealthcare/amazon-connect-lex-chat-ui/workflows/Lex-Chatbot-Demo-Site-CICD/badge.svg)
 
 # Amazon Connect Chat UI Examples
 
