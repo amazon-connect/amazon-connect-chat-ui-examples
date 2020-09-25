@@ -1,4 +1,4 @@
-#Tactic Edge Chatbot
+# Tactic Edge Chatbot
 We forked this repo from an AWS provided solution.
 
 CI/CD is setup to https://chatbot.tedevops.com/ for testing out the chatbot.
