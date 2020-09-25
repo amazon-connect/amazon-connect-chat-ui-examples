@@ -351,12 +351,12 @@ CHAT BOOT MESSENGER
 
 }
 
-#root {
+#chatbot-root {
     overflow: auto;
 
 }
 
-#root>div {
+#chatbot-root>div {
     overflow-y: auto;
     overflow-x: hidden;
     width: 330px;
