@@ -56,7 +56,7 @@ $(document).ready((a) => {
             render: () => {
                 return  (`
                     <div class="header-wrapper">
-                        <h2 class="welcome-text">Sales Chat</h2>
+                        <h2 class="welcome-text">Matthew's Sales Chat</h2>
                         <p id="chatDescription">You can modify this header or use the default.</p>
                     </div>
                 `)
@@ -116,7 +116,7 @@ function successHandler(chatSession) {
             render: () => {
                 return  (`
                     <div class="header-wrapper">
-                        <h2 class="welcome-text">DevOps Sales Bot</h2>
+                        <h2 class="welcome-text">Matthew's Sales Bot</h2>
                         <p id="chatDescription">Buy our Healthcare plans today!</p>
                     </div>
                 `)
