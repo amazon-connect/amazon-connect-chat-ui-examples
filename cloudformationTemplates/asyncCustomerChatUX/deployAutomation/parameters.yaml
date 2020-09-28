@@ -1,0 +1,30 @@
+[
+  {
+    "ParameterKey": "HostName",
+    "ParameterValue": "devops.chatbot.tedevops.com"
+  }, 
+  {
+    "ParameterKey": "HostedZoneId",
+    "ParameterValue": "Z058711919KZJ6AOHA1DN"
+  }, 
+  {
+    "ParameterKey": "WebsiteS3BucketName",
+    "ParameterValue": "devops.chatbot.tedevops.com"
+  }, 
+  {
+    "ParameterKey": "cloudFrontPriceClass",
+    "ParameterValue": "PriceClass_100"
+  }, 
+  {
+    "ParameterKey": "contactFlowId",
+    "ParameterValue": "128e2861-02e3-4080-bda6-f8f4f96ebb79"
+  }, 
+  {
+    "ParameterKey": "instanceId",
+    "ParameterValue": "dd3cb455-ab3e-4827-a079-1b86968ca2fb"
+  }, 
+  {
+    "ParameterKey": "transcriptPath",
+    "ParameterValue": "connect/instanceName/ChatTranscripts"
+  }
+]

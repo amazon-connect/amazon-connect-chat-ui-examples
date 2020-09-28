@@ -13,6 +13,12 @@ Mappings:
       SolutionID: "AC0001"
 
 Parameters:
+  HostName:
+    Description: HostName of the HostedZone in Route53 which should point to the ELB created. Aka chatbot.tedevops.com.
+    Type: String
+  HostedZoneId:
+    Description: ID of the HostedZone for the Subdomain in Route53 which should point to the ELB created.
+    Type: String
   WebsiteS3BucketName:
     Type: String
     Default: "new-website-bucket-name"
@@ -50,18 +56,19 @@ Parameters:
       - PriceClass_All
     ConstraintDescription: "Allowed Price Classes PriceClass_100 PriceClass_200 and PriceClass_All"
     Description: Specify the CloudFront price class. See https://aws.amazon.com/cloudfront/pricing/ for a description of each price class.
-  allowAnonymousUsageMetrics:
-    Type: String
-    Default: "Yes"
-    AllowedValues:
-      - "Yes"
-      - "No"
-    Description: Send usage metrics about this CloudFormation stack to AWS
+  # allowAnonymousUsageMetrics:
+  #   Type: String
+  #   Default: "Yes"
+  #   AllowedValues:
+  #     - "Yes"
+  #     - "No"
+  #   Description: Send usage metrics about this CloudFormation stack to AWS
 
-Conditions:
-  AnonymousUsageMetrics: !Equals [ !Ref allowAnonymousUsageMetrics, "Yes"]
+# Conditions:
+#   AnonymousUsageMetrics: !Equals [ !Ref allowAnonymousUsageMetrics, "Yes"]
 
 Resources:
+
 
   #### Lambda #####
   ChatSDKLayer:
@@ -304,14 +311,17 @@ Resources:
     Properties:
       BucketName: !Ref WebsiteS3BucketName
       AccessControl: LogDeliveryWrite
-      LoggingConfiguration:
-        DestinationBucketName: !Ref WebsiteS3BucketName
-        LogFilePrefix: 'logs/'
+      #LoggingConfiguration:
+      #  DestinationBucketName: !Ref WebsiteS3BucketName
+      #  LogFilePrefix: 'logs/'
       PublicAccessBlockConfiguration:
         BlockPublicAcls: True
         BlockPublicPolicy: True
         IgnorePublicAcls: True
         RestrictPublicBuckets: True
+      WebsiteConfiguration:
+          IndexDocument: "index.html"
+          ErrorDocument: "index.html"
       CorsConfiguration:
         CorsRules:
           -
@@ -323,6 +333,17 @@ Resources:
             AllowedOrigins:
               - "*" #!Sub "https://${CloudFrontDistribution.DomainName}"
             MaxAge: 3000
+
+  Route53RecordSet:
+    Type: AWS::Route53::RecordSet
+    DependsOn: CreateWebsiteS3Bucket
+    Properties:
+      Name: !Ref HostName
+      HostedZoneId: !Ref HostedZoneId
+      Type: A
+      AliasTarget:
+        DNSName: !GetAtt [CloudFrontDistribution, DomainName]
+        HostedZoneId: Z2FDTNDATAQYW2
 
   s3BucketPolicy:
     Type: AWS::S3::BucketPolicy
@@ -402,44 +423,32 @@ Resources:
                       - !FindInMap [FunctionMap, Configuration, S3Bucket]
                       - '/*'
 
-  ConfigureWebsite:
-    Type: Custom::LoadLambda
-    DependsOn:
-      - CreateWebsiteS3Bucket
-    Properties:
-      ServiceToken: !GetAtt CustomResourceHelper.Arn
-      Region: !Ref AWS::Region
-      customAction: configureWebsite
-      sourceS3Bucket:
-        !Join
-          - '.'
-          - - !Ref 'AWS::Region'
-            - !FindInMap [FunctionMap, Configuration, S3Bucket]
-      sourceS3key: !FindInMap [FunctionMap, Configuration, S3Key]
-      destS3Bucket: !Ref WebsiteS3BucketName
-      destS3KeyPrefix: contents/
-      UUID: !GetAtt SolutionUuid.UUID
-      data: !Ref allowAnonymousUsageMetrics
-      solutionId: !FindInMap [FunctionMap, Configuration, SolutionID]
+  # ConfigureWebsite:
+  #   Type: Custom::LoadLambda
+  #   DependsOn:
+  #     - CreateWebsiteS3Bucket
+  #   Properties:
+  #     ServiceToken: !GetAtt CustomResourceHelper.Arn
+  #     Region: !Ref AWS::Region
+  #     customAction: configureWebsite
+  #     sourceS3Bucket:
+  #       !Join
+  #         - '.'
+  #         - - !Ref 'AWS::Region'
+  #           - !FindInMap [FunctionMap, Configuration, S3Bucket]
+  #     sourceS3key: !FindInMap [FunctionMap, Configuration, S3Key]
+  #     destS3Bucket: !Ref WebsiteS3BucketName
+  #     destS3KeyPrefix: contents/
+  #     UUID: !GetAtt SolutionUuid.UUID
+  #     data: !Ref allowAnonymousUsageMetrics
+  #     solutionId: !FindInMap [FunctionMap, Configuration, SolutionID]
 
-  SolutionAnonymousMetric:
-    Type: "Custom::LoadLambda"
-    Condition: AnonymousUsageMetrics
-    Properties:
-      ServiceToken: !GetAtt CustomResourceHelper.Arn
-      Region: !Ref AWS::Region
-      solutionId: !FindInMap ["FunctionMap", "Configuration", "SolutionID"]
-      UUID: !GetAtt SolutionUuid.UUID
-      version: "1"
-      anonymousData: !Ref allowAnonymousUsageMetrics
-      customAction: "sendMetric"
-
-  SolutionUuid:
-    Type: "Custom::LoadLambda"
-    Properties:
-      ServiceToken: !GetAtt CustomResourceHelper.Arn
-      Region: !Ref AWS::Region
-      customAction: "createUuid"
+  # SolutionUuid:
+  #   Type: "Custom::LoadLambda"
+  #   Properties:
+  #     ServiceToken: !GetAtt CustomResourceHelper.Arn
+  #     Region: !Ref AWS::Region
+  #     customAction: "createUuid"
 
   CloudFrontDistributionAccessIdentity:
     Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
@@ -460,7 +469,8 @@ Resources:
               - - !Ref WebsiteS3BucketName
                 - .s3.amazonaws.com
             Id: !Ref WebsiteS3BucketName
-            OriginPath: /contents
+          #   OriginPath: /contents
+            Id: !Ref HostName
             S3OriginConfig:
               OriginAccessIdentity:
                 !Join
@@ -471,7 +481,7 @@ Resources:
         Logging:
           Bucket: !GetAtt CreateWebsiteS3Bucket.DomainName
           Prefix: 'logs/'
-          IncludeCookies: true
+          #IncludeCookies: true
         Comment: CloudFront for Chat UI
         DefaultRootObject: index.html
         DefaultCacheBehavior:
@@ -573,72 +583,72 @@ Resources:
 
   ### Generate Index.html file ####
 
-  ChatUXCreator:
-    Type: "AWS::Lambda::Function"
-    Properties:
-      Description:  >
-        AWS Lambda Function that will create the chat UX and upload it to the S3 bucket
-      Handler: "websiteCreator.handler"
-      Role: !GetAtt ChatUXCreatorRole.Arn
-      Runtime: "nodejs10.x"
-      MemorySize: 256
-      Timeout: 120
-      Code:
-        S3Bucket:
-          !Join
-            - '.'
-            - - !Ref 'AWS::Region'
-              - !FindInMap [FunctionMap, Configuration, S3Bucket]
-        S3Key: !Join ["", [!FindInMap [FunctionMap, Configuration, S3Key], 'create-website.zip']]
+  # ChatUXCreator:
+  #   Type: "AWS::Lambda::Function"
+  #   Properties:
+  #     Description:  >
+  #       AWS Lambda Function that will create the chat UX and upload it to the S3 bucket
+  #     Handler: "websiteCreator.handler"
+  #     Role: !GetAtt ChatUXCreatorRole.Arn
+  #     Runtime: "nodejs10.x"
+  #     MemorySize: 256
+  #     Timeout: 120
+  #     Code:
+  #       S3Bucket:
+  #         !Join
+  #           - '.'
+  #           - - !Ref 'AWS::Region'
+  #             - !FindInMap [FunctionMap, Configuration, S3Bucket]
+  #       S3Key: !Join ["", [!FindInMap [FunctionMap, Configuration, S3Key], 'create-website.zip']]
 
-  InvokeChatUXCreator:
-    Type: Custom::CreateChatUX
-    DependsOn:
-      - CreateWebsiteS3Bucket
-    Properties:
-      S3Bucket:
-        !Ref WebsiteS3BucketName
-      ApiGatewayId:
-        !Ref ApiGatewayRestAPI
-      Region:
-        !Ref AWS::Region
-      ServiceToken:
-        !GetAtt ChatUXCreator.Arn
-      InstanceId:
-        !Ref instanceId
-      ContactFlowId:
-        !Ref contactFlowId
+  # InvokeChatUXCreator:
+  #   Type: Custom::CreateChatUX
+  #   DependsOn:
+  #     - CreateWebsiteS3Bucket
+  #   Properties:
+  #     S3Bucket:
+  #       !Ref WebsiteS3BucketName
+  #     ApiGatewayId:
+  #       !Ref ApiGatewayRestAPI
+  #     Region:
+  #       !Ref AWS::Region
+  #     ServiceToken:
+  #       !GetAtt ChatUXCreator.Arn
+  #     InstanceId:
+  #       !Ref instanceId
+  #     ContactFlowId:
+  #       !Ref contactFlowId
 
-  ChatUXCreatorRole:
-    Type: "AWS::IAM::Role"
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: "Allow"
-            Principal:
-              Service:
-                - "lambda.amazonaws.com"
-            Action:
-              - "sts:AssumeRole"
-      Path: "/"
-      Policies:
-        - PolicyName: contact-flow-creator-policy
-          PolicyDocument:
-            Version: "2012-10-17"
-            Statement:
-              - Effect: "Allow"
-                Action:
-                  - 'logs:CreateLogGroup'
-                  - 'logs:CreateLogStream'
-                  - 'logs:PutLogEvents'
-                Resource:
-                  - !Sub "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/*"
-              - Effect: "Allow"
-                Action:
-                  - "s3:PutObject"
-                Resource:
-                  - !Sub ${CreateWebsiteS3Bucket.Arn}/*
+  # ChatUXCreatorRole:
+  #   Type: "AWS::IAM::Role"
+  #   Properties:
+  #     AssumeRolePolicyDocument:
+  #       Version: "2012-10-17"
+  #       Statement:
+  #         - Effect: "Allow"
+  #           Principal:
+  #             Service:
+  #               - "lambda.amazonaws.com"
+  #           Action:
+  #             - "sts:AssumeRole"
+  #     Path: "/"
+  #     Policies:
+  #       - PolicyName: contact-flow-creator-policy
+  #         PolicyDocument:
+  #           Version: "2012-10-17"
+  #           Statement:
+  #             - Effect: "Allow"
+  #               Action:
+  #                 - 'logs:CreateLogGroup'
+  #                 - 'logs:CreateLogStream'
+  #                 - 'logs:PutLogEvents'
+  #               Resource:
+  #                 - !Sub "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/*"
+  #             - Effect: "Allow"
+  #               Action:
+  #                 - "s3:PutObject"
+  #               Resource:
+  #                 - !Sub ${CreateWebsiteS3Bucket.Arn}/*
 
 Outputs:
   cloudFrontDistribution:
