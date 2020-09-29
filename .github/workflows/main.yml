@@ -65,7 +65,7 @@ jobs:
               username: 'Github Actions',
               icon_emoji: ':robot_face:',
               attachments: [{
-                title: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger',
+                title: 'Lex and Connect Chatbot CICD',
                 color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
                 text: `Job Completed.`,
                 fields: [{
