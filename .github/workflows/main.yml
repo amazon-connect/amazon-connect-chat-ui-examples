@@ -51,42 +51,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           SOURCE_DIR: 'StaticUITestSite' 
 
-      # - name: Slack Notification
-      #   uses: rtCamp/action-slack-notify@master
-      #   env:
-      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-      #     SLACK_CHANNEL: ci-cd-notifications
-      #     SLACK_USERNAME: GitHubActions
-      #     SLACK_TITLE: Lex-Chatbot-CICD
-      #     SLACK_MESSAGE: > 
-      #       Build finished for branch ${GITHUB_REF#refs/heads/}
-
-      # - name: Slack notification Failure
-      #   if: failure()
-      #   env:
-      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-      #   uses: cemkiy/action-slacker@master
-      #   with:
-      #     channel: 'ci-cd-notifications'
-      #     icon_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Slack_Icon.png/220px-Slack_Icon.png'
-      #     username: 'GitHub Actions'
-      #     color: '#cc0000'
-      #     text: 'Action failed'
-      #     image_url: 'https://cdn-media-1.freecodecamp.org/images/LSWK5plwMRtm14FC4QTmVhBKRF4wxeCj591G'
-
-      # - name: Slack notification Success
-      #   if: success()
-      #   env:
-      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-      #   uses: cemkiy/action-slacker@master
-      #   with:
-      #     channel: 'ci-cd-notifications'
-      #     icon_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Slack_Icon.png/220px-Slack_Icon.png'
-      #     username: 'GitHub Actions'
-      #     color: '#36a64f'
-      #     text: 'Action succeeded'
-      #     image_url: 'https://raw.githubusercontent.com/dwyl/repo-badges/master/highresPNGs/build-passing.png'
-
       - name: GitHub Actions Lex/Connect Chatbot Deploy notification
         uses: 8398a7/action-slack@v3
         if: always() # Pick up events even if the job fails or is canceled.
@@ -98,8 +62,8 @@ jobs:
           fields: repo,message,commit,author,action,eventName,ref,workflow,job,took 
           custom_payload: |
             {
-              username: 'action-slack',
-              icon_emoji: ':octocat:',
+              username: 'GitHub Actions',
+              icon_emoji: ':robot_face:',
               attachments: [{
                 color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
                 text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR} succeeded in ${process.env.AS_TOOK}`,
