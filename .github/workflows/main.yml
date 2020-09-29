@@ -6,9 +6,17 @@ name: Lex-Chatbot-Demo-Site-CICD
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches:
+      # Push events on master branch
+      - master
+      # Push events to branches matching refs/heads/mona/octocat
+      - 'feature/chat-1'
   pull_request:
-    branches: [ master ]
+    branches:
+      # Push events on master branch
+      - master
+      # Push events to branches matching refs/heads/mona/octocat
+      - 'feature/chat-1'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
