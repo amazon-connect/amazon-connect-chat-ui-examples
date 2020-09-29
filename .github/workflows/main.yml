@@ -68,7 +68,7 @@ jobs:
         uses: cemkiy/action-slacker@master
         with:
           channel: 'ci-cd-notifications'
-          #icon_url: 'slack user icon url'
+          icon_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Slack_Icon.png/220px-Slack_Icon.png'
           username: 'GitHub Actions'
           text: 'Action for $BRANCH failed'
           image_url: 'htthttps://github.com/AlieraHealthcare/amazon-connect-lex-chat-ui/workflows/Lex-Chatbot-Demo-Site-CICD/badge.svg'
@@ -80,7 +80,7 @@ jobs:
         uses: cemkiy/action-slacker@master
         with:
           channel: 'ci-cd-notifications'
-          #icon_url: 'slack user icon url'
+          icon_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Slack_Icon.png/220px-Slack_Icon.png'
           username: 'GitHub Actions'
           text: 'Action for $BRANCH succeeded'
           image_url: 'https://github.com/AlieraHealthcare/amazon-connect-lex-chat-ui/workflows/Lex-Chatbot-Demo-Site-CICD/badge.svg'
