@@ -65,13 +65,15 @@ jobs:
         if: failure()
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
         uses: cemkiy/action-slacker@master
         with:
           channel: 'ci-cd-notifications'
           icon_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Slack_Icon.png/220px-Slack_Icon.png'
           username: 'GitHub Actions'
-          text: 'Action for $BRANCH failed'
-          image_url: 'htthttps://github.com/AlieraHealthcare/amazon-connect-lex-chat-ui/workflows/Lex-Chatbot-Demo-Site-CICD/badge.svg'
+          color: '#cc0000'
+          text: 'Action failed'
+          image_url: 'https://cdn-media-1.freecodecamp.org/images/LSWK5plwMRtm14FC4QTmVhBKRF4wxeCj591G'
 
       - name: Slack notification Success
         if: success()
@@ -82,5 +84,6 @@ jobs:
           channel: 'ci-cd-notifications'
           icon_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Slack_Icon.png/220px-Slack_Icon.png'
           username: 'GitHub Actions'
-          text: 'Action for $BRANCH succeeded'
-          image_url: 'https://github.com/AlieraHealthcare/amazon-connect-lex-chat-ui/workflows/Lex-Chatbot-Demo-Site-CICD/badge.svg'
+          color: '#36a64f'
+          text: 'Action succeeded'
+          image_url: 'https://raw.githubusercontent.com/dwyl/repo-badges/master/highresPNGs/build-passing.png'
