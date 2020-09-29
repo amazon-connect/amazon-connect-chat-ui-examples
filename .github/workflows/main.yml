@@ -89,6 +89,8 @@ jobs:
 
       - name: GitHub Actions Lex/Connect Chatbot Deploy notification
         if: always()
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         uses: adamkdean/simple-slack-notify@master
         with:
           channel: 'ci-cd-notifications'
@@ -99,3 +101,12 @@ jobs:
           fields: |
             [{ "title": "Repository", "value": "${env.GITHUB_REPOSITORY}", "short": true },
             { "title": "Branch", "value": "${env.BRANCH}", "short": true }]
+
+      - uses: 8398a7/action-slack@v3
+        if: always() # Pick up events even if the job fails or is canceled.
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
+        
