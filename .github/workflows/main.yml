@@ -61,29 +61,41 @@ jobs:
       #     SLACK_MESSAGE: > 
       #       Build finished for branch ${GITHUB_REF#refs/heads/}
 
-      - name: Slack notification Failure
-        if: failure()
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      # - name: Slack notification Failure
+      #   if: failure()
+      #   env:
+      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      #   uses: cemkiy/action-slacker@master
+      #   with:
+      #     channel: 'ci-cd-notifications'
+      #     icon_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Slack_Icon.png/220px-Slack_Icon.png'
+      #     username: 'GitHub Actions'
+      #     color: '#cc0000'
+      #     text: 'Action failed'
+      #     image_url: 'https://cdn-media-1.freecodecamp.org/images/LSWK5plwMRtm14FC4QTmVhBKRF4wxeCj591G'
 
-        uses: cemkiy/action-slacker@master
+      # - name: Slack notification Success
+      #   if: success()
+      #   env:
+      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      #   uses: cemkiy/action-slacker@master
+      #   with:
+      #     channel: 'ci-cd-notifications'
+      #     icon_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Slack_Icon.png/220px-Slack_Icon.png'
+      #     username: 'GitHub Actions'
+      #     color: '#36a64f'
+      #     text: 'Action succeeded'
+      #     image_url: 'https://raw.githubusercontent.com/dwyl/repo-badges/master/highresPNGs/build-passing.png'
+
+      - name: GitHub Actions Lex/Connect Chatbot Deploy notification
+        if: always()
+        uses: adamkdean/simple-slack-notify@master
         with:
           channel: 'ci-cd-notifications'
-          icon_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Slack_Icon.png/220px-Slack_Icon.png'
-          username: 'GitHub Actions'
-          color: '#cc0000'
-          text: 'Action failed'
-          image_url: 'https://cdn-media-1.freecodecamp.org/images/LSWK5plwMRtm14FC4QTmVhBKRF4wxeCj591G'
-
-      - name: Slack notification Success
-        if: success()
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        uses: cemkiy/action-slacker@master
-        with:
-          channel: 'ci-cd-notifications'
-          icon_url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Slack_Icon.png/220px-Slack_Icon.png'
-          username: 'GitHub Actions'
-          color: '#36a64f'
-          text: 'Action succeeded'
-          image_url: 'https://raw.githubusercontent.com/dwyl/repo-badges/master/highresPNGs/build-passing.png'
+          status: ${{ job.status }}
+          success_text: 'Deployment (#${env.GITHUB_RUN_NUMBER}) completed successfully'
+          failure_text: 'Deployment (#${env.GITHUB_RUN_NUMBER}) failed'
+          cancelled_text: 'Deployment (#${env.GITHUB_RUN_NUMBER}) was cancelled'
+          fields: |
+            [{ "title": "Repository", "value": "${env.GITHUB_REPOSITORY}", "short": true },
+            { "title": "Branch", "value": "${env.BRANCH}", "short": true }]
