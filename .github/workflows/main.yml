@@ -88,10 +88,10 @@ jobs:
       #     image_url: 'https://raw.githubusercontent.com/dwyl/repo-badges/master/highresPNGs/build-passing.png'
 
       - name: GitHub Actions Lex/Connect Chatbot Deploy notification
+        uses: adamkdean/simple-slack-notify@master
         if: always()
         env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        uses: adamkdean/simple-slack-notify@master
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
         with:
           channel: 'ci-cd-notifications'
           status: ${{ job.status }}
@@ -102,10 +102,11 @@ jobs:
             [{ "title": "Repository", "value": "${env.GITHUB_REPOSITORY}", "short": true },
             { "title": "Branch", "value": "${env.BRANCH}", "short": true }]
 
-      - uses: 8398a7/action-slack@v3
+      - name: GitHub Actions Lex/Connect Chatbot Deploy notification
+        uses: 8398a7/action-slack@v3
         if: always() # Pick up events even if the job fails or is canceled.
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }} # required
         with:
           status: ${{ job.status }}
           fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
