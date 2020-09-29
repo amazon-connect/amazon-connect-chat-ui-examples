@@ -14,7 +14,6 @@ on:
     branches:
       # Push events on master branch
       - master
-      - 'feature/chat-*'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -27,6 +26,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
   
+      - name: Extract branch name
+          shell: bash
+          run: echo "::set-env name=BRANCH::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
+
       # Update static S3 site for chatbot testing
       - name: S3 Dev Deploy
         uses: jakejarvis/s3-sync-action@v0.5.1
@@ -48,10 +51,34 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           SOURCE_DIR: 'StaticUITestSite' 
 
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@master
+      # - name: Slack Notification
+      #   uses: rtCamp/action-slack-notify@master
+      #   env:
+      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      #     SLACK_CHANNEL: ci-cd-notifications
+      #     SLACK_USERNAME: GitHubActions
+      #     SLACK_TITLE: Lex-Chatbot-CICD
+      #     SLACK_MESSAGE: > 
+      #       Build finished for branch ${GITHUB_REF#refs/heads/}
+
+      - name: Slack notification Failure
+        if: failure()
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_CHANNEL: ci-cd-notifications
-          SLACK_TITLE: Lex-Chatbot-Demo-Site-CICD
-          SLACK_MESSAGE: "https://github.com/AlieraHealthcare/amazon-connect-lex-chat-ui/workflows/Lex-Chatbot-Demo-Site-CICD/badge.svg"
+        uses: cemkiy/action-slacker@master
+        with:
+          channel: 'ci-cd-notifications'
+          #icon_url: 'slack user icon url'
+          username: 'GitHub Actions'
+          image_url: 'htthttps://github.com/AlieraHealthcare/amazon-connect-lex-chat-ui/workflows/Lex-Chatbot-Demo-Site-CICD/badge.svg'
+
+      - name: Slack notification Success
+        if: success()
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        uses: cemkiy/action-slacker@master
+        with:
+          channel: 'ci-cd-notifications'
+          #icon_url: 'slack user icon url'
+          username: 'GitHub Actions'
+          image_url: 'https://github.com/AlieraHealthcare/amazon-connect-lex-chat-ui/workflows/Lex-Chatbot-Demo-Site-CICD/badge.svg'
