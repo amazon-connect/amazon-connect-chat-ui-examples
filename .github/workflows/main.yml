@@ -27,8 +27,8 @@ jobs:
       - uses: actions/checkout@v2
   
       - name: Extract branch name
-          shell: bash
-          run: echo "::set-env name=BRANCH::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
+        shell: bash
+        run: echo "::set-env name=BRANCH::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
 
       # Update static S3 site for chatbot testing
       - name: S3 Dev Deploy
@@ -70,6 +70,7 @@ jobs:
           channel: 'ci-cd-notifications'
           #icon_url: 'slack user icon url'
           username: 'GitHub Actions'
+          text: 'Action for $BRANCH failed'
           image_url: 'htthttps://github.com/AlieraHealthcare/amazon-connect-lex-chat-ui/workflows/Lex-Chatbot-Demo-Site-CICD/badge.svg'
 
       - name: Slack notification Success
@@ -81,4 +82,5 @@ jobs:
           channel: 'ci-cd-notifications'
           #icon_url: 'slack user icon url'
           username: 'GitHub Actions'
+          text: 'Action for $BRANCH succeeded'
           image_url: 'https://github.com/AlieraHealthcare/amazon-connect-lex-chat-ui/workflows/Lex-Chatbot-Demo-Site-CICD/badge.svg'
