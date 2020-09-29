@@ -75,7 +75,7 @@ jobs:
                 },
                 {
                   title: 'Branch',
-                  value: `${env.BRANCH}`,
+                  value: `${process.env.BRANCH}`,
                   short: true
                 },
                 {
