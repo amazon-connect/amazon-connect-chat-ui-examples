@@ -26,5 +26,9 @@
   {
     "ParameterKey": "transcriptPath",
     "ParameterValue": "connect/instanceName/ChatTranscripts"
+  },
+  {
+    "ParameterKey": "AmazonConnectS3BucketName",
+    "ParameterValue": "connect-ef986a233f60"
   }
 ]
