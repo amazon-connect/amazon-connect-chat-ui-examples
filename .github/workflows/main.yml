@@ -65,18 +65,43 @@ jobs:
               username: 'Github Actions',
               icon_emoji: ':robot_face:',
               attachments: [{
-                title: 'CI Result',
+                title: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger',
                 color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-                text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR} succeeded in ${process.env.AS_TOOK}`,
-                 fields: [{
+                text: `Job Completed.`,
+                fields: [{
                   title: 'Repo',
                   value: `${process.env.AS_REPO}`,
+                  short: true
+                },
+                {
+                  title: 'Branch',
+                  value: `${env.BRANCH}`,
                   short: true
                 },
                 {
                   title: 'Author',
                   value: `${process.env.AS_AUTHOR}`,
                   short: true
+                },
+                {
+                  title: 'Commit ID',
+                  value: `${process.env.AS_COMMIT}`, 
+                  short: true
+                },
+                {
+                  title: 'Commit Message',
+                  value: `${process.env.AS_MESSAGE}`,
+                  short: false
+                },
+                {
+                  title: 'Workflow',
+                  value: `${process.env.AS_WORKFLOW}`,
+                  short: false
+                },
+                {
+                  title: 'Job',
+                  value: `${process.env.AS_JOB}`,
+                  short: false
                 },
                 {
                   title: 'Took',
