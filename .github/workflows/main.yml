@@ -88,26 +88,20 @@ jobs:
       #     image_url: 'https://raw.githubusercontent.com/dwyl/repo-badges/master/highresPNGs/build-passing.png'
 
       - name: GitHub Actions Lex/Connect Chatbot Deploy notification
-        uses: adamkdean/simple-slack-notify@master
-        if: always()
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-        with:
-          channel: 'ci-cd-notifications'
-          status: ${{ job.status }}
-          success_text: 'Deployment (#${env.GITHUB_RUN_NUMBER}) completed successfully'
-          failure_text: 'Deployment (#${env.GITHUB_RUN_NUMBER}) failed'
-          cancelled_text: 'Deployment (#${env.GITHUB_RUN_NUMBER}) was cancelled'
-          fields: |
-            [{ "title": "Repository", "value": "${env.GITHUB_REPOSITORY}", "short": true },
-            { "title": "Branch", "value": "${env.BRANCH}", "short": true }]
-
-      - name: GitHub Actions Lex/Connect Chatbot Deploy notification
         uses: 8398a7/action-slack@v3
         if: always() # Pick up events even if the job fails or is canceled.
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }} # required
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          GITHUB_TOKEN: ${{ github.token }}
         with:
           status: ${{ job.status }}
-          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
-        
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took 
+          custom_payload: |
+            {
+              username: 'action-slack',
+              icon_emoji: ':octocat:',
+              attachments: [{
+                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+                text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR} succeeded in ${process.env.AS_TOOK}`,
+              }]
+            }
