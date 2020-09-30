@@ -17,7 +17,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  S3Deploy:
+  Dev-S3Deploy:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -51,7 +51,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           SOURCE_DIR: 'StaticUITestSite' 
 
-      - name: GitHub Actions Lex/Connect Chatbot Deploy notification
+      - name: Dev GitHub Actions Lex/Connect Chatbot Deploy notification
         uses: 8398a7/action-slack@v3
         if: always() # Pick up events even if the job fails or is canceled.
         env:
@@ -67,7 +67,7 @@ jobs:
               attachments: [{
                 title: 'Lex and Connect Chatbot CICD',
                 color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-                text: `Job Completed.`,
+                text: `Updated: https://chatbot.tedevops.com/`,
                 fields: [{
                   title: 'Repo',
                   value: `${process.env.AS_REPO}`,
@@ -91,22 +91,22 @@ jobs:
                 {
                   title: 'Commit Message',
                   value: `${process.env.AS_MESSAGE}`,
-                  short: false
+                  short: true
                 },
                 {
                   title: 'Workflow',
                   value: `${process.env.AS_WORKFLOW}`,
-                  short: false
+                  short: true
                 },
                 {
                   title: 'Job',
                   value: `${process.env.AS_JOB}`,
-                  short: false
+                  short: true
                 },
                 {
                   title: 'Took',
                   value: `${process.env.AS_TOOK}`,
-                  short: false
+                  short: true
                 }]
               }]
             }
