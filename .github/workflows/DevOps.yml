@@ -25,24 +25,13 @@ jobs:
       - name: Extract branch name
         shell: bash
         run: echo "::set-env name=BRANCH::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
-
-      # Update static S3 site for chatbot testing
-      - name: S3 Dev Deploy
-        uses: jakejarvis/s3-sync-action@v0.5.1
-        with:
-          args: --delete
-        env:
-          AWS_S3_BUCKET: arn:aws:s3:::devops.chatbot.tedevops.com
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          SOURCE_DIR: 'StaticUITestSite' 
       
       - name: S3 DevOps Deploy
         uses: jakejarvis/s3-sync-action@v0.5.1
         with:
           args: --delete
         env:
-          AWS_S3_BUCKET: arn:aws:s3:::devops.chatbot.tedevops.com
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET_DEVOPS }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           SOURCE_DIR: 'StaticUITestSite' 

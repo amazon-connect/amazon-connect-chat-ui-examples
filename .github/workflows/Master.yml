@@ -41,16 +41,6 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           SOURCE_DIR: 'StaticUITestSite' 
-      
-      - name: S3 DevOps Deploy
-        uses: jakejarvis/s3-sync-action@v0.5.1
-        with:
-          args: --delete
-        env:
-          AWS_S3_BUCKET: arn:aws:s3:::devops-demo-sales-site-te
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          SOURCE_DIR: 'StaticUITestSite' 
 
       - name: Dev GitHub Actions Lex/Connect Chatbot Deploy notification
         uses: 8398a7/action-slack@v3
