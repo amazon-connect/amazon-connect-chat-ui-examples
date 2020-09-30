@@ -68,7 +68,7 @@ jobs:
               attachments: [{
                 title: 'Lex and Connect Chatbot CICD',
                 color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-                text: `Updated: https://chatbot.tedevops.com/`,
+                text: `For https://chatbot.tedevops.com/`,
                 fields: [{
                   title: 'Repo',
                   value: `${process.env.AS_REPO}`,
