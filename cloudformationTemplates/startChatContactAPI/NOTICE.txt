@@ -1,0 +1,56 @@
+Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+**********************
+THIRD PARTY COMPONENTS
+**********************
+This software includes third party software subject to the following copyrights:
+
+AWS SDK under the Apache License Version 2.0
+amazon-connect-chatjs under the MIT License
+@babel/runtime under the MIT license
+awesome-typescript-loader under the MIT license
+axios under the MIT license
+babel-eslint under the MIT license
+babel-jest under the MIT license
+babel-preset-react-app under the MIT license
+bfj under the MIT license
+case-sensitive-paths-webpack-plugin under the MIT license
+chalk under the MIT license
+css-loader under the MIT license
+enzyme under the MIT license
+eslint under the MIT license
+eslint-config-react-app under the MIT license
+eslint-loader under the MIT license
+eslint-plugin-import under the MIT license
+eslint-plugin-jsx-a11y under the MIT license
+eslint-plugin-react under the MIT license
+file-loader under the MIT license
+fs-extra under the MIT license
+html-webpack-plugin under the MIT license
+jest under the MIT license
+jest-pnp-resolver under the MIT license
+jest-resolve under the MIT license
+linkifyjs under the MIT license
+lodash under the MIT license
+mini-css-extract-plugin under the MIT license
+postcss-flexbugs-fixes under the MIT license
+postcss-loader under the MIT license
+postcss-safe-parser under the MIT license
+react under the MIT license
+react-app-polyfill under the MIT license
+react-dev-utils under the MIT license
+react-dom under the MIT license
+react-intl under the BSD 3-clause
+react-linkify under the MIT license
+react-router-dom under the MIT license
+react-spinner under the MIT license
+resolve under the MIT license
+sass-loader under the MIT license
+style-loader under the MIT license
+styled-components under the MIT license
+terser-webpack-plugin under the MIT license
+typescript under the Apache 2.0 license
+universal-cookie under the MIT license
+url-loader under the MIT license
+webpack-dev-server under the MIT license
+webpack-manifest-plugin under the MIT license

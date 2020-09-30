@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+
+    <script type="text/javascript" src="js/amazon-connect-chat-min.js"></script>
+</head>
+<body>
+
+    <style>
+    </style>
+
+    <div>
+        <section class="section-main" id="section-main">
+            <header>
+                <h1>Amazon Connect - Custom Implementation of Customer Chat</h1>
+            </header>
+
+            <form name="contactDetails" id="contactDetails" style="padding-top: 30px; padding: 5px;">
+                <div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input name="firstName" type="text" id="firstName" placeholder="First Name"
+                                        style="width:161px;">
+                                </td>
+                                <td style="padding-left: 10px;">
+                                    <input type="submit" style="padding-left: 10px;" class="submit" id="startChat"
+                                        value="Start Chat"></input>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+            
+            <div style="padding: 5px;"><textarea type="text" id="chatContent"></textarea></div>
+            <div style="padding: 5px;"><input type="button" id="sendChat" value="Send chat"></div>
+            <div style="padding-top: 10px; display: inline-flex">
+                <div style="padding: 5px;"><input type="button" id="getTranscript" value="Get Transcript"></div>
+                <div style="padding: 5px;"><input type="button" id="sendTyping" value="Send typing"></div>
+                <div style="padding: 5px;"><input type="button" id="endChat" value="End chat"></div>
+            </div>
+            <div style="padding: 5px;"><textarea readonly id="chatTranscript"></textarea></div>
+        </section>
+    </div>
+
+    <script>
+
+        connect.ChatSession.setGlobalConfig({
+            region: "" // TODO: Fill in with your region, such as 'us-west-2'
+        });
+
+        var session;
+
+        $(document).ready((a) => {
+            $("#sendChat").click(() => { 
+                sendChat();
+            });
+
+            $("#getTranscript").click(() => { 
+                getTranscript();
+            });
+
+            $("#endChat").click(() => { 
+                endChat();
+            });
+
+            $("#sendTyping").click(() => { 
+                sendTypingEvent();
+            });
+        });
+
+        $(function () {
+            $('#contactDetails').submit(function (e) {
+                e.preventDefault();
+
+                customerName = $('#firstName').val();
+                if (!customerName) {
+                    alert('you must enter a name');
+                } else {
+                    var contactFlowId = ""; // TODO: Fill in. You can find the contact flow id when viewing a contact flow. For example, if the arn for your flow is 'arn:aws:connect:us-west-2:123456789012:instance/11111111-1111-1111-1111-111111111111/contact-flow/22222222-2222-2222-2222-222222222222', the contact flow id is '22222222-2222-2222-2222-222222222222'
+                    var instanceId = ""; // TODO: Fill in You can find the instance id when viewing a contact flow. For example, if the arn for your flow is 'arn:aws:connect:us-west-2:123456789012:instance/11111111-1111-1111-1111-111111111111/contact-flow/22222222-2222-2222-2222-222222222222', the instance id is '11111111-1111-1111-1111-111111111111'
+                    var apiGatewayEndpoint = ""; // TODO: Fill in with the API Gateway endpoint created by your CloudFormation template. It should look like this: https://${apiId}.execute-api.${region}.amazonaws.com/Prod
+
+                    console.log("this is the first name:" + customerName);
+                    document.getElementById("contactDetails").reset();
+
+                    var initiateChatRequest = {
+                        ParticipantDetails: {
+                            DisplayName: customerName
+                        },
+                        ContactFlowId: contactFlowId,
+                        InstanceId: instanceId
+                    };
+
+                    $.ajax({
+                        url: apiGatewayEndpoint,
+                        type: "POST",
+                        async: false,
+                        data: JSON.stringify(initiateChatRequest),
+                        success: function(result) {
+                            console.log("Success!");
+                            console.log(JSON.stringify(result));
+                            session = connect.ChatSession.create({
+                                chatDetails: result.data.startChatResult,
+                                type: "CUSTOMER"
+                            });
+                        },
+                        error: function(result) {
+                            console.log("Error:");
+                            console.log(result);
+                        },
+                        complete: function(data) {
+                            console.log("Complete: " + JSON.stringify(data));
+                            session.connect().then((response) => {
+                                console.log("successful connection: " + JSON.stringify(response));
+                                return response;
+                            }, (error) => {
+                                console.log("unsuccessful connection " + JSON.stringify(error));
+                                return Promise.reject(error);
+                            });
+
+                            session.onConnectionEstablished((data) => {
+                                console.log("Established!");
+                            })
+
+                            session.onMessage((message) => {
+                                console.log("Received message: " + JSON.stringify(message));
+                            });
+
+                            session.onTyping((typingEvent) => {
+                                if (typingEvent.data.ParticipantRole === "AGENT") {
+                                    console.log("Agent is typing ");
+                                }
+                            });
+
+                            session.onConnectionBroken((data) => {
+                                console.log("Connection broken");
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+        function sendChat() {
+            var message = document.getElementById("chatContent").value;
+            console.log("Clicked with message " + message);
+
+            session.controller.sendMessage({
+                message: message,
+                contentType: "text/plain"
+            })
+        }
+
+        function getTranscript() {
+            session.getTranscript({
+                scanDirection: "BACKWARD",
+                sortOrder: "ASCENDING",
+                maxResults: 15
+            }).then(response => {
+                console.log("Current transcript: ");
+                console.log(JSON.stringify(response.data.Transcript));
+                $('#chatTranscript').text(JSON.stringify(response.data.Transcript));
+            });
+        }
+
+        function endChat() {
+            session.controller.disconnectParticipant();
+        }
+
+        function sendTypingEvent() {
+            session.controller.sendEvent({
+                contentType: "application/vnd.amazonaws.connect.event.typing"
+            });
+        }
+    </script>
+
+</body>

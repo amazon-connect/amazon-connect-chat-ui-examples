@@ -1,0 +1,285 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Description: >
+  Customer chat solution for Amazon Connect:
+  - This solution creates an API Gateway method that invokes a Lambda function to start a chat via Amazon Connect Service StartChatContact and returns the result.
+
+Mappings:
+  FunctionMap:
+    Configuration:
+      S3Bucket: "start-chat-contact-api-cfn"
+      S3Key: "deployment/"
+      SolutionID: "AC0002"
+
+Parameters:
+  contactFlowId:
+    Type: String
+    Default: 12345678-1234-1234-1234-123456789012
+    Description: The contact flow id that the customer will interact with while chatting
+    AllowedPattern: '\w{8}-\w{4}-\w{4}-\w{4}-\w{12}'
+  instanceId:
+    Type: String
+    Default: 12345678-1234-1234-1234-123456789012
+    Description: The instance id of the Amazon Connect instance that the customer will interact with while chatting
+    AllowedPattern: '\w{8}-\w{4}-\w{4}-\w{4}-\w{12}'
+  allowAnonymousUsageMetrics:
+    Type: String
+    Default: "Yes"
+    AllowedValues:
+      - "Yes"
+      - "No"
+    Description: Send usage metrics about this CloudFormation stack to AWS
+
+Conditions:
+  AnonymousUsageMetrics: !Equals [ !Ref allowAnonymousUsageMetrics, "Yes"]
+
+Outputs:
+  StartChatLambda:
+    Description:  The ARN of the Lambda function created to initiate chat
+    Value: !GetAtt StartChatLambda.Arn
+  ApiGatewayEndoint:
+    Description:  The ARN of the API Gateway endpoint that triggers the Lambda function to initiate the chat
+    Value: !Ref ApiGatewayRestAPI
+  StartChatLambdaExecutionRole:
+    Description:  The ARN of the IAM role used by the Lambda function to initiate the chat
+    Value: !GetAtt StartChatLambdaExecutionRole.Arn
+
+Resources:
+
+  #### Lambda #####
+  ChatSDKLayer:
+    Type: AWS::Lambda::LayerVersion
+    Properties:
+      CompatibleRuntimes:
+        - "nodejs10.x"
+        - "nodejs8.10"
+      Content:
+        S3Bucket:
+          !Join
+            - '.'
+            - - !Ref 'AWS::Region'
+              - !FindInMap [FunctionMap, Configuration, S3Bucket]
+        S3Key: !Join ["", [!FindInMap [FunctionMap, Configuration, S3Key], 'ChatSDK.zip']]
+      Description: The AWS SDK including Amazon Connect Chat APIs.
+
+  StartChatLambda:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Description:  AWS Lambda Function to initiate the chat with the end user
+      Handler: "startChatContact.handler"
+      Role: !GetAtt StartChatLambdaExecutionRole.Arn
+      Runtime: "nodejs10.x"
+      MemorySize: 128
+      Timeout: 30
+      Layers:
+        - !Ref ChatSDKLayer
+      Environment:
+        Variables:
+          INSTANCE_ID: !Ref instanceId
+          CONTACT_FLOW_ID: !Ref contactFlowId
+          SOLUTION_ID: !FindInMap [FunctionMap, Configuration, SolutionID]
+      Code:
+        S3Bucket:
+          !Join
+            - '.'
+            - - !Ref 'AWS::Region'
+              - !FindInMap [FunctionMap, Configuration, S3Bucket]
+        S3Key: !Join ["", [!FindInMap [FunctionMap, Configuration, S3Key], 'start-chat-contact.zip']]
+
+  StartChatLambdaExecutionRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service:
+                - "lambda.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Path: "/"
+      Policies:
+        - PolicyName: start-chat-contact-execution-policy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - 'logs:CreateLogGroup'
+                  - 'logs:CreateLogStream'
+                  - 'logs:PutLogEvents'
+                Resource:
+                  - !Sub "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/*"
+              - Effect: "Allow"
+                Action:
+                  - "connect:StartChatContact"
+                Resource:
+                  - !Sub "arn:${AWS::Partition}:connect:${AWS::Region}:${AWS::AccountId}:instance/${instanceId}"
+                  - !Sub "arn:${AWS::Partition}:connect:${AWS::Region}:${AWS::AccountId}:instance/${instanceId}/*"
+
+  #### API Gateway ##### https://blog.jayway.com/2016/08/17/introduction-to-cloudformation-for-api-gateway/
+  # CORS: https://bitbucket.org/snippets/spenser_filler/LenB4p
+
+  ApiGatewayRestAPI:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: "StartChatContact"
+      Description: "API to initiate chat with Amazon Connect"
+
+  LambdaApiGatewayInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: "lambda:InvokeFunction"
+      FunctionName: !GetAtt StartChatLambda.Arn
+      Principal: "apigateway.amazonaws.com"
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGatewayRestAPI}/*"
+
+  ApiGatewayDeployment:
+    Type: AWS::ApiGateway::Deployment
+    DependsOn:
+      - ApiGatewayRootMethod
+    Properties:
+      RestApiId: !Ref ApiGatewayRestAPI
+      StageName: "Prod"
+
+  ApiGatewayRootMethod:
+    Type: AWS::ApiGateway::Method
+    DependsOn: LambdaApiGatewayInvokePermission
+    Properties:
+      AuthorizationType: "NONE"
+      HttpMethod: "POST"
+      Integration:
+        IntegrationHttpMethod: "POST"
+        Type: "AWS_PROXY"
+        Uri: !Sub
+          - "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${lambdaArn}/invocations"
+          - lambdaArn: !GetAtt StartChatLambda.Arn
+        PassthroughBehavior: WHEN_NO_MATCH
+      ResourceId:  !GetAtt ApiGatewayRestAPI.RootResourceId
+      RestApiId: !Ref ApiGatewayRestAPI
+      MethodResponses:
+        - StatusCode: "200"
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Origin: true
+          ResponseModels:
+            application/json: Empty
+        - StatusCode: "500"
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Origin: true
+          ResponseModels:
+            application/json: Empty
+
+  ApiGatewayOptionsMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      ResourceId: !GetAtt ApiGatewayRestAPI.RootResourceId
+      RestApiId: !Ref ApiGatewayRestAPI
+      AuthorizationType: NONE
+      HttpMethod: OPTIONS
+      Integration:
+        Type: MOCK
+        IntegrationResponses:
+          - ResponseParameters:
+              method.response.header.Access-Control-Allow-Headers: >-
+                'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'
+              method.response.header.Access-Control-Allow-Methods: '''POST,OPTIONS'''
+              method.response.header.Access-Control-Allow-Origin: '''*'''
+            ResponseTemplates:
+              application/json: ''
+            StatusCode: '200'
+        PassthroughBehavior: NEVER
+        RequestTemplates:
+          application/json: '{"statusCode": 200}'
+      MethodResponses:
+        - ResponseModels:
+            application/json: Empty
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Headers: true
+            method.response.header.Access-Control-Allow-Methods: true
+            method.response.header.Access-Control-Allow-Origin: true
+          StatusCode: '200'
+
+  #### Metrics ####
+  CustomResourceHelper:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket:
+          !Join
+            - '.'
+            - - !Ref 'AWS::Region'
+              - !FindInMap [FunctionMap, Configuration, S3Bucket]
+        S3Key: !Join ["", [!FindInMap [FunctionMap, Configuration, S3Key], 'custom-resource-helper.zip']]
+      Description: Solution Accelerator for Amazon Connect customer side Chat
+      Handler: customResourceHelper.handler
+      MemorySize: 256
+      Role: !GetAtt CustomResourceHelperIamRole.Arn
+      Runtime: nodejs10.x
+      Timeout: 300
+
+  CustomResourceHelperIamRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service:
+                - "lambda.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Path: "/"
+      Policies:
+        - PolicyName: connect-chat-resource-helper
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - 'logs:CreateLogGroup'
+                  - 'logs:CreateLogStream'
+                  - 'logs:PutLogEvents'
+                Resource:
+                  - !Sub "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/*"
+              - Effect: "Allow"
+                Action:
+                  - "s3:GetObject"
+                Resource:
+                  - !Join
+                    - ''
+                    - - 'arn:'
+                      - !Ref 'AWS::Partition'
+                      - ':s3:::'
+                      - !Ref 'AWS::Region'
+                      - '.'
+                      - !FindInMap [FunctionMap, Configuration, S3Bucket]
+                      - '/*'
+
+  SolutionAnonymousMetric:
+    Type: "Custom::LoadLambda"
+    Condition: AnonymousUsageMetrics
+    Properties:
+      ServiceToken:
+        Fn::GetAtt:
+          - "CustomResourceHelper"
+          - "Arn"
+      Region:
+        - Ref: "AWS::Region"
+      solutionId: !FindInMap ["FunctionMap", "Configuration", "SolutionID"]
+      UUID: !GetAtt SolutionUuid.UUID
+      version: "1"
+      anonymousData: !Ref allowAnonymousUsageMetrics
+      customAction: "sendMetric"
+
+  SolutionUuid:
+    Type: "Custom::LoadLambda"
+    Properties:
+      ServiceToken:
+        Fn::GetAtt:
+          - "CustomResourceHelper"
+          - "Arn"
+      Region:
+        - Ref: "AWS::Region"
+      customAction: "createUuid"
