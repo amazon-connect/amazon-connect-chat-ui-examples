@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Lex-Chatbot-Demo-Site-CICD
+name: Dev-Lex-Chatbot-Demo-Site-CICD
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -10,6 +10,7 @@ on:
       # Push events on master branch
       - master
       - 'feature/chat-*'
+      - '!feature/chat-4*'
   pull_request:
     branches:
       # Push events on master branch
