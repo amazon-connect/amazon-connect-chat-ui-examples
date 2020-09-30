@@ -31,7 +31,8 @@ function initalizeConnection()  {
         name: customerName,
         username: username,
         region: "us-east-1",
-        apiGatewayEndpoint: "https://m9s4er8x1h.execute-api.us-east-1.amazonaws.com/Prod/",
+        //apiGatewayEndpoint: "https://m9s4er8x1h.execute-api.us-east-1.amazonaws.com/Prod",
+        apiGatewayEndpoint: "https://owt1d20k5b.execute-api.us-east-1.amazonaws.com/Prod",
         contactAttributes: JSON.stringify({
             "customerName": customerName
         }),
