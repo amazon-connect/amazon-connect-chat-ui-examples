@@ -38,7 +38,6 @@ Parameters:
     AllowedPattern: '\w{8}-\w{4}-\w{4}-\w{4}-\w{12}'
   AmazonConnectS3BucketName:
     Type: String
-    Default: "chat-transcript-s3-bucket"
     Description: >
       Enter the name of the bucket that holds the chat transcripts for your Amazon Connect instance. You can find this in the Amazon Connect console when viewing the Data Storage section in your instance details. E.g. If your instance has connect-xxx/connect/instanceName/ChatTranscripts, enter 'connect-xxx'
     AllowedPattern: '(?=^.{3,63}$)(?!^(\d+\.)+\d+$)(^(([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])\.)*([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])$)'
@@ -46,7 +45,7 @@ Parameters:
     Type: String
     Description: >
         The path in the S3 bucket that contains the chat transcripts. You can find this in the Amazon Connect console when viewing the Data Storage section in your instance details. E.g. If your instance has connect-xxx/connect/instanceName/ChatTranscripts, enter 'connect/instanceName/ChatTranscripts'
-    Default: connect/instanceName/ChatTranscripts
+        Example: connect/alieradevopstestconnect/ChatTranscripts
   cloudFrontPriceClass:
     Type: String
     Default: PriceClass_100
@@ -101,7 +100,7 @@ Resources:
         Variables:
           INSTANCE_ID: !Ref instanceId
           CONTACT_FLOW_ID: !Ref contactFlowId
-          CF_DISTRIBUTION: !GetAtt CloudFrontDistribution.DomainName
+          CF_DISTRIBUTION: !Ref HostName #ToDo: Update the lambda function so this variable is called DomainNameForCORS.
           SOLUTION_ID: !FindInMap [FunctionMap, Configuration, SolutionID]
           CHAT_DATA_TABLE: !Ref chatContactDataTable
       Code:
@@ -255,6 +254,13 @@ Resources:
                   - 's3:putBucketNotification'
                 Resource:
                   - !Sub "arn:aws:s3:::${AmazonConnectS3BucketName}"
+              - Effect: "Allow"
+                Action:
+                  - 'logs:CreateLogGroup'
+                  - 'logs:CreateLogStream'
+                  - 'logs:PutLogEvents'
+                Resource:
+                  - !Sub "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/*"
 
   BucketPermission:
     Type: AWS::Lambda::Permission

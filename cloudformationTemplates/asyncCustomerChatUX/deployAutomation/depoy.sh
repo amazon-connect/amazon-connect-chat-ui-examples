@@ -5,16 +5,26 @@
 ############
 profile='new-dev-sso'
 stackName='DevOps-Chatbot-Deploy'
+templateFilePath='/home/chart/GitHub/amazon-connect-lex-chat-ui/cloudformationTemplates/asyncCustomerChatUX/cloudformation.yaml'
+parametersFilePath='parameters.yaml'
+IAMcapabilities='CAPABILITY_IAM'
 
 ##############
 #Start Deploy#
 ##############
+#Run 
 aws cloudformation create-stack \
-    --template-body file:///home/chart/GitHub/amazon-connect-lex-chat-ui/cloudformationTemplates/asyncCustomerChatUX/cloudformation.yaml \
+    --template-body file://$templateFilePath \
     --stack-name $stackName \
-    --parameters file://parameters.yaml \
-    --capabilities CAPABILITY_IAM \
-    --profile $profile
+    --parameters file://$parametersFilePath \
+    --capabilities "$IAMcapabilities" \
+    --profile $profile || echo "Stack may already exist, updating instead of creating." && \
+aws cloudformation update-stack \
+    --template-body file://$templateFilePath \
+    --stack-name $stackName \
+    --parameters file://$parametersFilePath \
+    --capabilities "$IAMcapabilities" \
+    --profile $profile || (echo "ERROR: Could not deploy or update.")
 
 ################
 #Monitor Deploy#

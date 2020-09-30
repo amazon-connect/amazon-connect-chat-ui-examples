@@ -25,7 +25,7 @@
   }, 
   {
     "ParameterKey": "transcriptPath",
-    "ParameterValue": "connect/instanceName/ChatTranscripts"
+    "ParameterValue": "connect/alieradevopstestconnect/ChatTranscripts"
   },
   {
     "ParameterKey": "AmazonConnectS3BucketName",
