@@ -26,13 +26,13 @@ function initalizeConnection()  {
     // var username = "Username";
 
     connect.ChatInterface.initiateChat({
-        name: customerName,
+        //name: customerName,
         //username: username,
         region: "us-east-1",
         apiGatewayEndpoint: "https://fa6jstm6z1.execute-api.us-east-1.amazonaws.com/Prod",
-        //contactAttributes: JSON.stringify({
-        //    "customerName": customerName
-        //}),
+        contactAttributes: JSON.stringify({
+           "customerName": customerName
+        }),
         contactFlowId: "bd8bf79c-68f4-4d05-869e-056f958eb39f",
         instanceId: "dd3cb455-ab3e-4827-a079-1b86968ca2fb"
     }, successHandler, failureHandler)
