@@ -84,7 +84,7 @@ jobs:
                 },
                 {
                   title: 'Commit Message',
-                  value: `${process.env.AS_MESSAGE}`,
+                  value: `${{ github.event.head_commit.message }}`,
                   short: true
                 },
                 {

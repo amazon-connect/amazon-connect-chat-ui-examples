@@ -22,11 +22,9 @@ function initalizeConnection()  {
     $("#divSpinner").fadeIn();
 
     //ToDo Eliminate the need for these by editing the Lambda function. Lex should collect all the needed info. 
-    var customerName = "MyName";
-    var username = "Username";
+    // var customerName = "MyName";
+    // var username = "Username";
 
-    console.log("this is the first name:" + customerName);
-    console.log("this is the username: " + username);
     connect.ChatInterface.initiateChat({
         //name: customerName,
         //username: username,
