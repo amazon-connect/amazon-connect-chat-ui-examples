@@ -26,7 +26,7 @@ function initalizeConnection()  {
     // var username = "Username";
 
     connect.ChatInterface.initiateChat({
-        //name: customerName,
+        name: customerName,
         //username: username,
         region: "us-east-1",
         apiGatewayEndpoint: "https://fa6jstm6z1.execute-api.us-east-1.amazonaws.com/Prod",
