@@ -22,11 +22,11 @@ function initalizeConnection()  {
     $("#divSpinner").fadeIn();
 
     //ToDo Eliminate the need for these by editing the Lambda function. Lex should collect all the needed info. 
-    // var customerName = "MyName";
+    var customerName = "Valued Potential Customer";
     // var username = "Username";
 
     connect.ChatInterface.initiateChat({
-        //name: customerName,
+        name: customerName,
         //username: username,
         region: "us-east-1",
         apiGatewayEndpoint: "https://fa6jstm6z1.execute-api.us-east-1.amazonaws.com/Prod",
