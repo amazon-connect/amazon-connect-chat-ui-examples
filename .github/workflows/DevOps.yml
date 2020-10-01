@@ -20,13 +20,13 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-     - uses: actions/checkout@v2
-  
-     - name: Extract branch name
+      - uses: actions/checkout@v2
+    
+      - name: Extract branch name
         shell: bash
         run: echo "::set-env name=BRANCH::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
-      
-     - name: S3 DevOps Deploy
+        
+      - name: S3 DevOps Deploy
         uses: jakejarvis/s3-sync-action@v0.5.1
         with:
           args: --delete
@@ -37,8 +37,6 @@ jobs:
           SOURCE_DIR: 'StaticUITestSite' 
 
       - name: Invalidate Cloudfront
-        # You may pin to the exact commit or the version.
-        # uses: chetan/invalidate-cloudfront-action@00d50031f6b55bac485c63d8789c6c346645d1a5
         uses: chetan/invalidate-cloudfront-action@v1.3
         env:
           DISTRIBUTION: E1MVSUGWPLPTX1
@@ -47,7 +45,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-    - name: GitHub Actions Lex/Connect Chatbot Deploy notification
+      - name: GitHub Actions Lex/Connect Chatbot Deploy notification
         uses: 8398a7/action-slack@v3
         if: always() # Pick up events even if the job fails or is canceled.
         env:
