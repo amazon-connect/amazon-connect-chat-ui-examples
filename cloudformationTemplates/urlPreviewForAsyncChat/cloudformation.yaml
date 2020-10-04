@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 
 Description: >
-  "Customer chat solution for Amazon Connect"
+  "Customer chat solution with URL Previews for Amazon Connect"
 
 Mappings:
   FunctionMap:

@@ -1,9 +1,7 @@
-# Resources: lambda, iam role for lambda, s3 bucket for website, cdn, api gateway, iam role to log api gateway
-
 AWSTemplateFormatVersion: '2010-09-09'
 
 Description: >
-  "Customer chat solution for Amazon Connect"
+  "Customer chat solution with URL Previews for Amazon Connect"
 
 Mappings:
   FunctionMap:
@@ -580,16 +578,15 @@ Resources:
           ViewerProtocolPolicy: redirect-to-https
         PriceClass: !Ref cloudFrontPriceClass
 
-  #### API Gateway ##### https://blog.jayway.com/2016/08/17/introduction-to-cloudformation-for-api-gateway/
-  # CORS: https://bitbucket.org/snippets/spenser_filler/LenB4p
+  #### API Gateway ####
 
-  ApiGatewayRestAPI: #DONE
+  ApiGatewayRestAPI: 
     Type: AWS::ApiGateway::RestApi
     Properties:
       Name: "initiateChatConnection"
       Description: "API to initiate chat with Amazon Connect"
 
-  LambdaApiGatewayInvokePermission: #DONE
+  LambdaApiGatewayInvokePermission: 
     Type: AWS::Lambda::Permission
     Properties:
       Action: "lambda:InvokeFunction"
@@ -605,7 +602,7 @@ Resources:
       RestApiId: !Ref ApiGatewayRestAPI
       StageName: "Prod"
 
-  ApiGatewayRootMethod: #DONE
+  ApiGatewayRootMethod: 
     Type: AWS::ApiGateway::Method
     DependsOn: LambdaApiGatewayInvokePermission
     Properties:
@@ -630,7 +627,7 @@ Resources:
           ResponseModels:
             application/json: Empty
 
-  ApiGatewayOptionsMethod: #DONE
+  ApiGatewayOptionsMethod: 
     Type: AWS::ApiGateway::Method
     Properties:
       ResourceId: !GetAtt ApiGatewayRestAPI.RootResourceId
@@ -668,7 +665,7 @@ Resources:
       ParentId: !GetAtt ApiGatewayRestAPI.RootResourceId
       PathPart: getUrlPreview
 
-  UrlPreviewInvokePermission: #DONE
+  UrlPreviewInvokePermission: 
     Type: AWS::Lambda::Permission
     Properties:
       Action: "lambda:InvokeFunction"
@@ -676,7 +673,7 @@ Resources:
       Principal: "apigateway.amazonaws.com"
       SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGatewayRestAPI}/*"
   
-  UrlPreviewMethod: #DONE
+  UrlPreviewMethod: 
     Type: AWS::ApiGateway::Method
     DependsOn: UrlPreviewLambda
     Properties:
@@ -701,7 +698,7 @@ Resources:
           ResponseModels:
             application/json: Empty
 
-  UrlPreviewOptionsMethod: #DONE
+  UrlPreviewOptionsMethod: 
     Type: AWS::ApiGateway::Method
     Properties:
       ResourceId: !Ref UrlPreviewResource
