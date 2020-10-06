@@ -45,8 +45,20 @@ Note: you will want to show the widget only when there is a conversation in prog
     ```js
     $(document).ready((a) => {
       connect.ChatInterface.init({
-        containerId: 'root' // This is the id of the container where you want the widget to reside
-        });
+        containerId: 'root', // This is the id of the container where you want the widget to reside
+        headerConfig: {      // Use the optional headerConfig and footerConfig to customize your widget
+          isHTML: true,
+          render: () => {
+            return (`<html code here/>`)
+          }
+        },
+        footerConfig: {
+          isHTML: true,
+          render: () => {
+            return (`<html code here/>`)
+          }
+        }
+      });
     });
     ```
 
