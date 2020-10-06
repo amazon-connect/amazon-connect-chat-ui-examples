@@ -6,7 +6,7 @@ Description: >
 Mappings:
   FunctionMap:
     Configuration:
-      S3Bucket: "khasnis-csat-demos-2" #TODO: CHANGE for prod
+      S3Bucket: "amazon-connect-url-preview-for-async-chat-cfn"
       S3Key: "deployment/"
       SolutionID: "AC0003"
 
