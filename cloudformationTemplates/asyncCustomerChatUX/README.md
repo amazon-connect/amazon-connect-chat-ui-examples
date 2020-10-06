@@ -62,8 +62,20 @@ If you want to add the customer chat widget (that is available in the Test Chat 
     ```js
     $(document).ready((a) => {
       connect.ChatInterface.init({
-        containerId: 'root' // This is the id of the container where you want the widget to reside
-        });
+        containerId: 'root', // This is the id of the container where you want the widget to reside
+        headerConfig: {      // Use the optional headerConfig and footerConfig to customize your widget
+          isHTML: true,
+          render: () => {
+            return (`<html code here/>`)
+          }
+        },
+        footerConfig: {
+          isHTML: true,
+          render: () => {
+            return (`<html code here/>`)
+          }
+        }
+      });
     });
     ```
 
