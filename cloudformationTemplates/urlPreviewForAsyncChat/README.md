@@ -7,7 +7,7 @@ This solution adds an enhancement to the [async chat solution](https://github.co
 
 This function is accessed through POST requests to an AWS API Gateway path of `/getUrlPreview`. An Amazon DynamoDB table caches link preview metadata (TTL: 30 days). Metadata is returned from the DynamoDB cache if it is present, otherwise it’s fetched from the third-party website, and then cached in the DynamoDB cache for future retrievals.
 
-The following screenshot provides an example of a link preview generated for `www.aws.com`.
+The following screenshot provides an example of a link preview generated for `www.aws.com`.<br/>
 ![chat preview diagram](images/chat_preview.png)
 
 ### Chat Functionality
