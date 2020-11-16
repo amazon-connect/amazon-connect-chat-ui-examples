@@ -239,6 +239,17 @@ Resources:
               - "sts:AssumeRole"
       Path: "/"
       Policies:
+        - PolicyName: S3BucketConfigurationLambdaLogPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - logs:CreateLogStream
+                  - logs:CreateLogGroup
+                  - logs:PutLogEvents
+                Resource:
+                  - !Sub "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/*"
         - PolicyName: get-previous-chat-policy
           PolicyDocument:
             Version: "2012-10-17"
