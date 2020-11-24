@@ -95,6 +95,14 @@ If you want to add the customer chat widget (that is available in the Test Chat 
     },successHandler, failureHandler)
     ```
 
+## Enabling interactive messages
+If you want to enable interactive messages for Amazon Connect Chat the customer chat widget (that is available in the Test Chat experience in the Amazon Connect website) to your website, read the blog on how to [easily set up interactive messages for your Amazon Connect chatbot](https://aws.amazon.com/blogs/contact-center/easily-set-up-interactive-messages-for-your-amazon-connect-chatbot/) for detailed instructions.
+
+*What are interactive messages for Amazon Connect Chat?*
+
+Interactive messages are pre-configured responses that your users can select from, making it easy for your customers to quickly resolve their issues through chat. Interactive messages can be designed using the new Amazon Connect Chat templates, which include several different customer display options like list pickers, list pickers with images, and time pickers. These are sent by Amazon Connect Chat using Amazon Lex chatbots. Interactive messages configured through Lex will be validated in the Amazon Connect contact flow to ensure that they have been configured correctly.
+
+
 ## Troubleshooting
 
 - After deploying the stack if you see an S3 permission error when viewing the CloudFront url, it means the domain is not ready yet. The CDN can take up to an hour to be ready.
