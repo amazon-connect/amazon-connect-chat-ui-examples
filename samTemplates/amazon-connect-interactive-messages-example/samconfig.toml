@@ -1,0 +1,10 @@
+version = 0.1 
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "amazon-connect-interactive-messaging-sar"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1tuyzwxytd29d"
+s3_prefix = "amazon-connect-interactive-messaging-sar"
+region = "us-west-2"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"

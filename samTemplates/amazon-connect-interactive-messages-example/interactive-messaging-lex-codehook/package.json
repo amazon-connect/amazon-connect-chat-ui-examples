@@ -1,0 +1,15 @@
+{
+  "name": "lex_codehook",
+  "version": "1.0.0",
+  "description": "Amazon Lex Code Hook sample for Amazon Connect Interactive Messages",
+  "main": "app.js",
+  "repository": "https://github.com/amazon-connect/amazon-connect-chat-ui-examples/amazon-connect-interactive-messages-example",
+  "author": "SAM CLI",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "scripts": {
+  },
+  "devDependencies": {
+  }
+}
