@@ -96,4 +96,4 @@ Here is an example of a `Time Picker` template:
 }
 ``` 
  
-You can find additional information in the AWS Contact Center blog post [How to enable interactive messages in Amazon Connect chat](https://aws.amazon.com/blogs/contact-center/).
+You can find additional information in the AWS Contact Center blog post [How to enable interactive messages in Amazon Connect chat](https://aws.amazon.com/blogs/contact-center/easily-set-up-interactive-messages-for-your-amazon-connect-chatbot/).

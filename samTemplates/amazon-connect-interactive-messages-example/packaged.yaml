@@ -18,9 +18,9 @@ Metadata:
     - lambda
     - lex
     - bot
-    HomePageUrl: https://github.com/amazon-connect/amazon-connect-chat-ui-examples/amazon-connect-interactive-messages-example
+    HomePageUrl: https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/samTemplates/amazon-connect-interactive-messages-example
     SemanticVersion: '0.0.1'
-    SourceCodeUrl: https://github.com/amazon-connect/amazon-connect-chat-ui-examples/amazon-connect-interactive-messages-example
+    SourceCodeUrl: https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/samTemplates/amazon-connect-interactive-messages-example
 Globals:
   Function:
     Timeout: 30
