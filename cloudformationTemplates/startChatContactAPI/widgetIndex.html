@@ -73,7 +73,7 @@
                     var contactFlowId = ""; // TODO: Fill in
                     var instanceId = ""; // TODO: Fill in
                     var apiGatewayEndpoint = ""; // TODO: Fill in with the API Gateway endpoint created by your CloudFormation template
-
+                    var enableAttachments = false // TODO: Fill in if you want to enable attachments on Amazon Connect chat widget (PRE-REQUISITE: Enable Amazon Connect instance for attachments)
                     console.log("this is the first name:" + customerName);
                     document.getElementById("contactDetails").reset();
 
@@ -85,7 +85,10 @@
                             "customerName": customerName
                         }),
                         contactFlowId: contactFlowId,
-                        instanceId: instanceId
+                        instanceId: instanceId,
+                        featurePermissions: {
+                            "ATTACHMENTS": enableAttachments,  // this is the override flag from user for attachments
+                        }
                     },successHandler, failureHandler);
 
                 }

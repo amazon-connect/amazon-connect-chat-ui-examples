@@ -27,7 +27,7 @@ function replaceAndUpload(properties, callback) {
 
 function replaceTextAndUploadToS3(properties, data, callback) {
     var result = data.replace('${region}', properties.Region);
-    var body = result.replace('${apiId}', properties.ApiGatewayId).replace('${instanceId}', properties.InstanceId).replace('${contactFlowId}', properties.ContactFlowId).replace('${region}', properties.Region);
+    var body = result.replace('${apiId}', properties.ApiGatewayId).replace('${instanceId}', properties.InstanceId).replace('${contactFlowId}', properties.ContactFlowId).replace('${region}', properties.Region).replace('${enableAttachments}', properties.EnableAttachments);
 
     S3.putObject({
         Bucket: properties.S3Bucket,

@@ -79,7 +79,7 @@ If you want to add the customer chat widget (that is available in the Test Chat 
     });
     ```
 
-4. Start the chat based on a user action. You will want to add fields for the customer name and username because those fields are used in the Lambda function that was created.
+4. Start the chat based on a user action. You will want to add fields for the customer name, username, and enableAttachments because those fields are used in the Lambda function that was created.
 
     ```js
     connect.ChatInterface.initiateChat({
@@ -91,7 +91,10 @@ If you want to add the customer chat widget (that is available in the Test Chat 
         "customerName": customerName
       }),
       contactFlowId: "${contactFlowId}",
-      instanceId: "${instanceId}"
+      instanceId: "${instanceId}",
+      featurePermissions: {
+        "ATTACHMENTS": enableAttachments==='true',  // this is the override flag from user for attachments
+        }
     },successHandler, failureHandler)
     ```
 
@@ -102,6 +105,25 @@ If you want to enable interactive messages for Amazon Connect Chat the customer 
 
 Interactive messages are pre-configured responses that your users can select from, making it easy for your customers to quickly resolve their issues through chat. Interactive messages can be designed using the new Amazon Connect Chat templates, which include several different customer display options like list pickers, list pickers with images, and time pickers. These are sent by Amazon Connect Chat using Amazon Lex chatbots. Interactive messages configured through Lex will be validated in the Amazon Connect contact flow to ensure that they have been configured correctly.
 
+## Enabling attachments
+If you want to enable sending attachments for Amazon Connect Chat the customer chat widget, follow the instructions in the documentation <TODO:ADD ST DOC LINK> to enable your Amazon Connect instance for attachments. Once enabled, you can mark the  `ATTACHMENTS` flag in `connect.ChatInterface.initiateChat` as `true`. Example below:
+
+```js
+    connect.ChatInterface.initiateChat({
+      name: customerName,
+      username: username,
+      region: ${region},
+      apiGatewayEndpoint: "https://${apiId}.execute-api.${region}.amazonaws.com/Prod",
+      contactAttributes: JSON.stringify({
+        "customerName": customerName
+      }),
+      contactFlowId: "${contactFlowId}",
+      instanceId: "${instanceId}",
+      featurePermissions: {
+        "ATTACHMENTS": true,  // this is the override flag from user for attachments
+        }
+    },successHandler, failureHandler)
+```
 
 ## Troubleshooting
 
