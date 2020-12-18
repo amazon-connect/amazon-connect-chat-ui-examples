@@ -327,7 +327,7 @@ Interactive messages are pre-configured responses that your users can select fro
 
 
 ## Enabling attachments
-If you want to enable sending attachments for Amazon Connect Chat the customer chat widget, follow the instructions in the documentation <ADD ST DOC LINK> to enable your Amazon Connect instance for attachments. Once enabled, you can mark the  `ATTACHMENTS` flag in `connect.ChatInterface.initiateChat` as `true`. Example below:
+If you want to enable sending attachments for Amazon Connect Chat the customer chat widget, follow the instructions in the [documentation](https://docs.aws.amazon.com/connect/latest/adminguide/enable-attachments.html)  to enable your Amazon Connect instance for attachments. Once enabled, you can mark the  `ATTACHMENTS` flag in `connect.ChatInterface.initiateChat` as `true`. Example below:
 
 ```js
     connect.ChatInterface.initiateChat({
