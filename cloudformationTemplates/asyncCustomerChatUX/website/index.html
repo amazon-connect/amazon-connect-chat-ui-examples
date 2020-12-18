@@ -269,7 +269,7 @@
             $(function () {
                 $('#contactDetails').submit(function (e) {
                     e.preventDefault();
-
+                    var enableAttachments = "${enableAttachments}";
                     var customerName = $('#firstName').val();
                     var username = $('#username').val();
                     if (!customerName || !username) {
@@ -289,8 +289,11 @@
                                 "customerName": customerName
                             }),
                             contactFlowId: "${contactFlowId}",
-                            instanceId: "${instanceId}"
-                        }, successHandler, failureHandler)
+                            instanceId: "${instanceId}",
+                            featurePermissions: {
+                                "ATTACHMENTS": enableAttachments==='true',  // this is the override flag from user for attachments
+                            }
+                        },successHandler, failureHandler);
 
                         $('#firstName').blur();
                         $('#username').blur();
