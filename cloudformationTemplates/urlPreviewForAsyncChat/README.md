@@ -88,11 +88,41 @@ If you want to add the customer chat widget (that is available in the Test Chat 
         "customerName": customerName
       }),
       contactFlowId: "${contactFlowId}",
-      instanceId: "${instanceId}"
+      instanceId: "${instanceId}",
+      featurePermissions: {
+        "ATTACHMENTS": enableAttachments==='true',  // this is the override flag from user for attachments
+        }
     },successHandler, failureHandler)
     ```
 5. Enter a URL like `www.aws.com` in the chat window, and send it. You should see the following link preview generated in your chat. 
 ![chat preview diagram](images/chat_preview.png)
+
+## Enabling interactive messages
+If you want to enable interactive messages for Amazon Connect Chat the customer chat widget (that is available in the Test Chat experience in the Amazon Connect website) to your website, read the blog on how to [easily set up interactive messages for your Amazon Connect chatbot](https://aws.amazon.com/blogs/contact-center/easily-set-up-interactive-messages-for-your-amazon-connect-chatbot/) for detailed instructions.
+
+*What are interactive messages for Amazon Connect Chat?*
+
+Interactive messages are pre-configured responses that your users can select from, making it easy for your customers to quickly resolve their issues through chat. Interactive messages can be designed using the new Amazon Connect Chat templates, which include several different customer display options like list pickers, list pickers with images, and time pickers. These are sent by Amazon Connect Chat using Amazon Lex chatbots. Interactive messages configured through Lex will be validated in the Amazon Connect contact flow to ensure that they have been configured correctly.
+
+## Enabling attachments
+If you want to enable sending attachments for Amazon Connect Chat the customer chat widget, follow the instructions in the [documentation](https://docs.aws.amazon.com/connect/latest/adminguide/enable-attachments.html) to enable your Amazon Connect instance for attachments. Once enabled, you can mark the  `ATTACHMENTS` flag in `connect.ChatInterface.initiateChat` as `true`. Example below:
+
+```js
+    connect.ChatInterface.initiateChat({
+      name: customerName,
+      username: username,
+      region: ${region},
+      apiGatewayEndpoint: "https://${apiId}.execute-api.${region}.amazonaws.com/Prod",
+      contactAttributes: JSON.stringify({
+        "customerName": customerName
+      }),
+      contactFlowId: "${contactFlowId}",
+      instanceId: "${instanceId}",
+      featurePermissions: {
+        "ATTACHMENTS": true,  // this is the override flag from user for attachments
+        }
+    },successHandler, failureHandler)
+```
 
 
 ## Troubleshooting

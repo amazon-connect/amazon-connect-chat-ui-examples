@@ -48,6 +48,14 @@ Parameters:
       - PriceClass_All
     ConstraintDescription: "Allowed Price Classes PriceClass_100 PriceClass_200 and PriceClass_All"
     Description: Specify the CloudFront price class. See https://aws.amazon.com/cloudfront/pricing/ for a description of each price class.
+  enableAttachments:
+    Type: String
+    Default: false
+    AllowedValues:
+      - true
+      - false
+    ConstraintDescription: "Flag to enable attachments support for Amazon Connect Chat messages"
+    Description: Specify if attachments need to be enabled for Amazon Connect Chat messages.
   allowAnonymousUsageMetrics:
     Type: String
     Default: "Yes"
@@ -765,6 +773,8 @@ Resources:
         !Ref instanceId
       ContactFlowId:
         !Ref contactFlowId
+      EnableAttachments:
+        !Ref enableAttachments
 
   ChatUXCreatorRole:
     Type: "AWS::IAM::Role"
