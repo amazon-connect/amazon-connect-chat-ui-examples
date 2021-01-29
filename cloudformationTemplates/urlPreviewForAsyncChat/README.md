@@ -8,7 +8,7 @@ This solution adds an enhancement to the [async chat solution](https://github.co
 This function is accessed through POST requests to an AWS API Gateway path of `/getUrlPreview`. An Amazon DynamoDB table caches link preview metadata (TTL: 30 days). Metadata is returned from the DynamoDB cache if it is present, otherwise it’s fetched from the third-party website, and then cached in the DynamoDB cache for future retrievals.
 
 The following screenshot provides an example of a link preview generated for `www.aws.com`.<br/>
-![chat preview diagram](images/chat_preview.png)
+![chat preview diagram](images/chat_preview_attachments.png)
 
 ### Chat Functionality
 The async simple website that enables a customer to start a chat with a pre-built widget. The end user enters their name and the username of the agent they would like to speak with and they'll then be put into that agent's queue. The stack creates a website hosted in [Amazon S3](https://aws.amazon.com/s3/) that is served by [Amazon CloudFront](https://aws.amazon.com/cloudfront/). The website calls an [Amazon API Gateway](https://aws.amazon.com/api-gateway/) endpoint that triggers an [AWS Lambda](https://aws.amazon.com/lambda/) function. This Lambda function invokes the [Amazon Connect](https://aws.amazon.com/connect/) Service [StartChatContact](https://docs.aws.amazon.com/en_pv/connect/latest/APIReference/API_StartChatContact.html) API, stores the result in [Amazon DynamoDB](https://aws.amazon.com/dynamodb/), and returns the result to the front end.
