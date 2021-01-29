@@ -95,7 +95,7 @@ If you want to add the customer chat widget (that is available in the Test Chat 
     },successHandler, failureHandler)
     ```
 5. Enter a URL like `www.aws.com` in the chat window, and send it. You should see the following link preview generated in your chat. 
-![chat preview diagram](images/chat_preview.png)
+![chat preview diagram](images/chat_preview_attachments.png)
 
 ## Enabling interactive messages
 If you want to enable interactive messages for Amazon Connect Chat the customer chat widget (that is available in the Test Chat experience in the Amazon Connect website) to your website, read the blog on how to [easily set up interactive messages for your Amazon Connect chatbot](https://aws.amazon.com/blogs/contact-center/easily-set-up-interactive-messages-for-your-amazon-connect-chatbot/) for detailed instructions.
