@@ -34,7 +34,7 @@ If you want to add the customer chat widget (that is available in the Test Chat 
 
 Note: you will want to show the widget only when there is a conversation in progress. If the widget is visible when there is no conversation, you will just see a loading spinner.
 
-1. In your website's html code, import the 'amazon-connect-chat-interface.js' file from this repo.
+1. In your website's html code, import the 'amazon-connect-chat-interface.js' file from this repo. If you want to modify the code in the interface.js file, you can refer to [this repo](https://github.com/amazon-connect/amazon-connect-chat-interface) to see its source.
 
     ```html
     <script src="amazon-connect-chat-interface.js"></script>

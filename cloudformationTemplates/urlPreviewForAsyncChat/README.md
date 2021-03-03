@@ -60,7 +60,7 @@ If you want to add the customer chat widget (that is available in the Test Chat 
 
 1. Update the CORS configuration in Lambda to refer to your new website. In Lambda, go to the initiateChatLambda function and update the `Access-Control-Allow-Origin` field in the success and failure responses to be your website's URL.
 
-2. In your website's html code, import 'amazon-connect-chat-interface.js'. This file was copied into your S3 bucket that hosts the website created by this CloudFormation template.
+2. In your website's html code, import 'amazon-connect-chat-interface.js'. This file was copied into your S3 bucket that hosts the website created by this CloudFormation template. If you want to modify the code in the interface.js file, you can refer to [this repo](https://github.com/amazon-connect/amazon-connect-chat-interface) to see its source.
 
     ```html
     <script src="amazon-connect-chat-interface.js"></script>
