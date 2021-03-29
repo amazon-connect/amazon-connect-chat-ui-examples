@@ -79,7 +79,7 @@ Note: you will want to show the widget only when there is a conversation in prog
         "ATTACHMENTS": enableAttachments==='true',  // this is the override flag from user for attachments
         }
     },successHandler, failureHandler)
-```
+    ```
 
 ## Creating your own Chat UX
 
