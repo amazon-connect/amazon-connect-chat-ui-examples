@@ -1,15 +1,14 @@
-# Amazon connect chat library build document
+# Custom Chat Widget Build
 
 ## Description
 
-Document explains the code structure, the external libraries used, and how to build the package(library) that can be imported into a web page.
+This document explains the code structure, the external libraries used, and how to build the package (library) that can be imported into a web page.
 
 ## Code structure
 
 ```bash
 .
 ├── build_readme.md                  <-- Instructions file for building the package
-├── client_readme.md                 <-- Instructions file for user on how to use on webpage
 ├── .babelrc                         <-- Babel configuration
 ├── webpack.dev.js                   <-- Webpack configuration
 ├── package.json                     <-- Node.js configuration and dependencies
@@ -18,62 +17,64 @@ Document explains the code structure, the external libraries used, and how to bu
 ├── src                              <-- Source code folder
 │   └── index.js                     <-- Code entry point.
 │   └── App.js                       <-- App differentiates the path.
-│   └── Components                   <-- Components folder
-│       └── ChatButton               <-- Chat button component folder.
-│           └── index.js             <-- Index file to expose this component.
-│           └── styled.js            <-- CSS Styles.
-│       └── ChatIcon                 <-- Chat Icon component Folder.
-│                └── index.js        <-- Index file that exposes ChatIcon component.
-│                └── styled.js       <-- CSS Styles.
-│       └── InputField               <-- Input Field component Folder.
-│                └── index.js        <-- Index file that exposes this component.
-│                └── styled.js       <-- CSS Styles.
-│       └── Spinner                  <-- Spinner component Folder.
-│                └── index.js        <-- Index file that exposes this component.
-│                └── styled.js       <-- CSS Styles.
+│   └── Components                   <-- Contains all the components
+│       └── ChatButton               <-- Chat Button component folder.
+│           └── index.js             <-- ChatButton component source.
+│           └── styled.js            <-- ChatButton component CSS styles.
+│       └── ChatIcon                 <-- Chat Icon component folder.
+│                └── index.js        <-- Chat Icon component source.
+│                └── styled.js       <-- Chat Icon component CSS styles.
+│       └── InputField               <-- Input Field component folder.
+│                └── index.js        <-- Input Field component source.
+│                └── styled.js       <-- Input Field component CSS styles.
+│       └── Spinner                  <-- Spinner component folder.
+│                └── index.js        <-- Spinner component source.
+│                └── styled.js       <-- Spinner component CSS styles.
 │    └── constants                   <-- Constants folder.
-│           └── index.js             <-- Index file to expose this component.
+│           └── index.js             <-- Contains all constants definitions.
 │    └── container                   <-- Contains all the containers.
-│           └── ChatForm             <-- Chat Form component Folder.
-│                └── index.js        <-- Index file that exposes this component.
-│                └── styled.js       <-- CSS Styles.
-│           └── ChatWidget           <-- Chat Widget component Folder.
-│                └── index.js        <-- Index file that exposes this component.
-│                └── styled.js       <-- CSS Styles.
-│    └── views                       <-- Contains views.
-│           └── ChatWithForm         <-- Folder that contains ChatWithForm view.
-│                └── index.js        <-- Index file that exposes this component.
-│                └── styled.js       <-- CSS Styles.
-│           └── ChatWithoutForm      <-- Folder that contains ChatWithoutForm view.
-│                └── index.js        <-- Index file that exposes this component.
-│                └── styled.js       <-- CSS Styles.
-│    └── providers                    <-- Contexts folder
-│       └── AppConfigProvider.js     <-- Chat Contexts that contain the config for this App.
+│           └── ChatForm             <-- Chat Form container folder.
+│                └── index.js        <-- Chat Form container source.
+│                └── styled.js       <-- Chat Form container CSS styles.
+│           └── ChatWidget           <-- Chat Widget container folder.
+│                └── index.js        <-- Chat Widget container source.
+│                └── styled.js       <-- Chat Widget container CSS styles.
+│    └── views                       <-- Contains all the views.
+│           └── ChatWithForm         <-- ChatWithForm view folder.
+│                └── index.js        <-- ChatWithForm view source.
+│                └── styled.js       <-- ChatWithForm view CSS styles.
+│           └── ChatWithoutForm      <-- ChatWithoutForm view folder.
+│                └── index.js        <-- ChatWithoutForm view source.
+│                └── styled.js       <-- ChatWithoutForm view CSS Styles.
+│    └── providers                   <-- Contains all the providers
+│       └── AppConfigProvider.js     <-- AppConfigProvider (context) provider source.
 
 
 ```
 
 ## 3rd party libraries used
 
-- Styled components for CSS to avoid css property styling conflict on the parent app.
+- `Styled components` for CSS, to avoid css property styling conflict on the parent app.
 
-- Anime and react-transition-group for CSS animations and transitions.
+- `Anime` and `react-transition-group`, for CSS animations and transitions.
 
-- Webpack and Babel for packaging.
+- `Webpack` and `Babel` for packaging.
 
-- React hooks are used in this project instead of class based components to improve component re-usability.
+- `React Hooks` are used in this project instead of class based components to improve component re-usability.
 
-- Component API to share app config across components and to avoid prop drilling between components.
+- `Component API` to share app config across components and to avoid prop drilling between components.
 
 ## Build steps
 
-- Clone the repo `git clone`
+- Clone the repo `git clone https://github.com/amazon-connect/amazon-connect-chat-ui-examples.git`
 
-- Run `npm i`
+- Go to `/customChatWidget`
 
-- Run `npm run build` which will build the package using babel and webpack and saves the package into the public folder with name ACChat.js.
+- Run `npm install`
+
+- Run `npm run build` to build the package using Babel and Webpack, and save the output into `public` folder with name `ACChat.js`.
 
 ## Testing
 
-- After a new build, you can used the built file `ACChat.js` in your webpage and test it using the instructions in the [README.md](/chatPluginForWebpage/README.md) file.
-- Or you can test it with index.html in `/chatPluginForWebpage/public` using a Live server extension in VS Code [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
+- After a new build, you can used the output file `ACChat.js` in your web page and test it using the instructions in the [README.md](README.md) file.
+- Or you can test it with `index.html` in `/customChatWidget/public` using *Live server* extension in VS Code [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
