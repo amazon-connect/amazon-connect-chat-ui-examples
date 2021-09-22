@@ -12,29 +12,23 @@
 	"license": "MIT-0",
 	"dependencies": {
 		"animejs": "^3.2.1",
-		"connect-core": "^1.1.2",
-		"D": "^1.0.0",
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0",
 		"react-icons": "^4.1.0",
 		"react-router-dom": "^5.2.0",
 		"react-spinners": "^0.9.0",
 		"react-transition-group": "^4.4.1",
-		"style-loader": "^1.1.2",
 		"styled-components": "^5.2.1"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.13.16",
-		"@babel/plugin-proposal-class-properties": "^7.7.4",
-		"@babel/plugin-proposal-object-rest-spread": "^7.13.8",
-		"@babel/plugin-transform-destructuring": "^7.13.17",
 		"@babel/preset-env": "^7.13.15",
 		"@babel/preset-react": "^7.13.13",
 		"babel-loader": "^8.2.2",
-		"babel-preset-latest": "^6.24.1",
 		"css-loader": "^5.2.4",
 		"file-loader": "^6.2.0",
 		"webpack": "^5.35.1",
-		"webpack-cli": "^4.6.0"
+		"webpack-cli": "^4.6.0",
+		"style-loader": "^1.1.2"
 	}
 }
