@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 
 Description: >
   "Customer chat solution with URL Previews for Amazon Connect"
@@ -6,7 +6,7 @@ Description: >
 Mappings:
   FunctionMap:
     Configuration:
-      S3Bucket: "amazon-connect-url-preview-for-async-chat-cfn" 
+      S3Bucket: "amazon-connect-url-preview-for-async-chat-cfn"
       S3Key: "deployment/"
       SolutionID: "AC0003"
 
@@ -37,7 +37,7 @@ Parameters:
   transcriptPath:
     Type: String
     Description: >
-        The path in the S3 bucket that contains the chat transcripts. You can find this in the Amazon Connect console when viewing the Data Storage section in your instance details. E.g. If your instance has connect-xxx/connect/instanceName/ChatTranscripts, enter 'connect/instanceName/ChatTranscripts'
+      The path in the S3 bucket that contains the chat transcripts. You can find this in the Amazon Connect console when viewing the Data Storage section in your instance details. E.g. If your instance has connect-xxx/connect/instanceName/ChatTranscripts, enter 'connect/instanceName/ChatTranscripts'
     Default: connect/instanceName/ChatTranscripts
   cloudFrontPriceClass:
     Type: String
@@ -65,7 +65,7 @@ Parameters:
     Description: Send usage metrics about this CloudFormation stack to AWS
 
 Conditions:
-  AnonymousUsageMetrics: !Equals [ !Ref allowAnonymousUsageMetrics, "Yes"]
+  AnonymousUsageMetrics: !Equals [!Ref allowAnonymousUsageMetrics, "Yes"]
 
 Resources:
   #### DynamoDb for user state####
@@ -73,31 +73,24 @@ Resources:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        -
-          AttributeName: "contactId"
+        - AttributeName: "contactId"
           AttributeType: "S"
-        -
-          AttributeName: "nextContactId"
+        - AttributeName: "nextContactId"
           AttributeType: "S"
-        -
-          AttributeName: "userDisplayHash"
+        - AttributeName: "userDisplayHash"
           AttributeType: "S"
       KeySchema:
-        -
-          AttributeName: "contactId"
+        - AttributeName: "contactId"
           KeyType: "HASH"
       ProvisionedThroughput:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
       GlobalSecondaryIndexes:
-        -
-          IndexName: "userDisplayHash-nextContactId-index"
+        - IndexName: "userDisplayHash-nextContactId-index"
           KeySchema:
-            -
-              AttributeName: "userDisplayHash"
+            - AttributeName: "userDisplayHash"
               KeyType: "HASH"
-            -
-              AttributeName: "nextContactId"
+            - AttributeName: "nextContactId"
               KeyType: "RANGE"
           Projection:
             ProjectionType: "ALL"
@@ -130,17 +123,23 @@ Resources:
     Type: AWS::Lambda::LayerVersion
     Properties:
       CompatibleRuntimes:
-        - "nodejs10.x"
+        - "nodejs14.x"
         - "nodejs12.x"
       Content:
-        S3Bucket:
-          !Join
-            - '.'
-            - - !Ref 'AWS::Region'
-              - !FindInMap [FunctionMap, Configuration, S3Bucket]
-        S3Key: !Join ["", [!FindInMap [FunctionMap, Configuration, S3Key], 'urlPreviewLayer.zip']]
+        S3Bucket: !Join
+          - "."
+          - - !Ref "AWS::Region"
+            - !FindInMap [FunctionMap, Configuration, S3Bucket]
+        S3Key:
+          !Join [
+            "",
+            [
+              !FindInMap [FunctionMap, Configuration, S3Key],
+              "urlPreviewLayer.zip",
+            ],
+          ]
       Description: The dependencies required for the UrlPreviewLambda.
-  
+
   UrlPreviewLambda:
     Type: "AWS::Lambda::Function"
     Properties:
@@ -158,26 +157,35 @@ Resources:
           PRIMARY_KEY: "normalized_url"
           SOLUTION_ID: !FindInMap [FunctionMap, Configuration, SolutionID]
       Code:
-        S3Bucket:
-          !Join
-            - '.'
-            - - !Ref 'AWS::Region'
-              - !FindInMap [FunctionMap, Configuration, S3Bucket]
-        S3Key: !Join ["", [!FindInMap [FunctionMap, Configuration, S3Key], 'urlPreviewFunction.zip']]
+        S3Bucket: !Join
+          - "."
+          - - !Ref "AWS::Region"
+            - !FindInMap [FunctionMap, Configuration, S3Bucket]
+        S3Key:
+          !Join [
+            "",
+            [
+              !FindInMap [FunctionMap, Configuration, S3Key],
+              "urlPreviewFunction.zip",
+            ],
+          ]
 
   ChatSDKLayer:
     Type: AWS::Lambda::LayerVersion
     Properties:
       CompatibleRuntimes:
-        - "nodejs10.x"
+        - "nodejs14.x"
         - "nodejs8.10"
       Content:
-        S3Bucket:
-          !Join
-            - '.'
-            - - !Ref 'AWS::Region'
-              - !FindInMap [FunctionMap, Configuration, S3Bucket]
-        S3Key: !Join ["", [!FindInMap [FunctionMap, Configuration, S3Key], 'ChatSDK.zip']]
+        S3Bucket: !Join
+          - "."
+          - - !Ref "AWS::Region"
+            - !FindInMap [FunctionMap, Configuration, S3Bucket]
+        S3Key:
+          !Join [
+            "",
+            [!FindInMap [FunctionMap, Configuration, S3Key], "ChatSDK.zip"],
+          ]
       Description: The AWS SDK including Amazon Connect Chat APIs.
 
   UrlPreviewLambdaExecutionRole:
@@ -217,10 +225,10 @@ Resources:
   InitiateChatLambda:
     Type: "AWS::Lambda::Function"
     Properties:
-      Description:  AWS Lambda Function to initiate the chat with the end user
+      Description: AWS Lambda Function to initiate the chat with the end user
       Handler: "startChatContact.handler"
       Role: !GetAtt InitiateChatLambdaExecutionRole.Arn
-      Runtime: "nodejs10.x"
+      Runtime: "nodejs14.x"
       MemorySize: 128
       Timeout: 30
       Layers:
@@ -233,12 +241,18 @@ Resources:
           SOLUTION_ID: !FindInMap [FunctionMap, Configuration, SolutionID]
           CHAT_DATA_TABLE: !Ref chatContactDataTable
       Code:
-        S3Bucket:
-          !Join
-            - '.'
-            - - !Ref 'AWS::Region'
-              - !FindInMap [FunctionMap, Configuration, S3Bucket]
-        S3Key: !Join ["", [!FindInMap [FunctionMap, Configuration, S3Key], 'start-chat-contact.zip']]
+        S3Bucket: !Join
+          - "."
+          - - !Ref "AWS::Region"
+            - !FindInMap [FunctionMap, Configuration, S3Bucket]
+        S3Key:
+          !Join [
+            "",
+            [
+              !FindInMap [FunctionMap, Configuration, S3Key],
+              "start-chat-contact.zip",
+            ],
+          ]
 
   InitiateChatLambdaExecutionRole:
     Type: "AWS::IAM::Role"
@@ -260,9 +274,9 @@ Resources:
             Statement:
               - Effect: "Allow"
                 Action:
-                  - 'logs:CreateLogGroup'
-                  - 'logs:CreateLogStream'
-                  - 'logs:PutLogEvents'
+                  - "logs:CreateLogGroup"
+                  - "logs:CreateLogStream"
+                  - "logs:PutLogEvents"
                 Resource:
                   - !Sub "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/*"
               - Effect: "Allow"
@@ -273,9 +287,9 @@ Resources:
                   - !Sub "arn:${AWS::Partition}:connect:${AWS::Region}:${AWS::AccountId}:instance/${instanceId}/*"
               - Effect: "Allow"
                 Action:
-                  - 'dynamodb:Query'
-                  - 'dynamodb:UpdateItem'
-                  - 'dynamodb:PutItem'
+                  - "dynamodb:Query"
+                  - "dynamodb:UpdateItem"
+                  - "dynamodb:PutItem"
                 Resource:
                   - !GetAtt chatContactDataTable.Arn
                   - !Sub "${chatContactDataTable.Arn}/index/*"
@@ -283,10 +297,10 @@ Resources:
   UpdateDdbWithS3LocationLambda:
     Type: "AWS::Lambda::Function"
     Properties:
-      Description:  AWS Lambda Function to update the DDB with the S3 location of the chat transcript
+      Description: AWS Lambda Function to update the DDB with the S3 location of the chat transcript
       Handler: "updateChatDdbWithS3Key.handler"
       Role: !GetAtt UpdateDdbWithS3LocationLambdaExecutionRole.Arn
-      Runtime: "nodejs10.x"
+      Runtime: "nodejs14.x"
       MemorySize: 128
       Timeout: 30
       Environment:
@@ -294,12 +308,18 @@ Resources:
           S3_BUCKET_NAME: !Ref AmazonConnectS3BucketName
           CHAT_DATA_TABLE: !Ref chatContactDataTable
       Code:
-        S3Bucket:
-          !Join
-            - '.'
-            - - !Ref 'AWS::Region'
-              - !FindInMap [FunctionMap, Configuration, S3Bucket]
-        S3Key: !Join ["", [!FindInMap [FunctionMap, Configuration, S3Key], 'update-chat-ddb.zip']]
+        S3Bucket: !Join
+          - "."
+          - - !Ref "AWS::Region"
+            - !FindInMap [FunctionMap, Configuration, S3Bucket]
+        S3Key:
+          !Join [
+            "",
+            [
+              !FindInMap [FunctionMap, Configuration, S3Key],
+              "update-chat-ddb.zip",
+            ],
+          ]
 
   UpdateDdbWithS3LocationLambdaExecutionRole:
     Type: "AWS::IAM::Role"
@@ -321,14 +341,14 @@ Resources:
             Statement:
               - Effect: "Allow"
                 Action:
-                  - 'dynamodb:UpdateItem'
+                  - "dynamodb:UpdateItem"
                 Resource:
                   - !GetAtt chatContactDataTable.Arn
               - Effect: "Allow"
                 Action:
-                  - 'logs:CreateLogGroup'
-                  - 'logs:CreateLogStream'
-                  - 'logs:PutLogEvents'
+                  - "logs:CreateLogGroup"
+                  - "logs:CreateLogStream"
+                  - "logs:PutLogEvents"
                 Resource:
                   - !Sub "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/*"
 
@@ -351,14 +371,20 @@ Resources:
       Handler: S3NotificationConfiguration.handler
       Role: !GetAtt S3BucketConfigurationLambdaExecutionRole.Arn
       Code:
-        S3Bucket:
-          !Join
-            - '.'
-            - - !Ref 'AWS::Region'
-              - !FindInMap [FunctionMap, Configuration, S3Bucket]
-        S3Key: !Join ["", [!FindInMap [FunctionMap, Configuration, S3Key], 's3-notification-lambda.zip']]
+        S3Bucket: !Join
+          - "."
+          - - !Ref "AWS::Region"
+            - !FindInMap [FunctionMap, Configuration, S3Bucket]
+        S3Key:
+          !Join [
+            "",
+            [
+              !FindInMap [FunctionMap, Configuration, S3Key],
+              "s3-notification-lambda.zip",
+            ],
+          ]
       Timeout: 30
-      Runtime: "nodejs10.x"
+      Runtime: "nodejs14.x"
 
   S3BucketConfigurationLambdaExecutionRole:
     Type: "AWS::IAM::Role"
@@ -380,14 +406,14 @@ Resources:
             Statement:
               - Effect: "Allow"
                 Action:
-                  - 's3:putBucketNotification'
+                  - "s3:putBucketNotification"
                 Resource:
                   - !Sub "arn:aws:s3:::${AmazonConnectS3BucketName}"
 
   BucketPermission:
     Type: AWS::Lambda::Permission
     Properties:
-      Action: 'lambda:InvokeFunction'
+      Action: "lambda:InvokeFunction"
       FunctionName: !Ref UpdateDdbWithS3LocationLambda
       Principal: s3.amazonaws.com
       SourceAccount: !Ref "AWS::AccountId"
@@ -395,13 +421,13 @@ Resources:
 
   #### Website #####
   CreateWebsiteS3Bucket:
-    Type: 'AWS::S3::Bucket'
+    Type: "AWS::S3::Bucket"
     Properties:
       BucketName: !Ref WebsiteS3BucketName
       AccessControl: LogDeliveryWrite
       LoggingConfiguration:
         DestinationBucketName: !Ref WebsiteS3BucketName
-        LogFilePrefix: 'logs/'
+        LogFilePrefix: "logs/"
       PublicAccessBlockConfiguration:
         BlockPublicAcls: True
         BlockPublicPolicy: True
@@ -409,8 +435,7 @@ Resources:
         RestrictPublicBuckets: True
       CorsConfiguration:
         CorsRules:
-          -
-            AllowedHeaders:
+          - AllowedHeaders:
               - "*"
             AllowedMethods:
               - GET
@@ -430,25 +455,31 @@ Resources:
             Effect: "Allow"
             Principal:
               CanonicalUser:
-                Fn::GetAtt: [ CloudFrontDistributionAccessIdentity , S3CanonicalUserId ]
-            Resource:
-              !Sub ${CreateWebsiteS3Bucket.Arn}/*
+                Fn::GetAtt:
+                  [CloudFrontDistributionAccessIdentity, S3CanonicalUserId]
+            Resource: !Sub ${CreateWebsiteS3Bucket.Arn}/*
 
   CustomResourceHelper:
     Type: AWS::Lambda::Function
     Properties:
       Code:
-        S3Bucket:
-          !Join
-            - '.'
-            - - !Ref 'AWS::Region'
-              - !FindInMap [FunctionMap, Configuration, S3Bucket]
-        S3Key: !Join ["", [!FindInMap [FunctionMap, Configuration, S3Key], 'custom-resource-helper.zip']]
+        S3Bucket: !Join
+          - "."
+          - - !Ref "AWS::Region"
+            - !FindInMap [FunctionMap, Configuration, S3Bucket]
+        S3Key:
+          !Join [
+            "",
+            [
+              !FindInMap [FunctionMap, Configuration, S3Key],
+              "custom-resource-helper.zip",
+            ],
+          ]
       Description: Solution Accelerator for Amazon Connect customer side Chat
       Handler: customResourceHelper.handler
       MemorySize: 256
       Role: !GetAtt CustomResourceHelperIamRole.Arn
-      Runtime: nodejs10.x
+      Runtime: nodejs14.x
       Timeout: 300
 
   CustomResourceHelperIamRole:
@@ -471,9 +502,9 @@ Resources:
             Statement:
               - Effect: "Allow"
                 Action:
-                  - 'logs:CreateLogGroup'
-                  - 'logs:CreateLogStream'
-                  - 'logs:PutLogEvents'
+                  - "logs:CreateLogGroup"
+                  - "logs:CreateLogStream"
+                  - "logs:PutLogEvents"
                 Resource:
                   - !Sub "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/*"
               - Effect: "Allow"
@@ -488,14 +519,14 @@ Resources:
                   - "s3:GetObject"
                 Resource:
                   - !Join
-                    - ''
-                    - - 'arn:'
-                      - !Ref 'AWS::Partition'
-                      - ':s3:::'
-                      - !Ref 'AWS::Region'
-                      - '.'
+                    - ""
+                    - - "arn:"
+                      - !Ref "AWS::Partition"
+                      - ":s3:::"
+                      - !Ref "AWS::Region"
+                      - "."
                       - !FindInMap [FunctionMap, Configuration, S3Bucket]
-                      - '/*'
+                      - "/*"
 
   ConfigureWebsite:
     Type: Custom::LoadLambda
@@ -505,11 +536,10 @@ Resources:
       ServiceToken: !GetAtt CustomResourceHelper.Arn
       Region: !Ref AWS::Region
       customAction: configureWebsite
-      sourceS3Bucket:
-        !Join
-          - '.'
-          - - !Ref 'AWS::Region'
-            - !FindInMap [FunctionMap, Configuration, S3Bucket]
+      sourceS3Bucket: !Join
+        - "."
+        - - !Ref "AWS::Region"
+          - !FindInMap [FunctionMap, Configuration, S3Bucket]
       sourceS3key: !FindInMap [FunctionMap, Configuration, S3Key]
       destS3Bucket: !Ref WebsiteS3BucketName
       destS3KeyPrefix: contents/
@@ -540,7 +570,7 @@ Resources:
     Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
     Properties:
       CloudFrontOriginAccessIdentityConfig:
-        Comment: 'CloudFront OAI for Amazon Connect Chat'
+        Comment: "CloudFront OAI for Amazon Connect Chat"
 
   CloudFrontDistribution:
     Type: AWS::CloudFront::Distribution
@@ -549,23 +579,21 @@ Resources:
     Properties:
       DistributionConfig:
         Origins:
-          - DomainName:
-              !Join
-              - ''
+          - DomainName: !Join
+              - ""
               - - !Ref WebsiteS3BucketName
                 - .s3.amazonaws.com
             Id: !Ref WebsiteS3BucketName
             OriginPath: /contents
             S3OriginConfig:
-              OriginAccessIdentity:
-                !Join
-                - ''
-                - - 'origin-access-identity/cloudfront/'
+              OriginAccessIdentity: !Join
+                - ""
+                - - "origin-access-identity/cloudfront/"
                   - !Ref CloudFrontDistributionAccessIdentity
         Enabled: true
         Logging:
           Bucket: !GetAtt CreateWebsiteS3Bucket.DomainName
-          Prefix: 'logs/'
+          Prefix: "logs/"
           IncludeCookies: true
         Comment: CloudFront for Chat UI
         DefaultRootObject: index.html
@@ -588,13 +616,13 @@ Resources:
 
   #### API Gateway ####
 
-  ApiGatewayRestAPI: 
+  ApiGatewayRestAPI:
     Type: AWS::ApiGateway::RestApi
     Properties:
       Name: "initiateChatConnection"
       Description: "API to initiate chat with Amazon Connect"
 
-  LambdaApiGatewayInvokePermission: 
+  LambdaApiGatewayInvokePermission:
     Type: AWS::Lambda::Permission
     Properties:
       Action: "lambda:InvokeFunction"
@@ -610,7 +638,7 @@ Resources:
       RestApiId: !Ref ApiGatewayRestAPI
       StageName: "Prod"
 
-  ApiGatewayRootMethod: 
+  ApiGatewayRootMethod:
     Type: AWS::ApiGateway::Method
     DependsOn: LambdaApiGatewayInvokePermission
     Properties:
@@ -621,7 +649,7 @@ Resources:
         Type: "AWS_PROXY"
         Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${InitiateChatLambda.Arn}/invocations"
         PassthroughBehavior: WHEN_NO_MATCH
-      ResourceId:  !GetAtt ApiGatewayRestAPI.RootResourceId
+      ResourceId: !GetAtt ApiGatewayRestAPI.RootResourceId
       RestApiId: !Ref ApiGatewayRestAPI
       MethodResponses:
         - StatusCode: "200"
@@ -635,7 +663,7 @@ Resources:
           ResponseModels:
             application/json: Empty
 
-  ApiGatewayOptionsMethod: 
+  ApiGatewayOptionsMethod:
     Type: AWS::ApiGateway::Method
     Properties:
       ResourceId: !GetAtt ApiGatewayRestAPI.RootResourceId
@@ -648,11 +676,11 @@ Resources:
           - ResponseParameters:
               method.response.header.Access-Control-Allow-Headers: >-
                 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'
-              method.response.header.Access-Control-Allow-Methods: '''POST,OPTIONS'''
-              method.response.header.Access-Control-Allow-Origin: !Sub '''${CloudFrontDistribution.DomainName}'''
+              method.response.header.Access-Control-Allow-Methods: "'POST,OPTIONS'"
+              method.response.header.Access-Control-Allow-Origin: !Sub "'${CloudFrontDistribution.DomainName}'"
             ResponseTemplates:
-              application/json: ''
-            StatusCode: '200'
+              application/json: ""
+            StatusCode: "200"
         PassthroughBehavior: NEVER
         RequestTemplates:
           application/json: '{"statusCode": 200}'
@@ -663,25 +691,25 @@ Resources:
             method.response.header.Access-Control-Allow-Headers: true
             method.response.header.Access-Control-Allow-Methods: true
             method.response.header.Access-Control-Allow-Origin: true
-          StatusCode: '200'
+          StatusCode: "200"
 
   ### URL PREVIEW API GW resource
   UrlPreviewResource:
-    Type: 'AWS::ApiGateway::Resource'
+    Type: "AWS::ApiGateway::Resource"
     Properties:
       RestApiId: !Ref ApiGatewayRestAPI
       ParentId: !GetAtt ApiGatewayRestAPI.RootResourceId
       PathPart: getUrlPreview
 
-  UrlPreviewInvokePermission: 
+  UrlPreviewInvokePermission:
     Type: AWS::Lambda::Permission
     Properties:
       Action: "lambda:InvokeFunction"
       FunctionName: !GetAtt UrlPreviewLambda.Arn
       Principal: "apigateway.amazonaws.com"
       SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGatewayRestAPI}/*"
-  
-  UrlPreviewMethod: 
+
+  UrlPreviewMethod:
     Type: AWS::ApiGateway::Method
     DependsOn: UrlPreviewLambda
     Properties:
@@ -692,7 +720,7 @@ Resources:
         Type: "AWS_PROXY"
         Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${UrlPreviewLambda.Arn}/invocations"
         PassthroughBehavior: WHEN_NO_MATCH
-      ResourceId:  !Ref UrlPreviewResource
+      ResourceId: !Ref UrlPreviewResource
       RestApiId: !Ref ApiGatewayRestAPI
       MethodResponses:
         - StatusCode: "200"
@@ -706,7 +734,7 @@ Resources:
           ResponseModels:
             application/json: Empty
 
-  UrlPreviewOptionsMethod: 
+  UrlPreviewOptionsMethod:
     Type: AWS::ApiGateway::Method
     Properties:
       ResourceId: !Ref UrlPreviewResource
@@ -719,11 +747,11 @@ Resources:
           - ResponseParameters:
               method.response.header.Access-Control-Allow-Headers: >-
                 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'
-              method.response.header.Access-Control-Allow-Methods: '''POST,OPTIONS'''
-              method.response.header.Access-Control-Allow-Origin: '''*''' #!Sub '''${CloudFrontDistribution.DomainName}'''
+              method.response.header.Access-Control-Allow-Methods: "'POST,OPTIONS'"
+              method.response.header.Access-Control-Allow-Origin: "'*'" #!Sub '''${CloudFrontDistribution.DomainName}'''
             ResponseTemplates:
-              application/json: ''
-            StatusCode: '200'
+              application/json: ""
+            StatusCode: "200"
         PassthroughBehavior: NEVER
         RequestTemplates:
           application/json: '{"statusCode": 200}'
@@ -734,47 +762,46 @@ Resources:
             method.response.header.Access-Control-Allow-Headers: true
             method.response.header.Access-Control-Allow-Methods: true
             method.response.header.Access-Control-Allow-Origin: true
-          StatusCode: '200'
-  
+          StatusCode: "200"
+
   ### Generate Index.html file ####
 
   ChatUXCreator:
     Type: "AWS::Lambda::Function"
     Properties:
-      Description:  >
+      Description: >
         AWS Lambda Function that will create the chat UX and upload it to the S3 bucket
       Handler: "websiteCreator.handler"
       Role: !GetAtt ChatUXCreatorRole.Arn
-      Runtime: "nodejs10.x"
+      Runtime: "nodejs14.x"
       MemorySize: 256
       Timeout: 120
       Code:
-        S3Bucket:
-          !Join
-            - '.'
-            - - !Ref 'AWS::Region'
-              - !FindInMap [FunctionMap, Configuration, S3Bucket]
-        S3Key: !Join ["", [!FindInMap [FunctionMap, Configuration, S3Key], 'create-website.zip']]
+        S3Bucket: !Join
+          - "."
+          - - !Ref "AWS::Region"
+            - !FindInMap [FunctionMap, Configuration, S3Bucket]
+        S3Key:
+          !Join [
+            "",
+            [
+              !FindInMap [FunctionMap, Configuration, S3Key],
+              "create-website.zip",
+            ],
+          ]
 
   InvokeChatUXCreator:
     Type: Custom::CreateChatUX
     DependsOn:
       - CreateWebsiteS3Bucket
     Properties:
-      S3Bucket:
-        !Ref WebsiteS3BucketName
-      ApiGatewayId:
-        !Ref ApiGatewayRestAPI
-      Region:
-        !Ref AWS::Region
-      ServiceToken:
-        !GetAtt ChatUXCreator.Arn
-      InstanceId:
-        !Ref instanceId
-      ContactFlowId:
-        !Ref contactFlowId
-      EnableAttachments:
-        !Ref enableAttachments
+      S3Bucket: !Ref WebsiteS3BucketName
+      ApiGatewayId: !Ref ApiGatewayRestAPI
+      Region: !Ref AWS::Region
+      ServiceToken: !GetAtt ChatUXCreator.Arn
+      InstanceId: !Ref instanceId
+      ContactFlowId: !Ref contactFlowId
+      EnableAttachments: !Ref enableAttachments
 
   ChatUXCreatorRole:
     Type: "AWS::IAM::Role"
@@ -796,9 +823,9 @@ Resources:
             Statement:
               - Effect: "Allow"
                 Action:
-                  - 'logs:CreateLogGroup'
-                  - 'logs:CreateLogStream'
-                  - 'logs:PutLogEvents'
+                  - "logs:CreateLogGroup"
+                  - "logs:CreateLogStream"
+                  - "logs:PutLogEvents"
                 Resource:
                   - !Sub "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/*"
               - Effect: "Allow"
@@ -809,19 +836,19 @@ Resources:
 
 Outputs:
   cloudFrontDistribution:
-    Description:  The domain name of the CloudFront Distribution to host the chat website
+    Description: The domain name of the CloudFront Distribution to host the chat website
     Value: !GetAtt CloudFrontDistribution.DomainName
   initiateChatLambda:
-    Description:  The ARN of the Lambda function created to initiate chat
+    Description: The ARN of the Lambda function created to initiate chat
     Value: !GetAtt InitiateChatLambda.Arn
   apiGatewayEndpoint:
-    Description:  The ARN of the API Gateway endpoint that triggers the Lambda function to initiate the chat
+    Description: The ARN of the API Gateway endpoint that triggers the Lambda function to initiate the chat
     Value: !Ref ApiGatewayRestAPI
   InitiateChatLambdaExecutionRole:
-    Description:  The ARN of the IAM role used by the Lambda function to initiate the chat
+    Description: The ARN of the IAM role used by the Lambda function to initiate the chat
     Value: !GetAtt InitiateChatLambdaExecutionRole.Arn
   websiteS3Bucket:
-    Description:  The ARN of the S3 Bucket used to host the website
+    Description: The ARN of the S3 Bucket used to host the website
     Value: !GetAtt CreateWebsiteS3Bucket.Arn
   chatContactDataTable:
     Description: Name of the new table to store the contact data related to chats.
