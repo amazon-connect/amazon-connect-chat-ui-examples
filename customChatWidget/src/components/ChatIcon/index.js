@@ -20,6 +20,15 @@ const ChatIcon = (props) =>
     const { primaryColor } = useAppConfig();
     const { showWidget, hideWidget, setShowWidget, setHideWidget, toggleIcon, chatWithoutForm, forceUnmountChatWidget, setForceUnmountChatWidget } = props;
     const handleChatIconClickEvent = (e) => {
+      // Request Browser Notifications using Browsers Notifications API, only works on HTTPS
+      Notification.requestPermission().then(status => {
+        if (status === 'denied'){
+          // log("Access for notification denied", status)
+        } else if (status === 'granted'){
+          // log("Access granted for notifications")
+        }
+      })
+
       if (chatWithoutForm && forceUnmountChatWidget) setForceUnmountChatWidget(false)
       const timeline = anime.timeline({
           duration: 750,

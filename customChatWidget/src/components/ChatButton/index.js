@@ -18,6 +18,15 @@ const ChatButton = (props) => {
   const { showWidget, hideWidget, setShowWidget, setHideWidget, toggleIcon, chatWithoutForm, forceUnmountChatWidget, setForceUnmountChatWidget } = props;
   const { primaryColor } = useAppConfig();
   const handleChatIconClickEvent = (e) => {
+    // Request Browser Notifications using 
+    Notification.requestPermission().then(status => {
+      if (status === 'denied'){
+        // log("Access for notification denied", status)
+      } else if (status === 'granted'){
+        // log("Access granted for notifications")
+      }
+    })
+
     if (chatWithoutForm && forceUnmountChatWidget) setForceUnmountChatWidget(false)
     toogleSVG ? setToggleSVG(false) : setToggleSVG(true);
     setShowWidget(!showWidget);

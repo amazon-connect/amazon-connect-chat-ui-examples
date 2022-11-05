@@ -41,6 +41,12 @@ const ChatWidget = ({
         }
         chatSession.onIncoming(function (data) {
             trace("incoming message:|| " + JSON.stringify(data));
+            // If the incoming msg is an interactive msg like a list picker return generic text, else return the body of the msg. 
+            if(data.Content.startsWith("{") && JSON.parse(data.Content).templateType){
+                new Notification("Incoming Message",{body: "Incoming Message from Chat"})
+            } else {
+                new Notification("Incoming Message",{body: data.Content})
+            }
         });
 
         chatSession.onOutgoing(function (data) {
