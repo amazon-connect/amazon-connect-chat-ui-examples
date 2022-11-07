@@ -31,3 +31,16 @@ export const Button = styled.button`
 	  align-items: center;
     background: ${props => props.primaryColor ? props.primaryColor : "#3F5773"};
 `;
+
+
+export const NotificationIcon = styled.div`
+  width:20px;
+  height: 20px;
+  background-color: red;
+  cursor: pointer;
+  border-radius: 25px;
+  visibility: ${(props) => (props.showNotification ? "hidden" : "visible")};
+  position: fixed;
+  bottom:60px;
+  right: 50px;
+`

@@ -19,8 +19,9 @@ const ChatWithForm = () => {
     log(">> Init");
     const [showWidget, setShowWidget] = useState(false);
     const [currentState, setCurrentState] = useState(chatWithFormStates.FORM);
-    const [hideWidget, setHideWidget] = useState(false);
     const [toggleIcon, setToggleIcon] = useState(false);
+    const [toggleSVG, setToggleSVG] = useState(false)
+    const [notificationCount, setNotificationCount] = useState(0)
     const [data, setData] = useState({});
     const { initiationIcon } = useAppConfig();
     return (
@@ -29,20 +30,24 @@ const ChatWithForm = () => {
                 initiationIcon.toLowerCase() === chatInitiationIcon.BUTTON ?
                     <ChatButton
                         showWidget={showWidget}
-                        hideWidget={hideWidget}
-                        setHideWidget={setHideWidget}
                         setShowWidget={setShowWidget}
                         toggleIcon={toggleIcon}
+                        toggleSVG={toggleSVG}
+                        setToggleSVG={setToggleSVG}
+                        notificationCount={notificationCount}
+                        setNotificationCount={setNotificationCount}
                     />
                     : <ChatIcon
                         showWidget={showWidget}
-                        hideWidget={hideWidget}
-                        setHideWidget={setHideWidget}
                         setShowWidget={setShowWidget}
                         toggleIcon={toggleIcon}
+                        toggleSVG={toggleSVG}
+                        setToggleSVG={setToggleSVG}
+                        notificationCount={notificationCount}
+                        setNotificationCount={setNotificationCount}
                     />
             }
-            <div style={{ display: hideWidget ? "none" : null }}>
+            <div style={{ display: !showWidget ? "none" : null }}>
                 <CSSTransition
                     in={showWidget}
                     timeout={400}
@@ -50,13 +55,19 @@ const ChatWithForm = () => {
                     mountOnEnter
                     //unmountOnExit
                     appear
-                    onExited={()=> setHideWidget(true)} 
+                    onExited={()=> setShowWidget(false)} 
                 >
                 {
                     currentState === chatWithFormStates.FORM ? (
                     <ChatForm  setData={setData} setCurrentState={setCurrentState} />
                     ) : (
-                            <ChatWidget dataFromInputForm={data} setCurrentState={setCurrentState} setHideWidget={setHideWidget} setShowWidget={setShowWidget} setToggleIcon={ setToggleIcon}/>
+                            <ChatWidget 
+                                dataFromInputForm={data} 
+                                showWidget={showWidget} 
+                                setCurrentState={setCurrentState} 
+                                setToggleIcon={ setToggleIcon} 
+                                setNotificationCount={setNotificationCount}
+                            />
                     )
                 }
                 </CSSTransition>

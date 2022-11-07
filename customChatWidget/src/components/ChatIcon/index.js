@@ -5,7 +5,7 @@ import React, { useState, useContext, useEffect } from "react";
 import anime from 'animejs';
 import { useAppConfig } from '../../providers/AppConfigProvider';
 import { device, closeChatSVGPath, chatSVGPath, loggerNames } from '../../constants';
-import { Button, Svg } from './styled';
+import { Button, Svg, NotificationIcon } from './styled';
 import { genLogger } from "../../lib/logger";
 
 const name = loggerNames.components.CHAT_ICON;
@@ -16,9 +16,8 @@ const ChatIcon = (props) =>
     log(">>> Init");
     log('ChatIcon.displayName: ', ChatIcon.displayName);
     log(props);
-    const [toogleSVG, setToggleSVG] = useState(false);
     const { primaryColor } = useAppConfig();
-    const { showWidget, hideWidget, setShowWidget, setHideWidget, toggleIcon, chatWithoutForm, forceUnmountChatWidget, setForceUnmountChatWidget } = props;
+    const { showWidget, setShowWidget, toggleIcon, toggleSVG, setToggleSVG, notificationCount, setNotificationCount, chatWithoutForm, forceUnmountChatWidget, setForceUnmountChatWidget } = props;
     const handleChatIconClickEvent = (e) => {
       if (chatWithoutForm && forceUnmountChatWidget) setForceUnmountChatWidget(false)
       const timeline = anime.timeline({
@@ -29,14 +28,23 @@ const ChatIcon = (props) =>
           targets: ".chat",
           d: [
               {
-              value: toogleSVG ? chatSVGPath : closeChatSVGPath
+              value: toggleSVG ? chatSVGPath : closeChatSVGPath
               }
           ],
-          strokeWidth: toogleSVG ? 3 : 1,
+          strokeWidth: toggleSVG ? 3 : 1,
         });
-      toogleSVG ? setToggleSVG(false) : setToggleSVG(true);
-      setShowWidget(!showWidget);
-      hideWidget ? setHideWidget(!hideWidget) : setHideWidget(hideWidget); 
+
+      // On click resets Notification count back to 0
+      setNotificationCount(0) 
+
+      // chat state problem fixed by syncing show widget and toggleSVG
+      if(showWidget && toggleSVG){
+        setToggleSVG(false)
+        setShowWidget(false)
+      } else {
+        setToggleSVG(true)
+        setShowWidget(true)
+      }
     }
     // Toggle to initial Icon after the chat is ended by the chat Widget:
     const toggleToChatIcon = () => {
@@ -58,11 +66,11 @@ const ChatIcon = (props) =>
   //This useEffect will run only after a chat is ended
   useEffect(() => {
     log('useEffect');
-      if (toggleIcon) {
-        log('Chat Ended hence toggling back to initial icon(chat)')
-        toggleToChatIcon();
-        if (chatWithoutForm) setForceUnmountChatWidget(true);
-      }  
+    log('Chat Ended hence toggling back to initial icon(chat)')
+    setShowWidget(false)
+    setToggleSVG(false)
+    toggleToChatIcon();
+    if (chatWithoutForm) setForceUnmountChatWidget(true);
   }, [toggleIcon])
   
   /*! Both chat and carrot SVG's are from Material Design Icons https://github.com/google/material-design-icons
@@ -84,6 +92,11 @@ const ChatIcon = (props) =>
               >
               </path>
             </Svg>
+            {!toggleSVG && notificationCount > 0 && (
+              <NotificationIcon showNotification={showWidget}>
+                {notificationCount}
+              </NotificationIcon>
+            )}
           </Button>
         </div>
 

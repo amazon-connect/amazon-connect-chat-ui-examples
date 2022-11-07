@@ -23,7 +23,7 @@ export const Button = styled.button`
   display:block;
   background-color:${props => props.primaryColor ? props.primaryColor : "#3F5773"};
   color: white;
-  padding: ${props => !props.toogleSVG ? '10px 10px' : '5px 5px'};
+  padding: ${props => !props.toggleSVG ? '10px 10px' : '5px 5px'};
   border: none;
   cursor: pointer;
   @media ${props => props.device.laptop}{
@@ -43,4 +43,16 @@ export const Button = styled.button`
   &:hover{
     background: ${props => props.primaryColor ? props.primaryColor : "#3F5773"};
   }
+`
+
+export const NotificationIcon = styled.div`
+  width:20px;
+  height: 20px;
+  background-color: red;
+  cursor: pointer;
+  border-radius: 25px;
+  visibility: ${(props) => (props.showNotification ? "hidden" : "visible")};
+  position: fixed;
+  bottom:55px;
+  right: 50px;
 `

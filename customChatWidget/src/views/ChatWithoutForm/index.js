@@ -17,8 +17,9 @@ const { log, trace } = genLogger(name);
 const ChatWithoutForm = () => {
     log(">> Init");
     const [showWidget, setShowWidget] = useState(false);
-    const [hideWidget, setHideWidget] = useState(false);
     const [toggleIcon, setToggleIcon] = useState(false);
+    const [toggleSVG, setToggleSVG] = useState(false)
+    const [notificationCount, setNotificationCount] = useState(0)
     const [forceUnmountChatWidget, setForceUnmountChatWidget] = useState(false);
     const { initiationIcon } = useAppConfig();
     trace(`showWidget`, showWidget);
@@ -31,40 +32,44 @@ const ChatWithoutForm = () => {
                 initiationIcon.toLowerCase() === chatInitiationIcon.BUTTON ?
                     <ChatButton
                         showWidget={showWidget}
-                        hideWidget={hideWidget}
-                        setHideWidget={setHideWidget}
                         setShowWidget={setShowWidget}
                         toggleIcon={toggleIcon}
+                        toggleSVG={toggleSVG}
+                        setToggleSVG={setToggleSVG}
+                        notificationCount={notificationCount}
+                        setNotificationCount={setNotificationCount}
                         forceUnmountChatWidget={forceUnmountChatWidget}
                         chatWithoutForm={true}
                         setForceUnmountChatWidget={setForceUnmountChatWidget}
                     />
                     : <ChatIcon
                         showWidget={showWidget}
-                        hideWidget={hideWidget}
-                        setHideWidget={setHideWidget}
                         setShowWidget={setShowWidget}
-                        toggleIcon={toggleIcon} f
+                        toggleIcon={toggleIcon}
+                        toggleSVG={toggleSVG}
+                        setToggleSVG={setToggleSVG}
+                        notificationCount={notificationCount}
+                        setNotificationCount={setNotificationCount}
                         forceUnmountChatWidget={forceUnmountChatWidget}
                         chatWithoutForm={true}
                         setForceUnmountChatWidget={setForceUnmountChatWidget}
                     />
             }
-            <div style={{ display: hideWidget ? "none" : null }}>
+            <div style={{ display: !showWidget ? "none" : null }}>
             <CSSTransition
                 in={showWidget}
                 timeout={400}
                 classNames="widget-transition"
                 mountOnEnter
                 appear
-                onExited={()=> setHideWidget(true)}
+                onExited={()=> setShowWidget(false)}
                 >
                     {
                         forceUnmountChatWidget ? <div></div> : (
-                            <ChatWidget
-                                setHideWidget={setHideWidget}
-                                setShowWidget={setShowWidget}
-                                setToggleIcon={setToggleIcon}
+                            <ChatWidget 
+                                showWidget={showWidget} 
+                                setNotificationCount={setNotificationCount} 
+                                setToggleIcon={setToggleIcon} 
                             />
                         )
                     }
