@@ -15,7 +15,7 @@ Set up the Lambda function code hook as described below
 * Under Create function, choose the radio button for *Browse serverless app repository*
 * Under the *Public applications* tab, search for `amazon-connect-interactive-messages-example` and click on it. Deep link [here](https://serverlessrepo.aws.amazon.com/applications/us-west-2/841676849665/amazon-connect-interactive-messages-example)
 * On the *Review, configure, and deploy* page, review the *Application details* and click *Deploy*.
-* Set up an Amazon Lex chat bot and connect it to the AWS Lambda function as decribed in the AWS Contact Center blog post [How to enable interactive messages in Amazon Connect chat](https://aws.amazon.com/blogs/contact-center/easily-set-up-interactive-messages-for-your-amazon-connect-chatbot/)
+* Set up an Amazon Lex chat bot and connect it to the AWS Lambda function as described in the AWS Contact Center blog post [How to enable interactive messages in Amazon Connect chat](https://aws.amazon.com/blogs/contact-center/easily-set-up-interactive-messages-for-your-amazon-connect-chatbot/)
 
 ## License Summary
 

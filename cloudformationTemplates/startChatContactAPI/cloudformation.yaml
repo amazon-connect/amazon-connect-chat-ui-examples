@@ -37,7 +37,7 @@ Outputs:
   StartChatLambda:
     Description: The ARN of the Lambda function created to initiate chat
     Value: !GetAtt StartChatLambda.Arn
-  ApiGatewayEndoint:
+  ApiGatewayEndpoint:
     Description: The ARN of the API Gateway endpoint that triggers the Lambda function to initiate the chat
     Value: !Ref ApiGatewayRestAPI
   StartChatLambdaExecutionRole:

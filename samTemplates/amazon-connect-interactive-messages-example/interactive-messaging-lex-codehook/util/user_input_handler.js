@@ -1,4 +1,4 @@
-/* user_input_hander.js HANDLES INPUTS PROVIDED BY THE USER TO THE CHAT */
+/* user_input_handler.js HANDLES INPUTS PROVIDED BY THE USER TO THE CHAT */
 
 const {
   formElicitSlotWithTemplateResponse,
@@ -53,7 +53,7 @@ function handleActionResponse(input, request) {
       outputSessionAttributes
     );
   } else {
-    throw new Error(`Invalid action recieved: ${input}`);
+    throw new Error(`Invalid action received: ${input}`);
   }
 }
 

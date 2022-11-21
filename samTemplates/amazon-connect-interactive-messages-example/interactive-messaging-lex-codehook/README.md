@@ -27,7 +27,7 @@ data object:
         imageType: the type of the image. Valid Value: URL
         imageData: url of the image.
     timeslots: 
-        date: available date-time for a meeting or appointment. Valid Value can be any date, but it need to be specifically in the format shown in the exmaple below.
+        date: available date-time for a meeting or appointment. Valid Value can be any date, but it need to be specifically in the format shown in the example below.
         duration: duration of the meeting or appointment
 ```
 
