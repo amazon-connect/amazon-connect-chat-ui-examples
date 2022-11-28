@@ -125,6 +125,38 @@ If you want to enable sending attachments for Amazon Connect Chat the customer c
     },successHandler, failureHandler)
 ```
 
+## Enabling message receipts
+
+Render and send read/delivered message receipts for customer chat-interface. Enable the feature [in the admin console](https://docs.aws.amazon.com/connect/latest/adminguide/message-receipts.html), and update [`chat-interface`](https://github.com/amazon-connect/amazon-connect-chat-interface#message-receipts) to generate latest webpack bundle.
+
+To customize wait time before sending read/delivered receipt, set the throttle in global config:
+
+```js
+connect.ChatSession.setGlobalConfig({
+  // ...
+  features: {
+    messageReceipts: {
+      shouldSendMessageReceipts: true,
+      throttleTime: 5000 // default throttle time in ms - time to wait before sending 
+    }
+  }
+});
+```
+
+## Disable message receipts
+
+By default, message receipts feature is enabled in ChatJs. [Disable in `chat-interface`](https://github.com/amazon-connect/amazon-connect-chat-interface#message-receipts) config and remove from the ChatJs config:
+
+```js
+connect.ChatSession.setGlobalConfig({
+  // ...
+  features: {
+    messageReceipts: {
+      shouldSendMessageReceipts: false, // default: true
+    }
+  }
+});
+```
 
 ## Troubleshooting
 
