@@ -25,8 +25,7 @@ function startChatContact(body) {
     if(body.hasOwnProperty('InstanceId')){
         instanceId = body["InstanceId"];
     }
-    console.log("Instance ID: " + instanceId);
-
+    console.log("chat contact body: ", JSON.stringify(body))
     return new Promise(function (resolve, reject) {
         var startChat = {
             "InstanceId": instanceId == "" ? process.env.INSTANCE_ID : instanceId,
@@ -38,11 +37,17 @@ function startChatContact(body) {
                 "DisplayName": body["ParticipantDetails"]["DisplayName"]
             }
         };
+        const persistentChatEnabled = body.PersistentChat && body.PersistentChat.RehydrationType && body.PersistentChat.SourceContactId;
+        if(persistentChatEnabled) {
+            startChat['PersistentChat'] = {
+                "RehydrationType": body["PersistentChat"]["RehydrationType"],
+                "SourceContactId": body["PersistentChat"]["SourceContactId"]
+            }
+        }
 
         connect.startChatContact(startChat, function(err, data) {
             if (err) {
-                console.log("Error starting the chat.");
-                console.log(err, err.stack);
+                console.log("Error starting the chat.", err);
                 reject(err);
             } else {
                 console.log("Start chat succeeded with the response: " + JSON.stringify(data));
@@ -72,7 +77,7 @@ function buildSuccessfulResponse(result) {
 
 function buildResponseFailed(err) {
     const response = {
-        statusCode: 500,
+        statusCode: err.statusCode,
         headers: {
             "Access-Control-Allow-Origin": "*",
             'Content-Type': 'application/json',
