@@ -3,6 +3,11 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2023-1-19
+### Added
+- cloudformationTemplates - startChatContactAPI - Introduce Persistent Chat
+  - Amazon Connect Chat introduces Persistent Chat, making it easier for customers to continue conversations with context and transcripts carried over from previous chats, eliminating the need for customers to repeat themselves and allowing agents to provide personalized service with access to the entire conversation history. [Learn more](https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html)
+
 ## [1.2.5] - 2022-12-14
 ### Changed
 - Custom Chat Widget - bump dependencies

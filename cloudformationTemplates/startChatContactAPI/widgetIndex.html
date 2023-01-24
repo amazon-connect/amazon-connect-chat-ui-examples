@@ -89,7 +89,15 @@
                         instanceId: instanceId,
                         featurePermissions: {
                             "ATTACHMENTS": enableAttachments,  // this is the override flag from user for attachments
-                        }
+                        },
+                        // Learn more about persistent chat: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html
+                        persistentChat: {
+                            rehydrationType: "",  // TODO: ENTIRE_PAST_SESSION or FROM_SEGMENT
+                            // For the ENTIRE_PAST_SESSION rehydration type, specify the first contact (initial contactId) of the past chat session as the SourceContactId attribute.
+                            // For the FROM_SEGMENT rehydration type, specify any contactId of the past chat session as the SourceContactId attribute.
+                            sourceContactId: "" // TODO: Fill in contactId based on rehydrationType
+                        },
+                        shouldShowMessageReceipts: true
                     },successHandler, failureHandler);
 
                 }
