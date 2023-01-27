@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.1] - 2023-2-23
+### Added
+- Custom Chat Widget - Include Rich Messaging suppport
+- cloudformationTemplates - Include Rich Messaging suppport
+  - Amazon Connect Chat now allows your agents and customers to use rich text formatting when composing a message, enabling them to quickly add emphasis and structure to messages, improving comprehension. The available formatting options include bold, italics, hyperlinks, bulleted lists, and numbered lists. [Learn more](https://docs.aws.amazon.com/connect/latest/adminguide/enable-text-formatting-chat.html)
+
 ## [1.3.0] - 2023-1-19
 ### Added
 - cloudformationTemplates - startChatContactAPI - Introduce Persistent Chat
