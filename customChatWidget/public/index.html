@@ -1,47 +1,48 @@
 <!DOCTYPE html>
 <html>
-    <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <title>Chat</title>
-    </head>
-    <body>
-        <div id="root"></div>
-        <script src="amazon-connect-chat-interface.js"></script>
-        <script src="ACChat.js"> </script>
-        <script>
-            AmazonCustomChatWidget.ChatInterface.init({
-                containerId: 'root',
-                initiationIcon: 'icon', // Set either 'icon' or 'button'
-                region:"us-west-2", 
-                name: "refer|inputFields|Name", // **** Mandatory**** For chat without form, please add a constant or a variable. Otherwise, if you have a chat form, then you can refer it to the input fields like "refer|inputFields|Name"
-                username: "refer|inputFields|UserName", // **** Mandatory**** For chat without form, please add a constant or a variable. Otherwise, if you have a chat form, then you can refer it to the input fields like "refer|inputFields|UserName"
-                apiGateway: "https://${apiId}.execute-api.${region}.amazonaws.com/Prod", // **** Mandatory Provide the api gateway ARN from installing the async chat cloudformation as explained in the readme document.
-                contactFlowId:'XXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXX', // This is the contact flow ID and not the full ARN of that contact Flow, please check README.md for more information.
-                instanceId: 'XXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXX', // This is the connect instance ID and not the full ARN of that contact Flow, please check README.md for more information.
-                attachments: true,
-                contactAttr:{
-                    SomeContactAttributeKey: "SomeContactAttributeValue",
-                },
-                preChatForm:{
-                    visible: true,
-                    inputFields:[
-                        {
-                            name: "Name",
-                            validation: "required"
-                        },{
-                            name: "UserName",
-                            validation: "required"
-                        },{
-                            name: "Email",
-                            validation: "notrequired"
-                        } 
-                    ]
-                },
-                primaryColor: 'green',
-                description: 'Welcome to Amazon Connect Chat'
-            })
-        </script>
-    </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chat</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="amazon-connect-chat-interface.js"></script>
+    <script src="ACChat.js"></script>
+    <script>
+        AmazonCustomChatWidget.ChatInterface.init({
+            containerId: 'root',
+            initiationIcon: 'icon', // Set either 'icon' or 'button'
+            region: "us-west-2",
+            name: "refer|inputFields|Name", // **** Mandatory**** For chat without form, please add a constant or a variable. Otherwise, if you have a chat form, then you can refer it to the input fields like "refer|inputFields|Name"
+            username: "refer|inputFields|UserName", // **** Mandatory**** For chat without form, please add a constant or a variable. Otherwise, if you have a chat form, then you can refer it to the input fields like "refer|inputFields|UserName"
+            apiGateway: "https://${apiId}.execute-api.${region}.amazonaws.com/Prod", // **** Mandatory Provide the api gateway ARN from installing the async chat cloudformation as explained in the readme document.
+            contactFlowId: 'XXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXX', // This is the contact flow ID and not the full ARN of that contact Flow, please check README.md for more information.
+            instanceId: 'XXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXX', // This is the connect instance ID and not the full ARN of that contact Flow, please check README.md for more information.
+            attachments: true,
+            contactAttr: {
+                SomeContactAttributeKey: "SomeContactAttributeValue",
+            },
+            preChatForm: {
+                visible: true,
+                inputFields: [{
+                    name: "Name",
+                    validation: "required"
+                }, {
+                    name: "UserName",
+                    validation: "required"
+                }, {
+                    name: "Email",
+                    validation: "notrequired"
+                }]
+            },
+            primaryColor: 'green',
+            description: 'Welcome to Amazon Connect Chat'
+        })
+    </script>
+</body>
+
 </html>

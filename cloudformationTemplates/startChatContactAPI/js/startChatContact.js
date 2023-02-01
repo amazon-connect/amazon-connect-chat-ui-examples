@@ -35,7 +35,9 @@ function startChatContact(body) {
             },
             "ParticipantDetails": {
                 "DisplayName": body["ParticipantDetails"]["DisplayName"]
-            }
+            },
+            // Enable rich messaging: https://docs.aws.amazon.com/connect/latest/adminguide/enable-text-formatting-chat.html
+            ...(!!body["SupportedMessagingContentTypes"] && { "SupportedMessagingContentTypes": body["SupportedMessagingContentTypes"] })
         };
         const persistentChatEnabled = body.PersistentChat && body.PersistentChat.RehydrationType && body.PersistentChat.SourceContactId;
         if(persistentChatEnabled) {

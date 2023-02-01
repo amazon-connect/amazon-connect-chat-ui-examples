@@ -125,6 +125,40 @@ If you want to enable sending attachments for Amazon Connect Chat the customer c
     },successHandler, failureHandler)
 ```
 
+## Enabling rich messaging
+
+Amazon Connect Chat now allows your agents and customers to use rich text formatting when composing a message, enabling them to quickly add emphasis and structure to messages, improving comprehension. The available formatting options include bold, italics, hyperlinks, bulleted lists, and numbered lists. [Documentation](https://docs.aws.amazon.com/connect/latest/adminguide/enable-text-formatting-chat.html)
+
+1. To enable rich messaging, include the new param when invoking `initiateChat`:
+
+```js
+  connect.ChatInterface.initiateChat({
+    contactFlowId: "${contactFlowId}",
+    instanceId: "${instanceId}",
+    // ...
+    supportedMessagingContentTypes: "text/plain,text/markdown", // include 'text/markdown' for rich messaging support
+    featurePermissions: {
+      ATTACHMENTS: false,
+      MESSAGING_MARKDOWN: true
+    }
+  },successHandler, failureHandler)
+```
+
+2. If updating an exisiting CFN stack, the startChatContact lambda function needs to be updated.
+
+Be sure to pass `supportedMessagingContentTypes` input to `startChatContact()`:
+
+```js
+function startChatContact(body) {
+    return new Promise(function (resolve, reject) {
+        var startChat = {
+            // ...
+            ...(!!body["SupportedMessagingContentTypes"] && { "SupportedMessagingContentTypes": body["SupportedMessagingContentTypes"] })
+        };
+    })
+}
+```
+
 ## Enabling message receipts
 
 Render and send read/delivered message receipts for customer chat-interface. Enable the feature [in the admin console](https://docs.aws.amazon.com/connect/latest/adminguide/message-receipts.html), and update [`chat-interface`](https://github.com/amazon-connect/amazon-connect-chat-interface#message-receipts) to generate latest webpack bundle.

@@ -12,10 +12,10 @@
 
     <script src="js/amazon-connect-chat-interface.js"></script>
 </head>
+
 <body>
 
-    <style>
-    </style>
+    <style></style>
 
     <div>
         <section class="section-main" id="section-main" style="position: absolute; float: left; width: 50%;">
@@ -30,17 +30,14 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <label for="firstName"
-                                            style="width: 128px; padding-right: 25px; padding-bottom: 10px;">Solution
+                                        <label for="firstName" style="width: 128px; padding-right: 25px; padding-bottom: 10px;">Solution
                                             Example:</label>
                                     </td>
                                     <td>
-                                        <input name="firstName" type="text" id="firstName" placeholder="First Name"
-                                            style="width:161px;">
+                                        <input name="firstName" type="text" id="firstName" placeholder="First Name" style="width:161px;">
                                     </td>
                                     <td style="padding-left: 10px;">
-                                        <input type="submit" style="padding-left: 10px;" class="submit" id="startChat"
-                                            value="Start Chat"></input>
+                                        <input type="submit" style="padding-left: 10px;" class="submit" id="startChat" value="Start Chat"></input>
                                     </td>
                                 </tr>
                             </tbody>
@@ -62,8 +59,8 @@
             });
         });
 
-        $(function () {
-            $('#contactDetails').submit(function (e) {
+        $(function() {
+            $('#contactDetails').submit(function(e) {
                 e.preventDefault();
 
                 customerName = $('#firstName').val();
@@ -88,17 +85,19 @@
                         contactFlowId: contactFlowId,
                         instanceId: instanceId,
                         featurePermissions: {
-                            "ATTACHMENTS": enableAttachments,  // this is the override flag from user for attachments
+                            "ATTACHMENTS": enableAttachments, // this is the override flag from user for attachments
+                            "MESSAGING_MARKDOWN": true // enable rich messaging toolbar and text formatting
                         },
+                        supportedMessagingContentTypes: "text/plain,text/markdown", // include 'text/markdown' for rich messaging support
                         // Learn more about persistent chat: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html
                         persistentChat: {
-                            rehydrationType: "",  // TODO: ENTIRE_PAST_SESSION or FROM_SEGMENT
+                            rehydrationType: "", // TODO: ENTIRE_PAST_SESSION or FROM_SEGMENT
                             // For the ENTIRE_PAST_SESSION rehydration type, specify the first contact (initial contactId) of the past chat session as the SourceContactId attribute.
                             // For the FROM_SEGMENT rehydration type, specify any contactId of the past chat session as the SourceContactId attribute.
                             sourceContactId: "" // TODO: Fill in contactId based on rehydrationType
                         },
                         shouldShowMessageReceipts: true
-                    },successHandler, failureHandler);
+                    }, successHandler, failureHandler);
 
                 }
             });

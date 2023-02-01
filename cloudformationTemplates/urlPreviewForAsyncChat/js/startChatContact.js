@@ -69,7 +69,7 @@ exports.handler = (event, context, callback) => {
 };
 
 function startChatContact(contactFlowId, username, body, instanceId) {
-        return new Promise(function (resolve, reject) {
+    return new Promise(function (resolve, reject) {
         var startChat = {
             "InstanceId": instanceId == "" ? process.env.INSTANCE_ID : instanceId,
             "ContactFlowId": contactFlowId == "" ? process.env.CONTACT_FLOW_ID : contactFlowId,
@@ -79,7 +79,9 @@ function startChatContact(contactFlowId, username, body, instanceId) {
             },
             "ParticipantDetails": {
                 "DisplayName": body["ParticipantDetails"]["DisplayName"]
-            }
+            },
+            // Enable rich messaging: https://docs.aws.amazon.com/connect/latest/adminguide/enable-text-formatting-chat.html
+            ...(!!body["SupportedMessagingContentTypes"] && { "SupportedMessagingContentTypes": body["SupportedMessagingContentTypes"] })
         };
 
         connect.startChatContact(startChat, function(err, data) {
@@ -92,7 +94,6 @@ function startChatContact(contactFlowId, username, body, instanceId) {
                 resolve(data);
             }
         });
-
     });
 }
 

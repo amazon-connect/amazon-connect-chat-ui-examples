@@ -52,15 +52,15 @@ If your instance was created before the release of the chat feature, here's an o
 3. Your existing contacts flows will also work for chat! You just need to update them to specify how you want them to work.
     We've added the following action blocks:
 
-    - [Wait](https://docs.aws.amazon.com/connect/latest/adminguide/contact-blocks.html#wait)
-    - [Set disconnect flow](https://docs.aws.amazon.com/connect/latest/adminguide/contact-blocks.html#set-disconnect-flow)
+    - [Wait](https://docs.aws.amazon.com/connect/latest/adminguide/wait.html)
+    - [Set disconnect flow](https://docs.aws.amazon.com/connect/latest/adminguide/set-disconnect-flow.html)
 
     And updated these blocks for chat:
 
-    - [Play prompt](https://docs.aws.amazon.com/connect/latest/adminguide/contact-blocks.html#play)
-    - [Get customer input](https://docs.aws.amazon.com/connect/latest/adminguide/contact-blocks.html#get-customer-input)
-    - [Store customer input](https://docs.aws.amazon.com/connect/latest/adminguide/contact-blocks.html#store-customer-input)
-    - [Set recording behavior](https://docs.aws.amazon.com/connect/latest/adminguide/contact-blocks.html#set-recording-behavior)
+    - [Play prompt](https://docs.aws.amazon.com/connect/latest/adminguide/play.html)
+    - [Get customer input](https://docs.aws.amazon.com/connect/latest/adminguide/get-customer-input.html)
+    - [Store customer input](https://docs.aws.amazon.com/connect/latest/adminguide/store-customer-input.html)
+    - [Set recording behavior](https://docs.aws.amazon.com/connect/latest/adminguide/set-recording-behavior.html)
 
 4. Your metric reports and the contact trace records will now reflect chat as a channel. Note the following metrics:
 

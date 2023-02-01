@@ -12,10 +12,10 @@
 
     <script type="text/javascript" src="js/amazon-connect-chat-min.js"></script>
 </head>
+
 <body>
 
-    <style>
-    </style>
+    <style></style>
 
     <div>
         <section class="section-main" id="section-main">
@@ -29,19 +29,17 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <input name="firstName" type="text" id="firstName" placeholder="First Name"
-                                        style="width:161px;">
+                                    <input name="firstName" type="text" id="firstName" placeholder="First Name" style="width:161px;">
                                 </td>
                                 <td style="padding-left: 10px;">
-                                    <input type="submit" style="padding-left: 10px;" class="submit" id="startChat"
-                                        value="Start Chat"></input>
+                                    <input type="submit" style="padding-left: 10px;" class="submit" id="startChat" value="Start Chat"></input>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </form>
-            
+
             <div style="padding: 5px;"><textarea type="text" id="chatContent"></textarea></div>
             <div style="padding: 5px;"><input type="button" id="sendChat" value="Send chat"></div>
             <div style="padding-top: 10px; display: inline-flex">
@@ -54,7 +52,6 @@
     </div>
 
     <script>
-
         connect.ChatSession.setGlobalConfig({
             region: "" // TODO: Fill in with your region, such as 'us-west-2'
         });
@@ -62,25 +59,25 @@
         var session;
 
         $(document).ready((a) => {
-            $("#sendChat").click(() => { 
-                sendChat();
+            $("#sendChat").click(() => {
+                sendTextMessage();
             });
 
-            $("#getTranscript").click(() => { 
+            $("#getTranscript").click(() => {
                 getTranscript();
             });
 
-            $("#endChat").click(() => { 
+            $("#endChat").click(() => {
                 endChat();
             });
 
-            $("#sendTyping").click(() => { 
+            $("#sendTyping").click(() => {
                 sendTypingEvent();
             });
         });
 
-        $(function () {
-            $('#contactDetails').submit(function (e) {
+        $(function() {
+            $('#contactDetails').submit(function(e) {
                 e.preventDefault();
 
                 customerName = $('#firstName').val();
@@ -99,7 +96,9 @@
                             DisplayName: customerName
                         },
                         ContactFlowId: contactFlowId,
-                        InstanceId: instanceId
+                        InstanceId: instanceId,
+                        // Enable rich messaging support: https://docs.aws.amazon.com/connect/latest/adminguide/enable-text-formatting-chat.html
+                        SupportedMessagingContentTypes: ["text/plain", "text/markdown"] // include 'text/markdown'
                     };
 
                     $.ajax({
@@ -152,13 +151,23 @@
             });
         });
 
-        function sendChat() {
+        function sendTextMessage() {
             var message = document.getElementById("chatContent").value;
             console.log("Clicked with message " + message);
 
             session.controller.sendMessage({
                 message: message,
                 contentType: "text/plain"
+            })
+        }
+
+        function sendRichMessage() {
+            var message = document.getElementById("chatContent").value;
+            console.log("Clicked with message " + message);
+
+            session.controller.sendMessage({
+                message: message,
+                contentType: "text/markdown"
             })
         }
 
