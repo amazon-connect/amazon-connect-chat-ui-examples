@@ -413,3 +413,22 @@ connect.ChatSession.setGlobalConfig({
   }
 });
 ```
+
+## Enable persistent chat
+
+Learn more about persistent chat: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html
+
+You can enable persistent chat in [`widgetIndex.html`](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/cloudformationTemplates/startChatContactAPI/widgetIndex.html).
+
+```
+connect.ChatInterface.initiateChat({
+    ...
+    persistentChat: {
+        rehydrationType: "", // TODO: ENTIRE_PAST_SESSION or FROM_SEGMENT
+        // ENTIRE_PAST_SESSION: specify the first contact (initial contactId) of the past chat session as the SourceContactId attribute.
+        // FROM_SEGMENT: specify any contactId of the past chat session as the SourceContactId attribute.
+        sourceContactId: "" // TODO: Fill in contactId based on rehydrationType
+    },
+    ...
+}, successHandler, failureHandler);
+```
