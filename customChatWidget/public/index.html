@@ -26,6 +26,8 @@
             contactAttr: {
                 SomeContactAttributeKey: "SomeContactAttributeValue",
             },
+            // Set optional chat duration: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html#connect-StartChatContact-request-ChatDurationInMinutes
+            chatDurationInMinutes: 1500, // min 60, max 10080 - default 1500 (25 hours)
             preChatForm: {
                 visible: true,
                 inputFields: [{

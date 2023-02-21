@@ -432,3 +432,17 @@ connect.ChatInterface.initiateChat({
     ...
 }, successHandler, failureHandler);
 ```
+
+## Custom chat duration
+
+Learn more about chat duration: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html#connect-StartChatContact-request-ChatDurationInMinutes
+
+You can set custom chat duration in [`widgetIndex.html`](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/cloudformationTemplates/startChatContactAPI/widgetIndex.html).
+
+```
+connect.ChatInterface.initiateChat({
+    ...
+    chatDurationInMinutes: 1500, // min 60, max 10080 - default 1500 (25 hours)
+    ...
+}, successHandler, failureHandler);
+```

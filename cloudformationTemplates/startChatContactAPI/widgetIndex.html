@@ -88,6 +88,8 @@
                             "ATTACHMENTS": enableAttachments, // this is the override flag from user for attachments
                             "MESSAGING_MARKDOWN": true // enable rich messaging toolbar and text formatting
                         },
+                        // Set optional chat duration: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html#connect-StartChatContact-request-ChatDurationInMinutes
+                        chatDurationInMinutes: 1500, // min 60, max 10080 - default 1500 (25 hours)
                         supportedMessagingContentTypes: "text/plain,text/markdown", // include 'text/markdown' for rich messaging support
                         // Learn more about persistent chat: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html
                         persistentChat: {
