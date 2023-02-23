@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.3] - 2023-2-21
+### Changed
+- Custom Chat Widget - Support Custom Chat Duration
+- cloudformationTemplates - startChatContactAPI - Support Custom Chat Duration
+  - Customize total chat duration of a newly started chat session. [Learn more](https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html#connect-StartChatContact-request-ChatDurationInMinutes)
+
 ## [1.3.2] - 2023-2-10
 ### Changed
 - Mark `asyncCustomerChatUX` approach as deprecated.

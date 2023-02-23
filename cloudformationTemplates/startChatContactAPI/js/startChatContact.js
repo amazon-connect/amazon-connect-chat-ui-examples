@@ -37,7 +37,9 @@ function startChatContact(body) {
                 "DisplayName": body["ParticipantDetails"]["DisplayName"]
             },
             // Enable rich messaging: https://docs.aws.amazon.com/connect/latest/adminguide/enable-text-formatting-chat.html
-            ...(!!body["SupportedMessagingContentTypes"] && { "SupportedMessagingContentTypes": body["SupportedMessagingContentTypes"] })
+            ...(!!body["SupportedMessagingContentTypes"] && { "SupportedMessagingContentTypes": body["SupportedMessagingContentTypes"] }),
+            // Set optional chat duration: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html#connect-StartChatContact-request-ChatDurationInMinutes
+            ...(!!body["ChatDurationInMinutes"] && { "ChatDurationInMinutes": body["ChatDurationInMinutes"] })
         };
         const persistentChatEnabled = body.PersistentChat && body.PersistentChat.RehydrationType && body.PersistentChat.SourceContactId;
         if(persistentChatEnabled) {

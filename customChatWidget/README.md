@@ -139,6 +139,8 @@ Below steps explain how Custom Chat Widget works on a web page
 					sampleKey1: 'sampleValue1',
 					sampleKey2: 'sampleValue2',
 				},
+				// Set optional chat duration: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html#connect-StartChatContact-request-ChatDurationInMinutes
+				chatDurationInMinutes: 1500, // min 60, max 10080 - default 1500 (25 hours)
 				preChatForm: {
 					visible: true,
 					inputFields: [
