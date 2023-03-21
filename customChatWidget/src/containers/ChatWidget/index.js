@@ -21,7 +21,7 @@ const ChatWidget = ({
     }) => {
     log(">>> Init");
     const [loading, setLoading ] = useState(true);
-    const { primaryColor, description, region, apiGateway, contactFlowId, instanceId } = useAppConfig();
+    const { primaryColor, description, region, apiGateway, contactFlowId, instanceId, enableAttachments } = useAppConfig();
     if (Object.keys(dataFromInputForm).length !== 0) log('dataFromInputForm: ', dataFromInputForm);
     // eslint-disable-next-line
     // eslint-disable-next-line
@@ -178,7 +178,7 @@ const ChatWidget = ({
             contactFlowId,
             instanceId,
             featurePermissions: {
-                "ATTACHMENTS": enableAttachments,  // this is the override flag from user for attachments
+                "ATTACHMENTS": !!enableAttachments,  // this is the override flag from user for attachments
                 "MESSAGING_MARKDOWN": true // enable rich messaging toolbar and text formatting
             },
             supportedMessagingContentTypes: "text/plain,text/markdown", // include 'text/markdown' for rich messaging support
