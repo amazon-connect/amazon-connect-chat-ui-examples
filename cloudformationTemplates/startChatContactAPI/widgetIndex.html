@@ -6,10 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-
     <script src="js/amazon-connect-chat-interface.js"></script>
 </head>
 
@@ -46,24 +42,24 @@
                 </fieldset>
             </form>
         </section>
-        <section class="section-chat" id="section-chat" style="display: none; float: right; width: 50%;">
+        <section class="section-chat" id="section-chat" style="float: right; width: 50%;; transition: opacity 1s; opacity: 0;">
             <div id="root"></div>
         </section>
     </div>
 
     <script>
-        $(document).ready((a) => {
+        document.addEventListener("DOMContentLoaded", function() {
             connect.ChatInterface.init({
                 containerId: 'root', // This is the id of the container where you want the widget to reside
                 shouldShowMessageReceipts: true
             });
         });
 
-        $(function() {
-            $('#contactDetails').submit(function(e) {
+        (function() {
+            document.getElementById('contactDetails').addEventListener('submit', function (e) {
                 e.preventDefault();
 
-                customerName = $('#firstName').val();
+                customerName = document.getElementById('firstName').value;
                 if (!customerName) {
                     alert('you must enter a name & username');
                     document.getElementById("contactDetails").reset();
@@ -103,14 +99,14 @@
 
                 }
             });
-        });
+        })();
 
         function successHandler(chatSession) {
             console.log("success!");
-            $('#section-chat').fadeIn(400);
+            document.getElementById('section-chat').style.opacity = 1;
 
             chatSession.onChatDisconnected(function(data) {
-                $('#section-chat').hide('slide');
+                document.getElementById('section-chat').style.opacity = 0;
             });
         }
 
