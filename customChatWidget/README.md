@@ -183,6 +183,44 @@ Below steps explain how Custom Chat Widget works on a web page
 
 - For testing, run `npm run dev-build` to build a dev package using Babel and `webpack.dev.js` and saves the built minified file into the `public` folder with name `ACChat.js`. The dev version will have console logs.
 
+### Enabling rich messaging
+
+Amazon Connect Chat now allows your agents and customers to use rich text formatting when composing a message, enabling them to quickly add emphasis and structure to messages, improving comprehension. The available formatting options include bold, italics, hyperlinks, bulleted lists, and numbered lists. [Documentation](https://docs.aws.amazon.com/connect/latest/adminguide/enable-text-formatting-chat.html)
+
+1. To enable rich messaging, include the new param when invoking `initiateChat`:
+
+```js
+// customChatWidget/src/containers/ChatWidget/index.js
+
+connect.ChatInterface.initiateChat({
+   contactFlowId: "${contactFlowId}",
+   instanceId: "${instanceId}",
+   // ...
+   supportedMessagingContentTypes: "text/plain,text/markdown", // include 'text/markdown' for rich messaging support
+   featurePermissions: {
+   ATTACHMENTS: false,
+   MESSAGING_MARKDOWN: true
+   }
+},successHandler, failureHandler);
+```
+
+2. If using an exisiting CFN stack, the [startChatContact lambda](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/cloudformationTemplates/startChatContactAPI/js/startChatContact.js) function needs to be updated.
+
+Be sure to pass `SupportedMessagingContentTypes` input to `startChatContact()`:
+
+```js
+// cloudformationTemplates/startChatContactAPI/js/startChatContact.js
+
+function startChatContact(body) {
+    return new Promise(function (resolve, reject) {
+        var startChat = {
+            // ...
+            ...(!!body["SupportedMessagingContentTypes"] && { "SupportedMessagingContentTypes": body["SupportedMessagingContentTypes"] })
+        };
+    })
+}
+```
+
 ## Testing
 
 - Once the build has completed, you can test `index.html` in `/customChatWidget/public`, using *Live Server* extension, in case you are using VS Code.

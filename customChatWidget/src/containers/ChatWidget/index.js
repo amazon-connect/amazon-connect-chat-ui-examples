@@ -179,9 +179,7 @@ const ChatWidget = ({
             instanceId,
             featurePermissions: {
                 "ATTACHMENTS": !!enableAttachments,  // this is the override flag from user for attachments
-                "MESSAGING_MARKDOWN": true // enable rich messaging toolbar and text formatting
             },
-            supportedMessagingContentTypes: "text/plain,text/markdown", // include 'text/markdown' for rich messaging support
         }
         log('Params to initiate chat connection: ', params);
 
