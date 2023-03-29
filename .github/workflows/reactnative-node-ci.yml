@@ -1,0 +1,53 @@
+# React Native ChatJS Example CI
+# ------------------------------
+# Install, lint, test, and build production Expo application 
+
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+    paths: 'connectReactNativeChat/**'
+  pull_request:
+    branches: [ master ]
+    paths: 'connectReactNativeChat/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    defaults:
+      run:
+        working-directory: ./connectReactNativeChat
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install Expo app dependencies
+      run: yarn
+
+    - run: yarn lint
+
+    - name: Create endpoint.js config
+      run: |
+        cp endpoints.sample.js endpoints.js || echo "no endpoint.sample.js found"
+
+    - run: yarn test
+
+    - name: Create app.json config
+      run: |
+        rm app.json || echo "no app.json found, creating new"
+        cp app.prod.json app.json
+
+    - name: Build the Expo application
+      run: CI=1 npx expo prebuild --platform all
+
