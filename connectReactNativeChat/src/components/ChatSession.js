@@ -41,7 +41,7 @@ class ChatJSClient {
       console.log('startChatResult:', JSON.stringify(startChatDetails, null, 2))
       this.session = connect.ChatSession.create({
         chatDetails: startChatDetails,
-        // disableCSM: true,
+        disableCSM: true, // please refer to the "Client Side Metrics Support" README section
         type: 'CUSTOMER',
         options: { region },
       })
