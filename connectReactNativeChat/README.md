@@ -2,9 +2,7 @@
  
 A demo [Expo](https://expo.dev/) app for building custom Amazon Connect Chat in React Native. This cross-platform (Android, iOS, macOS, Windows, & Web) solution implements basic ChatJS functionality and is fully customizable.
 
-> Built with `expo@~48.0.6`, `react-native-gifted-chat@^2.0.0`, and `Node.js v16`.
-
-> React Native (v0.71.3) apps may target iOS 12.4 and Android 5.0 (API 21) or newer. You may use Windows, macOS, or Linux as your development operating system, though building and running iOS apps is limited to macOS. 
+> Refer to [#Specifications](#speficications) for details on compatibility, supported versions, and platforms.
 
 **Reference:**
 
@@ -12,14 +10,30 @@ A demo [Expo](https://expo.dev/) app for building custom Amazon Connect Chat in 
 - NPM package: https://www.npmjs.com/package/amazon-connect-chatjs
 - Documentation: https://docs.aws.amazon.com/connect/latest/adminguide/enable-chat-in-app.html
 
-https://user-images.githubusercontent.com/60903378/229218472-bf2ba819-d7ea-46c9-9437-58290e8be962.mov
+https://github.com/amazon-connect/amazon-connect-chat-ui-examples/assets/60903378/8887f54a-c121-4246-8981-23d05dd9fa01
 
 ## Contents
 
+- [Prerequisites](#prerequisites)
 - [Mobile Support](#mobile-support)
 - [Local Development](#local-development)
 - [Production Build](#production-build)
 - [ChatJS Usage](#chatjs-usage)
+
+## Prerequisites
+
+- Create an Amazon Connect Instance [[guide](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-instances.html)]
+  - OR: enable chat experience for an existing Connect instance. [[guide](../README.md#enabling-chat-in-an-existing-amazon-connect-contact-center)]
+
+- Create an Amazon Connect Contact Flow, ready to receive chat contacts. [[guide](https://docs.aws.amazon.com/connect/latest/adminguide/chat.html)]
+
+    - Note the `instanceId` [[guide](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)]
+    - Find the `contactFlowId` for the ["Sample Inbound Flow (First Contact)"](https://docs.aws.amazon.com/connect/latest/adminguide/sample-inbound-flow.html) [[guide](https://docs.aws.amazon.com/connect/latest/adminguide/find-contact-flow-id.html)]
+
+- Deploy a custom Amazon Connect Chat backend. [Refer to this backend template](../cloudformationTemplates/startChatContactAPI/README.md)
+
+    - Deploy a StartChatContact template Lambda [[CloudFormation Template](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/cloudformationTemplates/startChatContactAPI)]
+    - Add the `region`, `API_GATEWAY_ID`, `contactFlowId`, and `instanceId` to `endpoints.js`.
 
 ## Mobile Support
 
@@ -358,6 +372,36 @@ const ChatWidget = ({ handleSendMessage, messages }) => {
   );
 };
 ```
+
+## Client Side Metrics (CSM) Support
+
+> ⚠️ NOT SUPPORTED - For more details please refer to the [tracking issue](https://github.com/amazon-connect/amazon-connect-chatjs/issues/171)
+
+The out-of-box ChatJS client side metrics are not currently supported in React Native. ChatJS is officially supported for browser environments, and may run into issues accessing the `document` DOM API.
+
+You can safely disable CSM without affecting other behavior:
+
+```diff
+this.session = connect.ChatSession.create({
+  chatDetails: startChatDetails,
++ disableCSM: true,
+  type: 'CUSTOMER',
+  options: { region },
+});
+```
+
+## Specifications
+
+For local development, please use Node v16, v18, or v19.
+
+> React Native (v0.71.3) apps may target iOS 12.4 and Android 5.0 (API 21) or newer. All platforms include Android, iOS, macOS, Windows, & Web.
+
+Built with:
+ - `amazon-connect-chatjs@^1.5.0`
+ - `expo@~48.0.6`
+ - `react-native-gifted-chat@^2.0.0`
+ - `react-native@^0.71.3`
+ - `react@18.2.0`
 
 <!-- ## Bugs
 
