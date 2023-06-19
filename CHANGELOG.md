@@ -3,6 +3,11 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.1] - 2023-6-19
+### Changed
+ - [Custom Chat Widget + cloudformationTemplates] - updated chat interface bundle file for additional interactive messages feature
+    - Amazon Connect Chat introduces additional interactive message templates, Carousel and QuickReplies. Create richer customer experiences and resolve issues faster by sending prompts and eliminating the need for a customer to manually type in their reply. [Learn More](https://docs.aws.amazon.com/connect/latest/adminguide/interactive-messages.html)
+
 ## [1.4.0] - 2023-3-29
 ### Changed
 - Connect React Native Chat - initial release of cross-platform Amazon Connect Chat solution
