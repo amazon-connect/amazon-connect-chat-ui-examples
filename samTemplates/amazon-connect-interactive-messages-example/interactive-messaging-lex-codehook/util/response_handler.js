@@ -9,47 +9,67 @@ function formElicitSlotWithTemplateResponse(
   sessionAttributes
 ) {
   return {
-    sessionAttributes,
-    dialogAction: {
-      type: "ElicitSlot",
-      intentName,
-      slots,
-      slotToElicit,
-      message: {
-        contentType: "CustomPayload",
-        content: JSON.stringify(template),
+    sessionState: {
+      sessionAttributes,
+      dialogAction: {
+        type: "ElicitSlot",
+        slotToElicit,
       },
+      intent: {
+        name: intentName,
+        slots,
+      }
     },
+    messages: [
+      {
+          contentType: "CustomPayload",
+          content: JSON.stringify(template),
+      }
+    ]
   };
 }
 
 /* CREATE A RESPONSE BASED TERMINATION UTTERANCE FROM THE USER */
-function formTerminalResponse(sessionAttributes,fulfillmentState, messageText) {
+function formTerminalResponse(sessionAttributes,fulfillmentState, intent, messageText) {
   return {
-    sessionAttributes,
-    dialogAction: {
-      type: "Close",
-      fulfillmentState,
-      message: {
-        contentType: "PlainText",
-        content: messageText,
+    sessionState: {
+      sessionAttributes,
+      dialogAction: {
+        type: "Close",
+      },
+      intent: {
+        confirmationState: "Confirmed",
+        name: intent,
+        state: fulfillmentState
       },
     },
+    messages: [
+      {
+          contentType: "PlainText",
+          content: messageText,
+      }
+    ]
   };
 }
 
 /* CLEAR THE RECENT INTENT HISTORY TO LET USER START OVER IN THE CHAT*/
 function formElicitIntentResponse(sessionAttributes,intentName, messageText) {
   return {
-    sessionAttributes,
-    recentIntentSummaryView: [],
-    dialogAction: {
-      type: "ElicitIntent",
-      message: {
-        contentType: "PlainText",
-        content: messageText,
+    sessionState: {
+      sessionAttributes,
+      dialogAction: {
+        type: "ElicitIntent",
+      },
+      intent: {
+        name: intentName,
       },
     },
+    messages: [
+      {
+          contentType: "PlainText",
+          content: messageText,
+      }
+    ]
   };
 }
 

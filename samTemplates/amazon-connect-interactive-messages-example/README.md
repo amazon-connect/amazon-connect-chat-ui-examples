@@ -2,9 +2,14 @@
 
 Set up this AWS Lambda code hook to provide interactive message responses to an Amazon Lex chat bot
 
+![Lex Lambda Hook Diagram](./AmazonConnectLexLambdaArchitecture.png)
+
 ## Overview
 This repository contains code for the Lambda Function, described in the AWS Contact Center blog post [How to enable interactive messages in Amazon Connect chat](https://aws.amazon.com/blogs/contact-center/easily-set-up-interactive-messages-for-your-amazon-connect-chatbot/).
 
+![Interactive Message Diagram](./interactive-message-diagram.png)
+
+![Interactive Message Flow Chart](InteractiveMessageUIExample_FlowChart.png)
 
 ## Setup
 Set up the Lambda function code hook as described below

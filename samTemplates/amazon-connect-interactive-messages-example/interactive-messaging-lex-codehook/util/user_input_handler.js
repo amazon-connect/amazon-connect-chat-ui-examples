@@ -37,6 +37,7 @@ function handleActionResponse(input, request) {
     return formTerminalResponse(
       request.sessionAttributes,
       FULFILLMENT_STATES.FULFILLED,
+      request.currentIntent.name,
       `Received '${input}'`
     );
   } else if (ACTIONS.TEST_INTERACTIVE === input) {
@@ -59,6 +60,7 @@ function handleActionResponse(input, request) {
 
 /* HANDLE INTERACTIVE OPTION INPUT */
 function handleInteractiveOptionResponse(input, request) {
+  console.log("handleInteractiveOptionResponse");
   let interactionOptionKey = Object.entries(TEST_INTERACTIVE_OPTIONS).filter(
     (entry) => entry[1] == input
   )[0][0];

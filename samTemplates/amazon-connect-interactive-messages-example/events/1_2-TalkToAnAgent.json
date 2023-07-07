@@ -1,0 +1,77 @@
+{
+    "requestAttributes": {
+        "x-amz-lex:accept-content-types": "PlainText"
+    },
+    "sessionId": "cf9a0e0d-91aa-4de3-b905-944083198864",
+    "inputTranscript": "Talk to an agent",
+    "interpretations": [
+        {
+            "intent": {
+                "slots": {
+                    "action": {
+                        "shape": "Scalar",
+                        "value": {
+                            "originalValue": "Talk to an agent",
+                            "resolvedValues": [
+                                "Talk to an agent"
+                            ],
+                            "interpretedValue": "Talk to an agent"
+                        }
+                    },
+                    "appointment": null,
+                    "department": null,
+                    "interactiveOption": null
+                },
+                "confirmationState": "None",
+                "name": "InteractiveMessageIntent",
+                "state": "InProgress"
+            },
+            "nluConfidence": 1
+        },
+        {
+            "intent": {
+                "slots": {},
+                "confirmationState": "None",
+                "name": "FallbackIntent",
+                "state": "InProgress"
+            }
+        }
+    ],
+    "responseContentType": "text/plain; charset=utf-8",
+    "sessionState": {
+        "sessionAttributes": {},
+        "activeContexts": [],
+        "intent": {
+            "slots": {
+                "action": {
+                    "shape": "Scalar",
+                    "value": {
+                        "originalValue": "Talk to an agent",
+                        "resolvedValues": [
+                            "Talk to an agent"
+                        ],
+                        "interpretedValue": "Talk to an agent"
+                    }
+                },
+                "appointment": null,
+                "department": null,
+                "interactiveOption": null
+            },
+            "confirmationState": "None",
+            "name": "InteractiveMessageIntent",
+            "state": "InProgress"
+        },
+        "originatingRequestId": "a58c4a95-5474-4060-9c35-c9b3f74202a4"
+    },
+    "invocationSource": "DialogCodeHook",
+    "messageVersion": "1.0",
+    "inputMode": "Text",
+    "bot": {
+        "aliasName": "TestBotAlias",
+        "aliasId": "TSTALIASID",
+        "name": "interactive-messaging-lexv2",
+        "version": "DRAFT",
+        "localeId": "en_US",
+        "id": "VGKIKY0S9G"
+    }
+}

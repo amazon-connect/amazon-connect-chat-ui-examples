@@ -29,15 +29,18 @@ exports.lambdaHandler = async (event, context) => {
 /* PROCESS INBOUND MESSAGE */
 function handleRequest(request) {
   let input = request.inputTranscript;
-  let recent_intent = request.recentIntentSummaryView;
+  let recent_intent = request.sessionState.intent;
+  request.currentIntent = request.interpretations[0].intent;
   let current_intent = request.currentIntent.name;
+  let initialPrompt = request.inputTranscript;
 
   /* HANDLE INTENT 'InteractiveMessageIntent' */
-  if (current_intent === 'InteractiveMessageIntent' && recent_intent === null) {
+  if (current_intent === 'InteractiveMessageIntent' && (recent_intent === null || initialPrompt === 'help')) {
+    /* console.log(recent_intent.slots.action); */
     return handleElicitAction(request);
-  } else if (current_intent === 'InteractiveMessageIntent' && !recent_intent[0].slots.action) {
+  } else if (current_intent === 'InteractiveMessageIntent' && !(Object.values(TEST_INTERACTIVE_OPTIONS).includes(input)) && recent_intent.slots.interactiveOption === null) {
     return handleActionResponse(input, request);
-  } else if (current_intent === 'InteractiveMessageIntent' && Object.values(TEST_INTERACTIVE_OPTIONS).includes(input) && recent_intent[0].slots.interactiveOption === null) {
+  } else if (current_intent === 'InteractiveMessageIntent' && Object.values(TEST_INTERACTIVE_OPTIONS).includes(input) && recent_intent.slots.interactiveOption !== null) {
     return handleInteractiveOptionResponse(input, request);
   } 
   /* (optional) HANDLE OTHER INTENTS */

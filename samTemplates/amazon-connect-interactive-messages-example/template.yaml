@@ -11,7 +11,7 @@ Metadata:
     ReadmeUrl: README.md
     Labels: ['connect', 'chat', 'interactive-messaging', 'contact-center', 'lambda', 'lex', 'bot']
     HomePageUrl: https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/samTemplates/amazon-connect-interactive-messages-example
-    SemanticVersion: 0.0.1
+    SemanticVersion: 2.0.0
     SourceCodeUrl: https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/samTemplates/amazon-connect-interactive-messages-example
   
 Globals:
@@ -24,7 +24,7 @@ Resources:
     Properties:
       CodeUri: interactive-messaging-lex-codehook/
       Handler: app.lambdaHandler
-      Runtime: nodejs12.x
+      Runtime: nodejs18.x
  
 Outputs:
   InteractiveMessagingLambdaFunction:
