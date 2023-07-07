@@ -1,0 +1,183 @@
+{
+  "modules": [
+    {
+      "id": "057134d9-a78e-4910-80f6-406a24ed68ca",
+      "type": "PlayPrompt",
+      "branches": [
+        {
+          "condition": "Success",
+          "transition": "36eb2181-5b9d-4e15-97cb-25b338280e30"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "Text",
+          "value": "Sorry I did not understand that. Please try again later.",
+          "namespace": null
+        },
+        { "name": "TextToSpeechType", "value": "text" }
+      ],
+      "metadata": { "position": { "x": 680, "y": 346 }, "useDynamic": false }
+    },
+    {
+      "id": "8b2f025e-cd00-4ffe-821a-76a3f9dda572",
+      "type": "SetLoggingBehavior",
+      "branches": [
+        {
+          "condition": "Success",
+          "transition": "b701c222-ed08-4fb2-84ff-b91f0fae04b9"
+        }
+      ],
+      "parameters": [{ "name": "LoggingBehavior", "value": "Enable" }],
+      "metadata": { "position": { "x": 163, "y": 14 } }
+    },
+    {
+      "id": "b701c222-ed08-4fb2-84ff-b91f0fae04b9",
+      "type": "GetUserInput",
+      "branches": [
+        {
+          "condition": "NoMatch",
+          "transition": "3b2f3727-4eb7-4422-95c2-50798429f382"
+        },
+        {
+          "condition": "Error",
+          "transition": "057134d9-a78e-4910-80f6-406a24ed68ca"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "Text",
+          "value": "Type help to get help!",
+          "namespace": null
+        },
+        { "name": "TextToSpeechType", "value": "text" },
+        { "name": "BotName", "value": "InteractiveMessageBot" },
+        { "name": "BotAlias", "value": "latest" }
+      ],
+      "metadata": {
+        "position": { "x": 421, "y": 13 },
+        "conditionMetadata": [],
+        "useDynamic": false,
+        "dynamicMetadata": {}
+      },
+      "target": "Lex"
+    },
+    {
+      "id": "b0dd1051-e4f0-4bae-9f09-2c1ba82ca30d",
+      "type": "Transfer",
+      "branches": [
+        {
+          "condition": "AtCapacity",
+          "transition": "36eb2181-5b9d-4e15-97cb-25b338280e30"
+        },
+        {
+          "condition": "Error",
+          "transition": "36eb2181-5b9d-4e15-97cb-25b338280e30"
+        }
+      ],
+      "parameters": [],
+      "metadata": {
+        "position": { "x": 1494, "y": 14 },
+        "useDynamic": false,
+        "queue": null
+      },
+      "target": "Queue"
+    },
+    {
+      "id": "36eb2181-5b9d-4e15-97cb-25b338280e30",
+      "type": "Disconnect",
+      "branches": [],
+      "parameters": [],
+      "metadata": { "position": { "x": 1766, "y": 243 } }
+    },
+    {
+      "id": "cb0a54b8-6407-44b2-b507-f8401de864c0",
+      "type": "SetQueue",
+      "branches": [
+        {
+          "condition": "Success",
+          "transition": "b0dd1051-e4f0-4bae-9f09-2c1ba82ca30d"
+        },
+        {
+          "condition": "Error",
+          "transition": "36eb2181-5b9d-4e15-97cb-25b338280e30"
+        }
+      ],
+      "parameters": [
+        {
+          "name": "Queue",
+          "namespace": null,
+          "resourceName": "BasicQueue"
+        }
+      ],
+      "metadata": {
+        "position": { "x": 1208, "y": 12 },
+        "useDynamic": false,
+        "queue": {
+          "text": "BasicQueue"
+        }
+      }
+    },
+    {
+      "id": "3b2f3727-4eb7-4422-95c2-50798429f382",
+      "type": "CheckAttribute",
+      "branches": [
+        {
+          "condition": "Evaluate",
+          "conditionType": "Equals",
+          "conditionValue": "Continue to agent",
+          "transition": "cb0a54b8-6407-44b2-b507-f8401de864c0"
+        },
+        {
+          "condition": "Evaluate",
+          "conditionType": "Equals",
+          "conditionValue": "End chat",
+          "transition": "36eb2181-5b9d-4e15-97cb-25b338280e30"
+        },
+        {
+          "condition": "NoMatch",
+          "transition": "cb0a54b8-6407-44b2-b507-f8401de864c0"
+        }
+      ],
+      "parameters": [
+        { "name": "Attribute", "value": "action" },
+        { "name": "Namespace", "value": "Lex.Slots" }
+      ],
+      "metadata": {
+        "position": { "x": 686, "y": 12 },
+        "conditionMetadata": [
+          {
+            "id": "2f8210b6-cf3d-43ea-9756-48afa4346954",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "Continue to agent"
+          },
+          {
+            "id": "0787c363-0b58-49fc-a512-f87c0c721e5a",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "End chat"
+          }
+        ]
+      }
+    }
+  ],
+  "version": "1",
+  "type": "contactFlow",
+  "start": "8b2f025e-cd00-4ffe-821a-76a3f9dda572",
+  "metadata": {
+    "entryPointPosition": { "x": 15, "y": 20 },
+    "snapToGrid": false,
+    "name": "InteractiveMessaging",
+    "description": null,
+    "type": "contactFlow",
+    "status": "published",
+    "hash": "755ae8ac42afd46659e1f23f817e2a5549b092f4d14b5ebf2e86bd2e0aaaa80a"
+  }
+}

@@ -1,0 +1,23 @@
+{ 
+  "messageVersion": "1.0",
+  "invocationSource": "DialogCodeHook",
+  "userId": "c6ff70c5-c315-4300-a817-5c0a17a01fa4",
+  "sessionAttributes": {},
+  "bot": {
+      "name": "InteractiveMessageBot",
+      "alias": "$LATEST",
+      "version": "$LATEST"
+  },
+  "outputDialogMode": "Text",
+  "currentIntent": {
+      "name": "InteractiveMessageIntent",
+      "slots": {
+          "action": null,
+          "departmentnull": null,
+          "interactiveOption": null
+      },
+      "confirmationStatus": "None"
+  },
+  "inputTranscript": "help",
+  "recentIntentSummaryView": null
+}

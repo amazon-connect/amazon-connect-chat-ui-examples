@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Metadata:
+  AWS::ServerlessRepo::Application:
+    Name: amazon-connect-interactive-messages-example
+    Description: Creates AWS Lambda function to be used as an initialization and validation code hook in Amazon Lex Bot for enabling interactive messages in Amazon Connect Chat.
+    Author: Amazon Connect CX Innovations
+    SpdxLicenseId: MIT-0
+    LicenseUrl: LICENSE.txt
+    ReadmeUrl: README.md
+    Labels: ['connect', 'chat', 'interactive-messaging', 'contact-center', 'lambda', 'lex', 'bot']
+    HomePageUrl: https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/samTemplates/amazon-connect-interactive-messages-example
+    SemanticVersion: 0.0.1
+    SourceCodeUrl: https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/samTemplates/amazon-connect-interactive-messages-example
+  
+Globals:
+  Function:
+    Timeout: 30
+
+Resources:
+  InteractiveMessagingLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: interactive-messaging-lex-codehook/
+      Handler: app.lambdaHandler
+      Runtime: nodejs12.x
+ 
+Outputs:
+  InteractiveMessagingLambdaFunction:
+    Description: "Interactive Messaging Lex Lambda Function ARN"
+    Value: !GetAtt InteractiveMessagingLambdaFunction.Arn
+  InteractiveMessagingFunctionIamRole:
+    Description: "Implicit IAM Role created for Interactive Messaging Lex Lambda Function"
+    Value: !GetAtt InteractiveMessagingLambdaFunctionRole.Arn
