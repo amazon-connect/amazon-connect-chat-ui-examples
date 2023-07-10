@@ -16,55 +16,42 @@ const { log, trace } = genLogger(name);
 
 const ChatWithoutForm = () => {
     log(">> Init");
-    const [showWidget, setShowWidget] = useState(false);
-    const [hideWidget, setHideWidget] = useState(false);
-    const [toggleIcon, setToggleIcon] = useState(false);
+    const [widgetIsOpen, setWidgetIsOpen] = useState(false);
     const [forceUnmountChatWidget, setForceUnmountChatWidget] = useState(false);
     const { initiationIcon } = useAppConfig();
-    trace(`showWidget`, showWidget);
-    trace(`hideWidget`, hideWidget);
-    trace(`toggleIcon`, toggleIcon);
     trace(`forceUnmountChatWidget`, forceUnmountChatWidget);
     return (
         <Main device={device}>
             {
                 initiationIcon.toLowerCase() === chatInitiationIcon.BUTTON ?
                     <ChatButton
-                        showWidget={showWidget}
-                        hideWidget={hideWidget}
-                        setHideWidget={setHideWidget}
-                        setShowWidget={setShowWidget}
-                        toggleIcon={toggleIcon}
+                        widgetIsOpen={widgetIsOpen}
+                        setWidgetIsOpen={setWidgetIsOpen}
                         forceUnmountChatWidget={forceUnmountChatWidget}
                         chatWithoutForm={true}
                         setForceUnmountChatWidget={setForceUnmountChatWidget}
                     />
                     : <ChatIcon
-                        showWidget={showWidget}
-                        hideWidget={hideWidget}
-                        setHideWidget={setHideWidget}
-                        setShowWidget={setShowWidget}
-                        toggleIcon={toggleIcon} f
+                        widgetIsOpen={widgetIsOpen}
+                        setWidgetIsOpen={setWidgetIsOpen}
                         forceUnmountChatWidget={forceUnmountChatWidget}
                         chatWithoutForm={true}
                         setForceUnmountChatWidget={setForceUnmountChatWidget}
                     />
             }
-            <div style={{ display: hideWidget ? "none" : null }}>
+            <div style={{ display: widgetIsOpen ? null : "none" }}>
             <CSSTransition
-                in={showWidget}
+                in={widgetIsOpen}
                 timeout={400}
                 classNames="widget-transition"
                 mountOnEnter
                 appear
-                onExited={()=> setHideWidget(true)}
+                onExited={()=> setWidgetIsOpen(false)}
                 >
                     {
                         forceUnmountChatWidget ? <div></div> : (
                             <ChatWidget
-                                setHideWidget={setHideWidget}
-                                setShowWidget={setShowWidget}
-                                setToggleIcon={setToggleIcon}
+                                setWidgetIsOpen={setWidgetIsOpen}
                             />
                         )
                     }

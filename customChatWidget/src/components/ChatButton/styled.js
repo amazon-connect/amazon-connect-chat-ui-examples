@@ -23,7 +23,7 @@ export const Button = styled.button`
   display:block;
   background-color:${props => props.primaryColor ? props.primaryColor : "#3F5773"};
   color: white;
-  padding: ${props => !props.toogleSVG ? '10px 10px' : '5px 5px'};
+  padding: ${props => !props.widgetIsOpen ? '10px 10px' : '5px 5px'};
   border: none;
   cursor: pointer;
   @media ${props => props.device.laptop}{
