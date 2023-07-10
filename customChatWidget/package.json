@@ -5,7 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"build": "webpack --config webpack.prod.js",
-		"dev-build": "webpack --config webpack.dev.js"
+		"dev-build": "webpack --config webpack.dev.js",
+		"dev-watch": "npx nodemon --watch src -x \"npm run dev-build\""
 	},
 	"keywords": [],
 	"author": "",
