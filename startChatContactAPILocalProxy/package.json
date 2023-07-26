@@ -1,0 +1,32 @@
+{
+  "name": "@amzn/startchatcontact-api-local-proxy",
+  "version": "1.0.0",
+  "description": "Local Proxy API server for Amazon Connect StartChatContactAPI",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "npx nodemon server.js",
+    "test": "jest",
+    "lint": "eslint --ext .js,.ts,.tsx ./",
+    "lint:fix": "eslint --fix --ext .js,.jsx ./",
+    "prettier": "prettier server.js --check",
+    "prettier:fix": "npm run prettier -- --write",
+    "precommit": "npx lint-staged"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-connect": "^3.370.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.4",
+    "supertest": "^6.3.3"
+  },
+  "lint-staged": {
+    "*.{js,css,md}": "prettier --write"
+  }
+}
