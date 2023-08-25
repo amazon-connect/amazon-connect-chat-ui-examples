@@ -47,6 +47,8 @@ Here are a few resources to help you implement chat in your contact center:
 Add a chat widget to your website that is hosted by Amazon Connect. You can configure the chat widget in the Amazon Connect console: customize the font and colors, and secure the widget so that it can be launched only from your website. As a result, you will have a short code snippet that you add to your website, with latest version always live on your website.
 
 ```html
+<!-- EXAMPLE SNIPPET -->
+
 <script type="text/javascript">
   (function(w, d, x, id){s=d.createElement('script');s.src='https://1234lbvr0vu.cloudfront.net/amazon-connect-chat-interface-client.js';s.async=1;s.id=id;d.getElementsByTagName('head')[0].appendChild(s);w[x]=w[x]||function(){(w[x].ac=w[x].ac||[]).push(arguments)}})(window, document, 'amazon_connect', '360f3075-asfd-asfd-asdf-asdf');
   
