@@ -16,9 +16,8 @@ const ChatIcon = (props) =>
     log(">>> Init");
     log('ChatIcon.displayName: ', ChatIcon.displayName);
     log(props);
-    const [toogleSVG, setToggleSVG] = useState(false);
     const { primaryColor } = useAppConfig();
-    const { showWidget, hideWidget, setShowWidget, setHideWidget, toggleIcon, chatWithoutForm, forceUnmountChatWidget, setForceUnmountChatWidget } = props;
+    const { chatWithoutForm, forceUnmountChatWidget, setForceUnmountChatWidget, setWidgetIsOpen, widgetIsOpen } = props;
     const handleChatIconClickEvent = (e) => {
       if (chatWithoutForm && forceUnmountChatWidget) setForceUnmountChatWidget(false)
       const timeline = anime.timeline({
@@ -29,14 +28,12 @@ const ChatIcon = (props) =>
           targets: ".chat",
           d: [
               {
-              value: toogleSVG ? chatSVGPath : closeChatSVGPath
+              value: widgetIsOpen ? chatSVGPath : closeChatSVGPath
               }
           ],
-          strokeWidth: toogleSVG ? 3 : 1,
+          strokeWidth: widgetIsOpen ? 3 : 1,
         });
-      toogleSVG ? setToggleSVG(false) : setToggleSVG(true);
-      setShowWidget(!showWidget);
-      hideWidget ? setHideWidget(!hideWidget) : setHideWidget(hideWidget); 
+      setWidgetIsOpen(!widgetIsOpen);
     }
     // Toggle to initial Icon after the chat is ended by the chat Widget:
     const toggleToChatIcon = () => {
@@ -55,15 +52,7 @@ const ChatIcon = (props) =>
 
       })
     }
-  //This useEffect will run only after a chat is ended
-  useEffect(() => {
-    log('useEffect');
-      if (toggleIcon) {
-        log('Chat Ended hence toggling back to initial icon(chat)')
-        toggleToChatIcon();
-        if (chatWithoutForm) setForceUnmountChatWidget(true);
-      }  
-  }, [toggleIcon])
+
   
   /*! Both chat and carrot SVG's are from Material Design Icons https://github.com/google/material-design-icons
   SPDX-License-Identifier: Apache-2.0 */

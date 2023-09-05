@@ -16,8 +16,7 @@ const { log, error, trace, info } = genLogger(name);
 const ChatWidget = ({
     dataFromInputForm = {},
     setCurrentState = () => log('No Function'),
-    setToggleIcon, setHideWidget,
-    setShowWidget
+    setWidgetIsOpen
     }) => {
     log(">>> Init");
     const [loading, setLoading ] = useState(true);
@@ -51,10 +50,7 @@ const ChatWidget = ({
             info("Chat has been disconnected");
             trace(data);
             if (Object.keys(dataFromInputForm).length !== 0) setCurrentState(chatWithFormStates.FORM);
-            setHideWidget(true);
-            setShowWidget(false);
-            setToggleIcon(true);
-
+            setWidgetIsOpen((prev) => !prev);
         });
     };
 
