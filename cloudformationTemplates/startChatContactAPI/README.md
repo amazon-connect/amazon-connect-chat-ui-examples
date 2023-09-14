@@ -63,7 +63,11 @@ Note: you will want to show the widget only when there is a conversation in prog
     });
     ```
 
-3. Start the chat based on a user action. You will want to add fields for the customer name, username, and enableAttachments because those fields are used in the Lambda function that was created. Note: you need to update this to include the API Gateway endpoint that was created in the CloudFormation stack. To see examples of the success and failure handlers, refer to the [example implementation](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/cloudformationTemplates/asyncCustomerChatUX/website/index.html#L283).
+3. Start the chat based on a user action. You will want to add fields for the customer name, username, and enableAttachments because those fields are used in the Lambda function that was created.
+
+     Note: you need to update this to include the API Gateway endpoint that was created in the CloudFormation stack. To see examples of the success and failure handlers, refer to the [example implementation](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/cloudformationTemplates/asyncCustomerChatUX/website/index.html#L283).
+
+     ⚠️ **Authentication Notice:** Please be aware that this API does not come with built-in authentication. By default, it is accessible to       anyone with the API Gateway endpoint. It is imperative to assume responsibility for implementing the necessary authentication mechanisms to secure access to this API.
 
     ```js
     connect.ChatInterface.initiateChat({
