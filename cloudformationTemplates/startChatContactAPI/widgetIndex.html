@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <script src="js/amazon-connect-chat-interface.js"></script>
+    <script type="text/javascript" src="js/amazon-connect-chat-interface.js"></script>
+    <script type="text/javascript" src="backendEndpoints.js"></script>
 </head>
 
 <body>
@@ -64,28 +65,25 @@
                     alert('you must enter a name & username');
                     document.getElementById("contactDetails").reset();
                 } else {
-                    var contactFlowId = ""; // TODO: Fill in
-                    var instanceId = ""; // TODO: Fill in
-                    var apiGatewayEndpoint = ""; // TODO: Fill in with the API Gateway endpoint created by your CloudFormation template
-                    var enableAttachments = false // TODO: Fill in if you want to enable attachments on Amazon Connect chat widget (PRE-REQUISITE: Enable Amazon Connect instance for attachments)
                     console.log("this is the first name:" + customerName);
                     document.getElementById("contactDetails").reset();
 
                     connect.ChatInterface.initiateChat({
                         name: customerName,
-                        region: "", // TODO: Fill in
-                        apiGatewayEndpoint: apiGatewayEndpoint,
+                        region: region, // default: "us-west-2" - set in "backendEndpoints.js"
+                        apiGatewayEndpoint: apiGatewayEndpoint, // set in "backendEndpoints.js"
+                        contactFlowId: contactFlowId, // set in "backendEndpoints.js"
+                        instanceId: instanceId, // set in "backendEndpoints.js"
                         contactAttributes: JSON.stringify({
                             "customerName": customerName
                         }),
-                        contactFlowId: contactFlowId,
-                        instanceId: instanceId,
                         featurePermissions: {
-                            "ATTACHMENTS": enableAttachments, // this is the override flag from user for attachments
-                            "MESSAGING_MARKDOWN": true // enable rich messaging toolbar and text formatting
+                            // Enable chat attachments support: https://docs.aws.amazon.com/connect/latest/adminguide/enable-attachments.html
+                            "ATTACHMENTS": true, // default `false` - set to `true` to enable
                         },
                         // Set optional chat duration: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html#connect-StartChatContact-request-ChatDurationInMinutes
                         chatDurationInMinutes: 1500, // min 60, max 10080 - default 1500 (25 hours)
+                        // Enable rich messaging support: https://docs.aws.amazon.com/connect/latest/adminguide/enable-text-formatting-chat.html           
                         supportedMessagingContentTypes: "text/plain,text/markdown", // include 'text/markdown' for rich messaging support
                         // Learn more about persistent chat: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html
                         persistentChat: {

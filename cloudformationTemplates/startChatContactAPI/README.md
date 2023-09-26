@@ -2,6 +2,9 @@
 
 Adding chat to your website is possible with a few easy steps. This solutions spins up an [Amazon API Gateway](https://aws.amazon.com/api-gateway/) endpoint that triggers an [AWS Lambda](https://aws.amazon.com/lambda/) function. This Lambda function invokes the [Amazon Connect](https://aws.amazon.com/connect/) Service [StartChatContact](https://docs.aws.amazon.com/en_pv/connect/latest/APIReference/API_StartChatContact.html) API and returns the result from that call. Once you have the StartChatContact API you can either pass that response to the prebuilt widget to get a quick implementation going or you can build your own customer chat experience by using the [Amazon Connect Chat JS]( https://github.com/amazon-connect/amazon-connect-chatjs)  library. 
 
+![StartChatContact CFN Template Diagram](.github/screenshots
+/StartChatContactCFNTemplateArchitecture.png)
+
 ## CloudFormation Deployment Steps
 
 ### Pre-requisites
@@ -41,7 +44,22 @@ Note: you will want to show the widget only when there is a conversation in prog
     <script src="amazon-connect-chat-interface.js"></script>
     ```
 
-2. Initialize the Chat Interface on page load. Note: you need to update this to include the root id of the div where the customer chat widget will live.
+2. Update the endpoints pointing to the CFN template, which can be found in `backendEndpoints.js`
+
+    ```js
+    // backendEndpoints.js
+
+    var region = ""; // default: "us-west-2"
+    var contactFlowId = "12345678-1234-1234-1234-123456789012"; // TODO: Fill in. You can find the contact flow id when viewing a contact flow. For example, if the arn for your flow is 'arn:aws:connect:us-west-2:123456789012:instance/11111111-1111-1111-1111-111111111111/contact-flow/22222222-2222-2222-2222-222222222222', the contact flow id is '22222222-2222-2222-2222-222222222222'
+    var instanceId = "12345678-1234-1234-1234-123456789012"; // TODO: Fill in You can find the instance id when viewing a contact flow. For example, if the arn for your flow is 'arn:aws:connect:us-west-2:123456789012:instance/11111111-1111-1111-1111-111111111111/contact-flow/22222222-2222-2222-2222-222222222222', the instance id is '11111111-1111-1111-1111-111111111111'
+    var apiGatewayEndpoint = `https://<apiId>.execute-api.${region}.amazonaws.com/Prod`; // TODO: Fill in with the API Gateway endpoint created by your CloudFormation template.
+    ```
+
+    ```html
+    <script src="backendEndpoints.js"></script>
+    ```
+
+3. Initialize the Chat Interface on page load. Note: you need to update this to include the root id of the div where the customer chat widget will live.
 
     ```js
     $(document).ready((a) => {
@@ -63,7 +81,7 @@ Note: you will want to show the widget only when there is a conversation in prog
     });
     ```
 
-3. Start the chat based on a user action. You will want to add fields for the customer name, username, and enableAttachments because those fields are used in the Lambda function that was created.
+4. Start the chat based on a user action. You will want to add fields for the customer name, username, and enableAttachments because those fields are used in the Lambda function that was created.
 
      Note: you need to update this to include the API Gateway endpoint that was created in the CloudFormation stack. To see examples of the success and failure handlers, refer to the [example implementation](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/cloudformationTemplates/asyncCustomerChatUX/website/index.html#L283).
 
@@ -334,56 +352,78 @@ Interactive messages are pre-configured responses that your users can select fro
 ## Enabling attachments
 If you want to enable sending attachments for Amazon Connect Chat the customer chat widget, follow the instructions in the [documentation](https://docs.aws.amazon.com/connect/latest/adminguide/enable-attachments.html)  to enable your Amazon Connect instance for attachments. Once enabled, you can mark the  `ATTACHMENTS` flag in `connect.ChatInterface.initiateChat` as `true`. Example below:
 
-```js
-    connect.ChatInterface.initiateChat({
-      name: customerName,
-      username: username,
-      region: ${region},
-      apiGatewayEndpoint: "https://${apiId}.execute-api.${region}.amazonaws.com/Prod",
-      contactAttributes: JSON.stringify({
-        "customerName": customerName
-      }),
-      contactFlowId: "${contactFlowId}",
-      instanceId: "${instanceId}",
-      featurePermissions: {
-        "ATTACHMENTS": true,  // this is the override flag from user for attachments
-        }
-    },successHandler, failureHandler)
+```diff
+connect.ChatInterface.initiateChat({
+    name: customerName,
+    region: ${region},
+    apiGatewayEndpoint: "https://${apiId}.execute-api.${region}.amazonaws.com/Prod",
+    contactFlowId: "${contactFlowId}",
+    instanceId: "${instanceId}",
+    // ...
+    featurePermissions: {
+    // Enable chat attachments support: https://docs.aws.amazon.com/connect/latest/adminguide/enable-attachments.html
++   "ATTACHMENTS": true,  // default `false` - set to `true` to enable
+    }
+},successHandler, failureHandler)
 ```
 
 ## Enabling rich messaging
 
 Amazon Connect Chat now allows your agents and customers to use rich text formatting when composing a message, enabling them to quickly add emphasis and structure to messages, improving comprehension. The available formatting options include bold, italics, hyperlinks, bulleted lists, and numbered lists. [Documentation](https://docs.aws.amazon.com/connect/latest/adminguide/enable-text-formatting-chat.html)
 
-1. To enable rich messaging, include the new param when invoking `initiateChat`:
+1) Enable rich messaging by adding `"text/markdown"` to the `SupportedMessagingContentTypes` key, which is passed in the [`StartChatContact`](https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html) request:
 
-```js
-  connect.ChatInterface.initiateChat({
-    contactFlowId: "${contactFlowId}",
-    instanceId: "${instanceId}",
+```diff
+// index.html
+
+var initiateChatRequest = {
+    ContactFlowId: "${contactFlowId}",
+    InstanceId: "${instanceId}",
     // ...
-    supportedMessagingContentTypes: "text/plain,text/markdown", // include 'text/markdown' for rich messaging support
-    featurePermissions: {
-      ATTACHMENTS: false,
-      MESSAGING_MARKDOWN: true
-    }
-  },successHandler, failureHandler)
+    // Enable rich messaging support: https://docs.aws.amazon.com/connect/latest/adminguide/enable-text-formatting-chat.html
++   SupportedMessagingContentTypes: ["text/plain", "text/markdown"], // include 'text/markdown',
+};
+
+// Request to the startChatContact.js Lambda
+$.ajax({
+    url: apiGatewayEndpoint,
+    type: "POST",
+    data: JSON.stringify(initiateChatRequest),
+    // ...
+});
 ```
 
-2. If updating an exisiting CFN stack, the startChatContact lambda function needs to be updated.
+2) Ensure to update and redeploy the `startChatContact.js` Lambda to consume the `SupportedMessagingContentTypes`:
 
-Be sure to pass `supportedMessagingContentTypes` input to `startChatContact()`:
+```diff
+// startChatContact.js (Lambda)
 
-```js
 function startChatContact(body) {
     return new Promise(function (resolve, reject) {
         var startChat = {
             // ...
-            ...(!!body["SupportedMessagingContentTypes"] && { "SupportedMessagingContentTypes": body["SupportedMessagingContentTypes"] })
++           ...(!!body["SupportedMessagingContentTypes"] && { "SupportedMessagingContentTypes": body["SupportedMessagingContentTypes"] })
         };
+
+        // Request from AWS SDK to Amazon Connect Public API
+        connect.startChatContact(startChat, function(err, data) {
+            // ...
+        });
     })
 }
 ```
+
+3) (optional) If using the `ChatInterface.initiateChat` method, simply update the `supportedMessagingContentTypes` key:
+
+```diff
+connect.ChatInterface.initiateChat({
+    contactFlowId: "${contactFlowId}",
+    instanceId: "${instanceId}",
+    // ...
++   supportedMessagingContentTypes: "text/plain,text/markdown", // include 'text/markdown' for rich messaging support
+}, successHandler, failureHandler);
+```
+
 
 ## Enabling message receipts
 
