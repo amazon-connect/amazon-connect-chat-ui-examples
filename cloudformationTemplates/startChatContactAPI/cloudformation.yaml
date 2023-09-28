@@ -50,8 +50,8 @@ Resources:
     Type: AWS::Lambda::LayerVersion
     Properties:
       CompatibleRuntimes:
-        - "nodejs14.x"
-        - "nodejs8.10"
+        - "nodejs18.x"
+        - "nodejs16.x"
       Content:
         S3Bucket: !Join
           - "."
@@ -70,7 +70,7 @@ Resources:
       Description: AWS Lambda Function to initiate the chat with the end user
       Handler: "startChatContact.handler"
       Role: !GetAtt StartChatLambdaExecutionRole.Arn
-      Runtime: "nodejs14.x"
+      Runtime: "nodejs18.x"
       MemorySize: 128
       Timeout: 30
       Layers:
@@ -229,7 +229,7 @@ Resources:
       Handler: customResourceHelper.handler
       MemorySize: 256
       Role: !GetAtt CustomResourceHelperIamRole.Arn
-      Runtime: nodejs14.x
+      Runtime: "nodejs18.x"
       Timeout: 300
 
   CustomResourceHelperIamRole:
