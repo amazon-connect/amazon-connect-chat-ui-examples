@@ -57,6 +57,11 @@ export const chatParties = {
   BOT: "BOT"
 }
 
+export const END_ACTIONS = {
+  NOTHING: "NOTHING",
+  BACK_TO_FORM: "BACK",
+  CLOSE_CHAT: "CLOSE",
+};
 
 export const chatWidgetDefaults = {
   NAME: 'Customer',
@@ -65,7 +70,9 @@ export const chatWidgetDefaults = {
   ENABLE_ATTACHMENTS: false,
   PRIMARY_COLOR: "#3F5773",
   DESCRIPTION: 'Welcome to Amazon chat',
-  REFER_INDICATOR: 'refer'
+  REFER_INDICATOR: 'refer',
+  ON_DISCONNECT: END_ACTIONS.BACK_TO_FORM,
+  ON_ENDED: END_ACTIONS.BACK_TO_FORM
 }
 
 export const chatInitiationIcon = {
@@ -80,7 +87,3 @@ export const closeChatSVGPath = "M11.6,14.9l-4.5-4.5c-0.1-0.1-0.2-0.2-0.2-0.4s0.
 
 // Vector data points for chat svg
 export const chatSVGPath = "M20.4,1.5H3.6c-1.2,0-2.1,0.9-2.1,2.1v18.9l4.2-4.2h14.7c1.2,0,2.1-0.9,2.1-2.1V3.6 C22.5,2.4,21.6,1.5,20.4,1.5z";
-
-
-
-

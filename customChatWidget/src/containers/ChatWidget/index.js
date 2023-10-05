@@ -4,7 +4,7 @@ SPDX-License-Identifier: MIT-0 */
 import React, { useEffect, useState } from 'react';
 import Spinner from '../../components/Spinner';
 import { useAppConfig } from '../../providers/AppConfigProvider';
-import { device, chatWithFormStates, chatWidgetDefaults, chatParties, loggerNames } from '../../constants';
+import { device, chatWithFormStates, chatWidgetDefaults, chatParties, loggerNames, END_ACTIONS } from '../../constants';
 import { ChatContainer, ChatWrapper } from './styled';
 import { genLogger } from "../../lib/logger";
 
@@ -20,7 +20,7 @@ const ChatWidget = ({
     }) => {
     log(">>> Init");
     const [loading, setLoading ] = useState(true);
-    const { primaryColor, description, region, apiGateway, contactFlowId, instanceId, enableAttachments } = useAppConfig();
+    const { primaryColor, description, region, apiGateway, contactFlowId, instanceId, enableAttachments, actions } = useAppConfig();
     if (Object.keys(dataFromInputForm).length !== 0) log('dataFromInputForm: ', dataFromInputForm);
     // eslint-disable-next-line
     // eslint-disable-next-line
@@ -49,6 +49,18 @@ const ChatWidget = ({
         chatSession.onChatDisconnected(function (data) {
             info("Chat has been disconnected");
             trace(data);
+
+            if(actions.onDisconnect === END_ACTIONS.NOTHING) return;
+
+            if (Object.keys(dataFromInputForm).length !== 0) setCurrentState(chatWithFormStates.FORM);
+            setWidgetIsOpen((prev) => !prev);
+        });
+        chatSession.onChatClose(function (data) {
+            info("Chat has been closed");
+            trace(data);
+
+            if(actions.onDisconnect === END_ACTIONS.NOTHING) return;
+
             if (Object.keys(dataFromInputForm).length !== 0) setCurrentState(chatWithFormStates.FORM);
             setWidgetIsOpen((prev) => !prev);
         });

@@ -26,6 +26,10 @@ export const AppConfigProvider = ({ children, config }) => {
     const preChatForm = config.preChatForm ? config.preChatForm : {};
     const primaryColor = config.primaryColor ? config.primaryColor : chatWidgetDefaults.PRIMARY_COLOR;
     const description = config.description ? config.description : chatWidgetDefaults.DESCRIPTION;
+    const actions = {
+        onDisconnect: config.actions?.onDisconnect ? config.actions.onDisconnect : chatWidgetDefaults.ON_DISCONNECT,
+        onEnded: config.actions?.onEnded ? config.actions.onEnded : chatWidgetDefaults.ON_ENDED,
+    }
 
     const providerValue = {
         initiationIcon,
@@ -39,7 +43,8 @@ export const AppConfigProvider = ({ children, config }) => {
         enableAttachments,
         preChatForm,
         primaryColor,
-        description
+        description,
+        actions
     };
 
     return (

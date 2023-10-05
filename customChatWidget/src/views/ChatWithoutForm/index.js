@@ -27,6 +27,7 @@ const ChatWithoutForm = () => {
                     <ChatButton
                         widgetIsOpen={widgetIsOpen}
                         setWidgetIsOpen={setWidgetIsOpen}
+                        currentState={currentState}
                         forceUnmountChatWidget={forceUnmountChatWidget}
                         chatWithoutForm={true}
                         setForceUnmountChatWidget={setForceUnmountChatWidget}
@@ -34,6 +35,7 @@ const ChatWithoutForm = () => {
                     : <ChatIcon
                         widgetIsOpen={widgetIsOpen}
                         setWidgetIsOpen={setWidgetIsOpen}
+                        currentState={currentState}
                         forceUnmountChatWidget={forceUnmountChatWidget}
                         chatWithoutForm={true}
                         setForceUnmountChatWidget={setForceUnmountChatWidget}

@@ -28,10 +28,12 @@ const ChatWithForm = () => {
                     <ChatButton
                         widgetIsOpen={widgetIsOpen}
                         setWidgetIsOpen={setWidgetIsOpen}
+                        currentState={currentState}
                     />
                     : <ChatIcon
                         widgetIsOpen={widgetIsOpen}
                         setWidgetIsOpen={setWidgetIsOpen}
+                        currentState={currentState}
                     />
             }
             <div style={{ display: widgetIsOpen ? null : "none" }}>
