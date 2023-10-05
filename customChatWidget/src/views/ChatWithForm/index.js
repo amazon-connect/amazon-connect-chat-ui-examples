@@ -21,6 +21,7 @@ const ChatWithForm = () => {
     const [currentState, setCurrentState] = useState(chatWithFormStates.FORM);
     const [data, setData] = useState({});
     const { initiationIcon } = useAppConfig();
+
     return (
         <Main device={device}>
             {
@@ -28,10 +29,12 @@ const ChatWithForm = () => {
                     <ChatButton
                         widgetIsOpen={widgetIsOpen}
                         setWidgetIsOpen={setWidgetIsOpen}
+                        currentState={currentState}
                     />
                     : <ChatIcon
                         widgetIsOpen={widgetIsOpen}
                         setWidgetIsOpen={setWidgetIsOpen}
+                        currentState={currentState}
                     />
             }
             <div style={{ display: widgetIsOpen ? null : "none" }}>
