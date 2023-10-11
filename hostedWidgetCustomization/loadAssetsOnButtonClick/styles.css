@@ -1,0 +1,158 @@
+/* Reset some default browser styles */
+body,
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Set a background color and text color for the whole page */
+body {
+  background-color: #f0f0f0;
+  color: #333;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+/* Style the header */
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+}
+
+/* Style the main content container */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Style headings */
+h1 {
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+/* Style paragraphs */
+p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Style links */
+a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Style a button */
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #0077cc;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #005599;
+}
+
+/* Add additional styles for different elements as needed */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f0f0f0;
+}
+
+.container {
+  min-height: 50vh;
+  padding: 10px;
+  display: grid;
+  place-content: center;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.header h1 {
+  text-transform: capitalize;
+  color: #333;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.header p {
+  font-size: 18px;
+  color: #777;
+  margin-top: 10px;
+  padding: 0 10px;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-top: 8px solid #48bb78;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  margin: 0 auto;
+  flex-grow: 1;
+}
+
+.card h2 {
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 28px;
+  color: #333;
+}
+
+.card p {
+  font-size: 18px;
+  color: #777;
+  margin-top: 10px;
+}
+
+.card button {
+  border: 1px solid #48bb78;
+  background-color: #48bb78;
+  color: #fff;
+  padding-top: 5px;
+  padding-bottom: 7px;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 9999px;
+  display: inline-block;
+  text-transform: capitalize;
+  margin-top: 24px;
+}
