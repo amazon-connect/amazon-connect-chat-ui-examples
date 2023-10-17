@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Your Website</h1>
+    </header>
+
+    <div class="container">
+      <div class="header">
+        <h1>Contact Us</h1>
+        <p>Have any questions? We'd love to hear from you.</p>
+      </div>
+      <div class="content">
+        <div class="card">
+          <h2>Help & Support</h2>
+          <p>
+            Our support team is spread across the globe to give you answers
+            fast.
+          </p>
+          <button id="launch-widget-btn">Launch a Chat</button>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    // Function to open a new browser window with specified URL and dimensions
+    function openNewWindow() {
+      var url = "https://example.com/contact-us-chat";
+
+      // Define the width and height
+      var width = 300;
+      var height = 540;
+
+      // Calculate the left and top position to center the window
+      var left = (window.innerWidth - width) / 2;
+      var top = (window.innerHeight - height) / 2;
+
+      // Open the new window with the specified URL, dimensions, and position
+      var newWindow = window.open(
+        url,
+        "",
+        "width=${width}, height=${height}, left=${left}, top=${top}",
+      );
+    }
+
+    // Attach a click event listener to the button
+    document
+      .getElementById("launch-widget-btn")
+      .addEventListener("click", openNewWindow);
+  </script>
+</html>
