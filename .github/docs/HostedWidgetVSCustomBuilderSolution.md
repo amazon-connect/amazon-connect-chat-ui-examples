@@ -22,8 +22,15 @@ Simple copy/paste snippet solution to render customer chat interface on your web
   (function(w,d,x,id){s=d.createElement('script');s.src='https://asdf5slbvr0vu.cloudfront.net/amazon-connect-chat-interface-client.js';s.async=1;s.id=id;d.getElementsByTagName('head')[0].appendChild(s);w[x]=w[x]||function(){(w[x].ac=w[x].ac||[]).push(arguments)}})(window,document,'amazon_connect','asdf-92ac-asdf-adfe-asdf0c3bfd');
 
   amazon_connect('styles', { openChat: { color: '#ffffff', backgroundColor: '#07b62a'}, closeChat: { color: '#ffffff', backgroundColor: '#07b62a'} });
+  // ALSO: further customize the widget styles: https://docs.aws.amazon.com/connect/latest/adminguide/pass-custom-styles.html
   amazon_connect('snippetId', 'asdf1234asdf1234adsf1234=');
   amazon_connect('supportedMessagingContentTypes', [ 'text/plain', 'text/markdown' ]);
+  // ALSO: how to pass contact attributes: https://docs.aws.amazon.com/connect/latest/adminguide/pass-contact-attributes-chat.html
+  amazon_connect('customerDisplayName', function(callback) {
+    // OPTIONAL: pass a customerDisplayName
+    const displayName = '<REPLACE_ME>';
+    callback(displayName);
+  });
 </script>
 ```
 
