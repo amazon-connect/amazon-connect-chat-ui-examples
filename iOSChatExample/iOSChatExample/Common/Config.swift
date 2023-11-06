@@ -13,7 +13,7 @@ class Config {
     let startChatEndPoint: String = ""
     let instanctId: String = ""
     let contactFlowId: String = ""
-    let region: AWSRegionType = 
+    let region: AWSRegionType =  // .USEast1/.USWest1 :https://docs.aws.amazon.com/general/latest/gr/rande.html
     let agentName = ""
     let customerName = ""
     
