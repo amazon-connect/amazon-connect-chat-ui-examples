@@ -1,0 +1,5 @@
+${PODS_ROOT}/Target Support Files/Pods-iOSChatExample-iOSChatExampleUITests/Pods-iOSChatExample-iOSChatExampleUITests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/AWSConnect/AWSConnect.framework
+${BUILT_PRODUCTS_DIR}/AWSConnectParticipant/AWSConnectParticipant.framework
+${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework
+${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework
