@@ -42,7 +42,7 @@ https://github.com/amazon-connect/amazon-connect-chat-ui-examples/assets/6090337
     ```sh
     $ git clone https://github.com/amazon-connect/amazon-connect-chat-ui-examples.git
     ```
-2. Navigate to the project directory `iOSChatExample` and run `pod install`.
+2. Navigate to the project directory `iOSChatExample` and make sure that `Podfile` is there, then run `pod install`.
 3. Once that is done, You will be able to see a workspace generated `iOSChatExample.xcworkspace`, double click and that will launch the project in Xcode.
 
 4. Edit the Config file with your instance details as generated in [Prerequisites](#prerequisites)
@@ -89,18 +89,13 @@ Incoming text messages are deserialized and depending on their type (MESSAGE, EV
 - **websocketDidConnect**: Called when the WebSocket connects, and may subscribe to topics if necessary.
 - **websocketDidReceiveMessage**: Parses and handles incoming messages, delegating them back to ChatManager for UI updates.
 
-## Client Side Metrics (CSM) Support
-
-> ⚠️ NOT SUPPORTED - For more details please refer to the [tracking issue](https://github.com/amazon-connect/amazon-connect-chatjs/issues/171)
-
-
-
-
 ## Specifications
 
 ### Technical Specifications
 
 - Language: Swift 5.x
+- Xcode : 15
+- iOS: iOS 16 and Higher (⚠️ Required)
 - Frameworks:
   - SwiftUI: For UI components and layout.
   - AsyncImage: For loading images asynchronously.

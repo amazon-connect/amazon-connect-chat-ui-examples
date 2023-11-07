@@ -1,9 +1,6 @@
-//
-//  ChatView.swift
-//  Chat
-//
-//  Created by Mittal, Rajat on 11/1/23.
-//
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0
+
 
 import SwiftUI
 
@@ -72,7 +69,7 @@ struct ChatView: View {
                 ScrollViewReader { scrollView in
                     ScrollView(.vertical) {
                         LazyVStack {
-                            ForEach(messages, id: \.self) { message in
+                            ForEach(messages, id: \.id) { message in
                                 ChatMessageView(message: message, chatManager: self.chatManager)
                                     .onAppear {
                                         if message.text == "The chat has ended." {
@@ -85,7 +82,7 @@ struct ChatView: View {
                             }
                         }.padding()
                     }
-                    .onChange(of: messages) { new, old in
+                    .onChange(of: messages) { _ in
                         if messages.count > 0 {
                             DispatchQueue.main.async {
                                 withAnimation {
@@ -100,7 +97,7 @@ struct ChatView: View {
                 HStack {
                     TextField("Type a message", text: $newMessageText, axis: .vertical)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .onChange(of: newMessageText) { old, new  in
+                        .onChange(of: newMessageText) { new  in
                             if !isTyping && !new.isEmpty {
                                 isTyping = true
                                 self.chatManager.sendEvent(contentType: .typing)
@@ -136,10 +133,6 @@ struct ChatView: View {
         Message(participant: "AGENT", text: "...", contentType: "text/plain", messageType: .Receiver,timeStamp: "06:51",isRead: true),
         Message(participant: "AGENT", text: "Hello, **this** is a agent \\\n\\\n speaking.Hello, this is a agent speaking.", contentType: "text/plain", messageType: .Receiver,timeStamp: "06:51",isRead: true),
         Message(participant: Optional("SYSTEM"), text: "{\"templateType\":\"QuickReply\",\"version\":\"1.0\",\"data\":{\"content\":{\"title\":\"How was your experience?\",\"elements\":[{\"title\":\"Very unsatisfied\"},{\"title\":\"Unsatisfied\"},{\"title\":\"Neutral\"},{\"title\":\"Satisfied\"},{\"title\":\"Very Satisfied\"}]}}}", contentType: "application/vnd.amazonaws.connect.message.interactive", messageType: iOSChatExample.MessageType.Receiver, timeStamp: "06:20", messageID: Optional("8f76a266-6654-434f-94ea-87ec111ee341"), status: nil, isRead: false),
-        Message(participant: Optional("SYSTEM"), text: "{\"templateType\":\"ListPicker\",\"version\":\"1.0\",\"data\":{\"content\":{\"title\":\"Which department do you want to select?\",\"subtitle\":\"Tap to select option\",\"imageType\":\"URL\",\"imageData\":\"https://amazon-connect-interactive-message-blog-assets.s3-us-west-2.amazonaws.com/interactive-images/company.jpg\",\"elements\":[{\"title\":\"Billing\",\"subtitle\":\"Request billing information\",\"imageType\":\"URL\",\"imageData\":\"https://amazon-connect-interactive-message-blog-assets.s3-us-west-2.amazonaws.com/interactive-images/billing.jpg\"},{\"title\":\"New Service\",\"subtitle\":\"Set up a new service\",\"imageType\":\"URL\",\"imageData\":\"https://amazon-connect-interactive-message-blog-assets.s3-us-west-2.amazonaws.com/interactive-images/new_service.jpg\"},{\"title\":\"Cancellation\",\"subtitle\":\"Request a cancellation\",\"imageType\":\"URL\",\"imageData\":\"https://amazon-connect-interactive-message-blog-assets.s3-us-west-2.amazonaws.com/interactive-images/cancel.jpg\"}]}}}", contentType: "application/vnd.amazonaws.connect.message.interactive", messageType: iOSChatExample.MessageType.Receiver, timeStamp: "11:19", messageID: Optional("63ede1cc-e857-447b-a298-f80a0c82e9e4"), status: nil, isRead: false),
         Message(participant: Optional("SYSTEM"), text: "{\"templateType\":\"ListPicker\",\"version\":\"1.0\",\"data\":{\"content\":{\"title\":\"Which department would you like?\",\"subtitle\":\"Tap to select option\",\"elements\":[{\"title\":\"Billing\",\"subtitle\":\"For billing issues\"},{\"title\":\"New Service\",\"subtitle\":\"For new service\"},{\"title\":\"Cancellation\",\"subtitle\":\"For new service requests\"}]}}}", contentType: "application/vnd.amazonaws.connect.message.interactive", messageType: iOSChatExample.MessageType.Receiver, timeStamp: "14:18", messageID: Optional("f905d16e-12a0-4854-9079-d5b34476c3ba"), status: nil, isRead: false),
-        Message(participant: "SYSTEM", text: "Someone joined the chat.Someone joined the chat.Someone joined the chat.", contentType: "text/plain", messageType: .Common,timeStamp: "06:51",isRead: true),
-        Message(participant: Optional("AGENT"), text: "1. 213\n2. 213\n3. $314", contentType: "text/markdown", messageType: iOSChatExample.MessageType.Receiver, timeStamp: "02:42", messageID: Optional("08cdd41c-8b3d-4012-b820-8c0560bcf3cf"), status: nil, isRead: false),
-        Message(participant: Optional("AGENT"), text: "- 324\n- #254563",  contentType: "text/markdown", messageType: iOSChatExample.MessageType.Receiver, timeStamp: "02:43", messageID: Optional("9c345fc8-727d-4ef2-9814-23efeb9d893d"), status: nil, isRead: false)
-                                 ]), isModalVisible: .constant(true), chatManager: ChatManager())
+        Message(participant: "SYSTEM", text: "Someone joined the chat.Someone joined the chat.Someone joined the chat.", contentType: "text/plain", messageType: .Common,timeStamp: "06:51",isRead: true)                                 ]), isModalVisible: .constant(true), chatManager: ChatManager())
 }

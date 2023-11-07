@@ -1,9 +1,10 @@
-//
-//  Config.swift
-//  Chat
-//
-//  Created by Mittal, Rajat on 11/1/23.
-//
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0
+
+/*
+ Find InstanceId: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+ Find ContactFlowId: https://docs.aws.amazon.com/connect/latest/adminguide/find-contact-flow-id.html
+ */
 
 import Foundation
 import AWSConnect

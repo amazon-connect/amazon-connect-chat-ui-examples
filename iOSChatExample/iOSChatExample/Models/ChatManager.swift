@@ -1,3 +1,6 @@
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0
+
 import Foundation
 import SwiftUI
 import AWSConnect
@@ -106,6 +109,9 @@ class ChatManager : ObservableObject{
     
     
     // MARK: - API and SDK calls
+
+    // StartChat API: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html
+    // IOS SDK Docs: https://github.com/aws-amplify/aws-sdk-ios/tree/main
     
     /// Initiates a flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service.
     /// - Parameters:

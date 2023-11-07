@@ -1,6 +1,0 @@
-framework module Pods_iOSChatExample_iOSChatExampleUITests {
-  umbrella header "Pods-iOSChatExample-iOSChatExampleUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}

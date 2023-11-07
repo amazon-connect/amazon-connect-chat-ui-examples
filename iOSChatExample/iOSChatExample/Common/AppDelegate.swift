@@ -1,10 +1,6 @@
-//
-//  AppDelegate.swift
-//  AWSConnectParticipantSample
-//
-//  Created by Roy, Jithin on 9/17/19.
-//  Copyright © 2019 Amazon Web Services. All rights reserved.
-//
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0
+
 
 import UIKit
 import AWSCore

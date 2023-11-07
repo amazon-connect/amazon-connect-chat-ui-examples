@@ -1,9 +1,6 @@
-//
-//  CreateStartChatRequest.swift
-//  AmazonConnectInAppCallingIOSSample
-//
-//  Created by Mittal, Rajat on 10/22/23.
-//
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0
+
 
 import Foundation
 
