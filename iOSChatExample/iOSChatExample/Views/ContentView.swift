@@ -39,7 +39,7 @@ struct ContentView: View {
                         }
                 })
             }
-        }
+        }.preferredColorScheme(.light) // Forces light mode
     }
     
 }
