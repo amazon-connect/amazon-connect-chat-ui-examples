@@ -30,7 +30,7 @@ https://github.com/amazon-connect/amazon-connect-chat-ui-examples/assets/1439784
 - Deploy a custom Amazon Connect Chat backend. [Refer to this backend template](../cloudformationTemplates/startChatContactAPI/README.md)
 
     - Deploy a StartChatContact template Lambda [[CloudFormation Template](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/cloudformationTemplates/startChatContactAPI)]
-    - Add the `region`, `API_GATEWAY_ID`, `contactFlowId`, and `instanceId` to `endpoints.js`.
+    - Add the `region`, `startChatEndPoint`, `contactFlowId`, and `instanceId` to `Config.swift`.
 
 - (Optional) Setup interactive messages [guide](https://aws.amazon.com/blogs/contact-center/easily-set-up-interactive-messages-for-your-amazon-connect-chatbot/)
   - If using above, make sure to deploy startChatContact template again with interactive message `contactFlowId` and update down the endpoints.
