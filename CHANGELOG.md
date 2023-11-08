@@ -3,6 +3,10 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.3] - 2023-11-07
+### Added
+ - [iOSChatExample](./iOSChatExample/README.md) - iOS example of the AWS Connect chat widget is designed for easy integration with a focus on customization.
+
 ## [1.4.2] - 2023-10-10
 ### Added
  - [Hosted Widget Customization](./hostedwidgetCustomization/README.md) examples for Amazon Connect. Additional ways to integrate the communications widget directly into your website and personalize the branding.

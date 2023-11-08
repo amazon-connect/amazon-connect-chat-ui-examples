@@ -8,7 +8,7 @@ An iOS example app for building custom Amazon Connect Chat. This solution implem
 
 - Documentation: https://docs.aws.amazon.com/connect/latest/adminguide/enable-chat-in-app.html
 
-https://github.com/amazon-connect/amazon-connect-chat-ui-examples/assets/60903378/8887f54a-c121-4246-8981-23d05dd9fa01
+https://github.com/amazon-connect/amazon-connect-chat-ui-examples/assets/143978428/86fee2ac-e32f-4184-bbd2-f54add78f8dc
 
 ## Contents
 
@@ -32,6 +32,8 @@ https://github.com/amazon-connect/amazon-connect-chat-ui-examples/assets/6090337
     - Deploy a StartChatContact template Lambda [[CloudFormation Template](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/cloudformationTemplates/startChatContactAPI)]
     - Add the `region`, `API_GATEWAY_ID`, `contactFlowId`, and `instanceId` to `endpoints.js`.
 
+- (Optional) Setup interactive messages [guide](https://aws.amazon.com/blogs/contact-center/easily-set-up-interactive-messages-for-your-amazon-connect-chatbot/)
+  - If using above, make sure to deploy startChatContact template again with interactive message `contactFlowId` and update down the endpoints.
 
 ## Local Development
 
@@ -45,7 +47,7 @@ https://github.com/amazon-connect/amazon-connect-chat-ui-examples/assets/6090337
 2. Navigate to the project directory `iOSChatExample` and make sure that `Podfile` is there, then run `pod install`.
 3. Once that is done, You will be able to see a workspace generated `iOSChatExample.xcworkspace`, double click and that will launch the project in Xcode.
 
-4. Edit the Config file with your instance details as generated in [Prerequisites](#prerequisites)
+4. Edit the [Config file](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/iOSChatExample/iOSChatExample/Common/Config.swift) with your instance details as generated in [Prerequisites](#prerequisites)
 
     > Make sure you have iOS Simulator added [Adding additional simulators](https://developer.apple.com/documentation/safari-developer-tools/adding-additional-simulators)
 
