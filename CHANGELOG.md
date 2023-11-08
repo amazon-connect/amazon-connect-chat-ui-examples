@@ -3,9 +3,18 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.4.2] - 2023-7-7
+## [1.4.4] - 2023-11-08
 ### Changed
  - [samTemplate interactive-messaging-lex-codehook] - update the lex/lambda code hook to support Lex V2 and Node 18.x. This example lambda function is used for the interacive message feature for Amazon Connect Chat Widget. To learn more, refer to the [Documentation](https://docs.aws.amazon.com/connect/latest/adminguide/interactive-messages.html), a walk-through [blog post](https://aws.amazon.com/blogs/contact-center/easily-set-up-interactive-messages-for-your-amazon-connect-chatbot/), or the [workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/638d00f5-2248-488f-b7ca-903e8b966bf8/en-US).
+
+## [1.4.3] - 2023-11-07
+### Added
+ - [iOSChatExample](./iOSChatExample/README.md) - iOS example of the AWS Connect chat widget is designed for easy integration with a focus on customization.
+
+## [1.4.2] - 2023-10-10
+### Added
+ - [Hosted Widget Customization](./hostedwidgetCustomization/README.md) examples for Amazon Connect. Additional ways to integrate the communications widget directly into your website and personalize the branding.
+
 ## [1.4.1] - 2023-6-19
 ### Changed
  - [Custom Chat Widget + cloudformationTemplates] - updated chat interface bundle file for additional interactive messages feature

@@ -4,7 +4,7 @@ SPDX-License-Identifier: MIT-0 */
 import React, { useState, useContext, useEffect } from "react";
 import anime from 'animejs';
 import { useAppConfig } from '../../providers/AppConfigProvider';
-import { device, closeChatSVGPath, chatSVGPath, loggerNames } from '../../constants';
+import { device, closeChatSVGPath, chatSVGPath, loggerNames, chatWithFormStates } from '../../constants';
 import { Button, Svg } from './styled';
 import { genLogger } from "../../lib/logger";
 
@@ -16,9 +16,8 @@ const ChatIcon = (props) =>
     log(">>> Init");
     log('ChatIcon.displayName: ', ChatIcon.displayName);
     log(props);
-    const [toogleSVG, setToggleSVG] = useState(false);
     const { primaryColor } = useAppConfig();
-    const { showWidget, hideWidget, setShowWidget, setHideWidget, toggleIcon, chatWithoutForm, forceUnmountChatWidget, setForceUnmountChatWidget } = props;
+    const { chatWithoutForm, forceUnmountChatWidget, setForceUnmountChatWidget, setWidgetIsOpen, widgetIsOpen, currentState } = props;
     const handleChatIconClickEvent = (e) => {
       if (chatWithoutForm && forceUnmountChatWidget) setForceUnmountChatWidget(false)
       const timeline = anime.timeline({
@@ -29,15 +28,14 @@ const ChatIcon = (props) =>
           targets: ".chat",
           d: [
               {
-              value: toogleSVG ? chatSVGPath : closeChatSVGPath
+              value: widgetIsOpen ? chatSVGPath : closeChatSVGPath
               }
           ],
-          strokeWidth: toogleSVG ? 3 : 1,
+          strokeWidth: widgetIsOpen ? 3 : 1,
         });
-      toogleSVG ? setToggleSVG(false) : setToggleSVG(true);
-      setShowWidget(!showWidget);
-      hideWidget ? setHideWidget(!hideWidget) : setHideWidget(hideWidget); 
+      setWidgetIsOpen(!widgetIsOpen);
     }
+
     // Toggle to initial Icon after the chat is ended by the chat Widget:
     const toggleToChatIcon = () => {
       const timeline = anime.timeline({
@@ -55,15 +53,23 @@ const ChatIcon = (props) =>
 
       })
     }
-  //This useEffect will run only after a chat is ended
-  useEffect(() => {
-    log('useEffect');
-      if (toggleIcon) {
-        log('Chat Ended hence toggling back to initial icon(chat)')
-        toggleToChatIcon();
-        if (chatWithoutForm) setForceUnmountChatWidget(true);
-      }  
-  }, [toggleIcon])
+
+    //This useEffect will run only after currentState is changed to widget.
+    useEffect(() => {
+      if (currentState === chatWithFormStates.CHAT_WIDGET) {
+        window.connect.ChatEvents &&
+          window.connect.ChatEvents.onAgentEndChat(() => {
+            log("Chat Ended hence toggling back to initial icon(chat)");
+            handleChatIconClickEvent();
+          });
+
+        window.connect.ChatEvents &&
+          window.connect.ChatEvents.onChatEnded(() => {
+            log("Chat Disconnected hence toggling back to initial icon(chat)");
+            handleChatIconClickEvent();
+          });
+      }
+    }, [currentState]);
   
   /*! Both chat and carrot SVG's are from Material Design Icons https://github.com/google/material-design-icons
   SPDX-License-Identifier: Apache-2.0 */
