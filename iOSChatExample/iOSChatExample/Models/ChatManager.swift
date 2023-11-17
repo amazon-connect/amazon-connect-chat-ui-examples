@@ -18,7 +18,9 @@ class ChatManager : ObservableObject{
 
     init() {
         networkManager = NetworkManager(httpClient: DefaultHttpClient())
+        // `accessKey`,`secretKey` and `forKey` are set to empty on purpose. This is just to initiate AWS service. DO NOT NEED TO CHANGE ANYTHING HERE.
         let credentials = AWSStaticCredentialsProvider(accessKey: "", secretKey: "")
+        // `region` is important, credentials are passed as empty as it was a mandatory parameter. 
         let participantService = AWSServiceConfiguration(region: config.region,
                                                          credentialsProvider: credentials)!
         AWSConnectParticipant.register(with: participantService, forKey: "")
