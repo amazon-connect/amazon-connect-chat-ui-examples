@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ AndroidManifest.xml
+  ~ Android WebView Sample Demo
+  ~
+  ~ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+  ~ SPDX-License-Identifier: MIT-0
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Required for WebView to function correctly and have correct permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AndroidWKWevViewsample"
+        android:fullBackupContent="@xml/backup_descriptor">
+        <activity
+            android:name="com.amazonaws.android_webview_sample.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
