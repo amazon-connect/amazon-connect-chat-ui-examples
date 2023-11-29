@@ -1,0 +1,10 @@
+/*
+ * settings.gradle
+ * Android WebView Sample Demo
+ *
+ * Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+ * SPDX-License-Identifier: MIT-0
+ */
+
+rootProject.name = "Android-WKWevView-sample"
+include ':app'

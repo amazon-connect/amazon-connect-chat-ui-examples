@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ nav_graph.xml
+  ~ Android WebView Sample Demo
+  ~
+  ~ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+  ~ SPDX-License-Identifier: MIT-0
+  -->
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/WebViewFragment">
+
+    <fragment
+        android:id="@+id/WebViewFragment"
+        android:name="com.amazonaws.android_webview_sample.WebViewFragment"
+        android:label="@string/webview_fragment_label"
+        tools:layout="@layout/fragment_webview">
+    </fragment>
+</navigation>

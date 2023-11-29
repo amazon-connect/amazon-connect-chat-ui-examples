@@ -1,0 +1,15 @@
+<!--
+  ~ strings.xml
+  ~ Android WebView Sample Demo
+  ~
+  ~ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+  ~ SPDX-License-Identifier: MIT-0
+  -->
+
+<resources>
+    <string name="app_name">Android WebView Sample</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="main_fragment_label">Main Fragment</string>
+    <string name="webview_fragment_label">Webview Fragment</string>
+    <string name="next">Go to Webview</string>
+</resources>

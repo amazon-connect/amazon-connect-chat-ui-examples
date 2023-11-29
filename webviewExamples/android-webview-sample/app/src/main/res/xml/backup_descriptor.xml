@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ backup_descriptor.xml
+  ~ Android WebView Sample Demo
+  ~
+  ~ Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+  ~ SPDX-License-Identifier: MIT-0
+  -->
+
+<full-backup-content>
+    <!-- Exclude specific shared preferences that contain GCM registration Id -->
+</full-backup-content>
