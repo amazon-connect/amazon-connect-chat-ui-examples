@@ -27,8 +27,8 @@ At the moment, these are the solutions in this repo:
 6. **[hostedWidgetCustomization](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/hostedWidgetCustomization)**
    Additional ways to configure the Amazon Connect Hosted Widget on your website and further personalize the branding. This sample code covers several common use cases for customizing the widget snippet code. [Learn more](https://docs.aws.amazon.com/connect/latest/adminguide/add-chat-to-website.html)
 
-7. **[iOSChatExample](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/iOSChatExample)**
-   This iOS example of the AWS Connect chat widget is designed for easy integration with a focus on customization. Out-of-the-box ready yet fully adaptable, it offers developers the perfect starting point for incorporating a chat feature that can be fine-tuned to any customer’s requirements.
+7. **[iOSChatExample](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/iOSChatExample)**/**[AndroidChatExample](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/AndroidChatExample)**
+   These native mobile example of the AWS Connect chat widget are designed for easy integration with a focus on customization. Out-of-the-box ready yet fully adaptable, they offers developers the perfect starting point for incorporating a chat feature that can be fine-tuned to any customer’s requirements.
 
 
 ## Resources
