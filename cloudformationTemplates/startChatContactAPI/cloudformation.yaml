@@ -71,6 +71,7 @@ Resources:
       Handler: "startChatContact.handler"
       Role: !GetAtt StartChatLambdaExecutionRole.Arn
       Runtime: "nodejs18.x"
+      ReservedConcurrentExecutions: 5  # Set the desired number of reserved executions
       MemorySize: 128
       Timeout: 30
       Layers:
@@ -230,6 +231,7 @@ Resources:
       MemorySize: 256
       Role: !GetAtt CustomResourceHelperIamRole.Arn
       Runtime: "nodejs18.x"
+      ReservedConcurrentExecutions: 5  # Set the desired number of reserved executions
       Timeout: 300
 
   CustomResourceHelperIamRole:
