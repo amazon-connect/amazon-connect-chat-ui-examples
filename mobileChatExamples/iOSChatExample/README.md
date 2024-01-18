@@ -47,7 +47,7 @@ https://github.com/amazon-connect/amazon-connect-chat-ui-examples/assets/1439784
 2. Navigate to the project directory `iOSChatExample` and make sure that `Podfile` is there, then run `pod install`.
 3. Once that is done, You will be able to see a workspace generated `iOSChatExample.xcworkspace`, double click and that will launch the project in Xcode.
 
-4. Edit the [Config file](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/iOSChatExample/iOSChatExample/Common/Config.swift) with your instance details as generated in [Prerequisites](#prerequisites)
+4. Edit the [Config file](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/mobileChatExamples/iOSChatExample/iOSChatExample/Common/Config.swift) with your instance details as generated in [Prerequisites](#prerequisites)
 
     > Make sure you have iOS Simulator added [Adding additional simulators](https://developer.apple.com/documentation/safari-developer-tools/adding-additional-simulators)
 
