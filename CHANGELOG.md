@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.4.3] - 2023-11-07
 ### Added
- - [iOSChatExample](./iOSChatExample/README.md) - iOS example of the AWS Connect chat widget is designed for easy integration with a focus on customization.
+ - [iOSChatExample](mobileChatExamples/iOSChatExample/README.md) - iOS example of the AWS Connect chat widget is designed for easy integration with a focus on customization.
 
 ## [1.4.2] - 2023-10-10
 ### Added

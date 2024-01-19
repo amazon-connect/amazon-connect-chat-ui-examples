@@ -20,14 +20,14 @@ https://github.com/amazon-connect/amazon-connect-chat-ui-examples/assets/1439784
 ## Prerequisites
 
 - Create an Amazon Connect Instance [[guide](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-instances.html)]
-  - OR: enable chat experience for an existing Connect instance. [[guide](../README.md#enabling-chat-in-an-existing-amazon-connect-contact-center)]
+  - OR: enable chat experience for an existing Connect instance. [[guide](../../README.md#enabling-chat-in-an-existing-amazon-connect-contact-center)]
 
 - Create an Amazon Connect Contact Flow, ready to receive chat contacts. [[guide](https://docs.aws.amazon.com/connect/latest/adminguide/chat.html)]
 
     - Note the `instanceId` [[guide](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)]
     - Find the `contactFlowId` for the ["Sample Inbound Flow (First Contact)"](https://docs.aws.amazon.com/connect/latest/adminguide/sample-inbound-flow.html) [[guide](https://docs.aws.amazon.com/connect/latest/adminguide/find-contact-flow-id.html)]
 
-- Deploy a custom Amazon Connect Chat backend. [Refer to this backend template](../cloudformationTemplates/startChatContactAPI/README.md)
+- Deploy a custom Amazon Connect Chat backend. [Refer to this backend template](../../cloudformationTemplates/startChatContactAPI/README.md)
 
     - Deploy a StartChatContact template Lambda [[CloudFormation Template](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/cloudformationTemplates/startChatContactAPI)]
     - Add the `region`, `startChatEndPoint`, `contactFlowId`, and `instanceId` to `Config.swift`.
@@ -47,7 +47,7 @@ https://github.com/amazon-connect/amazon-connect-chat-ui-examples/assets/1439784
 2. Navigate to the project directory `iOSChatExample` and make sure that `Podfile` is there, then run `pod install`.
 3. Once that is done, You will be able to see a workspace generated `iOSChatExample.xcworkspace`, double click and that will launch the project in Xcode.
 
-4. Edit the [Config file](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/iOSChatExample/iOSChatExample/Common/Config.swift) with your instance details as generated in [Prerequisites](#prerequisites)
+4. Edit the [Config file](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/mobileChatExamples/iOSChatExample/iOSChatExample/Common/Config.swift) with your instance details as generated in [Prerequisites](#prerequisites)
 
     > Make sure you have iOS Simulator added [Adding additional simulators](https://developer.apple.com/documentation/safari-developer-tools/adding-additional-simulators)
 
