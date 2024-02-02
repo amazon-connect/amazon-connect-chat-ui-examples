@@ -124,7 +124,7 @@ Resources:
     Properties:
       CompatibleRuntimes:
         - "nodejs14.x"
-        - "nodejs12.x"
+        - "nodejs18.x"
       Content:
         S3Bucket: !Join
           - "."
@@ -146,7 +146,7 @@ Resources:
       Description: AWS Lambda Function to generate URL preview
       Handler: "AmazonConnectChatLinkPreviewLambdaEntryPoint.handler"
       Role: !GetAtt UrlPreviewLambdaExecutionRole.Arn
-      Runtime: "nodejs12.x"
+      Runtime: "nodejs18.x"
       MemorySize: 128
       Timeout: 300
       Layers:
@@ -433,6 +433,9 @@ Resources:
         BlockPublicPolicy: True
         IgnorePublicAcls: True
         RestrictPublicBuckets: True
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: ObjectWriter
       CorsConfiguration:
         CorsRules:
           - AllowedHeaders:
