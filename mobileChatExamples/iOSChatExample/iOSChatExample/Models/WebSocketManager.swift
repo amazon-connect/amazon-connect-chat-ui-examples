@@ -3,6 +3,7 @@
 
 import Foundation
 import Starscream
+import AWSConnectParticipant
 
 class WebsocketManager : WebSocketDelegate {
     
@@ -30,7 +31,7 @@ class WebsocketManager : WebSocketDelegate {
             print("websocket is disconnected: \(reason) with code: \(code)")
         case .text(let text):
             print(text)
-            websocketDidReceiveMessage(socket: client, text: text)
+            websocketDidReceiveMessage(text: text)
         case .binary(let data):
             print("Received data: \(data.count)")
         case .ping(_):
@@ -67,11 +68,10 @@ class WebsocketManager : WebSocketDelegate {
         socket.write(string: "{\"topic\": \"aws/subscribe\", \"content\": {\"topics\": [\"aws/chat\"]}})")
     }
     
-
-    func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
+    
+    func websocketDidReceiveMessage(text: String) {
         if let jsonData = text.data(using: .utf8),
            let json = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
-            
             let content = json["content"] as? String
             
             if let stringContent = content,
@@ -100,8 +100,8 @@ class WebsocketManager : WebSocketDelegate {
             }
         }
     }
-
-    // MARK: - Handle Events    
+    
+    // MARK: - Handle Events
     func handleMessage(_ innerJson: [String: Any], _ time: String) {
         let participantRole = innerJson["ParticipantRole"] as! String
         let messageId = innerJson["Id"] as! String
@@ -122,7 +122,7 @@ class WebsocketManager : WebSocketDelegate {
         messageCallback(message)
         print("Received message: \(message)")
     }
-
+    
     func handleParticipantJoined(_ innerJson: [String: Any], _ time: String) {
         let participantRole = innerJson["ParticipantRole"] as! String
         let messageText = "\(participantRole) has joined"
@@ -135,7 +135,7 @@ class WebsocketManager : WebSocketDelegate {
         )
         messageCallback(message)
     }
-
+    
     func handleParticipantLeft(_ innerJson: [String: Any], _ time: String) {
         let participantRole = innerJson["ParticipantRole"] as! String
         let messageText = "\(participantRole) has left"
@@ -148,7 +148,7 @@ class WebsocketManager : WebSocketDelegate {
         )
         messageCallback(message)
     }
-
+    
     func handleTyping(_ innerJson: [String: Any], _ time: String) {
         let participantRole = innerJson["ParticipantRole"] as! String
         let message = Message(
@@ -170,7 +170,7 @@ class WebsocketManager : WebSocketDelegate {
             timeStamp: time)
         messageCallback(message)
     }
-
+    
     func handleMetadata(_ innerJson: [String: Any], _ time: String) {
         let messageMetadata = innerJson["MessageMetadata"] as! [String: Any]
         let messageId = messageMetadata["MessageId"] as! String
@@ -194,4 +194,40 @@ class WebsocketManager : WebSocketDelegate {
         )
         messageCallback(message)
     }
+    
+}
+
+// MARK: - Parsing transcript messages
+
+extension WebsocketManager {
+    func formatAndProcessTranscriptItems(_ transcriptItems: [AWSConnectParticipantItem]) {
+        transcriptItems.forEach { item in
+            
+            let participantRole = CommonUtils().convertParticipantRoleToString(item.participantRole.rawValue)
+            
+            // First, create the message dictionary for the inner content
+            let messageContentDict: [String: Any] = [
+                "Id": item.identifier ?? "",
+                "ParticipantRole": "\(participantRole)", // Make sure this maps correctly
+                "AbsoluteTime": item.absoluteTime ?? "",
+                "ContentType": item.contentType ?? "",
+                "Content": item.content ?? "",
+                "Type": CommonUtils().convertParticipantTypeToString(item.types.rawValue),
+                "DisplayName": item.displayName ?? ""
+            ]
+
+            // Serialize the inner content dictionary to a JSON string
+            guard let messageContentData = try? JSONSerialization.data(withJSONObject: messageContentDict, options: []),
+                  let messageContentString = String(data: messageContentData, encoding: .utf8) else {
+                print("Failed to serialize message content to JSON string")
+                return
+            }
+            
+            // wrapping string in the outer structure expected by websocketDidReceiveMessage
+            let wrappedMessageString = "{\"content\":\"\(messageContentString.replacingOccurrences(of: "\"", with: "\\\""))\"}"
+
+            self.websocketDidReceiveMessage(text: wrappedMessageString)
+        }
+    }
+
 }

@@ -72,8 +72,10 @@ struct ChatView: View {
                             ForEach(messages, id: \.id) { message in
                                 ChatMessageView(message: message, chatManager: self.chatManager)
                                     .onAppear {
-                                        if message.text == "The chat has ended." {
+                                        if message.text == "The chat has ended." || chatManager.websocketUrl == nil {
                                             self.isChatEnded = true
+                                        }else{
+                                            self.isChatEnded = false
                                         }
                                         chatManager.sendReadEventOnAppear(message: message)
                                     }
