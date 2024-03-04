@@ -66,7 +66,7 @@ struct ContentView: View {
             if chatManager.participantTokenExists {
                 Text("Participant token exists in storage.")
                     .foregroundColor(.green)
-                Text(UserDefaults.standard.string(forKey: "participantToken") ?? "")
+//                Text(UserDefaults.standard.string(forKey: "participantToken") ?? "")
             } else {
                 Text("No participant token found in storage.")
                     .foregroundColor(.red)
@@ -92,7 +92,7 @@ struct ContentView: View {
             if chatManager.contactIdExists {
                 Text("Contact ID exists in storage.")
                     .foregroundColor(.green)
-                Text(UserDefaults.standard.string(forKey: "contactID") ?? "")
+//                Text(UserDefaults.standard.string(forKey: "contactID") ?? "")
             } else {
                 Text("No contactID found in storage.")
                     .foregroundColor(.red)

@@ -27,11 +27,7 @@ class NetworkManager {
                                           contactFlowId: contactFlowId,
                                           participantDetails: ParticipantDetails(DisplayName: displayName),
                                           persistantChat: persistantChat)
-        // Convert body to JSON for logging
-        if let jsonData = try? JSONEncoder().encode(body),
-           let jsonString = String(data: jsonData, encoding: .utf8) {
-            print("Request body for startChat: \(jsonString)")
-        }
+        
         self.httpClient.postJson(url, nil, body) { (data : CreateStartChatResponse) in
             onSuccess(data)
         } _: { error in
