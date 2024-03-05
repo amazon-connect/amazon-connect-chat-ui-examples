@@ -7,7 +7,7 @@ Description: >
 Mappings:
   FunctionMap:
     Configuration:
-      S3Bucket: "start-chat-contact-api-cfn"
+      S3Bucket: "start-chat-contact-proxy-cfn"
       S3Key: "deployment/"
       SolutionID: "AC0002"
 

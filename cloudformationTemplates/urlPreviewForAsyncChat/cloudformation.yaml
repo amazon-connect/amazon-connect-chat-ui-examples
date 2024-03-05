@@ -6,7 +6,7 @@ Description: >
 Mappings:
   FunctionMap:
     Configuration:
-      S3Bucket: "amazon-connect-url-preview-for-async-chat-cfn"
+      S3Bucket: "amazon-connect-url-preview-cfn"
       S3Key: "deployment/"
       SolutionID: "AC0003"
 
