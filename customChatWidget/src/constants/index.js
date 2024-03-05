@@ -52,6 +52,11 @@ export const chatWithFormStates = {
   CHAT_WIDGET: 'chat'
 }
 
+export const chatWithoutFormStates = {
+ FORM: 'form',
+CHAT_WIDGET: 'chat'
+}
+
 export const chatParties = {
   SYSTEM_MESSAGE: "SYSTEM_MESSAGE",
   BOT: "BOT"
