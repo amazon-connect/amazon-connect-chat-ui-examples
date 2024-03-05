@@ -6,7 +6,7 @@ import ChatIcon from '../../components/ChatIcon';
 import ChatButton from '../../components/ChatButton';
 import { useAppConfig } from '../../providers/AppConfigProvider';
 import { Main } from './styled';
-import { device, loggerNames, chatInitiationIcon } from '../../constants';
+import { device, loggerNames, chatInitiationIcon, chatWithoutFormStates } from '../../constants';
 import ChatWidget from '../../containers/ChatWidget';
 import { CSSTransition } from "react-transition-group";
 import { genLogger } from "../../lib/logger";
@@ -18,6 +18,7 @@ const ChatWithoutForm = () => {
     log(">> Init");
     const [widgetIsOpen, setWidgetIsOpen] = useState(false);
     const [forceUnmountChatWidget, setForceUnmountChatWidget] = useState(false);
+    const [currentState, setCurrentState] = useState(chatWithoutFormStates.CHAT_WIDGET);
     const { initiationIcon } = useAppConfig();
     trace(`forceUnmountChatWidget`, forceUnmountChatWidget);
     return (
