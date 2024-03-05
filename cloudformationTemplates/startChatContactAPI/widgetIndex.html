@@ -64,16 +64,18 @@
                     alert('you must enter a name & username');
                     document.getElementById("contactDetails").reset();
                 } else {
-                    var contactFlowId = ""; // TODO: Fill in
-                    var instanceId = ""; // TODO: Fill in
-                    var apiGatewayEndpoint = ""; // TODO: Fill in with the API Gateway endpoint created by your CloudFormation template
+                    var REGION = "us-west-2"; // TODO
+                    var contactFlowId = "12345678-1234-1234-1234-123456789012"; // TODO - documentation: https://docs.aws.amazon.com/connect/latest/adminguide/find-contact-flow-id.html
+                    var instanceId = "12345678-1234-1234-1234-123456789012"; // TODO - documentation: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+                    var apiGatewayEndpoint = `https://<api-id>.execute-api.${REGION}.amazonaws.com/Prod/`; // TODO: Fill in with the API Gateway endpoint created by your CloudFormation template
+
                     var enableAttachments = false // TODO: Fill in if you want to enable attachments on Amazon Connect chat widget (PRE-REQUISITE: Enable Amazon Connect instance for attachments)
                     console.log("this is the first name:" + customerName);
                     document.getElementById("contactDetails").reset();
 
                     connect.ChatInterface.initiateChat({
                         name: customerName,
-                        region: "", // TODO: Fill in
+                        region: REGION,
                         apiGatewayEndpoint: apiGatewayEndpoint,
                         contactAttributes: JSON.stringify({
                             "customerName": customerName
