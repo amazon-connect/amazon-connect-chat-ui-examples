@@ -40,6 +40,9 @@ export const ChatWrapper = styled.div`
         height: 600px;
         width: 420px;
         }
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 0;
         height: 500px;
         width: 320px;
         background: linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255) 80%, rgb(255, 255, 255));
@@ -85,7 +88,7 @@ export const ChatContainer = styled.div`
         right: 75px;
     }
     position: fixed;
-    bottom: 65px;
+    bottom: 80px;
     right: 20px;
     display: flex;
     align-items: center;
@@ -95,6 +98,6 @@ export const ChatContainer = styled.div`
     margin-left: 3px;
     float: left;
     overflow: auto;
-    border-radius: 5px 5px 45px 5px;
+    border-radius: 5px 5px 5px 5px;
     z-index:999;
     `;
