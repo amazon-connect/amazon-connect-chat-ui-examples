@@ -52,8 +52,8 @@ struct ChatView: View {
                             primaryButton: .default(
                                 Text("Yes, End Chat"),
                                 action: {
-                                    isModalVisible.toggle()
                                     chatManager.endChat()
+                                    isModalVisible.toggle()
                                 }
                             ),
                             secondaryButton: .cancel(
@@ -72,8 +72,10 @@ struct ChatView: View {
                             ForEach(messages, id: \.id) { message in
                                 ChatMessageView(message: message, chatManager: self.chatManager)
                                     .onAppear {
-                                        if message.text == "The chat has ended." {
+                                        if message.contentType == ContentType.ended.rawValue || chatManager.websocketUrl == nil {
                                             self.isChatEnded = true
+                                        }else{
+                                            self.isChatEnded = false
                                         }
                                         chatManager.sendReadEventOnAppear(message: message)
                                     }

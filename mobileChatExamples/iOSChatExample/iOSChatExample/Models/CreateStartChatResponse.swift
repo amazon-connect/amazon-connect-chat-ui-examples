@@ -15,11 +15,13 @@ struct CreateStartChatResponse: Codable {
             let contactId: String
             let participantId: String
             let participantToken: String
+            let continuedFromContactId: String?
             
             enum CodingKeys: String, CodingKey {
                 case contactId = "ContactId"
                 case participantId = "ParticipantId"
                 case participantToken = "ParticipantToken"
+                case continuedFromContactId = "ContinuedFromContactId"
             }
         }
     }

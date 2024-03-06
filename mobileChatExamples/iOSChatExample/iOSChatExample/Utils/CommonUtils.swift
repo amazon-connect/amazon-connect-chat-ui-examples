@@ -3,6 +3,7 @@
 
 
 import Foundation
+import AWSConnectParticipant
 
 struct CommonUtils {
 
@@ -26,4 +27,28 @@ struct CommonUtils {
             return localTime.isEmpty ? timeStamp : localTime
     }
     
+    func convertParticipantRoleToString(_ roleValue: Int) -> String {
+        switch roleValue {
+        case AWSConnectParticipantParticipantRole.agent.rawValue:
+            return "AGENT"
+        case AWSConnectParticipantParticipantRole.customer.rawValue:
+            return "CUSTOMER"
+        case AWSConnectParticipantParticipantRole.system.rawValue:
+            return "SYSTEM"
+        default:
+            return "UNKNOWN"
+        }
+    }
+
+    func convertParticipantTypeToString(_ roleValue: Int) -> String {
+        switch roleValue {
+        case AWSConnectParticipantChatItemType.message.rawValue:
+            return "MESSAGE"
+        case AWSConnectParticipantChatItemType.event.rawValue:
+            return "EVENT"
+        default:
+            return "UNKNOWN"
+        }
+    }
+
 }
