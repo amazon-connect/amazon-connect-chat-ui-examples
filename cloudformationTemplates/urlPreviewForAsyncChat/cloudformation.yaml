@@ -446,6 +446,10 @@ Resources:
             AllowedOrigins:
               - "*" #!Sub "https://${CloudFrontDistribution.DomainName}"
             MaxAge: 3000
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+            - ServerSideEncryptionByDefault:
+                SSEAlgorithm: AES256
 
   s3BucketPolicy:
     Type: AWS::S3::BucketPolicy
