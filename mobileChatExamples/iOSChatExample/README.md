@@ -125,6 +125,10 @@ flowchart TD
     J --> K[Continue where left off]
 ```
 
+Sample demo: 
+
+https://github.com/amazon-connect/amazon-connect-chat-ui-examples/assets/143978428/4b207751-289f-4de1-b9b9-4e947ce48812
+
 
 ## Specifications
 

@@ -1,10 +1,7 @@
 package com.blitz.androidchatexample
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.os.Bundle
-import android.util.Log
-import android.view.ViewTreeObserver
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
@@ -13,21 +10,17 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
@@ -41,38 +34,27 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.blitz.androidchatexample.models.Message
 import com.blitz.androidchatexample.models.MessageType
 import com.blitz.androidchatexample.ui.theme.AndroidChatExampleTheme
-import com.blitz.androidchatexample.utils.CommonUtils
 import com.blitz.androidchatexample.utils.CommonUtils.Companion.keyboardAsState
 import com.blitz.androidchatexample.utils.ContentType
 import com.blitz.androidchatexample.viewmodel.ChatViewModel
 import com.blitz.androidchatexample.views.ChatMessageView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -102,6 +84,58 @@ fun ChatScreen(viewModel: ChatViewModel = hiltViewModel()) {
         viewModel.createParticipantConnectionResult.observeAsState()
     val webSocketUrl = viewModel.webSocketUrl.observeAsState()
     var showDialog by remember { mutableStateOf(false) }
+    var showRestoreDialog by remember { mutableStateOf(false) }
+    val contactId = viewModel.liveContactId.observeAsState()
+    val participantToken = viewModel.liveParticipantToken.observeAsState()
+    var showErrorDialog by remember { mutableStateOf(false) }
+    val errorMessage by viewModel.errorMessage.observeAsState()
+
+    LaunchedEffect(errorMessage) {
+        showErrorDialog = errorMessage != null
+    }
+
+    if (showErrorDialog) {
+        AlertDialog(
+            onDismissRequest = {
+                showErrorDialog = false
+                viewModel.clearErrorMessage()
+            },
+            title = { Text("Error") },
+            text = { Text(errorMessage ?: "An unknown error occurred") },
+            confirmButton = {
+                TextButton(onClick = {
+                    showErrorDialog = false
+                    viewModel.clearErrorMessage()
+                }) { Text("OK") }
+            }
+        )
+    }
+
+    if (showRestoreDialog) {
+        AlertDialog(
+            onDismissRequest = { showRestoreDialog = false },
+            title = { Text("Restore Chat") },
+            text = { Text("Do you want to restore the previous chat session?") },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        showRestoreDialog = false
+                        viewModel.clearParticipantToken()
+                        viewModel.initiateChat() // Restore the chat directly
+                    }
+                ) { Text("Restore") }
+            },
+            dismissButton = {
+                TextButton(onClick = {
+                    showRestoreDialog = false
+                    viewModel.clearContactId() // Clear contactId
+                    viewModel.clearParticipantToken()
+                    viewModel.initiateChat() // Start new chat
+                }) { Text("Start new") }
+            }
+        )
+    }
+
     if (showDialog) {
         AlertDialog(
             onDismissRequest = { showDialog = false },
@@ -139,12 +173,17 @@ fun ChatScreen(viewModel: ChatViewModel = hiltViewModel()) {
                         }
                     },
                     onClick = {
-                        if (webSocketUrl.value == null) {
-                            viewModel.startChat()
+                        if (!contactId.value.isNullOrEmpty() && participantToken.value.isNullOrEmpty()) {
+                            showRestoreDialog = true
                         } else {
-                            showCustomSheet = true
+                            if (webSocketUrl.value == null) {
+                                viewModel.initiateChat()
+                            } else {
+                                showCustomSheet = true
+                            }
                         }
                     },
+
                 )
             }
         }
@@ -154,6 +193,9 @@ fun ChatScreen(viewModel: ChatViewModel = hiltViewModel()) {
                 showCustomSheet = true
             }
         }
+
+        ContactIdAndTokenSection(viewModel)
+
         AnimatedVisibility(
             visible = showCustomSheet,
             enter = slideInVertically(initialOffsetY = { it }) + fadeIn(),
@@ -204,9 +246,10 @@ fun ChatView(viewModel: ChatViewModel) {
     var isChatEnded by remember { mutableStateOf(false) }
 
     LaunchedEffect(messages, isKeyboardVisible) {
-        if (messages.isNotEmpty() or isKeyboardVisible) {
+        if (messages.isNotEmpty() ) {
             listState.animateScrollToItem(messages.lastIndex)
         }
+
         if (isKeyboardVisible){
             viewModel.sendEvent(contentType = ContentType.TYPING)
         }
@@ -222,8 +265,11 @@ fun ChatView(viewModel: ChatViewModel) {
             itemsIndexed(messages) { index, message ->
                 ChatMessage(message)
                 LaunchedEffect(key1 = message, key2 = index) {
-                    if (message.text == "The chat has ended.") {
+                    if (message.contentType == ContentType.ENDED.type) {
                         isChatEnded = true
+                        viewModel.clearParticipantToken()
+                    }else{
+                        isChatEnded = false
                     }
                     // Logic to determine if the message is visible.
                     // For simplicity, let's say it's visible if it's one of the last three messages.
@@ -264,6 +310,24 @@ fun ChatView(viewModel: ChatViewModel) {
 fun ChatMessage(message: Message) {
     // Customize this composable to display each message
     ChatMessageView(message = message)
+}
+
+@Composable
+fun ContactIdAndTokenSection(viewModel: ChatViewModel) {
+    val contactId by viewModel.liveContactId.observeAsState()
+    val participantToken by viewModel.liveParticipantToken.observeAsState()
+
+    Column {
+        Text(text = "Contact ID: ${if (contactId != null) "Available" else "Not available"}", color = if (contactId != null) Color.Blue else Color.Red)
+        Button(onClick = viewModel::clearContactId) {
+            Text("Clear Contact ID")
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(text = "Participant Token: ${if (participantToken != null) "Available" else "Not available"}", color = if (participantToken != null) Color.Blue else Color.Red)
+        Button(onClick = viewModel::clearParticipantToken) {
+            Text("Clear Participant Token")
+        }
+    }
 }
 
 

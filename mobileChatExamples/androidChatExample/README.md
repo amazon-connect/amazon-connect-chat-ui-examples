@@ -89,6 +89,44 @@ The WebsocketManager handles the WebSocket connection lifecycle and receives cha
 - **websocketDidConnect**: Called when the WebSocket connects, and may subscribe to topics if necessary.
 - **websocketDidReceiveMessage**: Parses and handles incoming messages, delegating them back to ChatManager for UI updates.
 
+
+### Chat Rehydration
+
+Chat rehydration is a feature that allows users to continue their previous chat sessions. This process involves several checks and actions:
+
+- **Check for Participant Token:**
+  On initiating chat, the module first checks if a `participantToken` exists.
+  - If it exists, the module proceeds to fetch the chat transcript, allowing the user to continue from where they left off.
+  - If it does not exist, the module then checks for a `contactId`.
+
+- **Use of Contact ID:**
+  If a `contactId` exists, the module prompts the user to either restore the previous session or start a new chat.
+  - If the user chooses to restore, the module starts a new chat session with the existing `contactId`, creates a new participant connection, and then fetches the transcript.
+  - If the user opts for a new chat, the module deletes the stored `contactId` and `participantToken` from the storage, ensuring a fresh start. The chat begins with no prior context, emulating the start of a new conversation.
+
+- **Deleting Stored Values:**
+  For users who opt to start a new chat, the module ensures that previous session identifiers are cleared. This action prevents any overlap or confusion between different chat sessions. By removing the `participantToken` and `contactId`, the ChatViewModel guarantees that the new chat session does not carry over any data or context from previous sessions.
+
+```mermaid
+flowchart TD
+    style D fill:#fc6b03 size:10
+    A[Start Chat] --> B{Check for participantToken}
+    B -->|Exists| J[Fetch Chat Transcript]
+    B -->|Does not exist| D{Check for contactId}
+    D -->|Exists| E{User Choice}
+    E -->|Restore| F[Use existing contactId]
+    E -->|New Chat| G[Delete stored contactId and participantToken]
+    F --> H[Create new participant connection]
+    G --> I[Start fresh chat session]
+    H --> J[Fetch Chat Transcript]
+    I --> J
+    J --> K[Continue where left off]
+```
+
+Sample demo:
+
+https://github.com/amazon-connect/amazon-connect-chat-ui-examples/assets/143978428/ae078271-2699-4bae-b04a-503a3ac1bfdd
+
 ## Specifications
 
 ### Technical Specifications
