@@ -1,4 +1,4 @@
-# A Lambda function code hook for Amazon Connect Chat Interactive Messaging
+# A Lambda function code hook for Amazon Connect Chat Interactive Messaging [Lex V1]
 
 Set up this AWS Lambda code hook to provide interactive message responses to an Amazon Lex chat bot
 

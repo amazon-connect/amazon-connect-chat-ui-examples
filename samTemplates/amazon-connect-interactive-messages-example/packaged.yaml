@@ -1,26 +1,25 @@
-AWSTemplateFormatVersion: "2010-09-09"
+AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Metadata:
   AWS::ServerlessRepo::Application:
-    Name: amazon-connect-interactive-messages-example
-    Description:
-      Creates AWS Lambda function to be used as an initialization and validation
-      code hook in Amazon Lex Bot for enabling interactive messages in Amazon Connect
-      Chat.
-    Author: Amazon Connect CX Innovations
+    Name: amazon-connect-interactive-messages-example-lex-v1
+    Description: Creates AWS Lambda function to be used as an initialization and validation
+      code hook in Amazon Lex Bot (v1) for enabling interactive messages in Amazon
+      Connect Chat.
+    Author: Amazon Connect Messaging
     SpdxLicenseId: MIT-0
-    LicenseUrl: s3://amazon-connect-interactive-message-blog-assets/8b1efc8f5c96ace3619ceb54cf8d4ea7
-    ReadmeUrl: s3://amazon-connect-interactive-message-blog-assets/d46bbf73f7b9c60a89ec3896d2465c5a
+    LicenseUrl: s3://amazon-connect-interactive-message-blog-assets-lex-v1/7850c887b8e4c8f9654bdda1021d5d96
+    ReadmeUrl: s3://amazon-connect-interactive-message-blog-assets-lex-v1/1e5cb23c230477afd6b810999ce73775
     Labels:
-      - connect
-      - chat
-      - interactive-messaging
-      - contact-center
-      - lambda
-      - lex
-      - bot
+    - connect
+    - chat
+    - interactive-messaging
+    - contact-center
+    - lambda
+    - lex
+    - bot
     HomePageUrl: https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/samTemplates/amazon-connect-interactive-messages-example
-    SemanticVersion: "0.0.1"
+    SemanticVersion: 1.0.0
     SourceCodeUrl: https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/samTemplates/amazon-connect-interactive-messages-example
 Globals:
   Function:
@@ -29,19 +28,21 @@ Resources:
   InteractiveMessagingLambdaFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://amazon-connect-interactive-message-blog-assets/38e43dae9e20c2019b97f0e3d33d6174
+      CodeUri: s3://amazon-connect-interactive-message-blog-assets-lex-v1/3c7e2bced30d81e2a87bcd290a4a03c1
       Handler: app.lambdaHandler
-      Runtime: nodejs14.x
+      Runtime: nodejs18.x
+    Metadata:
+      SamResourceId: InteractiveMessagingLambdaFunction
 Outputs:
   InteractiveMessagingLambdaFunction:
     Description: Interactive Messaging Lex Lambda Function ARN
     Value:
       Fn::GetAtt:
-        - InteractiveMessagingLambdaFunction
-        - Arn
+      - InteractiveMessagingLambdaFunction
+      - Arn
   InteractiveMessagingFunctionIamRole:
     Description: Implicit IAM Role created for Interactive Messaging Lex Lambda Function
     Value:
       Fn::GetAtt:
-        - InteractiveMessagingLambdaFunctionRole
-        - Arn
+      - InteractiveMessagingLambdaFunctionRole
+      - Arn
