@@ -2,7 +2,6 @@ package com.blitz.androidchatexample.models
 
 import com.blitz.androidchatexample.utils.ContentType
 import kotlinx.serialization.SerializationException
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.util.UUID
 

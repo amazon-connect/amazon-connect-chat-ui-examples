@@ -1,5 +1,6 @@
 package com.blitz.androidchatexample.viewmodel
 
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,20 +17,23 @@ import com.amazonaws.services.connectparticipant.model.CreateParticipantConnecti
 import com.blitz.androidchatexample.Config
 import com.blitz.androidchatexample.models.Message
 import com.blitz.androidchatexample.models.ParticipantDetails
+import com.blitz.androidchatexample.models.PersistentChat
 import com.blitz.androidchatexample.models.StartChatRequest
 import com.blitz.androidchatexample.repository.WebSocketManager
+import com.blitz.androidchatexample.utils.CommonUtils.Companion.parseErrorMessage
 import com.blitz.androidchatexample.utils.ContentType
 import kotlinx.coroutines.launch
 
 @HiltViewModel
 class ChatViewModel @Inject constructor(
-    private val chatRepository: ChatRepository
+    private val chatRepository: ChatRepository,
+    private val sharedPreferences: SharedPreferences
 ) : ViewModel() {
     private val chatConfiguration = Config
     private val _isLoading = MutableLiveData(false)
     val isLoading: MutableLiveData<Boolean> = _isLoading
     private val _startChatResponse = MutableLiveData<Resource<StartChatResponse>>()
-    val startChatResponse: LiveData<Resource<StartChatResponse>> = _startChatResponse
+    private val startChatResponse: LiveData<Resource<StartChatResponse>> = _startChatResponse
     private val _createParticipantConnectionResult = MutableLiveData<CreateParticipantConnectionResult?>()
     val createParticipantConnectionResult: MutableLiveData<CreateParticipantConnectionResult?> = _createParticipantConnectionResult
     private val webSocketManager = WebSocketManager()
@@ -37,101 +41,186 @@ class ChatViewModel @Inject constructor(
     val messages: LiveData<List<Message>> = _messages
     private val _webSocketUrl = MutableLiveData<String?>()
     val webSocketUrl: MutableLiveData<String?> = _webSocketUrl
+    private val _errorMessage = MutableLiveData<String?>()
+    val errorMessage: LiveData<String?> = _errorMessage
 
-    fun startChat() {
+    // LiveData for actual string values, updates will reflect in the UI
+    private val _liveContactId = MutableLiveData<String?>(sharedPreferences.getString("contactID", null))
+    val liveContactId: LiveData<String?> = _liveContactId
+
+    private val _liveParticipantToken = MutableLiveData<String?>(sharedPreferences.getString("participantToken", null))
+    val liveParticipantToken: LiveData<String?> = _liveParticipantToken
+
+    // Setters that update LiveData, which in turn update the UI
+    private var contactId: String?
+        get() = liveContactId.value
+        set(value) {
+            sharedPreferences.edit().putString("contactID", value).apply()
+            _liveContactId.value = value
+        }
+
+    private var participantToken: String?
+        get() = liveParticipantToken.value
+        set(value) {
+            sharedPreferences.edit().putString("participantToken", value).apply()
+            _liveParticipantToken.value = value  // Reflect the new value in LiveData
+        }
+
+    fun clearContactId() {
+        sharedPreferences.edit().remove("contactID").apply()
+        _liveContactId.value = null
+    }
+
+    fun clearParticipantToken() {
+        sharedPreferences.edit().remove("participantToken").apply()
+        _liveParticipantToken.value = null
+    }
+
+    fun initiateChat() {
         viewModelScope.launch {
             _isLoading.value = true
-            // Clear the messages
-            _messages.postValue(emptyList())
-            try {
-                // Create StartChatRequest from configuration
-                val participantDetails =
-                    ParticipantDetails(displayName = chatConfiguration.customerName)
-                val request = StartChatRequest(
-                    connectInstanceId = chatConfiguration.connectInstanceId,
-                    contactFlowId = chatConfiguration.contactFlowId,
-                    participantDetails = participantDetails
-                )
-                val response = chatRepository.startChat(startChatRequest = request)
-                _startChatResponse.value = response
-                if (startChatResponse != null) {
-                    createParticipantConnection()
-                }else{
-                    _isLoading.postValue(false)
-                }
-            } catch (e: Exception) {
-                _startChatResponse.value = Resource.Error(e.localizedMessage ?: "Unknown Error")
-                _isLoading.postValue(false)
+            _messages.postValue(emptyList()) // Clear existing messages
+            if (participantToken != null) {
+                participantToken?.let { createParticipantConnection(it) }
+            } else if (contactId != null) {
+                startChat(contactId)
+            } else {
+                startChat(null) // Start a fresh chat if no tokens are present
             }
         }
     }
 
-    private fun createParticipantConnection() {
-        val startChatResponse = startChatResponse.value
-        if (startChatResponse is Resource.Success) {
-            val chatResponseData = startChatResponse.data?.data
-            // Now you can use chatResponseData
-            if (chatResponseData != null) {
-                chatRepository.createParticipantConnection(
-                    chatResponseData.startChatResult.participantToken,
-                    object :
-                        AsyncHandler<CreateParticipantConnectionRequest, CreateParticipantConnectionResult> {
-                        override fun onError(exception: Exception?) {
-                            // Handle error
-                            print(exception)
-                            _isLoading.postValue(false)
-                        }
+    private fun startChat(sourceContactId: String?) {
+        viewModelScope.launch {
+            _isLoading.value = true
+            val participantDetails = ParticipantDetails(displayName = chatConfiguration.customerName)
+            val persistentChat: PersistentChat? = sourceContactId?.let { PersistentChat(it, "ENTIRE_PAST_SESSION") }
+            val request = StartChatRequest(
+                connectInstanceId = chatConfiguration.connectInstanceId,
+                contactFlowId = chatConfiguration.contactFlowId,
+                participantDetails = participantDetails,
+                persistentChat = persistentChat
+            )
+            when (val response = chatRepository.startChat(startChatRequest = request)) {
+                is Resource.Success -> {
+                    response.data?.data?.startChatResult?.let { result ->
+                        this@ChatViewModel.contactId = result.contactId
+                        this@ChatViewModel.participantToken = result.participantToken
+                        createParticipantConnection(result.participantToken)
+                    } ?: run {
+                        _isLoading.value = false
+                    }
+                }
+                is Resource.Error -> {
+                    _errorMessage.value = response.message
+                    _isLoading.value = false
+                    clearContactId()
+                }
 
-                        override fun onSuccess(
-                            request: CreateParticipantConnectionRequest?,
-                            result: CreateParticipantConnectionResult?
-                        ) {
-                            // Handle success
-                            result?.let {
-                                _createParticipantConnectionResult.postValue(result)
-                                _isLoading.postValue(false)
-                                val websocketUrl = result.websocket?.url
-                                _webSocketUrl.postValue(websocketUrl)
-                                websocketUrl?.let {
-                                    webSocketManager.createWebSocket(it, this::onMessageReceived, this::onWebSocketError)
-                                }
-                            }
-                        }
-                        private fun onMessageReceived(message: Message) {
-                            // Handle incoming WebSocket messages
-                            Log.i("Received messages", message.toString())
-
-                            // Remove typing indicators
-                            val filteredMessages = _messages.value.orEmpty().filterNot { it.text == "..." }
-
-                            // Handle message receipts or regular message
-                            val updatedMessages = if (message.contentType == ContentType.META_DATA.type) {
-                                filteredMessages.map { if (it.messageID == message.messageID) it.copy(status = message.status) else it }
-                            } else {
-                                // Exclude customer's typing events
-                                if (!(message.text == "..." && message.participant == chatConfiguration.customerName)) {
-                                    filteredMessages + message
-                                } else {
-                                    filteredMessages
-                                }
-                            }
-
-                            // Update messages LiveData
-                            _messages.postValue(updatedMessages)
-
-                            // Send a 'Delivered' event if the message is from the agent
-                            if (message.participant == chatConfiguration.agentName && message.contentType.contains("text")) {
-                                val content = "{\"messageId\":\"${message.messageID}\"}"
-                                sendEvent(content, ContentType.MESSAGE_DELIVERED)
-                            }
-                        }
-                        private fun onWebSocketError(errorMessage: String) {
-                            // Handle WebSocket errors
-                            _isLoading.postValue(false)
-                        }
-                    })
+                is Resource.Loading -> _isLoading.value = true
             }
         }
+    }
+
+    private fun createParticipantConnection(participantToken: String) {
+        viewModelScope.launch {
+            _isLoading.value = true // Start loading
+            chatRepository.createParticipantConnection(
+                participantToken,
+                object : AsyncHandler<CreateParticipantConnectionRequest, CreateParticipantConnectionResult> {
+                    override fun onError(exception: Exception?) {
+                        Log.e("ChatViewModel", "CreateParticipantConnection failed: ${exception?.localizedMessage}")
+                        clearParticipantToken()
+                        _errorMessage.value = parseErrorMessage(exception?.localizedMessage)
+                        _isLoading.postValue(false)
+                    }
+                    override fun onSuccess(request: CreateParticipantConnectionRequest?, result: CreateParticipantConnectionResult?) {
+                        viewModelScope.launch {
+                            result?.let { connectionResult ->
+                                _createParticipantConnectionResult.value = connectionResult
+                                val websocketUrl = connectionResult.websocket?.url
+                                _webSocketUrl.value = websocketUrl
+                                websocketUrl?.let { wsUrl ->
+                                    webSocketManager.createWebSocket(
+                                        wsUrl,
+                                        this@ChatViewModel::onMessageReceived,
+                                        this@ChatViewModel::onWebSocketError
+                                    )
+                                }
+                                connectionResult.connectionCredentials?.connectionToken?.let { cToken ->
+                                    val transcriptsResource =
+                                        chatRepository.getAllTranscripts(cToken)
+                                    if (transcriptsResource is Resource.Success) {
+                                        transcriptsResource.data?.transcript?.let { transcriptItems ->
+                                            Log.d("ChatViewModel:GetTranscript",
+                                                transcriptItems.toString()
+                                            )
+                                            webSocketManager.formatAndProcessTranscriptItems(
+                                                transcriptItems.reversed()
+                                            )
+                                        }
+                                    } else {
+                                        Log.e(
+                                            "ChatViewModel",
+                                            "Error fetching transcripts: ${transcriptsResource.message}"
+                                        )
+                                        _errorMessage.value = parseErrorMessage("Error fetching transcripts: ${transcriptsResource.message}")
+                                    }
+                                }
+                                _isLoading.postValue(false) // End loading
+                            } ?: run {
+                                Log.e(
+                                    "ChatViewModel",
+                                    "CreateParticipantConnection returned null result"
+                                )
+                                _errorMessage.value = parseErrorMessage("CreateParticipantConnection returned null result")
+                                _isLoading.postValue(false) // End loading
+                            }
+                        }
+                    }
+                }
+            )
+        }
+    }
+
+    private fun onMessageReceived(message: Message) {
+        // Log the current state before the update
+        viewModelScope.launch {
+
+            Log.i("ChatViewModel", "Received message: $message")
+
+            // Construct the new list with modifications based on the received message
+            val updatedMessages = _messages.value.orEmpty().toMutableList().apply {
+                // Filter out typing indicators and apply message status updates or add new messages
+                removeIf { it.text == "..." }
+                if (message.contentType == ContentType.META_DATA.type) {
+                    val index = indexOfFirst { it.messageID == message.messageID }
+                    if (index != -1) {
+                        this[index] = get(index).copy(status = message.status)
+                    }
+                } else {
+                    // Exclude customer's typing events
+                    if (!(message.text == "..." && message.participant == chatConfiguration.customerName)) {
+                        add(message)
+                    }
+                }
+            }
+
+            // Update messages LiveData in a thread-safe manner
+            _messages.value =updatedMessages
+
+            // Additional logic like sending 'Delivered' events
+            if (message.participant == chatConfiguration.agentName && message.contentType.contains("text")) {
+                val content = "{\"messageId\":\"${message.messageID}\"}"
+                sendEvent(content, ContentType.MESSAGE_DELIVERED)
+            }
+        }
+    }
+
+
+    private fun onWebSocketError(errorMessage: String) {
+        // Handle WebSocket errors
+        _isLoading.postValue(false)
     }
 
     fun sendMessage(text: String) {
@@ -192,8 +281,11 @@ class ChatViewModel @Inject constructor(
                 }
             }
         }
+        clearParticipantToken()
     }
 
-
+    fun clearErrorMessage() {
+        _errorMessage.value = null
+    }
 
 }

@@ -4,6 +4,7 @@ import android.util.Log
 import com.blitz.androidchatexample.Config
 import com.blitz.androidchatexample.models.Message
 import com.blitz.androidchatexample.models.MessageType
+import com.blitz.androidchatexample.models.TranscriptItem
 import com.blitz.androidchatexample.utils.CommonUtils
 import com.blitz.androidchatexample.utils.ContentType
 import okhttp3.OkHttpClient
@@ -35,7 +36,7 @@ class WebSocketManager {
             }
 
             override fun onMessage(ws: WebSocket, text: String) {
-                Log.i("lal",text)
+                Log.i("text@onMessage",text)
                 websocketDidReceiveMessage(text)
             }
 
@@ -177,5 +178,32 @@ class WebSocketManager {
             webSocket?.send(message)
         }
     }
+
+    fun formatAndProcessTranscriptItems(transcriptItems: List<TranscriptItem>) {
+        transcriptItems.forEach { item ->
+            val participantRole = item.participantRole
+
+            // Create the message content in JSON format
+            val messageContentJson = JSONObject().apply {
+                put("Id", item.id ?: "")
+                put("ParticipantRole", participantRole)
+                put("AbsoluteTime", item.absoluteTime ?: "")
+                put("ContentType", item.contentType ?: "")
+                put("Content", item.content ?: "")
+                put("Type", item.type)
+                put("DisplayName", item.displayName ?: "")
+            }
+
+            // Convert JSON object to String format
+            val messageContentString = messageContentJson.toString()
+
+            // Prepare the message in the format expected by WebSocket
+            val wrappedMessageString = "{\"content\":\"${messageContentString.replace("\"", "\\\"")}\"}"
+
+            // Send the formatted message string via WebSocket
+            websocketDidReceiveMessage(wrappedMessageString)
+        }
+    }
+
 }
 
