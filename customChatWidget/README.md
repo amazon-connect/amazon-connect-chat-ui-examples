@@ -1,5 +1,7 @@
 # Custom Chat Widget Usage
 
+A light-weight react application to render a custom widget icon and user input form. Form data can be passed into an Amazon Connect Chat Widget when connecting to an Agent or Bot. This is paired with the open source [Chat Interface Repository](https://github.com/amazon-connect/amazon-connect-chat-interface). To learn more about customizing your chat experience, refer to the [Admin Guide](https://docs.aws.amazon.com/connect/latest/adminguide/download-chat-example.html) documentation.
+
 ## Description
 
 Custom Chat Widget is a JavaScript library that enables you to place a Chat Button (or Icon), Chat Form, and Chat Widget at your website. When this library is imported, using `script` tag in a web page, it exposes `AmazonCustomChatWidget.ChatInterface.init()` method to the global `window` object. This method can be invoked with various properties, to get the Amazon Connect Chat in the website.
@@ -33,7 +35,7 @@ Below steps explain how Custom Chat Widget works on a web page
    [Refer to this link on how to create a Contact Flow for Chat](https://docs.aws.amazon.com/connect/latest/adminguide/chat.html)
 
 - Amazon Connect Chat backend.  
-   [Refer to this link on how to deploy the Chat backend](../cloudformationTemplates/asyncCustomerChatUX/README.md)
+   [Refer to this link on how to deploy the Chat backend](../cloudformationTemplates/startChatContactAPI/README.md)
 
 ## Usage
 
@@ -167,6 +169,36 @@ Below steps explain how Custom Chat Widget works on a web page
 </html>
 ```
 
+## Local Development
+
+Fork this source code and generate a custom `ACChat.js` bundle file.
+
+```
+$ git clone https://github.com/amazon-connect/amazon-connect-chat-ui-examples.git
+$ cd amazon-connect-chat-ui-examples/customChatWidget
+$ npm install
+$ npm run build
+
+# open `public/index.html` in local browser
+```
+
+### Development Build
+
+To make local modifications to this package and test them on your webpage, simply make your edits and run `npm install && npm run dev-build` to produce the
+Webpack built file and the sourcemaps. This generates the `ACChat.js` bundle file, which can be imported in `public/index.html`.
+
+Optionally, run `npm run dev-watch` to auto-rebuild the bundle file during development.
+
+### Production Build
+
+To build the production version of this package, simply run `npm install && npm run build`. These will generate a minified build file, with console logs stripped and other Webpack optimizations.
+
+### Testing
+
+Once the build has completed, you can test `index.html` in `/customChatWidget/public`, using *Live Server* extension, in case you are using VS Code.
+
+  [VS Code Live Server Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+
 ## How to customize the widget
 
 - The source code in `/customChatWidget/src` folder can be used to customize `ChatIcon` , `ChatButton` and `ChatForm`.
@@ -182,6 +214,10 @@ Below steps explain how Custom Chat Widget works on a web page
 - Run `npm run build` to build a production package, using Babel. The build process produces minified `ACChat.js` file, and stores it into `public` folder. Please note that `webpack.dev.js` produces a development version, which includes console logs. For a production build, please use `webpack.prod.js`.
 
 - For testing, run `npm run dev-build` to build a dev package using Babel and `webpack.dev.js` and saves the built minified file into the `public` folder with name `ACChat.js`. The dev version will have console logs.
+
+## Chat Interface Features
+
+For latest documentation about supported Chat Interface features, please refer to [amazon-connect-chat-interface/README](https://github.com/amazon-connect/amazon-connect-chat-interface#documentation), or the [Admin Guide](https://docs.aws.amazon.com/connect/latest/adminguide/enable-chat-in-app.html) documentation.
 
 ### Enabling rich messaging
 
@@ -220,9 +256,3 @@ function startChatContact(body) {
     })
 }
 ```
-
-## Testing
-
-- Once the build has completed, you can test `index.html` in `/customChatWidget/public`, using *Live Server* extension, in case you are using VS Code.
-
-  [VS Code Live Server Extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
