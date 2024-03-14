@@ -20,7 +20,6 @@ import com.blitz.androidchatexample.models.ParticipantDetails
 import com.blitz.androidchatexample.models.PersistentChat
 import com.blitz.androidchatexample.models.StartChatRequest
 import com.blitz.androidchatexample.repository.WebSocketManager
-import com.blitz.androidchatexample.utils.CommonUtils
 import com.blitz.androidchatexample.utils.CommonUtils.Companion.parseErrorMessage
 import com.blitz.androidchatexample.utils.ContentType
 import kotlinx.coroutines.launch
@@ -91,11 +90,11 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-    private fun startChat(contactId: String?) {
+    private fun startChat(sourceContactId: String?) {
         viewModelScope.launch {
             _isLoading.value = true
             val participantDetails = ParticipantDetails(displayName = chatConfiguration.customerName)
-            val persistentChat: PersistentChat? = contactId?.let { PersistentChat(it, "ENTIRE_PAST_SESSION") }
+            val persistentChat: PersistentChat? = sourceContactId?.let { PersistentChat(it, "ENTIRE_PAST_SESSION") }
             val request = StartChatRequest(
                 connectInstanceId = chatConfiguration.connectInstanceId,
                 contactFlowId = chatConfiguration.contactFlowId,

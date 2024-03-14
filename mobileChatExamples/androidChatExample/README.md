@@ -104,6 +104,8 @@ Chat rehydration is a feature that allows users to continue their previous chat 
   - If the user chooses to restore, the module starts a new chat session with the existing `contactId`, creates a new participant connection, and then fetches the transcript.
   - If the user opts for a new chat, the module deletes the stored `contactId` and `participantToken` from the storage, ensuring a fresh start. The chat begins with no prior context, emulating the start of a new conversation.
 
+      > There will be a new `initialContactId` when chat is rehydrated. The existing `contactId` will only be used as the `sourceContactId`. You may need to use the new `initialContactId` for the `CreateParticipantConnection` call or other APIs if you want to operate on the new contact.
+
 - **Deleting Stored Values:**
   For users who opt to start a new chat, the module ensures that previous session identifiers are cleared. This action prevents any overlap or confusion between different chat sessions. By removing the `participantToken` and `contactId`, the ChatViewModel guarantees that the new chat session does not carry over any data or context from previous sessions.
 
