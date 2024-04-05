@@ -7,1501 +7,364 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4FD39CAACE378C9345661879 /* Pods_iOSChatExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8F136BC9800A14BC86B8D0C /* Pods_iOSChatExampleTests.framework */; };
-		5F2D37845AFE45BE032C04E3 /* Pods_iOSChatExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A16AF42EFCB24543A558DEFD /* Pods_iOSChatExample.framework */; };
-		7E21A7B72AF2DFE3006C4F39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21A7B62AF2DFE3006C4F39 /* SceneDelegate.swift */; };
-		7E21A7F12AF2E188006C4F39 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21A7F02AF2E188006C4F39 /* Config.swift */; };
-		7E21A7FF2AF2E637006C4F39 /* CreateStartChatRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21A7FD2AF2E637006C4F39 /* CreateStartChatRequest.swift */; };
-		7E21A8002AF2E637006C4F39 /* CreateStartChatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21A7FE2AF2E637006C4F39 /* CreateStartChatResponse.swift */; };
-		7E21A8022AF2E65C006C4F39 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21A8012AF2E65C006C4F39 /* NetworkManager.swift */; };
-		7E21A8082AF2E8BA006C4F39 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21A8042AF2E8B9006C4F39 /* HttpClient.swift */; };
-		7E21A8092AF2E8BA006C4F39 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21A8052AF2E8B9006C4F39 /* HttpMethod.swift */; };
-		7E21A80A2AF2E8BA006C4F39 /* DefaultHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21A8062AF2E8B9006C4F39 /* DefaultHttpClient.swift */; };
-		7E21A80B2AF2E8BA006C4F39 /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21A8072AF2E8BA006C4F39 /* HttpHeader.swift */; };
-		7E21A80D2AF2F85E006C4F39 /* ChatEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21A80C2AF2F85E006C4F39 /* ChatEvent.swift */; };
-		7E21A80F2AF30B04006C4F39 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21A80E2AF30B04006C4F39 /* FloatingButton.swift */; };
-		7E21A8112AF30B34006C4F39 /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21A8102AF30B34006C4F39 /* ChatMessageView.swift */; };
-		7E21A8132AF30B51006C4F39 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21A8122AF30B51006C4F39 /* ChatView.swift */; };
-		7E21A8152AF3707F006C4F39 /* TypingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21A8142AF3707F006C4F39 /* TypingIndicator.swift */; };
-		7E21A8172AF41B64006C4F39 /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E21A8162AF41B64006C4F39 /* CommonUtils.swift */; };
-		7E821AC02B7C59DC00059164 /* TranscriptResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E821ABF2B7C59DC00059164 /* TranscriptResponse.swift */; };
-		7EC6FDFB2AF6D9EC00CDF3AC /* MessageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC6FDFA2AF6D9EC00CDF3AC /* MessageContent.swift */; };
-		7EC6FDFF2AF748AA00CDF3AC /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC6FDFE2AF748AA00CDF3AC /* TestView.swift */; };
-		7EC6FE012AF8352600CDF3AC /* ListPickerContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC6FE002AF8352600CDF3AC /* ListPickerContentView.swift */; };
-		7EC6FE032AF8354F00CDF3AC /* QuickReplyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC6FE022AF8354F00CDF3AC /* QuickReplyContentView.swift */; };
-		7EE64DCD2AE3725F004E6A34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE64DCC2AE3725E004E6A34 /* AppDelegate.swift */; };
-		7EE64DCF2AE372A8004E6A34 /* WebSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE64DCE2AE372A8004E6A34 /* WebSocketManager.swift */; };
-		7EE64DD12AE372B6004E6A34 /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE64DD02AE372B6004E6A34 /* ChatManager.swift */; };
-		7EE64DD32AE372DD004E6A34 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE64DD22AE372DD004E6A34 /* Message.swift */; };
-		7EFE5FEA2AE36BD800EA85C4 /* ChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE5FE92AE36BD800EA85C4 /* ChatApp.swift */; };
-		7EFE5FEC2AE36BD800EA85C4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE5FEB2AE36BD800EA85C4 /* ContentView.swift */; };
-		7EFE5FEE2AE36BD900EA85C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EFE5FED2AE36BD900EA85C4 /* Assets.xcassets */; };
-		7EFE5FF12AE36BD900EA85C4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EFE5FF02AE36BD900EA85C4 /* Preview Assets.xcassets */; };
-		7EFE5FFB2AE36BD900EA85C4 /* ChatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE5FFA2AE36BD900EA85C4 /* ChatTests.swift */; };
-		7EFE60052AE36BD900EA85C4 /* ChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE60042AE36BD900EA85C4 /* ChatUITests.swift */; };
-		7EFE60072AE36BD900EA85C4 /* ChatUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFE60062AE36BD900EA85C4 /* ChatUITestsLaunchTests.swift */; };
-		90F2054D4A915D823A22B9A8 /* Pods_iOSChatExample_iOSChatExampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECA70CBBE017182DF10BCA8A /* Pods_iOSChatExample_iOSChatExampleUITests.framework */; };
+		4C2CE7B5B4492A6AD18EE508 /* Pods_iOSChatExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AED8EA0CC8097833A3D2AAD6 /* Pods_iOSChatExampleTests.framework */; };
+		76CBA3E0933F4899FC8FE220 /* Pods_iOSChatExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9334EF492AF9ECD41BED6E08 /* Pods_iOSChatExample.framework */; };
+		7E91591C2BBE674200821C05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E91591B2BBE674200821C05 /* Assets.xcassets */; };
+		7E91591F2BBE674200821C05 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E91591E2BBE674200821C05 /* Preview Assets.xcassets */; };
+		7E9159292BBE674200821C05 /* iOSChatExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9159282BBE674200821C05 /* iOSChatExampleTests.swift */; };
+		7E9159332BBE674200821C05 /* iOSChatExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9159322BBE674200821C05 /* iOSChatExampleUITests.swift */; };
+		7E9159352BBE674200821C05 /* iOSChatExampleUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9159342BBE674200821C05 /* iOSChatExampleUITestsLaunchTests.swift */; };
+		7E9159602BBE67D500821C05 /* TypingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9159422BBE67D500821C05 /* TypingIndicator.swift */; };
+		7E9159612BBE67D500821C05 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9159432BBE67D500821C05 /* TestView.swift */; };
+		7E9159622BBE67D500821C05 /* QuickReplyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9159442BBE67D500821C05 /* QuickReplyContentView.swift */; };
+		7E9159632BBE67D500821C05 /* ListPickerContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9159452BBE67D500821C05 /* ListPickerContentView.swift */; };
+		7E9159642BBE67D500821C05 /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9159462BBE67D500821C05 /* ChatMessageView.swift */; };
+		7E9159652BBE67D500821C05 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9159472BBE67D500821C05 /* ChatView.swift */; };
+		7E9159662BBE67D500821C05 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9159482BBE67D500821C05 /* ContentView.swift */; };
+		7E9159672BBE67D500821C05 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9159492BBE67D500821C05 /* FloatingButton.swift */; };
+		7E9159682BBE67D500821C05 /* ChatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E91594A2BBE67D500821C05 /* ChatApp.swift */; };
+		7E9159692BBE67D500821C05 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E91594C2BBE67D500821C05 /* Config.swift */; };
+		7E91596A2BBE67D500821C05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E91594D2BBE67D500821C05 /* AppDelegate.swift */; };
+		7E91596B2BBE67D500821C05 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E91594E2BBE67D500821C05 /* SceneDelegate.swift */; };
+		7E91596C2BBE67D500821C05 /* MessageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9159502BBE67D500821C05 /* MessageContent.swift */; };
+		7E91596D2BBE67D500821C05 /* CreateStartChatResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9159512BBE67D500821C05 /* CreateStartChatResponse.swift */; };
+		7E91596E2BBE67D500821C05 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9159522BBE67D500821C05 /* Message.swift */; };
+		7E91596F2BBE67D500821C05 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9159532BBE67D500821C05 /* NetworkManager.swift */; };
+		7E9159702BBE67D500821C05 /* CreateStartChatRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9159542BBE67D500821C05 /* CreateStartChatRequest.swift */; };
+		7E9159712BBE67D500821C05 /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9159552BBE67D500821C05 /* ChatManager.swift */; };
+		7E9159722BBE67D500821C05 /* TranscriptResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9159562BBE67D500821C05 /* TranscriptResponse.swift */; };
+		7E9159732BBE67D500821C05 /* WebSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9159572BBE67D500821C05 /* WebSocketManager.swift */; };
+		7E9159742BBE67D500821C05 /* ChatEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9159592BBE67D500821C05 /* ChatEvent.swift */; };
+		7E9159752BBE67D500821C05 /* DefaultHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E91595B2BBE67D500821C05 /* DefaultHttpClient.swift */; };
+		7E9159762BBE67D500821C05 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E91595C2BBE67D500821C05 /* HttpMethod.swift */; };
+		7E9159772BBE67D500821C05 /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E91595D2BBE67D500821C05 /* HttpHeader.swift */; };
+		7E9159782BBE67D500821C05 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E91595E2BBE67D500821C05 /* HttpClient.swift */; };
+		7E9159792BBE67D500821C05 /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E91595F2BBE67D500821C05 /* CommonUtils.swift */; };
+		F202396070A99BAF4EAB9C84 /* Pods_iOSChatExample_iOSChatExampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C6367BB2D0876643D5395F /* Pods_iOSChatExample_iOSChatExampleUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7E3E86942AF988AE006CB5AC /* PBXContainerItemProxy */ = {
+		7E9159252BBE674200821C05 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 7E3E85272AF988AE006CB5AC /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6AD983475DFEC6BD9B387D1E63EFE70A;
-			remoteInfo = AWSConnect;
-		};
-		7E3E86962AF988AE006CB5AC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7E3E85272AF988AE006CB5AC /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 474216EBEACFC6FEAA0ED7FACB440E60;
-			remoteInfo = AWSConnectParticipant;
-		};
-		7E3E86982AF988AE006CB5AC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7E3E85272AF988AE006CB5AC /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CCFB8F03867DB892EFC47B53186590C4;
-			remoteInfo = AWSCore;
-		};
-		7E3E869A2AF988AE006CB5AC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7E3E85272AF988AE006CB5AC /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 294BF9280C1C2A5B41BCB6A740F09A90;
-			remoteInfo = "Pods-iOSChatExample";
-		};
-		7E3E869C2AF988AE006CB5AC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7E3E85272AF988AE006CB5AC /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 277B3B1C202AB4CEBBAC80A3F3E49930;
-			remoteInfo = "Pods-iOSChatExample-iOSChatExampleUITests";
-		};
-		7E3E869E2AF988AE006CB5AC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7E3E85272AF988AE006CB5AC /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 587E6E3D874CBF20C40182A27882AF98;
-			remoteInfo = "Pods-iOSChatExampleTests";
-		};
-		7E3E86A02AF988AE006CB5AC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7E3E85272AF988AE006CB5AC /* Pods.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 891B2270823847ED23F2ECFC28F935EC;
-			remoteInfo = Starscream;
-		};
-		7EFE5FF72AE36BD900EA85C4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7EFE5FDE2AE36BD800EA85C4 /* Project object */;
+			containerPortal = 7E91590C2BBE674100821C05 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 7EFE5FE52AE36BD800EA85C4;
-			remoteInfo = Chat;
+			remoteGlobalIDString = 7E9159132BBE674100821C05;
+			remoteInfo = iOSChatExample;
 		};
-		7EFE60012AE36BD900EA85C4 /* PBXContainerItemProxy */ = {
+		7E91592F2BBE674200821C05 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 7EFE5FDE2AE36BD800EA85C4 /* Project object */;
+			containerPortal = 7E91590C2BBE674100821C05 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 7EFE5FE52AE36BD800EA85C4;
-			remoteInfo = Chat;
+			remoteGlobalIDString = 7E9159132BBE674100821C05;
+			remoteInfo = iOSChatExample;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0905B3AC24CDAF25E2E3F9FD /* Pods-iOSChatExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSChatExample.debug.xcconfig"; path = "Target Support Files/Pods-iOSChatExample/Pods-iOSChatExample.debug.xcconfig"; sourceTree = "<group>"; };
-		0E07ED73E4CEBD86809213E4 /* Pods-iOSChatExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSChatExample.release.xcconfig"; path = "Target Support Files/Pods-iOSChatExample/Pods-iOSChatExample.release.xcconfig"; sourceTree = "<group>"; };
-		13CD88C682D65D08EBD7BD34 /* Pods-iOSChatExample-iOSChatExampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSChatExample-iOSChatExampleUITests.release.xcconfig"; path = "Target Support Files/Pods-iOSChatExample-iOSChatExampleUITests/Pods-iOSChatExample-iOSChatExampleUITests.release.xcconfig"; sourceTree = "<group>"; };
-		1689F4DC69E1765B0A37D416 /* Pods-Chat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chat.release.xcconfig"; path = "Target Support Files/Pods-Chat/Pods-Chat.release.xcconfig"; sourceTree = "<group>"; };
-		2A3FCC62CACD723D42CB74D7 /* Pods-Chat-ChatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chat-ChatUITests.debug.xcconfig"; path = "Target Support Files/Pods-Chat-ChatUITests/Pods-Chat-ChatUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		302D0F1F90D6FEC9B0CBCFF0 /* Pods-iOSChatExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSChatExampleTests.release.xcconfig"; path = "Target Support Files/Pods-iOSChatExampleTests/Pods-iOSChatExampleTests.release.xcconfig"; sourceTree = "<group>"; };
-		6FE41B09460A7CEDCCA8A2EE /* Pods-ChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatTests.debug.xcconfig"; path = "Target Support Files/Pods-ChatTests/Pods-ChatTests.debug.xcconfig"; sourceTree = "<group>"; };
-		7DE20D0151A4ACCC74F81A2C /* Pods-Chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chat.debug.xcconfig"; path = "Target Support Files/Pods-Chat/Pods-Chat.debug.xcconfig"; sourceTree = "<group>"; };
-		7E21A7B62AF2DFE3006C4F39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7E21A7F02AF2E188006C4F39 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		7E21A7FD2AF2E637006C4F39 /* CreateStartChatRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStartChatRequest.swift; sourceTree = "<group>"; };
-		7E21A7FE2AF2E637006C4F39 /* CreateStartChatResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStartChatResponse.swift; sourceTree = "<group>"; };
-		7E21A8012AF2E65C006C4F39 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		7E21A8042AF2E8B9006C4F39 /* HttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
-		7E21A8052AF2E8B9006C4F39 /* HttpMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
-		7E21A8062AF2E8B9006C4F39 /* DefaultHttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultHttpClient.swift; sourceTree = "<group>"; };
-		7E21A8072AF2E8BA006C4F39 /* HttpHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpHeader.swift; sourceTree = "<group>"; };
-		7E21A80C2AF2F85E006C4F39 /* ChatEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatEvent.swift; sourceTree = "<group>"; };
-		7E21A80E2AF30B04006C4F39 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
-		7E21A8102AF30B34006C4F39 /* ChatMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageView.swift; sourceTree = "<group>"; };
-		7E21A8122AF30B51006C4F39 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
-		7E21A8142AF3707F006C4F39 /* TypingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingIndicator.swift; sourceTree = "<group>"; };
-		7E21A8162AF41B64006C4F39 /* CommonUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
-		7E3E85252AF988AE006CB5AC /* iOSChatExample.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = iOSChatExample.xcworkspace; sourceTree = "<group>"; };
-		7E3E85272AF988AE006CB5AC /* Pods.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Pods.xcodeproj; sourceTree = "<group>"; };
-		7E3E852C2AF988AE006CB5AC /* AWSCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSCore.h; sourceTree = "<group>"; };
-		7E3E852E2AF988AE006CB5AC /* AWSCognitoIdentity+Fabric.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AWSCognitoIdentity+Fabric.m"; sourceTree = "<group>"; };
-		7E3E852F2AF988AE006CB5AC /* AWSCognitoIdentityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSCognitoIdentityModel.h; sourceTree = "<group>"; };
-		7E3E85302AF988AE006CB5AC /* AWSCognitoIdentityResources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSCognitoIdentityResources.h; sourceTree = "<group>"; };
-		7E3E85312AF988AE006CB5AC /* AWSCognitoIdentityService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSCognitoIdentityService.m; sourceTree = "<group>"; };
-		7E3E85322AF988AE006CB5AC /* AWSCognitoIdentityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSCognitoIdentityModel.m; sourceTree = "<group>"; };
-		7E3E85332AF988AE006CB5AC /* AWSCognitoIdentity+Fabric.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AWSCognitoIdentity+Fabric.h"; sourceTree = "<group>"; };
-		7E3E85342AF988AE006CB5AC /* AWSCognitoIdentityResources.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSCognitoIdentityResources.m; sourceTree = "<group>"; };
-		7E3E85352AF988AE006CB5AC /* AWSCognitoIdentityService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSCognitoIdentityService.h; sourceTree = "<group>"; };
-		7E3E85362AF988AE006CB5AC /* AWSCognitoIdentity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSCognitoIdentity.h; sourceTree = "<group>"; };
-		7E3E85382AF988AE006CB5AC /* AWSMTLModel+NSCoding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AWSMTLModel+NSCoding.h"; sourceTree = "<group>"; };
-		7E3E85392AF988AE006CB5AC /* AWSMTLManagedObjectAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSMTLManagedObjectAdapter.m; sourceTree = "<group>"; };
-		7E3E853A2AF988AE006CB5AC /* NSError+AWSMTLModelException.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSError+AWSMTLModelException.m"; sourceTree = "<group>"; };
-		7E3E853B2AF988AE006CB5AC /* AWSMTLValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSMTLValueTransformer.h; sourceTree = "<group>"; };
-		7E3E853D2AF988AE006CB5AC /* AWSEXTRuntimeExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSEXTRuntimeExtensions.h; sourceTree = "<group>"; };
-		7E3E853E2AF988AE006CB5AC /* AWSEXTScope.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSEXTScope.h; sourceTree = "<group>"; };
-		7E3E853F2AF988AE006CB5AC /* AWSmetamacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSmetamacros.h; sourceTree = "<group>"; };
-		7E3E85402AF988AE006CB5AC /* AWSEXTRuntimeExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSEXTRuntimeExtensions.m; sourceTree = "<group>"; };
-		7E3E85412AF988AE006CB5AC /* AWSEXTKeyPathCoding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSEXTKeyPathCoding.h; sourceTree = "<group>"; };
-		7E3E85422AF988AE006CB5AC /* AWSEXTScope.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSEXTScope.m; sourceTree = "<group>"; };
-		7E3E85432AF988AE006CB5AC /* NSValueTransformer+AWSMTLPredefinedTransformerAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSValueTransformer+AWSMTLPredefinedTransformerAdditions.m"; sourceTree = "<group>"; };
-		7E3E85442AF988AE006CB5AC /* AWSMTLJSONAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSMTLJSONAdapter.h; sourceTree = "<group>"; };
-		7E3E85452AF988AE006CB5AC /* NSArray+AWSMTLManipulationAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+AWSMTLManipulationAdditions.m"; sourceTree = "<group>"; };
-		7E3E85462AF988AE006CB5AC /* AWSMTLReflection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSMTLReflection.m; sourceTree = "<group>"; };
-		7E3E85472AF988AE006CB5AC /* NSObject+AWSMTLComparisonAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+AWSMTLComparisonAdditions.m"; sourceTree = "<group>"; };
-		7E3E85482AF988AE006CB5AC /* NSValueTransformer+AWSMTLInversionAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSValueTransformer+AWSMTLInversionAdditions.h"; sourceTree = "<group>"; };
-		7E3E85492AF988AE006CB5AC /* AWSMTLModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSMTLModel.h; sourceTree = "<group>"; };
-		7E3E854A2AF988AE006CB5AC /* NSDictionary+AWSMTLManipulationAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+AWSMTLManipulationAdditions.m"; sourceTree = "<group>"; };
-		7E3E854B2AF988AE006CB5AC /* AWSMTLModel+NSCoding.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AWSMTLModel+NSCoding.m"; sourceTree = "<group>"; };
-		7E3E854C2AF988AE006CB5AC /* AWSMTLValueTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSMTLValueTransformer.m; sourceTree = "<group>"; };
-		7E3E854D2AF988AE006CB5AC /* NSError+AWSMTLModelException.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSError+AWSMTLModelException.h"; sourceTree = "<group>"; };
-		7E3E854E2AF988AE006CB5AC /* AWSMTLManagedObjectAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSMTLManagedObjectAdapter.h; sourceTree = "<group>"; };
-		7E3E854F2AF988AE006CB5AC /* NSValueTransformer+AWSMTLInversionAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSValueTransformer+AWSMTLInversionAdditions.m"; sourceTree = "<group>"; };
-		7E3E85502AF988AE006CB5AC /* NSObject+AWSMTLComparisonAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+AWSMTLComparisonAdditions.h"; sourceTree = "<group>"; };
-		7E3E85512AF988AE006CB5AC /* NSArray+AWSMTLManipulationAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+AWSMTLManipulationAdditions.h"; sourceTree = "<group>"; };
-		7E3E85522AF988AE006CB5AC /* AWSMTLReflection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSMTLReflection.h; sourceTree = "<group>"; };
-		7E3E85532AF988AE006CB5AC /* AWSMTLJSONAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSMTLJSONAdapter.m; sourceTree = "<group>"; };
-		7E3E85542AF988AE006CB5AC /* NSValueTransformer+AWSMTLPredefinedTransformerAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSValueTransformer+AWSMTLPredefinedTransformerAdditions.h"; sourceTree = "<group>"; };
-		7E3E85552AF988AE006CB5AC /* NSDictionary+AWSMTLManipulationAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+AWSMTLManipulationAdditions.h"; sourceTree = "<group>"; };
-		7E3E85562AF988AE006CB5AC /* AWSMantle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSMantle.h; sourceTree = "<group>"; };
-		7E3E85572AF988AE006CB5AC /* AWSMTLModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSMTLModel.m; sourceTree = "<group>"; };
-		7E3E85592AF988AE006CB5AC /* AWSXMLWriter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSXMLWriter.m; sourceTree = "<group>"; };
-		7E3E855A2AF988AE006CB5AC /* AWSXMLWriter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSXMLWriter.h; sourceTree = "<group>"; };
-		7E3E855C2AF988AE006CB5AC /* AWSNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSNetworking.h; sourceTree = "<group>"; };
-		7E3E855D2AF988AE006CB5AC /* AWSURLSessionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSURLSessionManager.m; sourceTree = "<group>"; };
-		7E3E855E2AF988AE006CB5AC /* AWSNetworkingHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSNetworkingHelpers.h; sourceTree = "<group>"; };
-		7E3E855F2AF988AE006CB5AC /* AWSNetworking.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSNetworking.m; sourceTree = "<group>"; };
-		7E3E85602AF988AE006CB5AC /* AWSURLSessionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSURLSessionManager.h; sourceTree = "<group>"; };
-		7E3E85612AF988AE006CB5AC /* AWSNetworkingHelpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSNetworkingHelpers.m; sourceTree = "<group>"; };
-		7E3E85632AF988AE006CB5AC /* AWSURLRequestSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSURLRequestSerialization.m; sourceTree = "<group>"; };
-		7E3E85642AF988AE006CB5AC /* AWSURLResponseSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSURLResponseSerialization.m; sourceTree = "<group>"; };
-		7E3E85652AF988AE006CB5AC /* AWSValidation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSValidation.h; sourceTree = "<group>"; };
-		7E3E85662AF988AE006CB5AC /* AWSTimestampSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSTimestampSerialization.h; sourceTree = "<group>"; };
-		7E3E85672AF988AE006CB5AC /* AWSSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSSerialization.m; sourceTree = "<group>"; };
-		7E3E85682AF988AE006CB5AC /* AWSURLRequestRetryHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSURLRequestRetryHandler.m; sourceTree = "<group>"; };
-		7E3E85692AF988AE006CB5AC /* AWSURLRequestSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSURLRequestSerialization.h; sourceTree = "<group>"; };
-		7E3E856A2AF988AE006CB5AC /* AWSValidation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSValidation.m; sourceTree = "<group>"; };
-		7E3E856B2AF988AE006CB5AC /* AWSURLResponseSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSURLResponseSerialization.h; sourceTree = "<group>"; };
-		7E3E856C2AF988AE006CB5AC /* AWSURLRequestRetryHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSURLRequestRetryHandler.h; sourceTree = "<group>"; };
-		7E3E856D2AF988AE006CB5AC /* AWSSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSSerialization.h; sourceTree = "<group>"; };
-		7E3E856E2AF988AE006CB5AC /* AWSTimestampSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSTimestampSerialization.m; sourceTree = "<group>"; };
-		7E3E85702AF988AE006CB5AC /* AWSGZIP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSGZIP.h; sourceTree = "<group>"; };
-		7E3E85712AF988AE006CB5AC /* AWSGZIP.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSGZIP.m; sourceTree = "<group>"; };
-		7E3E85732AF988AE006CB5AC /* AWSCancellationTokenSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSCancellationTokenSource.h; sourceTree = "<group>"; };
-		7E3E85742AF988AE006CB5AC /* AWSExecutor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSExecutor.h; sourceTree = "<group>"; };
-		7E3E85752AF988AE006CB5AC /* AWSCancellationToken.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSCancellationToken.m; sourceTree = "<group>"; };
-		7E3E85762AF988AE006CB5AC /* AWSTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSTask.h; sourceTree = "<group>"; };
-		7E3E85772AF988AE006CB5AC /* AWSBolts.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSBolts.m; sourceTree = "<group>"; };
-		7E3E85782AF988AE006CB5AC /* AWSCancellationTokenRegistration.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSCancellationTokenRegistration.m; sourceTree = "<group>"; };
-		7E3E85792AF988AE006CB5AC /* AWSTaskCompletionSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSTaskCompletionSource.h; sourceTree = "<group>"; };
-		7E3E857A2AF988AE006CB5AC /* AWSGeneric.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSGeneric.h; sourceTree = "<group>"; };
-		7E3E857B2AF988AE006CB5AC /* AWSCancellationToken.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSCancellationToken.h; sourceTree = "<group>"; };
-		7E3E857C2AF988AE006CB5AC /* AWSExecutor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSExecutor.m; sourceTree = "<group>"; };
-		7E3E857D2AF988AE006CB5AC /* AWSCancellationTokenSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSCancellationTokenSource.m; sourceTree = "<group>"; };
-		7E3E857E2AF988AE006CB5AC /* AWSCancellationTokenRegistration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSCancellationTokenRegistration.h; sourceTree = "<group>"; };
-		7E3E857F2AF988AE006CB5AC /* AWSTask.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSTask.m; sourceTree = "<group>"; };
-		7E3E85802AF988AE006CB5AC /* AWSBolts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSBolts.h; sourceTree = "<group>"; };
-		7E3E85812AF988AE006CB5AC /* AWSTaskCompletionSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSTaskCompletionSource.m; sourceTree = "<group>"; };
-		7E3E85832AF988AE006CB5AC /* AWSXMLDictionary.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSXMLDictionary.m; sourceTree = "<group>"; };
-		7E3E85842AF988AE006CB5AC /* AWSXMLDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSXMLDictionary.h; sourceTree = "<group>"; };
-		7E3E85862AF988AE006CB5AC /* Fabric.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fabric.h; sourceTree = "<group>"; };
-		7E3E85872AF988AE006CB5AC /* FABKitProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FABKitProtocol.h; sourceTree = "<group>"; };
-		7E3E85882AF988AE006CB5AC /* Fabric+FABKits.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fabric+FABKits.h"; sourceTree = "<group>"; };
-		7E3E85892AF988AE006CB5AC /* FABAttributes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FABAttributes.h; sourceTree = "<group>"; };
-		7E3E858B2AF988AE006CB5AC /* AWSFMDatabasePool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSFMDatabasePool.m; sourceTree = "<group>"; };
-		7E3E858C2AF988AE006CB5AC /* AWSFMDB+AWSHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AWSFMDB+AWSHelpers.h"; sourceTree = "<group>"; };
-		7E3E858D2AF988AE006CB5AC /* AWSFMDatabase+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AWSFMDatabase+Private.h"; sourceTree = "<group>"; };
-		7E3E858E2AF988AE006CB5AC /* AWSFMResultSet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSFMResultSet.m; sourceTree = "<group>"; };
-		7E3E858F2AF988AE006CB5AC /* AWSFMDatabaseQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSFMDatabaseQueue.m; sourceTree = "<group>"; };
-		7E3E85902AF988AE006CB5AC /* AWSFMDatabase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSFMDatabase.m; sourceTree = "<group>"; };
-		7E3E85912AF988AE006CB5AC /* AWSFMDatabaseAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSFMDatabaseAdditions.m; sourceTree = "<group>"; };
-		7E3E85922AF988AE006CB5AC /* AWSFMDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSFMDB.h; sourceTree = "<group>"; };
-		7E3E85932AF988AE006CB5AC /* AWSFMDatabasePool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSFMDatabasePool.h; sourceTree = "<group>"; };
-		7E3E85942AF988AE006CB5AC /* AWSFMDB+AWSHelpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AWSFMDB+AWSHelpers.m"; sourceTree = "<group>"; };
-		7E3E85952AF988AE006CB5AC /* AWSFMDatabaseAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSFMDatabaseAdditions.h; sourceTree = "<group>"; };
-		7E3E85962AF988AE006CB5AC /* AWSFMDatabaseQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSFMDatabaseQueue.h; sourceTree = "<group>"; };
-		7E3E85972AF988AE006CB5AC /* AWSFMDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSFMDatabase.h; sourceTree = "<group>"; };
-		7E3E85982AF988AE006CB5AC /* AWSFMResultSet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSFMResultSet.h; sourceTree = "<group>"; };
-		7E3E859A2AF988AE006CB5AC /* AWSClientContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSClientContext.h; sourceTree = "<group>"; };
-		7E3E859B2AF988AE006CB5AC /* AWSService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSService.m; sourceTree = "<group>"; };
-		7E3E859C2AF988AE006CB5AC /* AWSInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSInfo.m; sourceTree = "<group>"; };
-		7E3E859D2AF988AE006CB5AC /* AWSClientContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSClientContext.m; sourceTree = "<group>"; };
-		7E3E859E2AF988AE006CB5AC /* AWSService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSService.h; sourceTree = "<group>"; };
-		7E3E859F2AF988AE006CB5AC /* AWSServiceEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSServiceEnum.h; sourceTree = "<group>"; };
-		7E3E85A02AF988AE006CB5AC /* AWSInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSInfo.h; sourceTree = "<group>"; };
-		7E3E85A22AF988AE006CB5AC /* AWSUICKeyChainStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSUICKeyChainStore.m; sourceTree = "<group>"; };
-		7E3E85A32AF988AE006CB5AC /* AWSUICKeyChainStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSUICKeyChainStore.h; sourceTree = "<group>"; };
-		7E3E85A52AF988AE006CB5AC /* AWSIdentityProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSIdentityProvider.m; sourceTree = "<group>"; };
-		7E3E85A62AF988AE006CB5AC /* AWSCredentialsProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSCredentialsProvider.m; sourceTree = "<group>"; };
-		7E3E85A72AF988AE006CB5AC /* AWSSignature.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSSignature.h; sourceTree = "<group>"; };
-		7E3E85A82AF988AE006CB5AC /* AWSIdentityProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSIdentityProvider.h; sourceTree = "<group>"; };
-		7E3E85A92AF988AE006CB5AC /* AWSCredentialsProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSCredentialsProvider.h; sourceTree = "<group>"; };
-		7E3E85AA2AF988AE006CB5AC /* AWSSignature.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSSignature.m; sourceTree = "<group>"; };
-		7E3E85AC2AF988AE006CB5AC /* AWSDDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSDDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
-		7E3E85AD2AF988AE006CB5AC /* AWSDDTTYLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSDDTTYLogger.h; sourceTree = "<group>"; };
-		7E3E85AE2AF988AE006CB5AC /* AWSDDLog.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSDDLog.m; sourceTree = "<group>"; };
-		7E3E85AF2AF988AE006CB5AC /* AWSDDASLLogCapture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSDDASLLogCapture.h; sourceTree = "<group>"; };
-		7E3E85B02AF988AE006CB5AC /* AWSDDOSLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSDDOSLogger.h; sourceTree = "<group>"; };
-		7E3E85B12AF988AE006CB5AC /* AWSDDAssertMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSDDAssertMacros.h; sourceTree = "<group>"; };
-		7E3E85B22AF988AE006CB5AC /* AWSDDFileLogger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSDDFileLogger.m; sourceTree = "<group>"; };
-		7E3E85B32AF988AE006CB5AC /* AWSDDASLLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSDDASLLogger.h; sourceTree = "<group>"; };
-		7E3E85B42AF988AE006CB5AC /* AWSDDLog+LOGV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AWSDDLog+LOGV.h"; sourceTree = "<group>"; };
-		7E3E85B62AF988AE006CB5AC /* AWSDDContextFilterLogFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSDDContextFilterLogFormatter.h; sourceTree = "<group>"; };
-		7E3E85B72AF988AE006CB5AC /* AWSDDDispatchQueueLogFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSDDDispatchQueueLogFormatter.h; sourceTree = "<group>"; };
-		7E3E85B82AF988AE006CB5AC /* AWSDDMultiFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSDDMultiFormatter.h; sourceTree = "<group>"; };
-		7E3E85B92AF988AE006CB5AC /* AWSDDContextFilterLogFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSDDContextFilterLogFormatter.m; sourceTree = "<group>"; };
-		7E3E85BA2AF988AE006CB5AC /* AWSDDDispatchQueueLogFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSDDDispatchQueueLogFormatter.m; sourceTree = "<group>"; };
-		7E3E85BB2AF988AE006CB5AC /* AWSDDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSDDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
-		7E3E85BC2AF988AE006CB5AC /* AWSDDASLLogCapture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSDDASLLogCapture.m; sourceTree = "<group>"; };
-		7E3E85BD2AF988AE006CB5AC /* AWSDDLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSDDLog.h; sourceTree = "<group>"; };
-		7E3E85BE2AF988AE006CB5AC /* AWSDDTTYLogger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSDDTTYLogger.m; sourceTree = "<group>"; };
-		7E3E85BF2AF988AE006CB5AC /* AWSDDLegacyMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSDDLegacyMacros.h; sourceTree = "<group>"; };
-		7E3E85C02AF988AE006CB5AC /* AWSCocoaLumberjack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSCocoaLumberjack.h; sourceTree = "<group>"; };
-		7E3E85C12AF988AE006CB5AC /* AWSDDASLLogger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSDDASLLogger.m; sourceTree = "<group>"; };
-		7E3E85C22AF988AE006CB5AC /* AWSDDMultiFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSDDMultiFormatter.m; sourceTree = "<group>"; };
-		7E3E85C32AF988AE006CB5AC /* AWSDDFileLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSDDFileLogger.h; sourceTree = "<group>"; };
-		7E3E85C42AF988AE006CB5AC /* AWSDDLogMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSDDLogMacros.h; sourceTree = "<group>"; };
-		7E3E85C52AF988AE006CB5AC /* AWSDDOSLogger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSDDOSLogger.m; sourceTree = "<group>"; };
-		7E3E85C72AF988AE006CB5AC /* AWSSTSModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSSTSModel.m; sourceTree = "<group>"; };
-		7E3E85C82AF988AE006CB5AC /* AWSSTSService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSSTSService.h; sourceTree = "<group>"; };
-		7E3E85C92AF988AE006CB5AC /* AWSSTS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSSTS.h; sourceTree = "<group>"; };
-		7E3E85CA2AF988AE006CB5AC /* AWSSTSResources.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSSTSResources.m; sourceTree = "<group>"; };
-		7E3E85CB2AF988AE006CB5AC /* AWSSTSModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSSTSModel.h; sourceTree = "<group>"; };
-		7E3E85CC2AF988AE006CB5AC /* AWSSTSService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSSTSService.m; sourceTree = "<group>"; };
-		7E3E85CD2AF988AE006CB5AC /* AWSSTSResources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSSTSResources.h; sourceTree = "<group>"; };
-		7E3E85CF2AF988AE006CB5AC /* AWSModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSModel.h; sourceTree = "<group>"; };
-		7E3E85D02AF988AE006CB5AC /* AWSCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSCategory.h; sourceTree = "<group>"; };
-		7E3E85D12AF988AE006CB5AC /* AWSNSCodingUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSNSCodingUtilities.h; sourceTree = "<group>"; };
-		7E3E85D22AF988AE006CB5AC /* AWSSynchronizedMutableDictionary.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSSynchronizedMutableDictionary.m; sourceTree = "<group>"; };
-		7E3E85D32AF988AE006CB5AC /* AWSLogging.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSLogging.m; sourceTree = "<group>"; };
-		7E3E85D42AF988AE006CB5AC /* AWSModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSModel.m; sourceTree = "<group>"; };
-		7E3E85D52AF988AE006CB5AC /* AWSNSCodingUtilities.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSNSCodingUtilities.m; sourceTree = "<group>"; };
-		7E3E85D62AF988AE006CB5AC /* AWSCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSCategory.m; sourceTree = "<group>"; };
-		7E3E85D72AF988AE006CB5AC /* AWSSynchronizedMutableDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSSynchronizedMutableDictionary.h; sourceTree = "<group>"; };
-		7E3E85D82AF988AE006CB5AC /* AWSLogging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSLogging.h; sourceTree = "<group>"; };
-		7E3E85DA2AF988AE006CB5AC /* AWSKSReachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSKSReachability.h; sourceTree = "<group>"; };
-		7E3E85DB2AF988AE006CB5AC /* AWSKSReachability.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSKSReachability.m; sourceTree = "<group>"; };
-		7E3E85DC2AF988AE006CB5AC /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		7E3E85DD2AF988AE006CB5AC /* LICENSE.APACHE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.APACHE; sourceTree = "<group>"; };
-		7E3E85DE2AF988AE006CB5AC /* README-spm-support.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "README-spm-support.md"; sourceTree = "<group>"; };
-		7E3E85E12AF988AE006CB5AC /* Pods-iOSChatExampleTests-acknowledgements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pods-iOSChatExampleTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		7E3E85E22AF988AE006CB5AC /* Pods-iOSChatExampleTests.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pods-iOSChatExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
-		7E3E85E32AF988AE006CB5AC /* Pods-iOSChatExampleTests-dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Pods-iOSChatExampleTests-dummy.m"; sourceTree = "<group>"; };
-		7E3E85E42AF988AE006CB5AC /* Pods-iOSChatExampleTests.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pods-iOSChatExampleTests.release.xcconfig"; sourceTree = "<group>"; };
-		7E3E85E52AF988AE006CB5AC /* Pods-iOSChatExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pods-iOSChatExampleTests-Info.plist"; sourceTree = "<group>"; };
-		7E3E85E62AF988AE006CB5AC /* Pods-iOSChatExampleTests.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = "Pods-iOSChatExampleTests.modulemap"; sourceTree = "<group>"; };
-		7E3E85E72AF988AE006CB5AC /* Pods-iOSChatExampleTests-acknowledgements.markdown */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Pods-iOSChatExampleTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		7E3E85E82AF988AE006CB5AC /* Pods-iOSChatExampleTests-umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pods-iOSChatExampleTests-umbrella.h"; sourceTree = "<group>"; };
-		7E3E85EA2AF988AE006CB5AC /* AWSCore.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AWSCore.debug.xcconfig; sourceTree = "<group>"; };
-		7E3E85EB2AF988AE006CB5AC /* AWSCore-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AWSCore-Info.plist"; sourceTree = "<group>"; };
-		7E3E85EC2AF988AE006CB5AC /* AWSCore.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = AWSCore.modulemap; sourceTree = "<group>"; };
-		7E3E85ED2AF988AE006CB5AC /* AWSCore.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AWSCore.release.xcconfig; sourceTree = "<group>"; };
-		7E3E85EE2AF988AE006CB5AC /* AWSCore-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AWSCore-prefix.pch"; sourceTree = "<group>"; };
-		7E3E85EF2AF988AE006CB5AC /* AWSCore-dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AWSCore-dummy.m"; sourceTree = "<group>"; };
-		7E3E85F02AF988AE006CB5AC /* AWSCore-umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AWSCore-umbrella.h"; sourceTree = "<group>"; };
-		7E3E85F22AF988AE006CB5AC /* AWSConnect.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = AWSConnect.modulemap; sourceTree = "<group>"; };
-		7E3E85F32AF988AE006CB5AC /* AWSConnect-dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AWSConnect-dummy.m"; sourceTree = "<group>"; };
-		7E3E85F42AF988AE006CB5AC /* AWSConnect.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AWSConnect.release.xcconfig; sourceTree = "<group>"; };
-		7E3E85F52AF988AE006CB5AC /* AWSConnect-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AWSConnect-Info.plist"; sourceTree = "<group>"; };
-		7E3E85F62AF988AE006CB5AC /* AWSConnect-umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AWSConnect-umbrella.h"; sourceTree = "<group>"; };
-		7E3E85F72AF988AE006CB5AC /* AWSConnect-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AWSConnect-prefix.pch"; sourceTree = "<group>"; };
-		7E3E85F82AF988AE006CB5AC /* AWSConnect.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AWSConnect.debug.xcconfig; sourceTree = "<group>"; };
-		7E3E85FA2AF988AE006CB5AC /* Starscream.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Starscream.release.xcconfig; sourceTree = "<group>"; };
-		7E3E85FB2AF988AE006CB5AC /* Starscream-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Starscream-Info.plist"; sourceTree = "<group>"; };
-		7E3E85FC2AF988AE006CB5AC /* Starscream.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Starscream.debug.xcconfig; sourceTree = "<group>"; };
-		7E3E85FD2AF988AE006CB5AC /* Starscream.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = Starscream.modulemap; sourceTree = "<group>"; };
-		7E3E85FE2AF988AE006CB5AC /* Starscream-dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Starscream-dummy.m"; sourceTree = "<group>"; };
-		7E3E85FF2AF988AE006CB5AC /* Starscream-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Starscream-prefix.pch"; sourceTree = "<group>"; };
-		7E3E86002AF988AE006CB5AC /* Starscream-umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Starscream-umbrella.h"; sourceTree = "<group>"; };
-		7E3E86022AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pods-iOSChatExample-iOSChatExampleUITests.release.xcconfig"; sourceTree = "<group>"; };
-		7E3E86032AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pods-iOSChatExample-iOSChatExampleUITests-Info.plist"; sourceTree = "<group>"; };
-		7E3E86042AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests-frameworks.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "Pods-iOSChatExample-iOSChatExampleUITests-frameworks.sh"; sourceTree = "<group>"; };
-		7E3E86052AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests-acknowledgements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pods-iOSChatExample-iOSChatExampleUITests-acknowledgements.plist"; sourceTree = "<group>"; };
-		7E3E86062AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests-frameworks-Release-input-files.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = "Pods-iOSChatExample-iOSChatExampleUITests-frameworks-Release-input-files.xcfilelist"; sourceTree = "<group>"; };
-		7E3E86072AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests-frameworks-Debug-output-files.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = "Pods-iOSChatExample-iOSChatExampleUITests-frameworks-Debug-output-files.xcfilelist"; sourceTree = "<group>"; };
-		7E3E86082AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = "Pods-iOSChatExample-iOSChatExampleUITests.modulemap"; sourceTree = "<group>"; };
-		7E3E86092AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests-acknowledgements.markdown */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Pods-iOSChatExample-iOSChatExampleUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		7E3E860A2AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests-dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Pods-iOSChatExample-iOSChatExampleUITests-dummy.m"; sourceTree = "<group>"; };
-		7E3E860B2AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pods-iOSChatExample-iOSChatExampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		7E3E860C2AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests-umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pods-iOSChatExample-iOSChatExampleUITests-umbrella.h"; sourceTree = "<group>"; };
-		7E3E860D2AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests-frameworks-Debug-input-files.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = "Pods-iOSChatExample-iOSChatExampleUITests-frameworks-Debug-input-files.xcfilelist"; sourceTree = "<group>"; };
-		7E3E860E2AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests-frameworks-Release-output-files.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = "Pods-iOSChatExample-iOSChatExampleUITests-frameworks-Release-output-files.xcfilelist"; sourceTree = "<group>"; };
-		7E3E86102AF988AE006CB5AC /* Pods-iOSChatExample.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = "Pods-iOSChatExample.modulemap"; sourceTree = "<group>"; };
-		7E3E86112AF988AE006CB5AC /* Pods-iOSChatExample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pods-iOSChatExample-Info.plist"; sourceTree = "<group>"; };
-		7E3E86122AF988AE006CB5AC /* Pods-iOSChatExample-dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Pods-iOSChatExample-dummy.m"; sourceTree = "<group>"; };
-		7E3E86132AF988AE006CB5AC /* Pods-iOSChatExample-frameworks-Debug-output-files.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = "Pods-iOSChatExample-frameworks-Debug-output-files.xcfilelist"; sourceTree = "<group>"; };
-		7E3E86142AF988AE006CB5AC /* Pods-iOSChatExample-frameworks-Release-output-files.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = "Pods-iOSChatExample-frameworks-Release-output-files.xcfilelist"; sourceTree = "<group>"; };
-		7E3E86152AF988AE006CB5AC /* Pods-iOSChatExample-frameworks-Debug-input-files.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = "Pods-iOSChatExample-frameworks-Debug-input-files.xcfilelist"; sourceTree = "<group>"; };
-		7E3E86162AF988AE006CB5AC /* Pods-iOSChatExample-frameworks.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "Pods-iOSChatExample-frameworks.sh"; sourceTree = "<group>"; };
-		7E3E86172AF988AE006CB5AC /* Pods-iOSChatExample-acknowledgements.markdown */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "Pods-iOSChatExample-acknowledgements.markdown"; sourceTree = "<group>"; };
-		7E3E86182AF988AE006CB5AC /* Pods-iOSChatExample-frameworks-Release-input-files.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = "Pods-iOSChatExample-frameworks-Release-input-files.xcfilelist"; sourceTree = "<group>"; };
-		7E3E86192AF988AE006CB5AC /* Pods-iOSChatExample.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pods-iOSChatExample.release.xcconfig"; sourceTree = "<group>"; };
-		7E3E861A2AF988AE006CB5AC /* Pods-iOSChatExample.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Pods-iOSChatExample.debug.xcconfig"; sourceTree = "<group>"; };
-		7E3E861B2AF988AE006CB5AC /* Pods-iOSChatExample-umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pods-iOSChatExample-umbrella.h"; sourceTree = "<group>"; };
-		7E3E861C2AF988AE006CB5AC /* Pods-iOSChatExample-acknowledgements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pods-iOSChatExample-acknowledgements.plist"; sourceTree = "<group>"; };
-		7E3E861E2AF988AE006CB5AC /* AWSConnectParticipant.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AWSConnectParticipant.debug.xcconfig; sourceTree = "<group>"; };
-		7E3E861F2AF988AE006CB5AC /* AWSConnectParticipant-prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AWSConnectParticipant-prefix.pch"; sourceTree = "<group>"; };
-		7E3E86202AF988AE006CB5AC /* AWSConnectParticipant.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AWSConnectParticipant.release.xcconfig; sourceTree = "<group>"; };
-		7E3E86212AF988AE006CB5AC /* AWSConnectParticipant-dummy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AWSConnectParticipant-dummy.m"; sourceTree = "<group>"; };
-		7E3E86222AF988AE006CB5AC /* AWSConnectParticipant-umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AWSConnectParticipant-umbrella.h"; sourceTree = "<group>"; };
-		7E3E86232AF988AE006CB5AC /* AWSConnectParticipant-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AWSConnectParticipant-Info.plist"; sourceTree = "<group>"; };
-		7E3E86242AF988AE006CB5AC /* AWSConnectParticipant.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = AWSConnectParticipant.modulemap; sourceTree = "<group>"; };
-		7E3E86252AF988AE006CB5AC /* Manifest.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Manifest.lock; sourceTree = "<group>"; };
-		7E3E86282AF988AE006CB5AC /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		7E3E86292AF988AE006CB5AC /* LICENSE.APACHE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.APACHE; sourceTree = "<group>"; };
-		7E3E862A2AF988AE006CB5AC /* README-spm-support.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "README-spm-support.md"; sourceTree = "<group>"; };
-		7E3E862C2AF988AE006CB5AC /* AWSConnectService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSConnectService.m; sourceTree = "<group>"; };
-		7E3E862D2AF988AE006CB5AC /* AWSConnectResources.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSConnectResources.m; sourceTree = "<group>"; };
-		7E3E862E2AF988AE006CB5AC /* AWSConnectModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSConnectModel.h; sourceTree = "<group>"; };
-		7E3E862F2AF988AE006CB5AC /* AWSConnectResources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSConnectResources.h; sourceTree = "<group>"; };
-		7E3E86302AF988AE006CB5AC /* AWSConnectService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSConnectService.h; sourceTree = "<group>"; };
-		7E3E86312AF988AE006CB5AC /* AWSConnect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSConnect.h; sourceTree = "<group>"; };
-		7E3E86322AF988AE006CB5AC /* AWSConnectModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSConnectModel.m; sourceTree = "<group>"; };
-		7E3E86352AF988AE006CB5AC /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		7E3E86362AF988AE006CB5AC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		7E3E86392AF988AE006CB5AC /* Transport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transport.swift; sourceTree = "<group>"; };
-		7E3E863A2AF988AE006CB5AC /* FoundationTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationTransport.swift; sourceTree = "<group>"; };
-		7E3E863B2AF988AE006CB5AC /* TCPTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCPTransport.swift; sourceTree = "<group>"; };
-		7E3E863D2AF988AE006CB5AC /* Security.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Security.swift; sourceTree = "<group>"; };
-		7E3E863E2AF988AE006CB5AC /* FoundationSecurity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationSecurity.swift; sourceTree = "<group>"; };
-		7E3E86402AF988AE006CB5AC /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
-		7E3E86422AF988AE006CB5AC /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
-		7E3E86432AF988AE006CB5AC /* WebSocketServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketServer.swift; sourceTree = "<group>"; };
-		7E3E86452AF988AE006CB5AC /* FoundationHTTPHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationHTTPHandler.swift; sourceTree = "<group>"; };
-		7E3E86462AF988AE006CB5AC /* HTTPHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHandler.swift; sourceTree = "<group>"; };
-		7E3E86472AF988AE006CB5AC /* FrameCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameCollector.swift; sourceTree = "<group>"; };
-		7E3E86482AF988AE006CB5AC /* StringHTTPHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHTTPHandler.swift; sourceTree = "<group>"; };
-		7E3E86492AF988AE006CB5AC /* FoundationHTTPServerHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationHTTPServerHandler.swift; sourceTree = "<group>"; };
-		7E3E864A2AF988AE006CB5AC /* Framer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Framer.swift; sourceTree = "<group>"; };
-		7E3E864C2AF988AE006CB5AC /* Compression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compression.swift; sourceTree = "<group>"; };
-		7E3E864D2AF988AE006CB5AC /* WSCompression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSCompression.swift; sourceTree = "<group>"; };
-		7E3E864F2AF988AE006CB5AC /* WebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
-		7E3E86512AF988AE006CB5AC /* Engine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engine.swift; sourceTree = "<group>"; };
-		7E3E86522AF988AE006CB5AC /* NativeEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeEngine.swift; sourceTree = "<group>"; };
-		7E3E86532AF988AE006CB5AC /* WSEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSEngine.swift; sourceTree = "<group>"; };
-		7E3E86552AF988AE006CB5AC /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		7E3E86562AF988AE006CB5AC /* LICENSE.APACHE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.APACHE; sourceTree = "<group>"; };
-		7E3E86572AF988AE006CB5AC /* README-spm-support.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "README-spm-support.md"; sourceTree = "<group>"; };
-		7E3E865A2AF988AE006CB5AC /* AWSConnectParticipantModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSConnectParticipantModel.h; sourceTree = "<group>"; };
-		7E3E865B2AF988AE006CB5AC /* AWSConnectParticipantService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSConnectParticipantService.m; sourceTree = "<group>"; };
-		7E3E865C2AF988AE006CB5AC /* AWSConnectParticipantResources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSConnectParticipantResources.h; sourceTree = "<group>"; };
-		7E3E865D2AF988AE006CB5AC /* AWSConnectParticipantModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSConnectParticipantModel.m; sourceTree = "<group>"; };
-		7E3E865E2AF988AE006CB5AC /* AWSConnectParticipant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSConnectParticipant.h; sourceTree = "<group>"; };
-		7E3E865F2AF988AE006CB5AC /* AWSConnectParticipantResources.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AWSConnectParticipantResources.m; sourceTree = "<group>"; };
-		7E3E86602AF988AE006CB5AC /* AWSConnectParticipantService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSConnectParticipantService.h; sourceTree = "<group>"; };
-		7E3E86622AF988AE006CB5AC /* ChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUITests.swift; sourceTree = "<group>"; };
-		7E3E86632AF988AE006CB5AC /* ChatUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		7E3E86652AF988AE006CB5AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		7E3E86672AF988AE006CB5AC /* ChatEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatEvent.swift; sourceTree = "<group>"; };
-		7E3E86692AF988AE006CB5AC /* DefaultHttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHttpClient.swift; sourceTree = "<group>"; };
-		7E3E866A2AF988AE006CB5AC /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
-		7E3E866B2AF988AE006CB5AC /* HttpHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpHeader.swift; sourceTree = "<group>"; };
-		7E3E866C2AF988AE006CB5AC /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
-		7E3E866D2AF988AE006CB5AC /* CommonUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
-		7E3E866F2AF988AE006CB5AC /* MessageContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContent.swift; sourceTree = "<group>"; };
-		7E3E86702AF988AE006CB5AC /* CreateStartChatResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStartChatResponse.swift; sourceTree = "<group>"; };
-		7E3E86712AF988AE006CB5AC /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		7E3E86722AF988AE006CB5AC /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		7E3E86732AF988AE006CB5AC /* CreateStartChatRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStartChatRequest.swift; sourceTree = "<group>"; };
-		7E3E86742AF988AE006CB5AC /* ChatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
-		7E3E86752AF988AE006CB5AC /* WebSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketManager.swift; sourceTree = "<group>"; };
-		7E3E86772AF988AE006CB5AC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		7E3E86792AF988AE006CB5AC /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		7E3E867A2AF988AE006CB5AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7E3E867B2AF988AE006CB5AC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7E3E867D2AF988AE006CB5AC /* TypingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingIndicator.swift; sourceTree = "<group>"; };
-		7E3E867E2AF988AE006CB5AC /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
-		7E3E867F2AF988AE006CB5AC /* QuickReplyContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickReplyContentView.swift; sourceTree = "<group>"; };
-		7E3E86802AF988AE006CB5AC /* ListPickerContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPickerContentView.swift; sourceTree = "<group>"; };
-		7E3E86812AF988AE006CB5AC /* ChatMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageView.swift; sourceTree = "<group>"; };
-		7E3E86822AF988AE006CB5AC /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
-		7E3E86832AF988AE006CB5AC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		7E3E86842AF988AE006CB5AC /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
-		7E3E86852AF988AE006CB5AC /* ChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatApp.swift; sourceTree = "<group>"; };
-		7E3E86862AF988AE006CB5AC /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
-		7E3E86872AF988AE006CB5AC /* iOSChatExample.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = iOSChatExample.xcodeproj; sourceTree = "<group>"; };
-		7E3E868B2AF988AE006CB5AC /* ChatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTests.swift; sourceTree = "<group>"; };
-		7E3E868C2AF988AE006CB5AC /* Podfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
-		7E3E86A22AF988D9006CB5AC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		7E821ABF2B7C59DC00059164 /* TranscriptResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptResponse.swift; sourceTree = "<group>"; };
-		7EC6FDFA2AF6D9EC00CDF3AC /* MessageContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContent.swift; sourceTree = "<group>"; };
-		7EC6FDFE2AF748AA00CDF3AC /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
-		7EC6FE002AF8352600CDF3AC /* ListPickerContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPickerContentView.swift; sourceTree = "<group>"; };
-		7EC6FE022AF8354F00CDF3AC /* QuickReplyContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickReplyContentView.swift; sourceTree = "<group>"; };
-		7EE64DCC2AE3725E004E6A34 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7EE64DCE2AE372A8004E6A34 /* WebSocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocketManager.swift; sourceTree = "<group>"; };
-		7EE64DD02AE372B6004E6A34 /* ChatManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
-		7EE64DD22AE372DD004E6A34 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
-		7EFE5FE62AE36BD800EA85C4 /* iOSChatExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSChatExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7EFE5FE92AE36BD800EA85C4 /* ChatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatApp.swift; sourceTree = "<group>"; };
-		7EFE5FEB2AE36BD800EA85C4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		7EFE5FED2AE36BD900EA85C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		7EFE5FF02AE36BD900EA85C4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		7EFE5FF62AE36BD900EA85C4 /* iOSChatExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSChatExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7EFE5FFA2AE36BD900EA85C4 /* ChatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTests.swift; sourceTree = "<group>"; };
-		7EFE60002AE36BD900EA85C4 /* iOSChatExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSChatExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7EFE60042AE36BD900EA85C4 /* ChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUITests.swift; sourceTree = "<group>"; };
-		7EFE60062AE36BD900EA85C4 /* ChatUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		A16AF42EFCB24543A558DEFD /* Pods_iOSChatExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSChatExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A3128C6DCD0EEDE8A9F93F98 /* Pods-iOSChatExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSChatExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-iOSChatExampleTests/Pods-iOSChatExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
-		B7498F7026F80A5276FB87B5 /* Pods-iOSChatExample-iOSChatExampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSChatExample-iOSChatExampleUITests.debug.xcconfig"; path = "Target Support Files/Pods-iOSChatExample-iOSChatExampleUITests/Pods-iOSChatExample-iOSChatExampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		B8F136BC9800A14BC86B8D0C /* Pods_iOSChatExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSChatExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		ECA70CBBE017182DF10BCA8A /* Pods_iOSChatExample_iOSChatExampleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSChatExample_iOSChatExampleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F453D95C7C597025D99DD23D /* Pods-Chat-ChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chat-ChatUITests.release.xcconfig"; path = "Target Support Files/Pods-Chat-ChatUITests/Pods-Chat-ChatUITests.release.xcconfig"; sourceTree = "<group>"; };
-		F619C6C2FEFF4582FE28A9C4 /* Pods-ChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatTests.release.xcconfig"; path = "Target Support Files/Pods-ChatTests/Pods-ChatTests.release.xcconfig"; sourceTree = "<group>"; };
+		49C6367BB2D0876643D5395F /* Pods_iOSChatExample_iOSChatExampleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSChatExample_iOSChatExampleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DA7AD106CD43AFBCDA6B713 /* Pods-iOSChatExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSChatExample.release.xcconfig"; path = "Target Support Files/Pods-iOSChatExample/Pods-iOSChatExample.release.xcconfig"; sourceTree = "<group>"; };
+		65AC4142F3B70089B68792DD /* Pods-iOSChatExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSChatExampleTests.release.xcconfig"; path = "Target Support Files/Pods-iOSChatExampleTests/Pods-iOSChatExampleTests.release.xcconfig"; sourceTree = "<group>"; };
+		7E9159142BBE674100821C05 /* iOSChatExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSChatExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E91591B2BBE674200821C05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7E91591E2BBE674200821C05 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7E9159242BBE674200821C05 /* iOSChatExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSChatExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E9159282BBE674200821C05 /* iOSChatExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSChatExampleTests.swift; sourceTree = "<group>"; };
+		7E91592E2BBE674200821C05 /* iOSChatExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSChatExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E9159322BBE674200821C05 /* iOSChatExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSChatExampleUITests.swift; sourceTree = "<group>"; };
+		7E9159342BBE674200821C05 /* iOSChatExampleUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSChatExampleUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7E9159422BBE67D500821C05 /* TypingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypingIndicator.swift; sourceTree = "<group>"; };
+		7E9159432BBE67D500821C05 /* TestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		7E9159442BBE67D500821C05 /* QuickReplyContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickReplyContentView.swift; sourceTree = "<group>"; };
+		7E9159452BBE67D500821C05 /* ListPickerContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListPickerContentView.swift; sourceTree = "<group>"; };
+		7E9159462BBE67D500821C05 /* ChatMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageView.swift; sourceTree = "<group>"; };
+		7E9159472BBE67D500821C05 /* ChatView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		7E9159482BBE67D500821C05 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7E9159492BBE67D500821C05 /* FloatingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
+		7E91594A2BBE67D500821C05 /* ChatApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatApp.swift; sourceTree = "<group>"; };
+		7E91594C2BBE67D500821C05 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		7E91594D2BBE67D500821C05 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7E91594E2BBE67D500821C05 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		7E9159502BBE67D500821C05 /* MessageContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageContent.swift; sourceTree = "<group>"; };
+		7E9159512BBE67D500821C05 /* CreateStartChatResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStartChatResponse.swift; sourceTree = "<group>"; };
+		7E9159522BBE67D500821C05 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		7E9159532BBE67D500821C05 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		7E9159542BBE67D500821C05 /* CreateStartChatRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStartChatRequest.swift; sourceTree = "<group>"; };
+		7E9159552BBE67D500821C05 /* ChatManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
+		7E9159562BBE67D500821C05 /* TranscriptResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranscriptResponse.swift; sourceTree = "<group>"; };
+		7E9159572BBE67D500821C05 /* WebSocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocketManager.swift; sourceTree = "<group>"; };
+		7E9159592BBE67D500821C05 /* ChatEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatEvent.swift; sourceTree = "<group>"; };
+		7E91595B2BBE67D500821C05 /* DefaultHttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultHttpClient.swift; sourceTree = "<group>"; };
+		7E91595C2BBE67D500821C05 /* HttpMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
+		7E91595D2BBE67D500821C05 /* HttpHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpHeader.swift; sourceTree = "<group>"; };
+		7E91595E2BBE67D500821C05 /* HttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
+		7E91595F2BBE67D500821C05 /* CommonUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
+		87BDA2C5D5797785082F5C61 /* Pods-iOSChatExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSChatExample.debug.xcconfig"; path = "Target Support Files/Pods-iOSChatExample/Pods-iOSChatExample.debug.xcconfig"; sourceTree = "<group>"; };
+		9334EF492AF9ECD41BED6E08 /* Pods_iOSChatExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSChatExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		96C0239A868D653B1596D9D5 /* Pods-iOSChatExample-iOSChatExampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSChatExample-iOSChatExampleUITests.release.xcconfig"; path = "Target Support Files/Pods-iOSChatExample-iOSChatExampleUITests/Pods-iOSChatExample-iOSChatExampleUITests.release.xcconfig"; sourceTree = "<group>"; };
+		AC5E6D01633F96994CE633CA /* Pods-iOSChatExample-iOSChatExampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSChatExample-iOSChatExampleUITests.debug.xcconfig"; path = "Target Support Files/Pods-iOSChatExample-iOSChatExampleUITests/Pods-iOSChatExample-iOSChatExampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		AED8EA0CC8097833A3D2AAD6 /* Pods_iOSChatExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSChatExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF3B8D52D30464DDBCE5C30F /* Pods-iOSChatExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSChatExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-iOSChatExampleTests/Pods-iOSChatExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7EFE5FE32AE36BD800EA85C4 /* Frameworks */ = {
+		7E9159112BBE674100821C05 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F2D37845AFE45BE032C04E3 /* Pods_iOSChatExample.framework in Frameworks */,
+				76CBA3E0933F4899FC8FE220 /* Pods_iOSChatExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7EFE5FF32AE36BD900EA85C4 /* Frameworks */ = {
+		7E9159212BBE674200821C05 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4FD39CAACE378C9345661879 /* Pods_iOSChatExampleTests.framework in Frameworks */,
+				4C2CE7B5B4492A6AD18EE508 /* Pods_iOSChatExampleTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7EFE5FFD2AE36BD900EA85C4 /* Frameworks */ = {
+		7E91592B2BBE674200821C05 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90F2054D4A915D823A22B9A8 /* Pods_iOSChatExample_iOSChatExampleUITests.framework in Frameworks */,
+				F202396070A99BAF4EAB9C84 /* Pods_iOSChatExample_iOSChatExampleUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		484EC042BE4C86BA7E1CCE16 /* Pods */ = {
+		697C8D19CE221ADB8478DD5D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7DE20D0151A4ACCC74F81A2C /* Pods-Chat.debug.xcconfig */,
-				1689F4DC69E1765B0A37D416 /* Pods-Chat.release.xcconfig */,
-				2A3FCC62CACD723D42CB74D7 /* Pods-Chat-ChatUITests.debug.xcconfig */,
-				F453D95C7C597025D99DD23D /* Pods-Chat-ChatUITests.release.xcconfig */,
-				6FE41B09460A7CEDCCA8A2EE /* Pods-ChatTests.debug.xcconfig */,
-				F619C6C2FEFF4582FE28A9C4 /* Pods-ChatTests.release.xcconfig */,
-				0905B3AC24CDAF25E2E3F9FD /* Pods-iOSChatExample.debug.xcconfig */,
-				0E07ED73E4CEBD86809213E4 /* Pods-iOSChatExample.release.xcconfig */,
-				B7498F7026F80A5276FB87B5 /* Pods-iOSChatExample-iOSChatExampleUITests.debug.xcconfig */,
-				13CD88C682D65D08EBD7BD34 /* Pods-iOSChatExample-iOSChatExampleUITests.release.xcconfig */,
-				A3128C6DCD0EEDE8A9F93F98 /* Pods-iOSChatExampleTests.debug.xcconfig */,
-				302D0F1F90D6FEC9B0CBCFF0 /* Pods-iOSChatExampleTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
-		782DD59669931C5ADD056B8F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				A16AF42EFCB24543A558DEFD /* Pods_iOSChatExample.framework */,
-				ECA70CBBE017182DF10BCA8A /* Pods_iOSChatExample_iOSChatExampleUITests.framework */,
-				B8F136BC9800A14BC86B8D0C /* Pods_iOSChatExampleTests.framework */,
+				9334EF492AF9ECD41BED6E08 /* Pods_iOSChatExample.framework */,
+				49C6367BB2D0876643D5395F /* Pods_iOSChatExample_iOSChatExampleUITests.framework */,
+				AED8EA0CC8097833A3D2AAD6 /* Pods_iOSChatExampleTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7E21A7B42AF2DC7F006C4F39 /* Common */ = {
+		7E91590B2BBE674100821C05 = {
 			isa = PBXGroup;
 			children = (
-				7EE64DCC2AE3725E004E6A34 /* AppDelegate.swift */,
-				7E21A7B62AF2DFE3006C4F39 /* SceneDelegate.swift */,
-				7E21A7F02AF2E188006C4F39 /* Config.swift */,
+				7E9159162BBE674100821C05 /* iOSChatExample */,
+				7E9159272BBE674200821C05 /* iOSChatExampleTests */,
+				7E9159312BBE674200821C05 /* iOSChatExampleUITests */,
+				7E9159152BBE674100821C05 /* Products */,
+				9854A531CD839217B39D6669 /* Pods */,
+				697C8D19CE221ADB8478DD5D /* Frameworks */,
 			);
-			path = Common;
 			sourceTree = "<group>";
 		};
-		7E21A7EE2AF2E0AC006C4F39 /* Models */ = {
+		7E9159152BBE674100821C05 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7E21A7FD2AF2E637006C4F39 /* CreateStartChatRequest.swift */,
-				7E21A7FE2AF2E637006C4F39 /* CreateStartChatResponse.swift */,
-				7EE64DD22AE372DD004E6A34 /* Message.swift */,
-				7EE64DD02AE372B6004E6A34 /* ChatManager.swift */,
-				7EE64DCE2AE372A8004E6A34 /* WebSocketManager.swift */,
-				7E21A8012AF2E65C006C4F39 /* NetworkManager.swift */,
-				7EC6FDFA2AF6D9EC00CDF3AC /* MessageContent.swift */,
-				7E821ABF2B7C59DC00059164 /* TranscriptResponse.swift */,
+				7E9159142BBE674100821C05 /* iOSChatExample.app */,
+				7E9159242BBE674200821C05 /* iOSChatExampleTests.xctest */,
+				7E91592E2BBE674200821C05 /* iOSChatExampleUITests.xctest */,
 			);
-			path = Models;
+			name = Products;
 			sourceTree = "<group>";
 		};
-		7E21A7EF2AF2E0C7006C4F39 /* Views */ = {
+		7E9159162BBE674100821C05 /* iOSChatExample */ = {
 			isa = PBXGroup;
 			children = (
-				7EFE5FEB2AE36BD800EA85C4 /* ContentView.swift */,
-				7E21A80E2AF30B04006C4F39 /* FloatingButton.swift */,
-				7E21A8102AF30B34006C4F39 /* ChatMessageView.swift */,
-				7E21A8122AF30B51006C4F39 /* ChatView.swift */,
-				7E21A8142AF3707F006C4F39 /* TypingIndicator.swift */,
-				7EC6FDFE2AF748AA00CDF3AC /* TestView.swift */,
-				7EC6FE002AF8352600CDF3AC /* ListPickerContentView.swift */,
-				7EC6FE022AF8354F00CDF3AC /* QuickReplyContentView.swift */,
+				7E91594A2BBE67D500821C05 /* ChatApp.swift */,
+				7E91594B2BBE67D500821C05 /* Common */,
+				7E91594F2BBE67D500821C05 /* Models */,
+				7E9159582BBE67D500821C05 /* Utils */,
+				7E9159412BBE67D500821C05 /* Views */,
+				7E91591B2BBE674200821C05 /* Assets.xcassets */,
+				7E91591D2BBE674200821C05 /* Preview Content */,
+			);
+			path = iOSChatExample;
+			sourceTree = "<group>";
+		};
+		7E91591D2BBE674200821C05 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				7E91591E2BBE674200821C05 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		7E9159272BBE674200821C05 /* iOSChatExampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				7E9159282BBE674200821C05 /* iOSChatExampleTests.swift */,
+			);
+			path = iOSChatExampleTests;
+			sourceTree = "<group>";
+		};
+		7E9159312BBE674200821C05 /* iOSChatExampleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				7E9159322BBE674200821C05 /* iOSChatExampleUITests.swift */,
+				7E9159342BBE674200821C05 /* iOSChatExampleUITestsLaunchTests.swift */,
+			);
+			path = iOSChatExampleUITests;
+			sourceTree = "<group>";
+		};
+		7E9159412BBE67D500821C05 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7E9159422BBE67D500821C05 /* TypingIndicator.swift */,
+				7E9159432BBE67D500821C05 /* TestView.swift */,
+				7E9159442BBE67D500821C05 /* QuickReplyContentView.swift */,
+				7E9159452BBE67D500821C05 /* ListPickerContentView.swift */,
+				7E9159462BBE67D500821C05 /* ChatMessageView.swift */,
+				7E9159472BBE67D500821C05 /* ChatView.swift */,
+				7E9159482BBE67D500821C05 /* ContentView.swift */,
+				7E9159492BBE67D500821C05 /* FloatingButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		7E21A7F22AF2E2ED006C4F39 /* Utils */ = {
+		7E91594B2BBE67D500821C05 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				7E21A80C2AF2F85E006C4F39 /* ChatEvent.swift */,
-				7E21A8162AF41B64006C4F39 /* CommonUtils.swift */,
-				7E21A8032AF2E8AD006C4F39 /* Network */,
+				7E91594C2BBE67D500821C05 /* Config.swift */,
+				7E91594D2BBE67D500821C05 /* AppDelegate.swift */,
+				7E91594E2BBE67D500821C05 /* SceneDelegate.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		7E91594F2BBE67D500821C05 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7E9159502BBE67D500821C05 /* MessageContent.swift */,
+				7E9159512BBE67D500821C05 /* CreateStartChatResponse.swift */,
+				7E9159522BBE67D500821C05 /* Message.swift */,
+				7E9159532BBE67D500821C05 /* NetworkManager.swift */,
+				7E9159542BBE67D500821C05 /* CreateStartChatRequest.swift */,
+				7E9159552BBE67D500821C05 /* ChatManager.swift */,
+				7E9159562BBE67D500821C05 /* TranscriptResponse.swift */,
+				7E9159572BBE67D500821C05 /* WebSocketManager.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7E9159582BBE67D500821C05 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7E9159592BBE67D500821C05 /* ChatEvent.swift */,
+				7E91595A2BBE67D500821C05 /* Network */,
+				7E91595F2BBE67D500821C05 /* CommonUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		7E21A8032AF2E8AD006C4F39 /* Network */ = {
+		7E91595A2BBE67D500821C05 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				7E21A8062AF2E8B9006C4F39 /* DefaultHttpClient.swift */,
-				7E21A8042AF2E8B9006C4F39 /* HttpClient.swift */,
-				7E21A8072AF2E8BA006C4F39 /* HttpHeader.swift */,
-				7E21A8052AF2E8B9006C4F39 /* HttpMethod.swift */,
+				7E91595B2BBE67D500821C05 /* DefaultHttpClient.swift */,
+				7E91595C2BBE67D500821C05 /* HttpMethod.swift */,
+				7E91595D2BBE67D500821C05 /* HttpHeader.swift */,
+				7E91595E2BBE67D500821C05 /* HttpClient.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
 		};
-		7E3E85242AF988AE006CB5AC /* iOSChatExample */ = {
+		9854A531CD839217B39D6669 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7E3E85252AF988AE006CB5AC /* iOSChatExample.xcworkspace */,
-				7E3E85262AF988AE006CB5AC /* Pods */,
-				7E3E86612AF988AE006CB5AC /* iOSChatExampleUITests */,
-				7E3E86642AF988AE006CB5AC /* iOSChatExample */,
-				7E3E86862AF988AE006CB5AC /* Podfile */,
-				7E3E86872AF988AE006CB5AC /* iOSChatExample.xcodeproj */,
-				7E3E868A2AF988AE006CB5AC /* iOSChatExampleTests */,
-				7E3E868C2AF988AE006CB5AC /* Podfile.lock */,
-			);
-			name = iOSChatExample;
-			sourceTree = "<group>";
-		};
-		7E3E85262AF988AE006CB5AC /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E85272AF988AE006CB5AC /* Pods.xcodeproj */,
-				7E3E852A2AF988AE006CB5AC /* AWSCore */,
-				7E3E85DF2AF988AE006CB5AC /* Target Support Files */,
-				7E3E86252AF988AE006CB5AC /* Manifest.lock */,
-				7E3E86262AF988AE006CB5AC /* Local Podspecs */,
-				7E3E86272AF988AE006CB5AC /* AWSConnect */,
-				7E3E86332AF988AE006CB5AC /* Headers */,
-				7E3E86342AF988AE006CB5AC /* Starscream */,
-				7E3E86542AF988AE006CB5AC /* AWSConnectParticipant */,
+				87BDA2C5D5797785082F5C61 /* Pods-iOSChatExample.debug.xcconfig */,
+				4DA7AD106CD43AFBCDA6B713 /* Pods-iOSChatExample.release.xcconfig */,
+				AC5E6D01633F96994CE633CA /* Pods-iOSChatExample-iOSChatExampleUITests.debug.xcconfig */,
+				96C0239A868D653B1596D9D5 /* Pods-iOSChatExample-iOSChatExampleUITests.release.xcconfig */,
+				FF3B8D52D30464DDBCE5C30F /* Pods-iOSChatExampleTests.debug.xcconfig */,
+				65AC4142F3B70089B68792DD /* Pods-iOSChatExampleTests.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		7E3E85282AF988AE006CB5AC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E86952AF988AE006CB5AC /* AWSConnect */,
-				7E3E86972AF988AE006CB5AC /* AWSConnectParticipant */,
-				7E3E86992AF988AE006CB5AC /* AWSCore */,
-				7E3E869B2AF988AE006CB5AC /* Pods-iOSChatExample */,
-				7E3E869D2AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests */,
-				7E3E869F2AF988AE006CB5AC /* Pods-iOSChatExampleTests */,
-				7E3E86A12AF988AE006CB5AC /* Starscream */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		7E3E852A2AF988AE006CB5AC /* AWSCore */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E852B2AF988AE006CB5AC /* AWSCore */,
-				7E3E85DC2AF988AE006CB5AC /* LICENSE */,
-				7E3E85DD2AF988AE006CB5AC /* LICENSE.APACHE */,
-				7E3E85DE2AF988AE006CB5AC /* README-spm-support.md */,
-			);
-			path = AWSCore;
-			sourceTree = "<group>";
-		};
-		7E3E852B2AF988AE006CB5AC /* AWSCore */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E852C2AF988AE006CB5AC /* AWSCore.h */,
-				7E3E852D2AF988AE006CB5AC /* CognitoIdentity */,
-				7E3E85372AF988AE006CB5AC /* Mantle */,
-				7E3E85582AF988AE006CB5AC /* XMLWriter */,
-				7E3E855B2AF988AE006CB5AC /* Networking */,
-				7E3E85622AF988AE006CB5AC /* Serialization */,
-				7E3E856F2AF988AE006CB5AC /* GZIP */,
-				7E3E85722AF988AE006CB5AC /* Bolts */,
-				7E3E85822AF988AE006CB5AC /* XMLDictionary */,
-				7E3E85852AF988AE006CB5AC /* Fabric */,
-				7E3E858A2AF988AE006CB5AC /* FMDB */,
-				7E3E85992AF988AE006CB5AC /* Service */,
-				7E3E85A12AF988AE006CB5AC /* UICKeyChainStore */,
-				7E3E85A42AF988AE006CB5AC /* Authentication */,
-				7E3E85AB2AF988AE006CB5AC /* Logging */,
-				7E3E85C62AF988AE006CB5AC /* STS */,
-				7E3E85CE2AF988AE006CB5AC /* Utility */,
-				7E3E85D92AF988AE006CB5AC /* KSReachability */,
-			);
-			path = AWSCore;
-			sourceTree = "<group>";
-		};
-		7E3E852D2AF988AE006CB5AC /* CognitoIdentity */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E852E2AF988AE006CB5AC /* AWSCognitoIdentity+Fabric.m */,
-				7E3E852F2AF988AE006CB5AC /* AWSCognitoIdentityModel.h */,
-				7E3E85302AF988AE006CB5AC /* AWSCognitoIdentityResources.h */,
-				7E3E85312AF988AE006CB5AC /* AWSCognitoIdentityService.m */,
-				7E3E85322AF988AE006CB5AC /* AWSCognitoIdentityModel.m */,
-				7E3E85332AF988AE006CB5AC /* AWSCognitoIdentity+Fabric.h */,
-				7E3E85342AF988AE006CB5AC /* AWSCognitoIdentityResources.m */,
-				7E3E85352AF988AE006CB5AC /* AWSCognitoIdentityService.h */,
-				7E3E85362AF988AE006CB5AC /* AWSCognitoIdentity.h */,
-			);
-			path = CognitoIdentity;
-			sourceTree = "<group>";
-		};
-		7E3E85372AF988AE006CB5AC /* Mantle */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E85382AF988AE006CB5AC /* AWSMTLModel+NSCoding.h */,
-				7E3E85392AF988AE006CB5AC /* AWSMTLManagedObjectAdapter.m */,
-				7E3E853A2AF988AE006CB5AC /* NSError+AWSMTLModelException.m */,
-				7E3E853B2AF988AE006CB5AC /* AWSMTLValueTransformer.h */,
-				7E3E853C2AF988AE006CB5AC /* extobjc */,
-				7E3E85432AF988AE006CB5AC /* NSValueTransformer+AWSMTLPredefinedTransformerAdditions.m */,
-				7E3E85442AF988AE006CB5AC /* AWSMTLJSONAdapter.h */,
-				7E3E85452AF988AE006CB5AC /* NSArray+AWSMTLManipulationAdditions.m */,
-				7E3E85462AF988AE006CB5AC /* AWSMTLReflection.m */,
-				7E3E85472AF988AE006CB5AC /* NSObject+AWSMTLComparisonAdditions.m */,
-				7E3E85482AF988AE006CB5AC /* NSValueTransformer+AWSMTLInversionAdditions.h */,
-				7E3E85492AF988AE006CB5AC /* AWSMTLModel.h */,
-				7E3E854A2AF988AE006CB5AC /* NSDictionary+AWSMTLManipulationAdditions.m */,
-				7E3E854B2AF988AE006CB5AC /* AWSMTLModel+NSCoding.m */,
-				7E3E854C2AF988AE006CB5AC /* AWSMTLValueTransformer.m */,
-				7E3E854D2AF988AE006CB5AC /* NSError+AWSMTLModelException.h */,
-				7E3E854E2AF988AE006CB5AC /* AWSMTLManagedObjectAdapter.h */,
-				7E3E854F2AF988AE006CB5AC /* NSValueTransformer+AWSMTLInversionAdditions.m */,
-				7E3E85502AF988AE006CB5AC /* NSObject+AWSMTLComparisonAdditions.h */,
-				7E3E85512AF988AE006CB5AC /* NSArray+AWSMTLManipulationAdditions.h */,
-				7E3E85522AF988AE006CB5AC /* AWSMTLReflection.h */,
-				7E3E85532AF988AE006CB5AC /* AWSMTLJSONAdapter.m */,
-				7E3E85542AF988AE006CB5AC /* NSValueTransformer+AWSMTLPredefinedTransformerAdditions.h */,
-				7E3E85552AF988AE006CB5AC /* NSDictionary+AWSMTLManipulationAdditions.h */,
-				7E3E85562AF988AE006CB5AC /* AWSMantle.h */,
-				7E3E85572AF988AE006CB5AC /* AWSMTLModel.m */,
-			);
-			path = Mantle;
-			sourceTree = "<group>";
-		};
-		7E3E853C2AF988AE006CB5AC /* extobjc */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E853D2AF988AE006CB5AC /* AWSEXTRuntimeExtensions.h */,
-				7E3E853E2AF988AE006CB5AC /* AWSEXTScope.h */,
-				7E3E853F2AF988AE006CB5AC /* AWSmetamacros.h */,
-				7E3E85402AF988AE006CB5AC /* AWSEXTRuntimeExtensions.m */,
-				7E3E85412AF988AE006CB5AC /* AWSEXTKeyPathCoding.h */,
-				7E3E85422AF988AE006CB5AC /* AWSEXTScope.m */,
-			);
-			path = extobjc;
-			sourceTree = "<group>";
-		};
-		7E3E85582AF988AE006CB5AC /* XMLWriter */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E85592AF988AE006CB5AC /* AWSXMLWriter.m */,
-				7E3E855A2AF988AE006CB5AC /* AWSXMLWriter.h */,
-			);
-			path = XMLWriter;
-			sourceTree = "<group>";
-		};
-		7E3E855B2AF988AE006CB5AC /* Networking */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E855C2AF988AE006CB5AC /* AWSNetworking.h */,
-				7E3E855D2AF988AE006CB5AC /* AWSURLSessionManager.m */,
-				7E3E855E2AF988AE006CB5AC /* AWSNetworkingHelpers.h */,
-				7E3E855F2AF988AE006CB5AC /* AWSNetworking.m */,
-				7E3E85602AF988AE006CB5AC /* AWSURLSessionManager.h */,
-				7E3E85612AF988AE006CB5AC /* AWSNetworkingHelpers.m */,
-			);
-			path = Networking;
-			sourceTree = "<group>";
-		};
-		7E3E85622AF988AE006CB5AC /* Serialization */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E85632AF988AE006CB5AC /* AWSURLRequestSerialization.m */,
-				7E3E85642AF988AE006CB5AC /* AWSURLResponseSerialization.m */,
-				7E3E85652AF988AE006CB5AC /* AWSValidation.h */,
-				7E3E85662AF988AE006CB5AC /* AWSTimestampSerialization.h */,
-				7E3E85672AF988AE006CB5AC /* AWSSerialization.m */,
-				7E3E85682AF988AE006CB5AC /* AWSURLRequestRetryHandler.m */,
-				7E3E85692AF988AE006CB5AC /* AWSURLRequestSerialization.h */,
-				7E3E856A2AF988AE006CB5AC /* AWSValidation.m */,
-				7E3E856B2AF988AE006CB5AC /* AWSURLResponseSerialization.h */,
-				7E3E856C2AF988AE006CB5AC /* AWSURLRequestRetryHandler.h */,
-				7E3E856D2AF988AE006CB5AC /* AWSSerialization.h */,
-				7E3E856E2AF988AE006CB5AC /* AWSTimestampSerialization.m */,
-			);
-			path = Serialization;
-			sourceTree = "<group>";
-		};
-		7E3E856F2AF988AE006CB5AC /* GZIP */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E85702AF988AE006CB5AC /* AWSGZIP.h */,
-				7E3E85712AF988AE006CB5AC /* AWSGZIP.m */,
-			);
-			path = GZIP;
-			sourceTree = "<group>";
-		};
-		7E3E85722AF988AE006CB5AC /* Bolts */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E85732AF988AE006CB5AC /* AWSCancellationTokenSource.h */,
-				7E3E85742AF988AE006CB5AC /* AWSExecutor.h */,
-				7E3E85752AF988AE006CB5AC /* AWSCancellationToken.m */,
-				7E3E85762AF988AE006CB5AC /* AWSTask.h */,
-				7E3E85772AF988AE006CB5AC /* AWSBolts.m */,
-				7E3E85782AF988AE006CB5AC /* AWSCancellationTokenRegistration.m */,
-				7E3E85792AF988AE006CB5AC /* AWSTaskCompletionSource.h */,
-				7E3E857A2AF988AE006CB5AC /* AWSGeneric.h */,
-				7E3E857B2AF988AE006CB5AC /* AWSCancellationToken.h */,
-				7E3E857C2AF988AE006CB5AC /* AWSExecutor.m */,
-				7E3E857D2AF988AE006CB5AC /* AWSCancellationTokenSource.m */,
-				7E3E857E2AF988AE006CB5AC /* AWSCancellationTokenRegistration.h */,
-				7E3E857F2AF988AE006CB5AC /* AWSTask.m */,
-				7E3E85802AF988AE006CB5AC /* AWSBolts.h */,
-				7E3E85812AF988AE006CB5AC /* AWSTaskCompletionSource.m */,
-			);
-			path = Bolts;
-			sourceTree = "<group>";
-		};
-		7E3E85822AF988AE006CB5AC /* XMLDictionary */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E85832AF988AE006CB5AC /* AWSXMLDictionary.m */,
-				7E3E85842AF988AE006CB5AC /* AWSXMLDictionary.h */,
-			);
-			path = XMLDictionary;
-			sourceTree = "<group>";
-		};
-		7E3E85852AF988AE006CB5AC /* Fabric */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E85862AF988AE006CB5AC /* Fabric.h */,
-				7E3E85872AF988AE006CB5AC /* FABKitProtocol.h */,
-				7E3E85882AF988AE006CB5AC /* Fabric+FABKits.h */,
-				7E3E85892AF988AE006CB5AC /* FABAttributes.h */,
-			);
-			path = Fabric;
-			sourceTree = "<group>";
-		};
-		7E3E858A2AF988AE006CB5AC /* FMDB */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E858B2AF988AE006CB5AC /* AWSFMDatabasePool.m */,
-				7E3E858C2AF988AE006CB5AC /* AWSFMDB+AWSHelpers.h */,
-				7E3E858D2AF988AE006CB5AC /* AWSFMDatabase+Private.h */,
-				7E3E858E2AF988AE006CB5AC /* AWSFMResultSet.m */,
-				7E3E858F2AF988AE006CB5AC /* AWSFMDatabaseQueue.m */,
-				7E3E85902AF988AE006CB5AC /* AWSFMDatabase.m */,
-				7E3E85912AF988AE006CB5AC /* AWSFMDatabaseAdditions.m */,
-				7E3E85922AF988AE006CB5AC /* AWSFMDB.h */,
-				7E3E85932AF988AE006CB5AC /* AWSFMDatabasePool.h */,
-				7E3E85942AF988AE006CB5AC /* AWSFMDB+AWSHelpers.m */,
-				7E3E85952AF988AE006CB5AC /* AWSFMDatabaseAdditions.h */,
-				7E3E85962AF988AE006CB5AC /* AWSFMDatabaseQueue.h */,
-				7E3E85972AF988AE006CB5AC /* AWSFMDatabase.h */,
-				7E3E85982AF988AE006CB5AC /* AWSFMResultSet.h */,
-			);
-			path = FMDB;
-			sourceTree = "<group>";
-		};
-		7E3E85992AF988AE006CB5AC /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E859A2AF988AE006CB5AC /* AWSClientContext.h */,
-				7E3E859B2AF988AE006CB5AC /* AWSService.m */,
-				7E3E859C2AF988AE006CB5AC /* AWSInfo.m */,
-				7E3E859D2AF988AE006CB5AC /* AWSClientContext.m */,
-				7E3E859E2AF988AE006CB5AC /* AWSService.h */,
-				7E3E859F2AF988AE006CB5AC /* AWSServiceEnum.h */,
-				7E3E85A02AF988AE006CB5AC /* AWSInfo.h */,
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
-		7E3E85A12AF988AE006CB5AC /* UICKeyChainStore */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E85A22AF988AE006CB5AC /* AWSUICKeyChainStore.m */,
-				7E3E85A32AF988AE006CB5AC /* AWSUICKeyChainStore.h */,
-			);
-			path = UICKeyChainStore;
-			sourceTree = "<group>";
-		};
-		7E3E85A42AF988AE006CB5AC /* Authentication */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E85A52AF988AE006CB5AC /* AWSIdentityProvider.m */,
-				7E3E85A62AF988AE006CB5AC /* AWSCredentialsProvider.m */,
-				7E3E85A72AF988AE006CB5AC /* AWSSignature.h */,
-				7E3E85A82AF988AE006CB5AC /* AWSIdentityProvider.h */,
-				7E3E85A92AF988AE006CB5AC /* AWSCredentialsProvider.h */,
-				7E3E85AA2AF988AE006CB5AC /* AWSSignature.m */,
-			);
-			path = Authentication;
-			sourceTree = "<group>";
-		};
-		7E3E85AB2AF988AE006CB5AC /* Logging */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E85AC2AF988AE006CB5AC /* AWSDDAbstractDatabaseLogger.m */,
-				7E3E85AD2AF988AE006CB5AC /* AWSDDTTYLogger.h */,
-				7E3E85AE2AF988AE006CB5AC /* AWSDDLog.m */,
-				7E3E85AF2AF988AE006CB5AC /* AWSDDASLLogCapture.h */,
-				7E3E85B02AF988AE006CB5AC /* AWSDDOSLogger.h */,
-				7E3E85B12AF988AE006CB5AC /* AWSDDAssertMacros.h */,
-				7E3E85B22AF988AE006CB5AC /* AWSDDFileLogger.m */,
-				7E3E85B32AF988AE006CB5AC /* AWSDDASLLogger.h */,
-				7E3E85B42AF988AE006CB5AC /* AWSDDLog+LOGV.h */,
-				7E3E85B52AF988AE006CB5AC /* Extensions */,
-				7E3E85BB2AF988AE006CB5AC /* AWSDDAbstractDatabaseLogger.h */,
-				7E3E85BC2AF988AE006CB5AC /* AWSDDASLLogCapture.m */,
-				7E3E85BD2AF988AE006CB5AC /* AWSDDLog.h */,
-				7E3E85BE2AF988AE006CB5AC /* AWSDDTTYLogger.m */,
-				7E3E85BF2AF988AE006CB5AC /* AWSDDLegacyMacros.h */,
-				7E3E85C02AF988AE006CB5AC /* AWSCocoaLumberjack.h */,
-				7E3E85C12AF988AE006CB5AC /* AWSDDASLLogger.m */,
-				7E3E85C22AF988AE006CB5AC /* AWSDDMultiFormatter.m */,
-				7E3E85C32AF988AE006CB5AC /* AWSDDFileLogger.h */,
-				7E3E85C42AF988AE006CB5AC /* AWSDDLogMacros.h */,
-				7E3E85C52AF988AE006CB5AC /* AWSDDOSLogger.m */,
-			);
-			path = Logging;
-			sourceTree = "<group>";
-		};
-		7E3E85B52AF988AE006CB5AC /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E85B62AF988AE006CB5AC /* AWSDDContextFilterLogFormatter.h */,
-				7E3E85B72AF988AE006CB5AC /* AWSDDDispatchQueueLogFormatter.h */,
-				7E3E85B82AF988AE006CB5AC /* AWSDDMultiFormatter.h */,
-				7E3E85B92AF988AE006CB5AC /* AWSDDContextFilterLogFormatter.m */,
-				7E3E85BA2AF988AE006CB5AC /* AWSDDDispatchQueueLogFormatter.m */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		7E3E85C62AF988AE006CB5AC /* STS */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E85C72AF988AE006CB5AC /* AWSSTSModel.m */,
-				7E3E85C82AF988AE006CB5AC /* AWSSTSService.h */,
-				7E3E85C92AF988AE006CB5AC /* AWSSTS.h */,
-				7E3E85CA2AF988AE006CB5AC /* AWSSTSResources.m */,
-				7E3E85CB2AF988AE006CB5AC /* AWSSTSModel.h */,
-				7E3E85CC2AF988AE006CB5AC /* AWSSTSService.m */,
-				7E3E85CD2AF988AE006CB5AC /* AWSSTSResources.h */,
-			);
-			path = STS;
-			sourceTree = "<group>";
-		};
-		7E3E85CE2AF988AE006CB5AC /* Utility */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E85CF2AF988AE006CB5AC /* AWSModel.h */,
-				7E3E85D02AF988AE006CB5AC /* AWSCategory.h */,
-				7E3E85D12AF988AE006CB5AC /* AWSNSCodingUtilities.h */,
-				7E3E85D22AF988AE006CB5AC /* AWSSynchronizedMutableDictionary.m */,
-				7E3E85D32AF988AE006CB5AC /* AWSLogging.m */,
-				7E3E85D42AF988AE006CB5AC /* AWSModel.m */,
-				7E3E85D52AF988AE006CB5AC /* AWSNSCodingUtilities.m */,
-				7E3E85D62AF988AE006CB5AC /* AWSCategory.m */,
-				7E3E85D72AF988AE006CB5AC /* AWSSynchronizedMutableDictionary.h */,
-				7E3E85D82AF988AE006CB5AC /* AWSLogging.h */,
-			);
-			path = Utility;
-			sourceTree = "<group>";
-		};
-		7E3E85D92AF988AE006CB5AC /* KSReachability */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E85DA2AF988AE006CB5AC /* AWSKSReachability.h */,
-				7E3E85DB2AF988AE006CB5AC /* AWSKSReachability.m */,
-			);
-			path = KSReachability;
-			sourceTree = "<group>";
-		};
-		7E3E85DF2AF988AE006CB5AC /* Target Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E85E02AF988AE006CB5AC /* Pods-iOSChatExampleTests */,
-				7E3E85E92AF988AE006CB5AC /* AWSCore */,
-				7E3E85F12AF988AE006CB5AC /* AWSConnect */,
-				7E3E85F92AF988AE006CB5AC /* Starscream */,
-				7E3E86012AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests */,
-				7E3E860F2AF988AE006CB5AC /* Pods-iOSChatExample */,
-				7E3E861D2AF988AE006CB5AC /* AWSConnectParticipant */,
-			);
-			path = "Target Support Files";
-			sourceTree = "<group>";
-		};
-		7E3E85E02AF988AE006CB5AC /* Pods-iOSChatExampleTests */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E85E12AF988AE006CB5AC /* Pods-iOSChatExampleTests-acknowledgements.plist */,
-				7E3E85E22AF988AE006CB5AC /* Pods-iOSChatExampleTests.debug.xcconfig */,
-				7E3E85E32AF988AE006CB5AC /* Pods-iOSChatExampleTests-dummy.m */,
-				7E3E85E42AF988AE006CB5AC /* Pods-iOSChatExampleTests.release.xcconfig */,
-				7E3E85E52AF988AE006CB5AC /* Pods-iOSChatExampleTests-Info.plist */,
-				7E3E85E62AF988AE006CB5AC /* Pods-iOSChatExampleTests.modulemap */,
-				7E3E85E72AF988AE006CB5AC /* Pods-iOSChatExampleTests-acknowledgements.markdown */,
-				7E3E85E82AF988AE006CB5AC /* Pods-iOSChatExampleTests-umbrella.h */,
-			);
-			path = "Pods-iOSChatExampleTests";
-			sourceTree = "<group>";
-		};
-		7E3E85E92AF988AE006CB5AC /* AWSCore */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E85EA2AF988AE006CB5AC /* AWSCore.debug.xcconfig */,
-				7E3E85EB2AF988AE006CB5AC /* AWSCore-Info.plist */,
-				7E3E85EC2AF988AE006CB5AC /* AWSCore.modulemap */,
-				7E3E85ED2AF988AE006CB5AC /* AWSCore.release.xcconfig */,
-				7E3E85EE2AF988AE006CB5AC /* AWSCore-prefix.pch */,
-				7E3E85EF2AF988AE006CB5AC /* AWSCore-dummy.m */,
-				7E3E85F02AF988AE006CB5AC /* AWSCore-umbrella.h */,
-			);
-			path = AWSCore;
-			sourceTree = "<group>";
-		};
-		7E3E85F12AF988AE006CB5AC /* AWSConnect */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E85F22AF988AE006CB5AC /* AWSConnect.modulemap */,
-				7E3E85F32AF988AE006CB5AC /* AWSConnect-dummy.m */,
-				7E3E85F42AF988AE006CB5AC /* AWSConnect.release.xcconfig */,
-				7E3E85F52AF988AE006CB5AC /* AWSConnect-Info.plist */,
-				7E3E85F62AF988AE006CB5AC /* AWSConnect-umbrella.h */,
-				7E3E85F72AF988AE006CB5AC /* AWSConnect-prefix.pch */,
-				7E3E85F82AF988AE006CB5AC /* AWSConnect.debug.xcconfig */,
-			);
-			path = AWSConnect;
-			sourceTree = "<group>";
-		};
-		7E3E85F92AF988AE006CB5AC /* Starscream */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E85FA2AF988AE006CB5AC /* Starscream.release.xcconfig */,
-				7E3E85FB2AF988AE006CB5AC /* Starscream-Info.plist */,
-				7E3E85FC2AF988AE006CB5AC /* Starscream.debug.xcconfig */,
-				7E3E85FD2AF988AE006CB5AC /* Starscream.modulemap */,
-				7E3E85FE2AF988AE006CB5AC /* Starscream-dummy.m */,
-				7E3E85FF2AF988AE006CB5AC /* Starscream-prefix.pch */,
-				7E3E86002AF988AE006CB5AC /* Starscream-umbrella.h */,
-			);
-			path = Starscream;
-			sourceTree = "<group>";
-		};
-		7E3E86012AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E86022AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests.release.xcconfig */,
-				7E3E86032AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests-Info.plist */,
-				7E3E86042AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests-frameworks.sh */,
-				7E3E86052AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests-acknowledgements.plist */,
-				7E3E86062AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests-frameworks-Release-input-files.xcfilelist */,
-				7E3E86072AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests-frameworks-Debug-output-files.xcfilelist */,
-				7E3E86082AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests.modulemap */,
-				7E3E86092AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests-acknowledgements.markdown */,
-				7E3E860A2AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests-dummy.m */,
-				7E3E860B2AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests.debug.xcconfig */,
-				7E3E860C2AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests-umbrella.h */,
-				7E3E860D2AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests-frameworks-Debug-input-files.xcfilelist */,
-				7E3E860E2AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests-frameworks-Release-output-files.xcfilelist */,
-			);
-			path = "Pods-iOSChatExample-iOSChatExampleUITests";
-			sourceTree = "<group>";
-		};
-		7E3E860F2AF988AE006CB5AC /* Pods-iOSChatExample */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E86102AF988AE006CB5AC /* Pods-iOSChatExample.modulemap */,
-				7E3E86112AF988AE006CB5AC /* Pods-iOSChatExample-Info.plist */,
-				7E3E86122AF988AE006CB5AC /* Pods-iOSChatExample-dummy.m */,
-				7E3E86132AF988AE006CB5AC /* Pods-iOSChatExample-frameworks-Debug-output-files.xcfilelist */,
-				7E3E86142AF988AE006CB5AC /* Pods-iOSChatExample-frameworks-Release-output-files.xcfilelist */,
-				7E3E86152AF988AE006CB5AC /* Pods-iOSChatExample-frameworks-Debug-input-files.xcfilelist */,
-				7E3E86162AF988AE006CB5AC /* Pods-iOSChatExample-frameworks.sh */,
-				7E3E86172AF988AE006CB5AC /* Pods-iOSChatExample-acknowledgements.markdown */,
-				7E3E86182AF988AE006CB5AC /* Pods-iOSChatExample-frameworks-Release-input-files.xcfilelist */,
-				7E3E86192AF988AE006CB5AC /* Pods-iOSChatExample.release.xcconfig */,
-				7E3E861A2AF988AE006CB5AC /* Pods-iOSChatExample.debug.xcconfig */,
-				7E3E861B2AF988AE006CB5AC /* Pods-iOSChatExample-umbrella.h */,
-				7E3E861C2AF988AE006CB5AC /* Pods-iOSChatExample-acknowledgements.plist */,
-			);
-			path = "Pods-iOSChatExample";
-			sourceTree = "<group>";
-		};
-		7E3E861D2AF988AE006CB5AC /* AWSConnectParticipant */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E861E2AF988AE006CB5AC /* AWSConnectParticipant.debug.xcconfig */,
-				7E3E861F2AF988AE006CB5AC /* AWSConnectParticipant-prefix.pch */,
-				7E3E86202AF988AE006CB5AC /* AWSConnectParticipant.release.xcconfig */,
-				7E3E86212AF988AE006CB5AC /* AWSConnectParticipant-dummy.m */,
-				7E3E86222AF988AE006CB5AC /* AWSConnectParticipant-umbrella.h */,
-				7E3E86232AF988AE006CB5AC /* AWSConnectParticipant-Info.plist */,
-				7E3E86242AF988AE006CB5AC /* AWSConnectParticipant.modulemap */,
-			);
-			path = AWSConnectParticipant;
-			sourceTree = "<group>";
-		};
-		7E3E86262AF988AE006CB5AC /* Local Podspecs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Local Podspecs";
-			sourceTree = "<group>";
-		};
-		7E3E86272AF988AE006CB5AC /* AWSConnect */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E86282AF988AE006CB5AC /* LICENSE */,
-				7E3E86292AF988AE006CB5AC /* LICENSE.APACHE */,
-				7E3E862A2AF988AE006CB5AC /* README-spm-support.md */,
-				7E3E862B2AF988AE006CB5AC /* AWSConnect */,
-			);
-			path = AWSConnect;
-			sourceTree = "<group>";
-		};
-		7E3E862B2AF988AE006CB5AC /* AWSConnect */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E862C2AF988AE006CB5AC /* AWSConnectService.m */,
-				7E3E862D2AF988AE006CB5AC /* AWSConnectResources.m */,
-				7E3E862E2AF988AE006CB5AC /* AWSConnectModel.h */,
-				7E3E862F2AF988AE006CB5AC /* AWSConnectResources.h */,
-				7E3E86302AF988AE006CB5AC /* AWSConnectService.h */,
-				7E3E86312AF988AE006CB5AC /* AWSConnect.h */,
-				7E3E86322AF988AE006CB5AC /* AWSConnectModel.m */,
-			);
-			path = AWSConnect;
-			sourceTree = "<group>";
-		};
-		7E3E86332AF988AE006CB5AC /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Headers;
-			sourceTree = "<group>";
-		};
-		7E3E86342AF988AE006CB5AC /* Starscream */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E86352AF988AE006CB5AC /* LICENSE */,
-				7E3E86362AF988AE006CB5AC /* README.md */,
-				7E3E86372AF988AE006CB5AC /* Sources */,
-			);
-			path = Starscream;
-			sourceTree = "<group>";
-		};
-		7E3E86372AF988AE006CB5AC /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E86382AF988AE006CB5AC /* Transport */,
-				7E3E863C2AF988AE006CB5AC /* Security */,
-				7E3E863F2AF988AE006CB5AC /* DataBytes */,
-				7E3E86412AF988AE006CB5AC /* Server */,
-				7E3E86442AF988AE006CB5AC /* Framer */,
-				7E3E864B2AF988AE006CB5AC /* Compression */,
-				7E3E864E2AF988AE006CB5AC /* Starscream */,
-				7E3E86502AF988AE006CB5AC /* Engine */,
-			);
-			path = Sources;
-			sourceTree = "<group>";
-		};
-		7E3E86382AF988AE006CB5AC /* Transport */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E86392AF988AE006CB5AC /* Transport.swift */,
-				7E3E863A2AF988AE006CB5AC /* FoundationTransport.swift */,
-				7E3E863B2AF988AE006CB5AC /* TCPTransport.swift */,
-			);
-			path = Transport;
-			sourceTree = "<group>";
-		};
-		7E3E863C2AF988AE006CB5AC /* Security */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E863D2AF988AE006CB5AC /* Security.swift */,
-				7E3E863E2AF988AE006CB5AC /* FoundationSecurity.swift */,
-			);
-			path = Security;
-			sourceTree = "<group>";
-		};
-		7E3E863F2AF988AE006CB5AC /* DataBytes */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E86402AF988AE006CB5AC /* Data+Extensions.swift */,
-			);
-			path = DataBytes;
-			sourceTree = "<group>";
-		};
-		7E3E86412AF988AE006CB5AC /* Server */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E86422AF988AE006CB5AC /* Server.swift */,
-				7E3E86432AF988AE006CB5AC /* WebSocketServer.swift */,
-			);
-			path = Server;
-			sourceTree = "<group>";
-		};
-		7E3E86442AF988AE006CB5AC /* Framer */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E86452AF988AE006CB5AC /* FoundationHTTPHandler.swift */,
-				7E3E86462AF988AE006CB5AC /* HTTPHandler.swift */,
-				7E3E86472AF988AE006CB5AC /* FrameCollector.swift */,
-				7E3E86482AF988AE006CB5AC /* StringHTTPHandler.swift */,
-				7E3E86492AF988AE006CB5AC /* FoundationHTTPServerHandler.swift */,
-				7E3E864A2AF988AE006CB5AC /* Framer.swift */,
-			);
-			path = Framer;
-			sourceTree = "<group>";
-		};
-		7E3E864B2AF988AE006CB5AC /* Compression */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E864C2AF988AE006CB5AC /* Compression.swift */,
-				7E3E864D2AF988AE006CB5AC /* WSCompression.swift */,
-			);
-			path = Compression;
-			sourceTree = "<group>";
-		};
-		7E3E864E2AF988AE006CB5AC /* Starscream */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E864F2AF988AE006CB5AC /* WebSocket.swift */,
-			);
-			path = Starscream;
-			sourceTree = "<group>";
-		};
-		7E3E86502AF988AE006CB5AC /* Engine */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E86512AF988AE006CB5AC /* Engine.swift */,
-				7E3E86522AF988AE006CB5AC /* NativeEngine.swift */,
-				7E3E86532AF988AE006CB5AC /* WSEngine.swift */,
-			);
-			path = Engine;
-			sourceTree = "<group>";
-		};
-		7E3E86542AF988AE006CB5AC /* AWSConnectParticipant */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E86552AF988AE006CB5AC /* LICENSE */,
-				7E3E86562AF988AE006CB5AC /* LICENSE.APACHE */,
-				7E3E86572AF988AE006CB5AC /* README-spm-support.md */,
-				7E3E86582AF988AE006CB5AC /* AWSConnect */,
-				7E3E86592AF988AE006CB5AC /* AWSConnectParticipant */,
-			);
-			path = AWSConnectParticipant;
-			sourceTree = "<group>";
-		};
-		7E3E86582AF988AE006CB5AC /* AWSConnect */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = AWSConnect;
-			sourceTree = "<group>";
-		};
-		7E3E86592AF988AE006CB5AC /* AWSConnectParticipant */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E865A2AF988AE006CB5AC /* AWSConnectParticipantModel.h */,
-				7E3E865B2AF988AE006CB5AC /* AWSConnectParticipantService.m */,
-				7E3E865C2AF988AE006CB5AC /* AWSConnectParticipantResources.h */,
-				7E3E865D2AF988AE006CB5AC /* AWSConnectParticipantModel.m */,
-				7E3E865E2AF988AE006CB5AC /* AWSConnectParticipant.h */,
-				7E3E865F2AF988AE006CB5AC /* AWSConnectParticipantResources.m */,
-				7E3E86602AF988AE006CB5AC /* AWSConnectParticipantService.h */,
-			);
-			path = AWSConnectParticipant;
-			sourceTree = "<group>";
-		};
-		7E3E86612AF988AE006CB5AC /* iOSChatExampleUITests */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E86622AF988AE006CB5AC /* ChatUITests.swift */,
-				7E3E86632AF988AE006CB5AC /* ChatUITestsLaunchTests.swift */,
-			);
-			path = iOSChatExampleUITests;
-			sourceTree = "<group>";
-		};
-		7E3E86642AF988AE006CB5AC /* iOSChatExample */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E86652AF988AE006CB5AC /* Assets.xcassets */,
-				7E3E86662AF988AE006CB5AC /* Utils */,
-				7E3E866E2AF988AE006CB5AC /* Models */,
-				7E3E86762AF988AE006CB5AC /* Preview Content */,
-				7E3E86782AF988AE006CB5AC /* Common */,
-				7E3E867C2AF988AE006CB5AC /* Views */,
-				7E3E86852AF988AE006CB5AC /* ChatApp.swift */,
-			);
-			path = iOSChatExample;
-			sourceTree = "<group>";
-		};
-		7E3E86662AF988AE006CB5AC /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E86672AF988AE006CB5AC /* ChatEvent.swift */,
-				7E3E86682AF988AE006CB5AC /* Network */,
-				7E3E866D2AF988AE006CB5AC /* CommonUtils.swift */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
-		7E3E86682AF988AE006CB5AC /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E86692AF988AE006CB5AC /* DefaultHttpClient.swift */,
-				7E3E866A2AF988AE006CB5AC /* HttpMethod.swift */,
-				7E3E866B2AF988AE006CB5AC /* HttpHeader.swift */,
-				7E3E866C2AF988AE006CB5AC /* HttpClient.swift */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
-		7E3E866E2AF988AE006CB5AC /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E866F2AF988AE006CB5AC /* MessageContent.swift */,
-				7E3E86702AF988AE006CB5AC /* CreateStartChatResponse.swift */,
-				7E3E86712AF988AE006CB5AC /* Message.swift */,
-				7E3E86722AF988AE006CB5AC /* NetworkManager.swift */,
-				7E3E86732AF988AE006CB5AC /* CreateStartChatRequest.swift */,
-				7E3E86742AF988AE006CB5AC /* ChatManager.swift */,
-				7E3E86752AF988AE006CB5AC /* WebSocketManager.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		7E3E86762AF988AE006CB5AC /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E86772AF988AE006CB5AC /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		7E3E86782AF988AE006CB5AC /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E86792AF988AE006CB5AC /* Config.swift */,
-				7E3E867A2AF988AE006CB5AC /* AppDelegate.swift */,
-				7E3E867B2AF988AE006CB5AC /* SceneDelegate.swift */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		7E3E867C2AF988AE006CB5AC /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E867D2AF988AE006CB5AC /* TypingIndicator.swift */,
-				7E3E867E2AF988AE006CB5AC /* TestView.swift */,
-				7E3E867F2AF988AE006CB5AC /* QuickReplyContentView.swift */,
-				7E3E86802AF988AE006CB5AC /* ListPickerContentView.swift */,
-				7E3E86812AF988AE006CB5AC /* ChatMessageView.swift */,
-				7E3E86822AF988AE006CB5AC /* ChatView.swift */,
-				7E3E86832AF988AE006CB5AC /* ContentView.swift */,
-				7E3E86842AF988AE006CB5AC /* FloatingButton.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		7E3E86882AF988AE006CB5AC /* Products */ = {
-			isa = PBXGroup;
-			name = Products;
-			sourceTree = "<group>";
-		};
-		7E3E868A2AF988AE006CB5AC /* iOSChatExampleTests */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E868B2AF988AE006CB5AC /* ChatTests.swift */,
-			);
-			path = iOSChatExampleTests;
-			sourceTree = "<group>";
-		};
-		7EFE5FDD2AE36BD800EA85C4 = {
-			isa = PBXGroup;
-			children = (
-				7E3E86A22AF988D9006CB5AC /* README.md */,
-				7EFE5FE82AE36BD800EA85C4 /* iOSChatExample */,
-				7E3E85242AF988AE006CB5AC /* iOSChatExample */,
-				7EFE5FF92AE36BD900EA85C4 /* iOSChatExampleTests */,
-				7EFE60032AE36BD900EA85C4 /* iOSChatExampleUITests */,
-				7EFE5FE72AE36BD800EA85C4 /* Products */,
-				484EC042BE4C86BA7E1CCE16 /* Pods */,
-				782DD59669931C5ADD056B8F /* Frameworks */,
-			);
-			sourceTree = "<group>";
-		};
-		7EFE5FE72AE36BD800EA85C4 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				7EFE5FE62AE36BD800EA85C4 /* iOSChatExample.app */,
-				7EFE5FF62AE36BD900EA85C4 /* iOSChatExampleTests.xctest */,
-				7EFE60002AE36BD900EA85C4 /* iOSChatExampleUITests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		7EFE5FE82AE36BD800EA85C4 /* iOSChatExample */ = {
-			isa = PBXGroup;
-			children = (
-				7E21A7F22AF2E2ED006C4F39 /* Utils */,
-				7E21A7EF2AF2E0C7006C4F39 /* Views */,
-				7E21A7EE2AF2E0AC006C4F39 /* Models */,
-				7E21A7B42AF2DC7F006C4F39 /* Common */,
-				7EFE5FE92AE36BD800EA85C4 /* ChatApp.swift */,
-				7EFE5FED2AE36BD900EA85C4 /* Assets.xcassets */,
-				7EFE5FEF2AE36BD900EA85C4 /* Preview Content */,
-			);
-			path = iOSChatExample;
-			sourceTree = "<group>";
-		};
-		7EFE5FEF2AE36BD900EA85C4 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				7EFE5FF02AE36BD900EA85C4 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		7EFE5FF92AE36BD900EA85C4 /* iOSChatExampleTests */ = {
-			isa = PBXGroup;
-			children = (
-				7EFE5FFA2AE36BD900EA85C4 /* ChatTests.swift */,
-			);
-			path = iOSChatExampleTests;
-			sourceTree = "<group>";
-		};
-		7EFE60032AE36BD900EA85C4 /* iOSChatExampleUITests */ = {
-			isa = PBXGroup;
-			children = (
-				7EFE60042AE36BD900EA85C4 /* ChatUITests.swift */,
-				7EFE60062AE36BD900EA85C4 /* ChatUITestsLaunchTests.swift */,
-			);
-			path = iOSChatExampleUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7EFE5FE52AE36BD800EA85C4 /* iOSChatExample */ = {
+		7E9159132BBE674100821C05 /* iOSChatExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7EFE600A2AE36BD900EA85C4 /* Build configuration list for PBXNativeTarget "iOSChatExample" */;
+			buildConfigurationList = 7E9159382BBE674200821C05 /* Build configuration list for PBXNativeTarget "iOSChatExample" */;
 			buildPhases = (
-				BCC302AC248B0CC383B3CADA /* [CP] Check Pods Manifest.lock */,
-				7EFE5FE22AE36BD800EA85C4 /* Sources */,
-				7EFE5FE32AE36BD800EA85C4 /* Frameworks */,
-				7EFE5FE42AE36BD800EA85C4 /* Resources */,
-				9275E4BFBD532E2A92EBDF23 /* [CP] Embed Pods Frameworks */,
+				894350A0FB9C50FBB494A0C1 /* [CP] Check Pods Manifest.lock */,
+				7E9159102BBE674100821C05 /* Sources */,
+				7E9159112BBE674100821C05 /* Frameworks */,
+				7E9159122BBE674100821C05 /* Resources */,
+				D9EE1FB40F98C2637947EDF0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = iOSChatExample;
-			productName = Chat;
-			productReference = 7EFE5FE62AE36BD800EA85C4 /* iOSChatExample.app */;
+			productName = iOSChatExample;
+			productReference = 7E9159142BBE674100821C05 /* iOSChatExample.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7EFE5FF52AE36BD900EA85C4 /* iOSChatExampleTests */ = {
+		7E9159232BBE674200821C05 /* iOSChatExampleTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7EFE600D2AE36BD900EA85C4 /* Build configuration list for PBXNativeTarget "iOSChatExampleTests" */;
+			buildConfigurationList = 7E91593B2BBE674200821C05 /* Build configuration list for PBXNativeTarget "iOSChatExampleTests" */;
 			buildPhases = (
-				083ED76C3A441F0D3DD63A40 /* [CP] Check Pods Manifest.lock */,
-				7EFE5FF22AE36BD900EA85C4 /* Sources */,
-				7EFE5FF32AE36BD900EA85C4 /* Frameworks */,
-				7EFE5FF42AE36BD900EA85C4 /* Resources */,
+				8CD8B2CC823448A69FDCEC72 /* [CP] Check Pods Manifest.lock */,
+				7E9159202BBE674200821C05 /* Sources */,
+				7E9159212BBE674200821C05 /* Frameworks */,
+				7E9159222BBE674200821C05 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7EFE5FF82AE36BD900EA85C4 /* PBXTargetDependency */,
+				7E9159262BBE674200821C05 /* PBXTargetDependency */,
 			);
 			name = iOSChatExampleTests;
-			productName = ChatTests;
-			productReference = 7EFE5FF62AE36BD900EA85C4 /* iOSChatExampleTests.xctest */;
+			productName = iOSChatExampleTests;
+			productReference = 7E9159242BBE674200821C05 /* iOSChatExampleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		7EFE5FFF2AE36BD900EA85C4 /* iOSChatExampleUITests */ = {
+		7E91592D2BBE674200821C05 /* iOSChatExampleUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7EFE60102AE36BD900EA85C4 /* Build configuration list for PBXNativeTarget "iOSChatExampleUITests" */;
+			buildConfigurationList = 7E91593E2BBE674200821C05 /* Build configuration list for PBXNativeTarget "iOSChatExampleUITests" */;
 			buildPhases = (
-				AE92FD154DAA89AF71CC34F9 /* [CP] Check Pods Manifest.lock */,
-				7EFE5FFC2AE36BD900EA85C4 /* Sources */,
-				7EFE5FFD2AE36BD900EA85C4 /* Frameworks */,
-				7EFE5FFE2AE36BD900EA85C4 /* Resources */,
-				02007004FB83BF82E5B07CEF /* [CP] Embed Pods Frameworks */,
+				899FAB91E9FDD67C46E1CBA1 /* [CP] Check Pods Manifest.lock */,
+				7E91592A2BBE674200821C05 /* Sources */,
+				7E91592B2BBE674200821C05 /* Frameworks */,
+				7E91592C2BBE674200821C05 /* Resources */,
+				E7B35754B474C2D3BE9B1000 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7EFE60022AE36BD900EA85C4 /* PBXTargetDependency */,
+				7E9159302BBE674200821C05 /* PBXTargetDependency */,
 			);
 			name = iOSChatExampleUITests;
-			productName = ChatUITests;
-			productReference = 7EFE60002AE36BD900EA85C4 /* iOSChatExampleUITests.xctest */;
+			productName = iOSChatExampleUITests;
+			productReference = 7E91592E2BBE674200821C05 /* iOSChatExampleUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		7EFE5FDE2AE36BD800EA85C4 /* Project object */ = {
+		7E91590C2BBE674100821C05 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastSwiftUpdateCheck = 1510;
+				LastUpgradeCheck = 1510;
 				TargetAttributes = {
-					7EFE5FE52AE36BD800EA85C4 = {
-						CreatedOnToolsVersion = 15.0.1;
+					7E9159132BBE674100821C05 = {
+						CreatedOnToolsVersion = 15.1;
+						LastSwiftMigration = 1510;
 					};
-					7EFE5FF52AE36BD900EA85C4 = {
-						CreatedOnToolsVersion = 15.0.1;
-						TestTargetID = 7EFE5FE52AE36BD800EA85C4;
+					7E9159232BBE674200821C05 = {
+						CreatedOnToolsVersion = 15.1;
+						TestTargetID = 7E9159132BBE674100821C05;
 					};
-					7EFE5FFF2AE36BD900EA85C4 = {
-						CreatedOnToolsVersion = 15.0.1;
-						TestTargetID = 7EFE5FE52AE36BD800EA85C4;
+					7E91592D2BBE674200821C05 = {
+						CreatedOnToolsVersion = 15.1;
+						TestTargetID = 7E9159132BBE674100821C05;
 					};
 				};
 			};
-			buildConfigurationList = 7EFE5FE12AE36BD800EA85C4 /* Build configuration list for PBXProject "iOSChatExample" */;
+			buildConfigurationList = 7E91590F2BBE674100821C05 /* Build configuration list for PBXProject "iOSChatExample" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -1509,105 +372,36 @@
 				en,
 				Base,
 			);
-			mainGroup = 7EFE5FDD2AE36BD800EA85C4;
-			productRefGroup = 7EFE5FE72AE36BD800EA85C4 /* Products */;
+			mainGroup = 7E91590B2BBE674100821C05;
+			productRefGroup = 7E9159152BBE674100821C05 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 7E3E86882AF988AE006CB5AC /* Products */;
-					ProjectRef = 7E3E86872AF988AE006CB5AC /* iOSChatExample.xcodeproj */;
-				},
-				{
-					ProductGroup = 7E3E85282AF988AE006CB5AC /* Products */;
-					ProjectRef = 7E3E85272AF988AE006CB5AC /* Pods.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
-				7EFE5FE52AE36BD800EA85C4 /* iOSChatExample */,
-				7EFE5FF52AE36BD900EA85C4 /* iOSChatExampleTests */,
-				7EFE5FFF2AE36BD900EA85C4 /* iOSChatExampleUITests */,
+				7E9159132BBE674100821C05 /* iOSChatExample */,
+				7E9159232BBE674200821C05 /* iOSChatExampleTests */,
+				7E91592D2BBE674200821C05 /* iOSChatExampleUITests */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXReferenceProxy section */
-		7E3E86952AF988AE006CB5AC /* AWSConnect */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			name = AWSConnect;
-			path = AWSConnect.framework;
-			remoteRef = 7E3E86942AF988AE006CB5AC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7E3E86972AF988AE006CB5AC /* AWSConnectParticipant */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			name = AWSConnectParticipant;
-			path = AWSConnectParticipant.framework;
-			remoteRef = 7E3E86962AF988AE006CB5AC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7E3E86992AF988AE006CB5AC /* AWSCore */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			name = AWSCore;
-			path = AWSCore.framework;
-			remoteRef = 7E3E86982AF988AE006CB5AC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7E3E869B2AF988AE006CB5AC /* Pods-iOSChatExample */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			name = "Pods-iOSChatExample";
-			path = Pods_iOSChatExample.framework;
-			remoteRef = 7E3E869A2AF988AE006CB5AC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7E3E869D2AF988AE006CB5AC /* Pods-iOSChatExample-iOSChatExampleUITests */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			name = "Pods-iOSChatExample-iOSChatExampleUITests";
-			path = Pods_iOSChatExample_iOSChatExampleUITests.framework;
-			remoteRef = 7E3E869C2AF988AE006CB5AC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7E3E869F2AF988AE006CB5AC /* Pods-iOSChatExampleTests */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			name = "Pods-iOSChatExampleTests";
-			path = Pods_iOSChatExampleTests.framework;
-			remoteRef = 7E3E869E2AF988AE006CB5AC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7E3E86A12AF988AE006CB5AC /* Starscream */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			name = Starscream;
-			path = Starscream.framework;
-			remoteRef = 7E3E86A02AF988AE006CB5AC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
-
 /* Begin PBXResourcesBuildPhase section */
-		7EFE5FE42AE36BD800EA85C4 /* Resources */ = {
+		7E9159122BBE674100821C05 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EFE5FF12AE36BD900EA85C4 /* Preview Assets.xcassets in Resources */,
-				7EFE5FEE2AE36BD900EA85C4 /* Assets.xcassets in Resources */,
+				7E91591F2BBE674200821C05 /* Preview Assets.xcassets in Resources */,
+				7E91591C2BBE674200821C05 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7EFE5FF42AE36BD900EA85C4 /* Resources */ = {
+		7E9159222BBE674200821C05 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7EFE5FFE2AE36BD900EA85C4 /* Resources */ = {
+		7E91592C2BBE674200821C05 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1617,85 +411,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		02007004FB83BF82E5B07CEF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOSChatExample-iOSChatExampleUITests/Pods-iOSChatExample-iOSChatExampleUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOSChatExample-iOSChatExampleUITests/Pods-iOSChatExample-iOSChatExampleUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOSChatExample-iOSChatExampleUITests/Pods-iOSChatExample-iOSChatExampleUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		083ED76C3A441F0D3DD63A40 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-iOSChatExampleTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9275E4BFBD532E2A92EBDF23 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOSChatExample/Pods-iOSChatExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-iOSChatExample/Pods-iOSChatExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOSChatExample/Pods-iOSChatExample-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AE92FD154DAA89AF71CC34F9 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-iOSChatExample-iOSChatExampleUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BCC302AC248B0CC383B3CADA /* [CP] Check Pods Manifest.lock */ = {
+		894350A0FB9C50FBB494A0C1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1717,76 +433,154 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		899FAB91E9FDD67C46E1CBA1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOSChatExample-iOSChatExampleUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8CD8B2CC823448A69FDCEC72 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOSChatExampleTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D9EE1FB40F98C2637947EDF0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOSChatExample/Pods-iOSChatExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOSChatExample/Pods-iOSChatExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOSChatExample/Pods-iOSChatExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E7B35754B474C2D3BE9B1000 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOSChatExample-iOSChatExampleUITests/Pods-iOSChatExample-iOSChatExampleUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOSChatExample-iOSChatExampleUITests/Pods-iOSChatExample-iOSChatExampleUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOSChatExample-iOSChatExampleUITests/Pods-iOSChatExample-iOSChatExampleUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7EFE5FE22AE36BD800EA85C4 /* Sources */ = {
+		7E9159102BBE674100821C05 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E21A8132AF30B51006C4F39 /* ChatView.swift in Sources */,
-				7E21A8112AF30B34006C4F39 /* ChatMessageView.swift in Sources */,
-				7E821AC02B7C59DC00059164 /* TranscriptResponse.swift in Sources */,
-				7EE64DCD2AE3725F004E6A34 /* AppDelegate.swift in Sources */,
-				7E21A80F2AF30B04006C4F39 /* FloatingButton.swift in Sources */,
-				7E21A8002AF2E637006C4F39 /* CreateStartChatResponse.swift in Sources */,
-				7E21A8092AF2E8BA006C4F39 /* HttpMethod.swift in Sources */,
-				7E21A7B72AF2DFE3006C4F39 /* SceneDelegate.swift in Sources */,
-				7EC6FDFB2AF6D9EC00CDF3AC /* MessageContent.swift in Sources */,
-				7E21A8022AF2E65C006C4F39 /* NetworkManager.swift in Sources */,
-				7EFE5FEC2AE36BD800EA85C4 /* ContentView.swift in Sources */,
-				7E21A80A2AF2E8BA006C4F39 /* DefaultHttpClient.swift in Sources */,
-				7EFE5FEA2AE36BD800EA85C4 /* ChatApp.swift in Sources */,
-				7EE64DD32AE372DD004E6A34 /* Message.swift in Sources */,
-				7E21A7F12AF2E188006C4F39 /* Config.swift in Sources */,
-				7EE64DCF2AE372A8004E6A34 /* WebSocketManager.swift in Sources */,
-				7E21A80B2AF2E8BA006C4F39 /* HttpHeader.swift in Sources */,
-				7EC6FE032AF8354F00CDF3AC /* QuickReplyContentView.swift in Sources */,
-				7E21A80D2AF2F85E006C4F39 /* ChatEvent.swift in Sources */,
-				7E21A8152AF3707F006C4F39 /* TypingIndicator.swift in Sources */,
-				7EE64DD12AE372B6004E6A34 /* ChatManager.swift in Sources */,
-				7EC6FDFF2AF748AA00CDF3AC /* TestView.swift in Sources */,
-				7E21A8082AF2E8BA006C4F39 /* HttpClient.swift in Sources */,
-				7E21A8172AF41B64006C4F39 /* CommonUtils.swift in Sources */,
-				7EC6FE012AF8352600CDF3AC /* ListPickerContentView.swift in Sources */,
-				7E21A7FF2AF2E637006C4F39 /* CreateStartChatRequest.swift in Sources */,
+				7E9159792BBE67D500821C05 /* CommonUtils.swift in Sources */,
+				7E9159752BBE67D500821C05 /* DefaultHttpClient.swift in Sources */,
+				7E91596A2BBE67D500821C05 /* AppDelegate.swift in Sources */,
+				7E9159642BBE67D500821C05 /* ChatMessageView.swift in Sources */,
+				7E9159612BBE67D500821C05 /* TestView.swift in Sources */,
+				7E9159712BBE67D500821C05 /* ChatManager.swift in Sources */,
+				7E9159722BBE67D500821C05 /* TranscriptResponse.swift in Sources */,
+				7E9159662BBE67D500821C05 /* ContentView.swift in Sources */,
+				7E91596F2BBE67D500821C05 /* NetworkManager.swift in Sources */,
+				7E9159622BBE67D500821C05 /* QuickReplyContentView.swift in Sources */,
+				7E9159702BBE67D500821C05 /* CreateStartChatRequest.swift in Sources */,
+				7E9159682BBE67D500821C05 /* ChatApp.swift in Sources */,
+				7E9159632BBE67D500821C05 /* ListPickerContentView.swift in Sources */,
+				7E9159732BBE67D500821C05 /* WebSocketManager.swift in Sources */,
+				7E9159652BBE67D500821C05 /* ChatView.swift in Sources */,
+				7E9159692BBE67D500821C05 /* Config.swift in Sources */,
+				7E9159782BBE67D500821C05 /* HttpClient.swift in Sources */,
+				7E9159602BBE67D500821C05 /* TypingIndicator.swift in Sources */,
+				7E91596C2BBE67D500821C05 /* MessageContent.swift in Sources */,
+				7E9159762BBE67D500821C05 /* HttpMethod.swift in Sources */,
+				7E9159742BBE67D500821C05 /* ChatEvent.swift in Sources */,
+				7E91596D2BBE67D500821C05 /* CreateStartChatResponse.swift in Sources */,
+				7E9159772BBE67D500821C05 /* HttpHeader.swift in Sources */,
+				7E91596E2BBE67D500821C05 /* Message.swift in Sources */,
+				7E9159672BBE67D500821C05 /* FloatingButton.swift in Sources */,
+				7E91596B2BBE67D500821C05 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7EFE5FF22AE36BD900EA85C4 /* Sources */ = {
+		7E9159202BBE674200821C05 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EFE5FFB2AE36BD900EA85C4 /* ChatTests.swift in Sources */,
+				7E9159292BBE674200821C05 /* iOSChatExampleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7EFE5FFC2AE36BD900EA85C4 /* Sources */ = {
+		7E91592A2BBE674200821C05 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EFE60072AE36BD900EA85C4 /* ChatUITestsLaunchTests.swift in Sources */,
-				7EFE60052AE36BD900EA85C4 /* ChatUITests.swift in Sources */,
+				7E9159332BBE674200821C05 /* iOSChatExampleUITests.swift in Sources */,
+				7E9159352BBE674200821C05 /* iOSChatExampleUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		7EFE5FF82AE36BD900EA85C4 /* PBXTargetDependency */ = {
+		7E9159262BBE674200821C05 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7EFE5FE52AE36BD800EA85C4 /* iOSChatExample */;
-			targetProxy = 7EFE5FF72AE36BD900EA85C4 /* PBXContainerItemProxy */;
+			target = 7E9159132BBE674100821C05 /* iOSChatExample */;
+			targetProxy = 7E9159252BBE674200821C05 /* PBXContainerItemProxy */;
 		};
-		7EFE60022AE36BD900EA85C4 /* PBXTargetDependency */ = {
+		7E9159302BBE674200821C05 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7EFE5FE52AE36BD800EA85C4 /* iOSChatExample */;
-			targetProxy = 7EFE60012AE36BD900EA85C4 /* PBXContainerItemProxy */;
+			target = 7E9159132BBE674100821C05 /* iOSChatExample */;
+			targetProxy = 7E91592F2BBE674200821C05 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		7EFE60082AE36BD900EA85C4 /* Debug */ = {
+		7E9159362BBE674200821C05 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1823,7 +617,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1838,19 +632,18 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = iOSChatExample;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		7EFE60092AE36BD900EA85C4 /* Release */ = {
+		7E9159372BBE674200821C05 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1887,7 +680,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1896,28 +689,29 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = iOSChatExample;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		7EFE600B2AE36BD900EA85C4 /* Debug */ = {
+		7E9159392BBE674200821C05 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0905B3AC24CDAF25E2E3F9FD /* Pods-iOSChatExample.debug.xcconfig */;
+			baseConfigurationReference = 87BDA2C5D5797785082F5C61 /* Pods-iOSChatExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iOSChatExample/Preview Content\"";
 				DEVELOPMENT_TEAM = 94KV3E626L;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1929,25 +723,28 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = blitz.Chat;
+				PRODUCT_BUNDLE_IDENTIFIER = connect.iOSChatExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		7EFE600C2AE36BD900EA85C4 /* Release */ = {
+		7E91593A2BBE674200821C05 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0E07ED73E4CEBD86809213E4 /* Pods-iOSChatExample.release.xcconfig */;
+			baseConfigurationReference = 4DA7AD106CD43AFBCDA6B713 /* Pods-iOSChatExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iOSChatExample/Preview Content\"";
 				DEVELOPMENT_TEAM = 94KV3E626L;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1959,7 +756,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = blitz.Chat;
+				PRODUCT_BUNDLE_IDENTIFIER = connect.iOSChatExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1967,9 +764,9 @@
 			};
 			name = Release;
 		};
-		7EFE600E2AE36BD900EA85C4 /* Debug */ = {
+		7E91593C2BBE674200821C05 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A3128C6DCD0EEDE8A9F93F98 /* Pods-iOSChatExampleTests.debug.xcconfig */;
+			baseConfigurationReference = FF3B8D52D30464DDBCE5C30F /* Pods-iOSChatExampleTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1977,20 +774,20 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 94KV3E626L;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = blitz.ChatTests;
+				PRODUCT_BUNDLE_IDENTIFIER = connect.iOSChatExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chat.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Chat";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOSChatExample.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/iOSChatExample";
 			};
 			name = Debug;
 		};
-		7EFE600F2AE36BD900EA85C4 /* Release */ = {
+		7E91593D2BBE674200821C05 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 302D0F1F90D6FEC9B0CBCFF0 /* Pods-iOSChatExampleTests.release.xcconfig */;
+			baseConfigurationReference = 65AC4142F3B70089B68792DD /* Pods-iOSChatExampleTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1998,20 +795,20 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 94KV3E626L;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = blitz.ChatTests;
+				PRODUCT_BUNDLE_IDENTIFIER = connect.iOSChatExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chat.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Chat";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOSChatExample.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/iOSChatExample";
 			};
 			name = Release;
 		};
-		7EFE60112AE36BD900EA85C4 /* Debug */ = {
+		7E91593F2BBE674200821C05 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B7498F7026F80A5276FB87B5 /* Pods-iOSChatExample-iOSChatExampleUITests.debug.xcconfig */;
+			baseConfigurationReference = AC5E6D01633F96994CE633CA /* Pods-iOSChatExample-iOSChatExampleUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -2019,18 +816,18 @@
 				DEVELOPMENT_TEAM = 94KV3E626L;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = blitz.ChatUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = connect.iOSChatExampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Chat;
+				TEST_TARGET_NAME = iOSChatExample;
 			};
 			name = Debug;
 		};
-		7EFE60122AE36BD900EA85C4 /* Release */ = {
+		7E9159402BBE674200821C05 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 13CD88C682D65D08EBD7BD34 /* Pods-iOSChatExample-iOSChatExampleUITests.release.xcconfig */;
+			baseConfigurationReference = 96C0239A868D653B1596D9D5 /* Pods-iOSChatExample-iOSChatExampleUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -2038,55 +835,55 @@
 				DEVELOPMENT_TEAM = 94KV3E626L;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = blitz.ChatUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = connect.iOSChatExampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Chat;
+				TEST_TARGET_NAME = iOSChatExample;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7EFE5FE12AE36BD800EA85C4 /* Build configuration list for PBXProject "iOSChatExample" */ = {
+		7E91590F2BBE674100821C05 /* Build configuration list for PBXProject "iOSChatExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7EFE60082AE36BD900EA85C4 /* Debug */,
-				7EFE60092AE36BD900EA85C4 /* Release */,
+				7E9159362BBE674200821C05 /* Debug */,
+				7E9159372BBE674200821C05 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7EFE600A2AE36BD900EA85C4 /* Build configuration list for PBXNativeTarget "iOSChatExample" */ = {
+		7E9159382BBE674200821C05 /* Build configuration list for PBXNativeTarget "iOSChatExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7EFE600B2AE36BD900EA85C4 /* Debug */,
-				7EFE600C2AE36BD900EA85C4 /* Release */,
+				7E9159392BBE674200821C05 /* Debug */,
+				7E91593A2BBE674200821C05 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7EFE600D2AE36BD900EA85C4 /* Build configuration list for PBXNativeTarget "iOSChatExampleTests" */ = {
+		7E91593B2BBE674200821C05 /* Build configuration list for PBXNativeTarget "iOSChatExampleTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7EFE600E2AE36BD900EA85C4 /* Debug */,
-				7EFE600F2AE36BD900EA85C4 /* Release */,
+				7E91593C2BBE674200821C05 /* Debug */,
+				7E91593D2BBE674200821C05 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7EFE60102AE36BD900EA85C4 /* Build configuration list for PBXNativeTarget "iOSChatExampleUITests" */ = {
+		7E91593E2BBE674200821C05 /* Build configuration list for PBXNativeTarget "iOSChatExampleUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7EFE60112AE36BD900EA85C4 /* Debug */,
-				7EFE60122AE36BD900EA85C4 /* Release */,
+				7E91593F2BBE674200821C05 /* Debug */,
+				7E9159402BBE674200821C05 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 7EFE5FDE2AE36BD800EA85C4 /* Project object */;
+	rootObject = 7E91590C2BBE674100821C05 /* Project object */;
 }
