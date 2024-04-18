@@ -41,6 +41,12 @@
 		7E9159782BBE67D500821C05 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E91595E2BBE67D500821C05 /* HttpClient.swift */; };
 		7E9159792BBE67D500821C05 /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E91595F2BBE67D500821C05 /* CommonUtils.swift */; };
 		F202396070A99BAF4EAB9C84 /* Pods_iOSChatExample_iOSChatExampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C6367BB2D0876643D5395F /* Pods_iOSChatExample_iOSChatExampleUITests.framework */; };
+		F712DCA62BCF4A28009FC568 /* NetworkConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */; };
+		F712DCA72BCF4A28009FC568 /* NetworkConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */; };
+		F712DCA82BCF4A28009FC568 /* NetworkConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */; };
+		F72A640E2BD3160000881A24 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72A640D2BD315FF00881A24 /* Notifications.swift */; };
+		F72A640F2BD3160000881A24 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72A640D2BD315FF00881A24 /* Notifications.swift */; };
+		F72A64102BD3160000881A24 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72A640D2BD315FF00881A24 /* Notifications.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +109,9 @@
 		96C0239A868D653B1596D9D5 /* Pods-iOSChatExample-iOSChatExampleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSChatExample-iOSChatExampleUITests.release.xcconfig"; path = "Target Support Files/Pods-iOSChatExample-iOSChatExampleUITests/Pods-iOSChatExample-iOSChatExampleUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AC5E6D01633F96994CE633CA /* Pods-iOSChatExample-iOSChatExampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSChatExample-iOSChatExampleUITests.debug.xcconfig"; path = "Target Support Files/Pods-iOSChatExample-iOSChatExampleUITests/Pods-iOSChatExample-iOSChatExampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		AED8EA0CC8097833A3D2AAD6 /* Pods_iOSChatExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSChatExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectionManager.swift; sourceTree = "<group>"; };
+		F712DCA92BD06EDB009FC568 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F72A640D2BD315FF00881A24 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		FF3B8D52D30464DDBCE5C30F /* Pods-iOSChatExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSChatExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-iOSChatExampleTests/Pods-iOSChatExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -169,6 +178,7 @@
 		7E9159162BBE674100821C05 /* iOSChatExample */ = {
 			isa = PBXGroup;
 			children = (
+				F712DCA92BD06EDB009FC568 /* Info.plist */,
 				7E91594A2BBE67D500821C05 /* ChatApp.swift */,
 				7E91594B2BBE67D500821C05 /* Common */,
 				7E91594F2BBE67D500821C05 /* Models */,
@@ -234,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				7E9159502BBE67D500821C05 /* MessageContent.swift */,
+				F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */,
 				7E9159512BBE67D500821C05 /* CreateStartChatResponse.swift */,
 				7E9159522BBE67D500821C05 /* Message.swift */,
 				7E9159532BBE67D500821C05 /* NetworkManager.swift */,
@@ -241,6 +252,7 @@
 				7E9159552BBE67D500821C05 /* ChatManager.swift */,
 				7E9159562BBE67D500821C05 /* TranscriptResponse.swift */,
 				7E9159572BBE67D500821C05 /* WebSocketManager.swift */,
+				F72A640D2BD315FF00881A24 /* Notifications.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -518,6 +530,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F712DCA62BCF4A28009FC568 /* NetworkConnectionManager.swift in Sources */,
 				7E9159792BBE67D500821C05 /* CommonUtils.swift in Sources */,
 				7E9159752BBE67D500821C05 /* DefaultHttpClient.swift in Sources */,
 				7E91596A2BBE67D500821C05 /* AppDelegate.swift in Sources */,
@@ -525,6 +538,7 @@
 				7E9159612BBE67D500821C05 /* TestView.swift in Sources */,
 				7E9159712BBE67D500821C05 /* ChatManager.swift in Sources */,
 				7E9159722BBE67D500821C05 /* TranscriptResponse.swift in Sources */,
+				F72A640E2BD3160000881A24 /* Notifications.swift in Sources */,
 				7E9159662BBE67D500821C05 /* ContentView.swift in Sources */,
 				7E91596F2BBE67D500821C05 /* NetworkManager.swift in Sources */,
 				7E9159622BBE67D500821C05 /* QuickReplyContentView.swift in Sources */,
@@ -551,6 +565,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F72A640F2BD3160000881A24 /* Notifications.swift in Sources */,
+				F712DCA72BCF4A28009FC568 /* NetworkConnectionManager.swift in Sources */,
 				7E9159292BBE674200821C05 /* iOSChatExampleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -559,6 +575,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F72A64102BD3160000881A24 /* Notifications.swift in Sources */,
+				F712DCA82BCF4A28009FC568 /* NetworkConnectionManager.swift in Sources */,
 				7E9159332BBE674200821C05 /* iOSChatExampleUITests.swift in Sources */,
 				7E9159352BBE674200821C05 /* iOSChatExampleUITestsLaunchTests.swift in Sources */,
 			);
@@ -709,10 +727,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iOSChatExample/Preview Content\"";
-				DEVELOPMENT_TEAM = 94KV3E626L;
+				DEVELOPMENT_TEAM = 324G6572KE;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = iOSChatExample/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -742,10 +761,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iOSChatExample/Preview Content\"";
-				DEVELOPMENT_TEAM = 94KV3E626L;
+				DEVELOPMENT_TEAM = 324G6572KE;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = iOSChatExample/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

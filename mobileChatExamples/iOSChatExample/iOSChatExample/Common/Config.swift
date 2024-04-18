@@ -10,12 +10,10 @@ import Foundation
 import AWSConnect
 
 class Config {
-    
-    let startChatEndPoint: String = ""
-    let instanctId: String = ""
-    let contactFlowId: String = ""
-    let region: AWSRegionType =  // .USEast1/.USWest1 :https://docs.aws.amazon.com/general/latest/gr/rande.html
-    let agentName = ""
-    let customerName = ""
-    
+  let startChatEndPoint: String = ""
+  let instanceId: String = ""
+  let contactFlowId: String = ""
+  let region: AWSRegionType = // .USEast1/.USWest1 :https://docs.aws.amazon.com/general/latest/gr/rande.html
+  let agentName = "Agent"
+  let customerName = "Customer"
 }
