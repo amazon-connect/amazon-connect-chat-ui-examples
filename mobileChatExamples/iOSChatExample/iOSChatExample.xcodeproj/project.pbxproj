@@ -47,6 +47,9 @@
 		F72A640E2BD3160000881A24 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72A640D2BD315FF00881A24 /* Notifications.swift */; };
 		F72A640F2BD3160000881A24 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72A640D2BD315FF00881A24 /* Notifications.swift */; };
 		F72A64102BD3160000881A24 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72A640D2BD315FF00881A24 /* Notifications.swift */; };
+		F7B074782BDAE58000E8B805 /* HeartbeatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B074772BDAE58000E8B805 /* HeartbeatManager.swift */; };
+		F7B074792BDAE58000E8B805 /* HeartbeatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B074772BDAE58000E8B805 /* HeartbeatManager.swift */; };
+		F7B0747A2BDAE58000E8B805 /* HeartbeatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B074772BDAE58000E8B805 /* HeartbeatManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +115,7 @@
 		F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectionManager.swift; sourceTree = "<group>"; };
 		F712DCA92BD06EDB009FC568 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F72A640D2BD315FF00881A24 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		F7B074772BDAE58000E8B805 /* HeartbeatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatManager.swift; sourceTree = "<group>"; };
 		FF3B8D52D30464DDBCE5C30F /* Pods-iOSChatExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSChatExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-iOSChatExampleTests/Pods-iOSChatExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -253,6 +257,7 @@
 				7E9159562BBE67D500821C05 /* TranscriptResponse.swift */,
 				7E9159572BBE67D500821C05 /* WebSocketManager.swift */,
 				F72A640D2BD315FF00881A24 /* Notifications.swift */,
+				F7B074772BDAE58000E8B805 /* HeartbeatManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -554,6 +559,7 @@
 				7E9159762BBE67D500821C05 /* HttpMethod.swift in Sources */,
 				7E9159742BBE67D500821C05 /* ChatEvent.swift in Sources */,
 				7E91596D2BBE67D500821C05 /* CreateStartChatResponse.swift in Sources */,
+				F7B074782BDAE58000E8B805 /* HeartbeatManager.swift in Sources */,
 				7E9159772BBE67D500821C05 /* HttpHeader.swift in Sources */,
 				7E91596E2BBE67D500821C05 /* Message.swift in Sources */,
 				7E9159672BBE67D500821C05 /* FloatingButton.swift in Sources */,
@@ -565,6 +571,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7B074792BDAE58000E8B805 /* HeartbeatManager.swift in Sources */,
 				F72A640F2BD3160000881A24 /* Notifications.swift in Sources */,
 				F712DCA72BCF4A28009FC568 /* NetworkConnectionManager.swift in Sources */,
 				7E9159292BBE674200821C05 /* iOSChatExampleTests.swift in Sources */,
@@ -577,6 +584,7 @@
 			files = (
 				F72A64102BD3160000881A24 /* Notifications.swift in Sources */,
 				F712DCA82BCF4A28009FC568 /* NetworkConnectionManager.swift in Sources */,
+				F7B0747A2BDAE58000E8B805 /* HeartbeatManager.swift in Sources */,
 				7E9159332BBE674200821C05 /* iOSChatExampleUITests.swift in Sources */,
 				7E9159352BBE674200821C05 /* iOSChatExampleUITestsLaunchTests.swift in Sources */,
 			);

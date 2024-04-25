@@ -54,7 +54,7 @@ class WebsocketManager: NSObject {
         }
     }
     
-    func sendMessage(string message: String) {
+    func sendWebSocketMessage(string message: String) {
         let messageToSend = URLSessionWebSocketTask.Message.string(message)
         websocketTask?.send(messageToSend) { error in
             if let error = error {
@@ -164,60 +164,6 @@ class WebsocketManager: NSObject {
         }
     }
     
-    // MARK: - Reconnection / State Management
-    
-    func retryConnection() {
-        if !self.isReconnecting {
-            self.isReconnecting = true
-            var numAttempts = 0.0
-            var numOfflineChecks = 0.0
-            var timer: Timer?
-
-            func retry() {
-                if self.wsUrl == nil {
-                    return
-                }
-                timer?.invalidate()
-                if numOfflineChecks < 5 {
-                    if numAttempts < 5 {
-                        DispatchQueue.main.async {
-                            timer = Timer.scheduledTimer(withTimeInterval: max(numAttempts, numOfflineChecks) * 5.0, repeats: false) { _ in
-                                if NetworkConnectionManager.shared.checkConnectivity() {
-                                    numOfflineChecks = 0
-                                    if self.isConnected {
-                                        print("Websocket connection has been re-established")
-                                        print("Connected successfully on attempt \(numAttempts)")
-                                        timer?.invalidate()
-                                        self.isReconnecting = false
-                                        numAttempts = 0.0
-                                    } else {
-                                        print("Attempt re-connect")
-                                        self.connect()
-                                        numAttempts += 1
-                                        retry()
-                                    }
-                                } else {
-                                    print("Device is not connected to the internet, retrying... attempt \(numOfflineChecks)")
-                                    numOfflineChecks += 1
-                                    numAttempts = 0
-                                    retry()
-                                }
-                            }
-                        }
-                    } else {
-                        print("Retry connection failed after \(numAttempts) attempts. Please re-start chat session.")
-                        self.isReconnecting = false
-                    }
-                } else {
-                    print("Network connection has been lost. Please restore your network connection to try again.")
-                    self.pendingNetworkReconnection = true
-                    self.isReconnecting = false
-                }
-            }
-            retry()
-        }
-    }
-    
     // MARK: - Handle Events
     func handleMessage(_ innerJson: [String: Any], _ time: String) {
         let participantRole = innerJson["ParticipantRole"] as! String
@@ -312,6 +258,60 @@ class WebsocketManager: NSObject {
         messageCallback(message)
     }
     
+    // MARK: - Reconnection / State Management
+    
+    func retryConnection() {
+        if !self.isReconnecting {
+            self.isReconnecting = true
+            var numAttempts = 0.0
+            var numOfflineChecks = 0.0
+            var timer: Timer?
+
+            func retry() {
+                if self.wsUrl == nil {
+                    return
+                }
+                timer?.invalidate()
+                if numOfflineChecks < 5 {
+                    if numAttempts < 5 {
+                        DispatchQueue.main.async {
+                            timer = Timer.scheduledTimer(withTimeInterval: max(numAttempts, numOfflineChecks) * 5.0, repeats: false) { _ in
+                                if NetworkConnectionManager.shared.checkConnectivity() {
+                                    numOfflineChecks = 0
+                                    if self.isConnected {
+                                        print("Websocket connection has been re-established")
+                                        print("Connected successfully on attempt \(numAttempts)")
+                                        timer?.invalidate()
+                                        self.isReconnecting = false
+                                        numAttempts = 0.0
+                                    } else {
+                                        print("Attempt re-connect")
+                                        self.connect()
+                                        numAttempts += 1
+                                        retry()
+                                    }
+                                } else {
+                                    print("Device is not connected to the internet, retrying... attempt \(numOfflineChecks)")
+                                    numOfflineChecks += 1
+                                    numAttempts = 0
+                                    retry()
+                                }
+                            }
+                        }
+                    } else {
+                        print("Retry connection failed after \(numAttempts) attempts. Please re-start chat session.")
+                        self.isReconnecting = false
+                    }
+                } else {
+                    print("Network connection has been lost. Please restore your network connection to try again.")
+                    self.pendingNetworkReconnection = true
+                    self.isReconnecting = false
+                }
+            }
+            retry()
+        }
+    }
+    
     // MARK: - Heartbeat Logic
     
     func resetHeartbeatManagers() {
@@ -330,11 +330,11 @@ class WebsocketManager: NSObject {
     }
     
     func sendHeartbeat() {
-        self.sendMessage(string: EventTypes.heartbeat)
+        self.sendWebSocketMessage(string: EventTypes.heartbeat)
     }
     
     func sendDeepHeartbeat() {
-        self.sendMessage(string: EventTypes.deepHeartbeat)
+        self.sendWebSocketMessage(string: EventTypes.deepHeartbeat)
     }
     
     func onHeartbeatMissed() {
@@ -402,7 +402,7 @@ extension WebsocketManager: URLSessionWebSocketDelegate {
     func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didOpenWithProtocol protocol: String?) {
         print("Websocket connection successfully established")
         self.isConnected = true
-        self.sendMessage(string: EventTypes.subscribe)
+        self.sendWebSocketMessage(string: EventTypes.subscribe)
         self.startHeartbeats()
     }
     
@@ -416,68 +416,15 @@ extension WebsocketManager: URLSessionWebSocketDelegate {
             print("Failed to parse HTTPURLResponse")
             return
         }
-        if (response.statusCode == 403) {
-            NotificationCenter.default.post(name: .requestNewWsUrl, object: nil)
-            self.wsUrl = nil
-        } else if !self.intentionalDisconnect {
-            retryConnection()
+        switch response.statusCode {
+            case 403:
+                print("REAUTHENTICATE")
+                NotificationCenter.default.post(name: .requestNewWsUrl, object: nil)
+                self.wsUrl = nil
+                break
+            default:
+                retryConnection()
         }
         self.intentionalDisconnect = false
-    }
-}
-
-// MARK: - Heartbeat Manager
-
-class HeartbeatManager {
-    var pendingResponse: Bool = false
-    var timer: Timer?
-    let isDeepHeartbeat: Bool
-    var sendHeartbeatCallback: () -> ()
-    var missedHeartbeatCallback: () -> ()
-    var backgroundTask: UIBackgroundTaskIdentifier = UIBackgroundTaskIdentifier.invalid
-    
-    init(isDeepHeartbeat: Bool, sendHeartbeatCallback: @escaping () -> (), missedHeartbeatCallback: @escaping () -> ()) {
-        self.isDeepHeartbeat = isDeepHeartbeat
-        self.sendHeartbeatCallback = sendHeartbeatCallback
-        self.missedHeartbeatCallback = missedHeartbeatCallback
-        // self.registerBackgroundTask()
-    }
-    
-    func startHeartbeat() {
-        self.timer?.invalidate()
-        self.pendingResponse = false
-        DispatchQueue.main.async {
-            self.timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
-                if !self.pendingResponse {
-                    self.sendHeartbeatCallback()
-                    self.pendingResponse = true
-                } else {
-                    self.timer?.invalidate()
-                    self.missedHeartbeatCallback()
-                }
-            }
-        }
-    }
-    
-    func stopHeartbeat() {
-        self.timer?.invalidate()
-        self.pendingResponse = false
-    }
-    
-    func heartbeatReceived() {
-        self.pendingResponse = false
-    }
-    
-    func registerBackgroundTask() {
-        backgroundTask = UIApplication.shared.beginBackgroundTask { [weak self] in
-            self?.endBackgroundTask()
-        }
-        assert(backgroundTask != UIBackgroundTaskIdentifier.invalid)
-    }
-    
-    func endBackgroundTask() {
-        print("Background task ended.")
-        UIApplication.shared.endBackgroundTask(backgroundTask)
-        backgroundTask = UIBackgroundTaskIdentifier.invalid
     }
 }
