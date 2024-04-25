@@ -29,7 +29,7 @@ class ChatManager : ObservableObject{
                     print("Contact Id is set")
                     self.contactIdExists = true // Reflect the contactId's presence
                 } else {
-                    print("Contact Id is nill")
+                    print("Contact Id is nil")
                     // ContactId is nil, reflect its absence
                     self.contactIdExists = false
                 }
@@ -63,6 +63,7 @@ class ChatManager : ObservableObject{
                                                          credentialsProvider: credentials)!
         AWSConnectParticipant.register(with: participantService, forKey: "")
         connectParticipantClient = AWSConnectParticipant.init(forKey: "")
+        addRequestNewWsUrlListener()
     }
     
     // Create a computed property to expose a @Binding to messages
@@ -205,7 +206,19 @@ class ChatManager : ObservableObject{
         }
         self.websocketManager = WebsocketManager(wsUrl: wsUrl, onRecievedMessage: self.handleIncomingMessage)
     }
-
+    
+    func addRequestNewWsUrlListener() {
+        NotificationCenter.default.addObserver(forName: .requestNewWsUrl, object: nil, queue: .main) { [weak self] _ in
+            let handleCompletion: (Bool) -> Void = { success in
+                if success {
+                    self?.websocketManager.connect(wsUrl: self?.websocketUrl)
+                } else {
+                    print("Create participant retry failed")
+                }
+            }
+            self?.createParticipantConnection(usingSavedToken: true, completion: handleCompletion)
+        }
+    }
     
     // MARK: - API and SDK calls
     
@@ -325,6 +338,7 @@ class ChatManager : ObservableObject{
                 return nil
             }).waitUntilFinished()
         self.websocketUrl = nil
+        self.websocketManager.disconnect()
     }
     
     

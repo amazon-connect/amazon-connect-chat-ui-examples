@@ -12,6 +12,7 @@ struct ChatView: View {
     @State private var isTyping: Bool = false
     @State var isChatEnded: Bool = false
     @ObservedObject var chatManager: ChatManager
+    @ObservedObject var networkManager = NetworkConnectionManager.shared
     @State private var showAlert = false
     var config = Config()
     
@@ -37,6 +38,7 @@ struct ChatView: View {
                     
                     Text("Chat")
                         .font(.title2)
+                        .foregroundColor(networkManager.isConnected ? Color.green : Color.red)
                     Spacer()
                     
                     Button(action: {
