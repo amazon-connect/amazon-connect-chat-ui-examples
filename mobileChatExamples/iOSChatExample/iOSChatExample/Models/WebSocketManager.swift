@@ -20,7 +20,7 @@ class WebsocketManager: NSObject {
     var config = Config()
     private var heartbeatManager: HeartbeatManager?
     private var deepHeartbeatManager: HeartbeatManager?
-    private var isReconnecting = false
+    private var hasActiveReconnection = false
     private var pendingNetworkReconnection = false
     private var wsUrl: String?
     private var intentionalDisconnect = false
@@ -40,7 +40,7 @@ class WebsocketManager: NSObject {
             wsTask.cancel(with: .goingAway, reason: nil)
         }
         if let nonEmptyWsUrl = wsUrl {
-            self.isReconnecting = false
+            self.hasActiveReconnection = false
             self.wsUrl = nonEmptyWsUrl
         }
         if let webSocketUrl = self.wsUrl {
@@ -260,9 +260,14 @@ class WebsocketManager: NSObject {
     
     // MARK: - Reconnection / State Management
     
+    private func getRetryDelay(numAttempts: Double) -> Double {
+        let calculatedDelay = pow(2, numAttempts) * 2;
+        return calculatedDelay <= 30 ? calculatedDelay : 30
+    }
+    
     func retryConnection() {
-        if !self.isReconnecting {
-            self.isReconnecting = true
+        if !self.hasActiveReconnection {
+            self.hasActiveReconnection = true
             var numAttempts = 0.0
             var numOfflineChecks = 0.0
             var timer: Timer?
@@ -275,17 +280,16 @@ class WebsocketManager: NSObject {
                 if numOfflineChecks < 5 {
                     if numAttempts < 5 {
                         DispatchQueue.main.async {
-                            timer = Timer.scheduledTimer(withTimeInterval: max(numAttempts, numOfflineChecks) * 5.0, repeats: false) { _ in
+                            timer = Timer.scheduledTimer(withTimeInterval: self.getRetryDelay(numAttempts: max(numAttempts, numOfflineChecks)), repeats: false) { _ in
                                 if NetworkConnectionManager.shared.checkConnectivity() {
                                     numOfflineChecks = 0
                                     if self.isConnected {
-                                        print("Websocket connection has been re-established")
                                         print("Connected successfully on attempt \(numAttempts)")
                                         timer?.invalidate()
-                                        self.isReconnecting = false
+                                        self.hasActiveReconnection = false
                                         numAttempts = 0.0
                                     } else {
-                                        print("Attempt re-connect")
+                                        print("Attempting websocket re-connect... attempt \(numAttempts)")
                                         self.connect()
                                         numAttempts += 1
                                         retry()
@@ -300,12 +304,12 @@ class WebsocketManager: NSObject {
                         }
                     } else {
                         print("Retry connection failed after \(numAttempts) attempts. Please re-start chat session.")
-                        self.isReconnecting = false
+                        self.hasActiveReconnection = false
                     }
                 } else {
                     print("Network connection has been lost. Please restore your network connection to try again.")
                     self.pendingNetworkReconnection = true
-                    self.isReconnecting = false
+                    self.hasActiveReconnection = false
                 }
             }
             retry()
