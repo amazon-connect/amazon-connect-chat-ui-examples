@@ -18,7 +18,12 @@ const ChatIcon = (props) =>
     log(props);
     const { primaryColor } = useAppConfig();
     const { chatWithoutForm, forceUnmountChatWidget, setForceUnmountChatWidget, setWidgetIsOpen, widgetIsOpen, currentState } = props;
-    const handleChatIconClickEvent = (e) => {
+
+    const handleChatIconClickEvent = () => {
+      toggleChatIcon(!widgetIsOpen);
+    }
+
+    const toggleChatIcon = (open) => {
       if (chatWithoutForm && forceUnmountChatWidget) setForceUnmountChatWidget(false)
       const timeline = anime.timeline({
           duration: 750,
@@ -28,12 +33,12 @@ const ChatIcon = (props) =>
           targets: ".chat",
           d: [
               {
-              value: widgetIsOpen ? chatSVGPath : closeChatSVGPath
+              value: !open ? chatSVGPath : closeChatSVGPath
               }
           ],
-          strokeWidth: widgetIsOpen ? 3 : 1,
+          strokeWidth: !open ? 3 : 1,
         });
-      setWidgetIsOpen(!widgetIsOpen);
+      setWidgetIsOpen(open);
     }
 
     // Toggle to initial Icon after the chat is ended by the chat Widget:
@@ -60,13 +65,15 @@ const ChatIcon = (props) =>
         window.connect.ChatEvents &&
           window.connect.ChatEvents.onAgentEndChat(() => {
             log("Chat Ended hence toggling back to initial icon(chat)");
-            handleChatIconClickEvent();
+            setWidgetIsOpen(false);
+            toggleChatIcon(false);
           });
 
         window.connect.ChatEvents &&
           window.connect.ChatEvents.onChatEnded(() => {
             log("Chat Disconnected hence toggling back to initial icon(chat)");
-            handleChatIconClickEvent();
+            setWidgetIsOpen(false);
+            toggleChatIcon(false);
           });
       }
     }, [currentState]);
