@@ -63,12 +63,6 @@ const ChatIcon = (props) =>
     useEffect(() => {
       if (currentState === chatWithFormStates.CHAT_WIDGET) {
         window.connect.ChatEvents &&
-          window.connect.ChatEvents.onAgentEndChat(() => {
-            log("Chat Ended hence toggling back to initial icon(chat)");
-            setWidgetIsOpen(false);
-            toggleChatIcon(false);
-          });
-
         window.connect.ChatEvents &&
           window.connect.ChatEvents.onChatEnded(() => {
             log("Chat Disconnected hence toggling back to initial icon(chat)");

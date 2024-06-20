@@ -22,6 +22,7 @@ const ChatWidget = ({
     log(">>> Init");
     const [loading, setLoading ] = useState(true);
     const [chatInitialized, setChatInitialized] = useState(false);
+    const [toggleToForm, setToggleToForm] = useState(false);
     const { primaryColor, description, region, apiGateway, contactFlowId, instanceId, enableAttachments } = useAppConfig();
     if (Object.keys(dataFromInputForm).length !== 0) log('dataFromInputForm: ', dataFromInputForm);
     // eslint-disable-next-line
@@ -62,8 +63,7 @@ const ChatWidget = ({
         chatSession.onChatDisconnected(function (data) {
             info("Chat has been disconnected");
             trace(data);
-            if (Object.keys(dataFromInputForm).length !== 0) setCurrentState(chatWithFormStates.FORM);
-            setWidgetIsOpen(false);
+            if (Object.keys(dataFromInputForm).length !== 0) setToggleToForm(true);
         });
     };
 
@@ -201,6 +201,10 @@ const ChatWidget = ({
         catch (e) {
             error('window.connect.ChatInterface.init');
             error(e);
+        }
+        if (toggleToForm && !widgetIsOpen) {
+            setCurrentState(chatWithFormStates.FORM);
+            setToggleToForm(false);
         }
         if (!chatInitialized) {
             initializeChat();
