@@ -51,7 +51,7 @@ const ChatWithForm = () => {
                     currentState === chatWithFormStates.FORM ? (
                     <ChatForm  setData={setData} setCurrentState={setCurrentState} />
                     ) : (
-                        <ChatWidget dataFromInputForm={data} setCurrentState={setCurrentState} setWidgetIsOpen={setWidgetIsOpen} />
+                        <ChatWidget dataFromInputForm={data} setCurrentState={setCurrentState} setWidgetIsOpen={setWidgetIsOpen} widgetIsOpen={widgetIsOpen} />
                     )
                 }
                 </CSSTransition>
