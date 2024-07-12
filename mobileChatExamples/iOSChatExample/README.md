@@ -1,14 +1,18 @@
-# iOS Native Chat Demo 📱
+# Amazon Connect Chat IOS Demo 📱
  
-An iOS example app for building custom Amazon Connect Chat. This solution implements basic [ChatWidget](https://docs.aws.amazon.com/connect/latest/adminguide/add-chat-to-website.html) functionality and is capable of Interactive Messages.
+This is an example app on how to utilise [AmazonConnectChatIOS](https://github.com/amazon-connect/amazon-connect-chat-ios) SDK
 
 > Refer to [#Specifications](#speficications) for details on compatibility, supported versions, and platforms.
 
+
+
+https://github.com/user-attachments/assets/542c8d10-c95a-4edb-842c-b5ccbb6baa41
+
+
+
 **Reference:**
 
-- Documentation: https://docs.aws.amazon.com/connect/latest/adminguide/enable-chat-in-app.html
-
-https://github.com/amazon-connect/amazon-connect-chat-ui-examples/assets/143978428/86fee2ac-e32f-4184-bbd2-f54add78f8dc
+- Documentation: [https://docs.aws.amazon.com/connect/latest/adminguide/enable-chat-in-app.html](https://docs.aws.amazon.com/connect/latest/adminguide/integrate-chat-with-mobile.html#connect-chatsdk-for-ios)
 
 ## Contents
 
@@ -44,93 +48,146 @@ https://github.com/amazon-connect/amazon-connect-chat-ui-examples/assets/1439784
     ```sh
     $ git clone https://github.com/amazon-connect/amazon-connect-chat-ui-examples.git
     ```
-2. Navigate to the project directory `iOSChatExample` and make sure that `Podfile` is there, then run `pod install`.
-3. Once that is done, You will be able to see a workspace generated `iOSChatExample.xcworkspace`, double click and that will launch the project in Xcode.
+2. This examples uses SPM as dependency manager, once you open the .xcodeproj file make sure that all the required dependencies are added. [More here](https://github.com/amazon-connect/amazon-connect-chat-ios?tab=readme-ov-file#install-via-swift-package-manager)
 
-4. Edit the [Config file](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/mobileChatExamples/iOSChatExample/iOSChatExample/Common/Config.swift) with your instance details as generated in [Prerequisites](#prerequisites)
+3. Edit the [Config file](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/mobileChatExamples/iOSChatExample/iOSChatExample/Common/Config.swift) with your instance details as generated in [Prerequisites](#prerequisites)
 
     > Make sure you have iOS Simulator added [Adding additional simulators](https://developer.apple.com/documentation/safari-developer-tools/adding-additional-simulators)
 
 5. Once everything looks okay, Run the app by clicking on ▶️ button on top left or hit `Cmd + R`.
 
-## How is it working?
+## Implementation
 
-### ChatManager
-It is responsible for managing the chat state, including initiating the chat, sending and receiving messages, and closing the chat connection when done.
+The first step to leveraging the Amazon Connect Chat SDK after installation is to import the library into your file. The first step is to call the `StartChatContact` API and pass the response details into the SDK’s `ChatSession` object. Here are some examples of how we would set this up in Swift. For reference, you can visit the `iOSChatExample` demo within the Amazon Connect Chat UI Examples GitHub repository.
 
-- **Managing Messages**: It holds an array of Message objects, which are published to the UI to reflect real-time chat updates.
-- **Handling WebSockets**: ChatManager integrates with WebsocketManager to manage WebSocket connections for real-time message delivery.
-- **Interfacing with AWS Services**: Utilizes the AWS Connect Participant Service to register a participant and establish a chat session.
+### Configuring and Using `ChatSession` in Your Project
 
-#### Initialization:
-Upon instantiation, ChatManager sets up necessary configurations and prepares the AWS Connect Participant client.
-- **Chat Initiation**:
-When initiateChat is called, it ensures that a WebSocket URL is available, then creates a WebSocket manager instance that listens for incoming messages and events.
-- **Message Handling**:
-handleIncomingMessage processes incoming messages and updates the UI accordingly. It filters out typing indicators and handles message status updates (e.g., delivered, read).
-- **Chat API Calls**:
-The manager makes API calls to start chat sessions (startChatContact), create participant connections (createParticipantConnection), and send messages or events (sendChatMessage, sendEvent).
+The majority of the SDK's functionality will be accessed through the `ChatSession` object. In order to use this object in the file, we have to first import the `AmazonConnectChatIOS` library:
 
-### WebsocketManager:
-The WebsocketManager handles the WebSocket connection lifecycle and receives chat messages and other events.
-
-- **WebSocket Connection**:
-Manages the WebSocket connection, handling connect and disconnect events, and transmitting chat messages.
-- **Receiving Messages**:
-Implements the didReceive delegate method to handle different WebSocket events, such as incoming text messages that are then passed to the messageCallback.
-
-- **Connection**:
-Connects to the WebSocket using the provided URL and listens for events.
-- **Event Handling**:
-On receiving events, it delegates processing to the appropriate handlers, for instance:
-Messages are processed and passed to ChatManager through the messageCallback.
-Connection status changes are logged, and isConnected status is updated.
-- **Message Distribution**:
-Incoming text messages are deserialized and depending on their type (MESSAGE, EVENT, etc.), appropriate actions are taken, such as updating UI or acknowledging message receipt.
-
-- **websocketDidConnect**: Called when the WebSocket connects, and may subscribe to topics if necessary.
-- **websocketDidReceiveMessage**: Parses and handles incoming messages, delegating them back to ChatManager for UI updates.
-
-
-### Chat Rehydration
-
-Chat rehydration is a feature that allows users to continue their previous chat sessions. This process involves several checks and actions:
-
-- **Check for Participant Token:**
-  On initiating chat, the module first checks if a `participantToken` exists.
-  - If it exists, the module proceeds to fetch the chat transcript, allowing the user to continue from where they left off.
-  - If it does not exist, the module then checks for a `contactId`.
-
-- **Use of Contact ID:**
-  If a `contactId` exists, the module prompts the user to either restore the previous session or start a new chat.
-  - If the user chooses to restore, the module starts a new chat session with the existing `contactId`, creates a new participant connection, and then fetches the transcript.
-  - If the user opts for a new chat, the module deletes the stored `contactId` and `participantToken` from the storage, ensuring a fresh start. The chat begins with no prior context, emulating the start of a new conversation.
-
-      > There will be a new `initialContactId` when chat is rehydrated. The existing `contactId` will only be used as the `sourceContactId`. You may need to use the new `initialContactId` for the `CreateParticipantConnection` call or other APIs if you want to operate on the new contact.
-
-- **Deleting Stored Values:**
-  For users who opt to start a new chat, the module ensures that previous session identifiers are cleared. This action prevents any overlap or confusion between different chat sessions. By removing the `participantToken` and `contactId`, the ChatManager guarantees that the new chat session does not carry over any data or context from previous sessions.
-
-```mermaid
-flowchart TD
-    style D fill:#fc6b03 size:10
-    A[Start Chat] --> B{Check for participantToken}
-    B -->|Exists| J[Fetch Chat Transcript]
-    B -->|Does not exist| D{Check for contactId}
-    D -->|Exists| E{User Choice}
-    E -->|Restore| F[Use existing contactId]
-    E -->|New Chat| G[Delete stored contactId and participantToken]
-    F --> H[Create new participant connection]
-    G --> I[Start fresh chat session]
-    H --> J[Fetch Chat Transcript]
-    I --> J
-    J --> K[Continue where left off]
+```swift
+import AmazonConnectChatIOS
 ```
 
-Sample demo: 
+Next, we can create a ChatManager class that helps bridge UI and SDK communication. This class should be responsible for managing interactions with the ChatSession object. We can either add it as a class property or reference it directly using `ChatSession.shared`.
 
-https://github.com/amazon-connect/amazon-connect-chat-ui-examples/assets/143978428/4b207751-289f-4de1-b9b9-4e947ce48812
+```swift
+class ChatManager: ObservableObject {
+    private var chatSession = ChatSession.shared
 
+    ...
+```
+
+Before using the `chatSession` object, we need to set the config for it via the `GlobalConfig` object. Most importantly, the `GlobalConfig` object will be used to set the AWS region that your Connect instance lives in. Here is an example of how to configure the ChatSession object:
+
+```swift
+init() {
+    let globalConfig = GlobalConfig(region: .USEast1)
+    self.chatSession = ChatSession.shared
+    chatSession.configure(config: globalConfig)
+    ...
+}
+```
+
+### Creating Participant Connection
+After calling `StartChatContact`, we can pass that information to `self.chatSession.connect` to call `createParticipantConnection` and begin the participant’s chat session.
+
+```swift
+class ChatManager: ObservableObject {
+    private var chatSession = ChatSession.shared
+
+    ...
+    private func handleStartChatResponse(_ response: CreateStartChatResponse, completion: @escaping (Bool) -> Void) {
+        DispatchQueue.main.async {
+            let response = response.data.startChatResult
+            self.participantToken = response.participantToken
+            let chatDetails = ChatDetails(contactId: response.contactId, participantId: response.participantId, participantToken: response.participantToken)
+            self.createParticipantConnection(usingSavedToken: false, chatDetails: chatDetails, completion: completion)
+        }
+    }
+    
+    private func createParticipantConnection(usingSavedToken: Bool, chatDetails: ChatDetails, completion: @escaping (Bool) -> Void) {
+        self.chatSession.connect(chatDetails: chatDetails) { [weak self] result in
+            switch result {
+            case .success:
+                // Handle success case
+            case .failure(let error):
+                // Handle error case
+            }
+        }
+    }
+    ...
+}
+```
+
+### Interacting with the Chat Session
+
+After calling `createParticipantConnection`, the SDK will maintain the credentials needed to call any following Amazon Connect Participant Service APIs. Here are some examples of how to call some common Amazon Connect Participant Service APIs. For more in-depth documentation on all APIs, please visit the Amazon Connect Chat SDK for iOS GitHub page.
+
+
+#### SendMessage
+```swift
+/// Sends a chat message with plain text content
+func sendChatMessage(messageContent: String) {
+    self.chatSession.sendMessage(contentType: .plainText, message: messageContent) { [weak self] result in
+        self?.handleMessageSendResult(result)
+    }
+}
+```
+
+#### SendEvent
+```swift
+/// Sends an event to the chat session
+func sendEvent(contentType: AmazonConnectChatIOS.ContentType, content: String = "") {
+    self.chatSession.sendEvent(event: contentType, content: content) { [weak self] result in
+        self?.handleEventSendResult(result)
+    }
+}
+```
+#### GetTranscript
+```swift
+/// Fetches the chat transcript
+func fetchTranscript() {
+    self.chatSession.getTranscript(scanDirection: .backward, sortOrder: .ascending, maxResults: 15, nextToken: nil, startPosition: nil) { [weak self] result in
+        self?.handleFetchTranscriptResult(result)
+    }
+}
+```
+#### Disconnect
+```swift
+/// Disconnects the chat session
+func disconnectChat() {
+    self.chatSession.disconnect { [weak self] result in
+        self?.handleChatDisconnectResult(result)
+    }
+}
+```
+
+### Setting Up Chat Event Handlers
+The ChatSession object also exposes handlers for common chat events for users to build on. Here is an example code block that demonstrates how you can register event handlers to chat events.
+
+```swift
+private func setupChatSessionHandlers(chatSession: ChatSessionProtocol) {
+    self.chatSession.onConnectionEstablished = { [weak self] in
+        // Handle established chat connection
+    }
+    
+    self.chatSession.onMessageReceived = { [weak self] transcriptItem in
+        // Handle incoming messages
+    }
+    
+    self.chatSession.onTranscriptUpdated = { [weak self] transcript in
+        // Handle transcript updates
+    }
+    
+    self.chatSession.onChatEnded = { [weak self] in
+        // Handle chat end
+    }
+    
+    self.chatSession.onConnectionBroken = {
+        // Handle lost connection
+    }
+}
+```
 
 ## Specifications
 
