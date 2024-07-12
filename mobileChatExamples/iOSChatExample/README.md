@@ -4,6 +4,12 @@ This is an example app on how to utilise [AmazonConnectChatIOS](https://github.c
 
 > Refer to [#Specifications](#speficications) for details on compatibility, supported versions, and platforms.
 
+
+
+https://github.com/user-attachments/assets/542c8d10-c95a-4edb-842c-b5ccbb6baa41
+
+
+
 **Reference:**
 
 - Documentation: [https://docs.aws.amazon.com/connect/latest/adminguide/enable-chat-in-app.html](https://docs.aws.amazon.com/connect/latest/adminguide/integrate-chat-with-mobile.html#connect-chatsdk-for-ios)
