@@ -6,7 +6,8 @@ This is an example app on how to utilise [AmazonConnectChatIOS](https://github.c
 
 
 
-https://github.com/user-attachments/assets/542c8d10-c95a-4edb-842c-b5ccbb6baa41
+https://github.com/user-attachments/assets/90622e9a-dcdd-4e12-a0c6-f989338d850e
+
 
 
 
