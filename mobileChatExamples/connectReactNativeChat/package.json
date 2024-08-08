@@ -15,7 +15,7 @@
     "unused:prepare": "husky install"
   },
   "dependencies": {
-    "@expo/webpack-config": "^18.0.1",
+    "@expo/webpack-config": "^19.0.1",
     "@react-native-community/netinfo": "^9.3.7",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/stack": "^6.3.16",
