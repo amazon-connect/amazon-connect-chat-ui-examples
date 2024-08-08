@@ -1640,10 +1640,10 @@
   dependencies:
     prop-types "^15.8.1"
 
-"@expo/webpack-config@^18.0.1":
-  version "18.1.4"
-  resolved "https://registry.yarnpkg.com/@expo/webpack-config/-/webpack-config-18.1.4.tgz#45945f401ef8e246f0f74945e1d1bbe7ce36efac"
-  integrity sha512-lc2ZvlsxI6vDH4RHA4xnYzDl4Dir5HTiFpw8WE28kE8+33pma/DIIycv5bE/BZx+czV5NqM4103E2TvgKkccKA==
+"@expo/webpack-config@^19.0.1":
+  version "19.0.1"
+  resolved "https://registry.yarnpkg.com/@expo/webpack-config/-/webpack-config-19.0.1.tgz#c54db7ecbe37cc8ae3d8cc4a7d8184ab4633827e"
+  integrity sha512-5bSxXTUd/DCF44+1dSyU23YKLOOYCr9pMJ+C5Vw7PAi6v6OEyNp4uOVMk2x5DAEpXtvOsJCxvNZdmtY/IqmO/A==
   dependencies:
     "@babel/core" "^7.20.2"
     babel-loader "^8.3.0"
@@ -1652,15 +1652,16 @@
     copy-webpack-plugin "^10.2.0"
     css-loader "^6.5.1"
     css-minimizer-webpack-plugin "^3.4.1"
-    expo-pwa "0.0.126"
+    expo-pwa "0.0.127"
     find-up "^5.0.0"
     find-yarn-workspace-root "~2.0.0"
+    fs-extra "^11.2.0"
     getenv "^1.0.0"
     html-webpack-plugin "^5.5.0"
     is-wsl "^2.0.0"
     mini-css-extract-plugin "^2.5.2"
     node-html-parser "^5.2.0"
-    semver "~7.3.2"
+    semver "~7.5.4"
     source-map-loader "^3.0.1"
     style-loader "^3.3.1"
     terser-webpack-plugin "^5.3.0"
@@ -5296,10 +5297,10 @@ expo-modules-core@1.12.20:
   dependencies:
     invariant "^2.2.4"
 
-expo-pwa@0.0.126:
-  version "0.0.126"
-  resolved "https://registry.yarnpkg.com/expo-pwa/-/expo-pwa-0.0.126.tgz#2d554a4a671eb25a3560eb99d46de65634de52dd"
-  integrity sha512-9qb6aIY0awez4FTyIiNhqyekb6sKnbvODOFCDPg23PqpkvdhuzzDRtP/Avgippt8kqRAgPpFXmIp2LaAyH1/aw==
+expo-pwa@0.0.127:
+  version "0.0.127"
+  resolved "https://registry.yarnpkg.com/expo-pwa/-/expo-pwa-0.0.127.tgz#b8d2fd28efff408a24e0f2539bfb47e09f8e4ebe"
+  integrity sha512-8D9wEDkEXG9r6TPvAFpWt27IiP1cLm/4RWVRUHzFZflbWYLi8GkYArj5LHbbfokybRm1GVAanSrrYFEqHoIUiA==
   dependencies:
     "@expo/image-utils" "0.3.23"
     chalk "^4.0.0"
@@ -5642,6 +5643,15 @@ fs-extra@9.0.0:
     graceful-fs "^4.2.0"
     jsonfile "^6.0.1"
     universalify "^1.0.0"
+
+fs-extra@^11.2.0:
+  version "11.2.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-11.2.0.tgz#e70e17dfad64232287d01929399e0ea7c86b0e5b"
+  integrity sha512-PmDi3uwK5nFuXh7XDTlVnS17xJS7vW36is2+w3xcv8SVxiB4NyATf4ctkVY5bkSjX0Y4nbvZCq1/EjtEyr9ktw==
+  dependencies:
+    graceful-fs "^4.2.0"
+    jsonfile "^6.0.1"
+    universalify "^2.0.0"
 
 fs-extra@^8.1.0, fs-extra@~8.1.0:
   version "8.1.0"
@@ -10079,7 +10089,7 @@ selfsigned@^2.1.1, selfsigned@^2.4.1:
     "@types/node-forge" "^1.3.0"
     node-forge "^1"
 
-semver@7.3.2, semver@^5.5.0, semver@^5.6.0, semver@^6.0.0, semver@^6.3.0, semver@^6.3.1, semver@^7.3.2, semver@^7.3.5, semver@^7.5.2, semver@^7.5.3, semver@^7.5.4, semver@^7.6.0, semver@~7.3.2:
+semver@7.3.2, semver@^5.5.0, semver@^5.6.0, semver@^6.0.0, semver@^6.3.0, semver@^6.3.1, semver@^7.3.2, semver@^7.3.5, semver@^7.5.2, semver@^7.5.3, semver@^7.5.4, semver@^7.6.0, semver@~7.5.4:
   version "7.6.3"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.6.3.tgz#980f7b5550bc175fb4dc09403085627f9eb33143"
   integrity sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==
