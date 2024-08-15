@@ -37,7 +37,6 @@ export const ChatWrapper = styled.div`
 
     .connect-customer-interface{
         @media ${props => props.device.laptop}{
-        height: 600px;
         width: 420px;
         }
         height: 500px;
@@ -81,7 +80,7 @@ export const ChatContainer = styled.div`
         height: 100%;
         max-width: 448px;
         max-height: 630px;
-        bottom: 90px;
+        bottom: 15px;
         right: 75px;
     }
     position: fixed;
