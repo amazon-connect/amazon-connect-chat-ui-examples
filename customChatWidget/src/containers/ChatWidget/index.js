@@ -16,15 +16,29 @@ const { log, error, trace, info } = genLogger(name);
 const ChatWidget = ({
     dataFromInputForm = {},
     setCurrentState = () => log('No Function'),
-    setWidgetIsOpen
+    setWidgetIsOpen,
+    widgetIsOpen
     }) => {
     log(">>> Init");
     const [loading, setLoading ] = useState(true);
+    const [chatInitialized, setChatInitialized] = useState(false);
+    const [toggleToForm, setToggleToForm] = useState(false);
     const { primaryColor, description, region, apiGateway, contactFlowId, instanceId, enableAttachments } = useAppConfig();
     if (Object.keys(dataFromInputForm).length !== 0) log('dataFromInputForm: ', dataFromInputForm);
     // eslint-disable-next-line
     // eslint-disable-next-line
     const initialProperties = useAppConfig();
+
+    window.connect.ChatEvents &&
+    window.connect.ChatEvents.onAgentEndChat(() => {
+      setChatInitialized(false);
+    });
+
+    window.connect.ChatEvents &&
+        window.connect.ChatEvents.onChatEnded(() => {
+        setChatInitialized(false);
+    });
+
     const successHandler = (chatSession) => {
         info("successHandler");
         setLoading(false);
@@ -49,8 +63,7 @@ const ChatWidget = ({
         chatSession.onChatDisconnected(function (data) {
             info("Chat has been disconnected");
             trace(data);
-            if (Object.keys(dataFromInputForm).length !== 0) setCurrentState(chatWithFormStates.FORM);
-            setWidgetIsOpen((prev) => !prev);
+            if (Object.keys(dataFromInputForm).length !== 0) setToggleToForm(true);
         });
     };
 
@@ -136,27 +149,7 @@ const ChatWidget = ({
         return attrs;
     }
 
-    // eslint-disable-next-line
-    useEffect(() => {
-        log("useEffect");
-        try {
-            window.connect.ChatInterface.init({
-                containerId: 'chat-widget', // This is the id of the container where you want the widget to reside
-                headerConfig: {      // Use the optional headerConfig and footerConfig to customize your widget
-                    isHTML: true,
-                    render: () => {
-                    return (`<div class="header-wrapper">
-                                <h2 class="welcome-text">${description}</h2>
-                            </div>`)
-                    }
-                },
-            });
-        }
-        catch (e) {
-            error('window.connect.ChatInterface.init');
-            error(e);
-        }
-
+    const initializeChat = () => {
         // Set default name and username:
         const { name, username } = getNameAndUserName(dataFromInputForm, initialProperties.name, initialProperties.username);
         log('Name and username to initiate a chat connection: ', { name, username })
@@ -178,15 +171,45 @@ const ChatWidget = ({
             },
         }
         log('Params to initiate chat connection: ', params);
-
         try {
             window.connect.ChatInterface.initiateChat(params, successHandler, failureHandler);
+            setChatInitialized(true);
         }
         catch (e) {
             error('window.connect.ChatInterface.initiateChat');
             error(e);
+            setChatInitialized(false);
         }
-    }, [])
+    }
+
+    // eslint-disable-next-line
+    useEffect(() => {
+        log("useEffect");
+        try {
+            window.connect.ChatInterface.init({
+                containerId: 'chat-widget', // This is the id of the container where you want the widget to reside
+                headerConfig: {      // Use the optional headerConfig and footerConfig to customize your widget
+                    isHTML: true,
+                    render: () => {
+                    return (`<div class="header-wrapper">
+                                <h2 class="welcome-text">${description}</h2>
+                            </div>`)
+                    }
+                },
+            });
+        }
+        catch (e) {
+            error('window.connect.ChatInterface.init');
+            error(e);
+        }
+        if (toggleToForm && !widgetIsOpen) {
+            setCurrentState(chatWithFormStates.FORM);
+            setToggleToForm(false);
+        }
+        if (!chatInitialized) {
+            initializeChat();
+        }
+    }, [widgetIsOpen]);
 
     return (
         <ChatContainer id="chat-container" device={device}>

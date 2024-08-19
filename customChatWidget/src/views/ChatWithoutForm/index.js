@@ -55,6 +55,7 @@ const ChatWithoutForm = () => {
                         forceUnmountChatWidget ? <div></div> : (
                             <ChatWidget
                                 setWidgetIsOpen={setWidgetIsOpen}
+                                widgetIsOpen={widgetIsOpen}
                             />
                         )
                     }

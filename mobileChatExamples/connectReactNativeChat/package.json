@@ -15,13 +15,13 @@
     "unused:prepare": "husky install"
   },
   "dependencies": {
-    "@expo/webpack-config": "^18.0.1",
+    "@expo/webpack-config": "^19.0.1",
     "@react-native-community/netinfo": "^9.3.7",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/stack": "^6.3.16",
     "amazon-connect-chatjs": "^1.5.0",
-    "axios": "^1.3.4",
-    "expo": "~48.0.6",
+    "axios": "^1.7.4",
+    "expo": "~51.0.25",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.71.3",
@@ -49,5 +49,9 @@
   },
   "lint-staged": {
     "*.{js,css,md}": "prettier --write"
+  },
+  "resolutions": {
+    "semver": "^7.5.2",
+    "xml2js": "^0.5.0"
   }
 }
