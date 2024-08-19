@@ -13,7 +13,7 @@ export const FormSection = styled.div`
     width: 420px;
     bottom: 100px;
     right: 80px;
-    height: 600px;
+    height: 420px;
   }
   width: 320px;
   height: 450px;

@@ -1,6 +1,5 @@
 # Xcode
 *.xcworkspace
-*.xcodeproj
 xcuserdata/
 *.plist
 *.pbxuser
