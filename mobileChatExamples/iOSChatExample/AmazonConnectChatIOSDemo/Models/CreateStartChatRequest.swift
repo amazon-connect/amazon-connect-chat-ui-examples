@@ -22,3 +22,15 @@ struct CreateStartChatRequest: Codable {
 struct ParticipantDetails: Codable {
     let DisplayName: String
 }
+
+struct StartChatRequest: Encodable {
+    let sourceContactId: String?
+    let contactFlowId: String
+    let connectInstanceId: String
+    let displayName: String
+    let attributes: Attributes
+}
+
+struct Attributes: Encodable {
+    let name: String
+}

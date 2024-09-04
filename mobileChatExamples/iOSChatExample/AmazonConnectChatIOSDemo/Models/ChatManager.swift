@@ -147,7 +147,7 @@ class ChatManager: ObservableObject {
     // Handles the successful response from starting a chat
     private func handleStartChatResponse(_ response: CreateStartChatResponse, completion: @escaping (Bool) -> Void) {
         DispatchQueue.main.async {
-            let response = response.data.startChatResult
+            let response = response.data
             // Save the participant token
             self.participantToken = response.participantToken
             let chatDetails = ChatDetails(contactId: response.contactId, participantId: response.participantId, participantToken: response.participantToken)

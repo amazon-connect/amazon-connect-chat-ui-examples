@@ -151,8 +151,7 @@ class DefaultHttpClient: HttpClient {
         var request = URLRequest(url: serviceUrl)
         request.httpMethod = HttpMethod.post.rawValue
         request.httpShouldHandleCookies = true
-        request.setValue(HttpHeader.Value.amzEncoding.rawValue,
-                         forHTTPHeaderField: HttpHeader.Key.contentEncoding.rawValue)
+
         request.setValue(HttpHeader.Value.jsonContentType.rawValue,
                          forHTTPHeaderField: HttpHeader.Key.contentType.rawValue)
         if let headers = headers {

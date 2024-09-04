@@ -20,11 +20,14 @@ class NetworkManager {
                    onSuccess: @escaping (_ response: CreateStartChatResponse) -> Void,
                    onFailure: @escaping (_ error: Error) -> Void) {
         let url = endpoint
-        let body = CreateStartChatRequest(connectInstanceId: connectInstanceId,
-                                          contactFlowId: contactFlowId,
-                                          participantDetails: ParticipantDetails(DisplayName: displayName))
-        
-        self.httpClient.postJson(url, nil, body) { (data : CreateStartChatResponse) in
+        let requestBody = StartChatRequest(
+            sourceContactId: nil,
+            contactFlowId: contactFlowId,
+            connectInstanceId: connectInstanceId,
+            displayName: displayName,
+            attributes: Attributes(name: displayName)
+        )
+        self.httpClient.postJson(url, nil, requestBody) { (data : CreateStartChatResponse) in
             onSuccess(data)
         } _: { error in
             onFailure(error)
