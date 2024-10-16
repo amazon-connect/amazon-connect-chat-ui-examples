@@ -1,9 +1,6 @@
-//
-//  AttachmentButton.swift
-//  iOSChatExample
-//
-//  Created by Liao, Michael on 6/5/24.
-//
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0
+
 import SwiftUI
 
 struct AttachmentButton: View {
