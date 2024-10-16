@@ -40,7 +40,7 @@ class ChatManager: ObservableObject {
         setupChatSessionHandlers(chatSession: chatSession)
         
         let customLogger = CustomLogger()
-        SDKLogger.configure(customLogger)
+        SDKLogger.configureLogger(customLogger)
     }
     
     // MARK: - Init Chat
