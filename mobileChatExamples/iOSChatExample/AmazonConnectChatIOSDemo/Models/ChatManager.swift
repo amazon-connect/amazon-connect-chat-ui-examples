@@ -1,3 +1,6 @@
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0
+
 import Foundation
 import SwiftUI
 import AmazonConnectChatIOS
@@ -35,6 +38,9 @@ class ChatManager: ObservableObject {
         chatSession.configure(config: globalConfig)
         // Setup handlers for various chat session events
         setupChatSessionHandlers(chatSession: chatSession)
+        
+        let customLogger = CustomLogger()
+        SDKLogger.configureLogger(customLogger)
     }
     
     // MARK: - Init Chat
