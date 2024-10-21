@@ -1,15 +1,17 @@
 # Android Native Chat Demo 📱
 
-This is an example app on how to utilise [AmazonConnectChatAndroid](https://github.com/amazon-connect/amazon-connect-chat-android) SDK
+This is an example app on how to utilize [ Amazon Connect Chat SDK ](https://github.com/amazon-connect/amazon-connect-chat-android)
 
 
 > Refer to [#Specifications](#speficications) for details on compatibility, supported versions, and platforms.
 
 **Reference:**
 
-- Documentation: https://docs.aws.amazon.com/connect/latest/adminguide/enable-chat-in-app.html
+- Admin guide: [https://docs.aws.amazon.com/connect/latest/adminguide/enable-chat-in-app.html](https://docs.aws.amazon.com/connect/latest/adminguide/integrate-chat-with-mobile.html)
+- SDK Documentation: https://github.com/amazon-connect/amazon-connect-chat-android/blob/main/README.md
 
 
+### Demo:
 
 https://github.com/user-attachments/assets/216d9df8-63ad-473f-a14f-9bc7c5ed3ec3
 
@@ -19,7 +21,7 @@ https://github.com/user-attachments/assets/216d9df8-63ad-473f-a14f-9bc7c5ed3ec3
 
 - [Prerequisites](#prerequisites)
 - [Local Development](#local-development)
-- [Implmentation](#implementation)
+- [Implementation](#implementation)
 
 
 ## Prerequisites
@@ -58,11 +60,35 @@ https://github.com/user-attachments/assets/216d9df8-63ad-473f-a14f-9bc7c5ed3ec3
 
 ## Implementation
 
-The first step is to call the `StartChatContact` API and pass the response details into the SDK’s `ChatSession` object. Here are some examples of how we would set this up in Kotlin. For reference, you can visit the `androidChatExample` demo within the Amazon Connect Chat UI Examples GitHub repository.
+The first step is to call the `StartChatContact` API and pass the response details into the SDK’s `ChatSession` object. 
+
+```kotlin
+// Start a new chat session by sending a StartChatRequest to the repository
+private fun startChat() {
+    viewModelScope.launch {
+        val participantDetails = ParticipantDetails(displayName = chatConfiguration.customerName)
+        val request = StartChatRequest(
+            connectInstanceId = chatConfiguration.connectInstanceId,
+            contactFlowId = chatConfiguration.contactFlowId,
+            participantDetails = participantDetails
+        )
+        when (val response = chatRepository.startChat(endpoint = chatConfiguration.startChatEndpoint,startChatRequest = request)) {
+            is Resource.Success -> {
+                response.data?.data?.startChatResult?.let { result ->
+                    // handleStartChatResponse(result)
+                }
+            }
+            is Resource.Error -> {
+                // Log error
+            }
+
+            is Resource.Loading -> // Still loading action
+        }
+    }
+}
+```
 
 ### Configuring and Using `ChatSession` in Your Project
-
-The first step to leveraging the Amazon Connect Chat SDK after installation is to import the library into your file. Next, let's call the StartChatContact API and pass the response details into the SDK’s ChatSession object.  Here is an [example](TODO - Add link to UI Example) of how we would set this up in Kotlin. For reference, you can visit the [AndroidChatExample demo](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/mobileChatExamples/androidChatExample) within the [Amazon Connect Chat UI Examples](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master) GitHub repository.
 
 The majority of the SDKs functionality will be accessed through the `ChatSession` object. In order to use this object in the file, you can inject it using `@HiltViewModel`:
 
@@ -74,7 +100,7 @@ class ChatViewModel @Inject constructor(
 ) : ViewModel() {
 ```
 
-If you are not using Hilt, then you can initialise `ChatSession` like this:
+If you are not using Hilt, then you can initialize `ChatSession` like this:
 
 ```
 private val chatSession = ChatSessionProvider.getChatSession(context)
@@ -92,7 +118,42 @@ private suspend fun configureChatSession() {
   }
 ```
 
-From here, you are now ready to interact with the chat via the `ChatSession` object.
+Once configured, we can pass the response of `StartChatAPI` into `chatSession` object and initiate connection.
+```kotlin
+// Handle the response after starting a chat session
+private fun handleStartChatResponse(result: StartChatResponse.Data.StartChatResult) {
+    viewModelScope.launch {
+        val chatDetails = ChatDetails(
+            contactId = result.contactId,
+            participantId = result.participantId,
+            participantToken = result.participantToken
+        )
+        createParticipantConnection(chatDetails)
+    }
+}
+```
+
+## Interacting with Amazon Connect Chat SDK 
+
+From here, you are now ready to interact with the chat via the `ChatSession` object. For more information, please refer to [ Amazon Connect Chat SDK ](https://github.com/amazon-connect/amazon-connect-chat-android).
+
+#### Create Conenection
+```kotlin
+
+// Create a connection to the participant chat session
+private fun createParticipantConnection(chatDetails: ChatDetails) {
+    viewModelScope.launch {
+        val result = chatSession.connect(chatDetails) // Attempt connection
+
+        if (result.isSuccess) {
+            Log.d("ChatViewModel", "Connection successful $result")
+        } else if (result.isFailure) {
+            Log.e("ChatViewModel", "Connection failed: ${result.exceptionOrNull()}")
+        }
+    }
+}
+```
+
 
 #### SendMessage
 ```kotlin
@@ -112,7 +173,7 @@ fun sendMessage(text: String) {
 ```
 
 
-### How to receive messages
+#### How to receive messages
 ```
 chatSession.onMessageReceived = { transcriptItem ->
     // Handle received websocket message if needed
@@ -164,7 +225,7 @@ fun endChat() {
 }
 ```
 
-### Setting Up Chat Event Handlers
+#### Setting Up Chat Event Handlers
 The ChatSession object also exposes handlers for common chat events for users to build on. Here is an example code block that demonstrates how you can register event handlers to chat events.
 
 ```kotlin
