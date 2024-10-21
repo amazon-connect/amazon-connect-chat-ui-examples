@@ -1,20 +1,27 @@
 # Android Native Chat Demo 📱
 
-A native android example app for building custom Amazon Connect Chat. This solution implements basic [ChatWidget](https://docs.aws.amazon.com/connect/latest/adminguide/add-chat-to-website.html) functionality and is capable of Interactive Messages.
+This is an example app on how to utilize [ Amazon Connect Chat SDK ](https://github.com/amazon-connect/amazon-connect-chat-android)
+
 
 > Refer to [#Specifications](#speficications) for details on compatibility, supported versions, and platforms.
 
 **Reference:**
 
-- Documentation: https://docs.aws.amazon.com/connect/latest/adminguide/enable-chat-in-app.html
+- Admin guide: [https://docs.aws.amazon.com/connect/latest/adminguide/enable-chat-in-app.html](https://docs.aws.amazon.com/connect/latest/adminguide/integrate-chat-with-mobile.html)
+- SDK Documentation: https://github.com/amazon-connect/amazon-connect-chat-android/blob/main/README.md
 
-https://github.com/amazon-connect/amazon-connect-chat-ui-examples/assets/143978428/1298b153-f476-48d8-aa36-605f3642103a
+
+### Demo:
+
+https://github.com/user-attachments/assets/216d9df8-63ad-473f-a14f-9bc7c5ed3ec3
+
+
 
 ## Contents
 
 - [Prerequisites](#prerequisites)
 - [Local Development](#local-development)
-- [How is it working?](#how-is-it-working)
+- [Implementation](#implementation)
 
 
 ## Prerequisites
@@ -51,83 +58,218 @@ https://github.com/amazon-connect/amazon-connect-chat-ui-examples/assets/1439784
 
 5. Once everything looks okay, Run the app by clicking on ▶️ button `Control + R`or`^ + R`.
 
-## How is it working?
+## Implementation
 
-### ChatViewModel
-It is responsible for managing the chat state, including initiating the chat, sending and receiving messages, and closing the chat connection when done.
+The first step is to call the `StartChatContact` API and pass the response details into the SDK’s `ChatSession` object. 
 
-- **Managing Messages**: It holds an array of Message objects, which are published to the UI to reflect real-time chat updates.
-- **Handling WebSockets**: ChatViewModel integrates with WebsocketManager to manage WebSocket connections for real-time message delivery.
+```kotlin
+// Start a new chat session by sending a StartChatRequest to the repository
+private fun startChat() {
+    viewModelScope.launch {
+        val participantDetails = ParticipantDetails(displayName = chatConfiguration.customerName)
+        val request = StartChatRequest(
+            connectInstanceId = chatConfiguration.connectInstanceId,
+            contactFlowId = chatConfiguration.contactFlowId,
+            participantDetails = participantDetails
+        )
+        when (val response = chatRepository.startChat(endpoint = chatConfiguration.startChatEndpoint,startChatRequest = request)) {
+            is Resource.Success -> {
+                response.data?.data?.startChatResult?.let { result ->
+                    // handleStartChatResponse(result)
+                }
+            }
+            is Resource.Error -> {
+                // Log error
+            }
 
-#### Initialization:
-Upon instantiation, ChatViewModel sets up necessary configurations and prepares the AWS Connect Participant client.
-- **Chat Initiation**:
-  When initiateChat is called, it ensures that a WebSocket URL is available, then creates a WebSocket manager instance that listens for incoming messages and events.
-- **Message Handling**:
-  onMessageReceived processes incoming messages and updates the UI accordingly. It filters out typing indicators and handles message status updates (e.g., delivered, read).
-- **Chat API Calls**:
-  The view model interacts with ChatRepository to API calls to start chat sessions (startChatContact), create participant connections (createParticipantConnection), and send messages or events (sendChatMessage, sendEvent).
-
-### ChatRepository
-- **Interfacing with AWS Services**: Makes HTTP calls and Utilizes the AWS Connect Participant Service to register a participant and establish a chat session.
-
-### WebsocketManager:
-The WebsocketManager handles the WebSocket connection lifecycle and receives chat messages and other events.
-
-- **WebSocket Connection**:
-  Manages the WebSocket connection, handling connect and disconnect events, and transmitting chat messages.
-- **Receiving Messages**:
-  Implements the didReceive method to handle different WebSocket events, such as incoming text messages that are then passed to the messageCallback.
-- **Connection**:
-  Connects to the WebSocket using the provided URL and listens for events.
-- **Event Handling**:
-  On receiving events, it delegates processing to the appropriate handlers, for instance:
-  Messages are processed and passed to ChatViewModel through the messageCallback.
-  Connection status changes are logged, and isConnected status is updated.
-- **Message Distribution**:
-  Incoming text messages are deserialized and depending on their type (MESSAGE, EVENT, etc.), appropriate actions are taken, such as updating UI or acknowledging message receipt.
-- **websocketDidConnect**: Called when the WebSocket connects, and may subscribe to topics if necessary.
-- **websocketDidReceiveMessage**: Parses and handles incoming messages, delegating them back to ChatManager for UI updates.
-
-
-### Chat Rehydration
-
-Chat rehydration is a feature that allows users to continue their previous chat sessions. This process involves several checks and actions:
-
-- **Check for Participant Token:**
-  On initiating chat, the module first checks if a `participantToken` exists.
-  - If it exists, the module proceeds to fetch the chat transcript, allowing the user to continue from where they left off.
-  - If it does not exist, the module then checks for a `contactId`.
-
-- **Use of Contact ID:**
-  If a `contactId` exists, the module prompts the user to either restore the previous session or start a new chat.
-  - If the user chooses to restore, the module starts a new chat session with the existing `contactId`, creates a new participant connection, and then fetches the transcript.
-  - If the user opts for a new chat, the module deletes the stored `contactId` and `participantToken` from the storage, ensuring a fresh start. The chat begins with no prior context, emulating the start of a new conversation.
-
-      > There will be a new `initialContactId` when chat is rehydrated. The existing `contactId` will only be used as the `sourceContactId`. You may need to use the new `initialContactId` for the `CreateParticipantConnection` call or other APIs if you want to operate on the new contact.
-
-- **Deleting Stored Values:**
-  For users who opt to start a new chat, the module ensures that previous session identifiers are cleared. This action prevents any overlap or confusion between different chat sessions. By removing the `participantToken` and `contactId`, the ChatViewModel guarantees that the new chat session does not carry over any data or context from previous sessions.
-
-```mermaid
-flowchart TD
-    style D fill:#fc6b03 size:10
-    A[Start Chat] --> B{Check for participantToken}
-    B -->|Exists| J[Fetch Chat Transcript]
-    B -->|Does not exist| D{Check for contactId}
-    D -->|Exists| E{User Choice}
-    E -->|Restore| F[Use existing contactId]
-    E -->|New Chat| G[Delete stored contactId and participantToken]
-    F --> H[Create new participant connection]
-    G --> I[Start fresh chat session]
-    H --> J[Fetch Chat Transcript]
-    I --> J
-    J --> K[Continue where left off]
+            is Resource.Loading -> // Still loading action
+        }
+    }
+}
 ```
 
-Sample demo:
+### Configuring and Using `ChatSession` in Your Project
 
-https://github.com/amazon-connect/amazon-connect-chat-ui-examples/assets/143978428/ae078271-2699-4bae-b04a-503a3ac1bfdd
+The majority of the SDKs functionality will be accessed through the `ChatSession` object. In order to use this object in the file, you can inject it using `@HiltViewModel`:
+
+```
+class ChatViewModel @Inject constructor(
+    private val chatSession: ChatSession, // Injected ChatSession
+    private val chatRepository: ChatRepository,
+    private val sharedPreferences: SharedPreferences,
+) : ViewModel() {
+```
+
+If you are not using Hilt, then you can initialize `ChatSession` like this:
+
+```
+private val chatSession = ChatSessionProvider.getChatSession(context)
+```
+
+In this example, we are using a `ChatViewModel` class that helps bridge UI and SDK communication.  This class is responsible for managing interactions with the SDK's ChatSession object. From here, we can access the SDK's suite of APIs from the `chatSession` property. 
+
+Before using the chatSession object, we need to set the config for it via the GlobalConfig object.  Most importantly, the GlobalConfig object will be used to set the AWS region that your Connect instance lives in.  Here is an example of how to configure the ChatSession object:
+
+```
+private suspend fun configureChatSession() {
+      val globalConfig = GlobalConfig(region = chatConfiguration.region)
+      chatSession.configure(globalConfig)
+      ...
+  }
+```
+
+Once configured, we can pass the response of `StartChatAPI` into `chatSession` object and initiate connection.
+```kotlin
+// Handle the response after starting a chat session
+private fun handleStartChatResponse(result: StartChatResponse.Data.StartChatResult) {
+    viewModelScope.launch {
+        val chatDetails = ChatDetails(
+            contactId = result.contactId,
+            participantId = result.participantId,
+            participantToken = result.participantToken
+        )
+        createParticipantConnection(chatDetails)
+    }
+}
+```
+
+## Interacting with Amazon Connect Chat SDK 
+
+From here, you are now ready to interact with the chat via the `ChatSession` object. For more information, please refer to [ Amazon Connect Chat SDK ](https://github.com/amazon-connect/amazon-connect-chat-android).
+
+#### Create Conenection
+```kotlin
+
+// Create a connection to the participant chat session
+private fun createParticipantConnection(chatDetails: ChatDetails) {
+    viewModelScope.launch {
+        val result = chatSession.connect(chatDetails) // Attempt connection
+
+        if (result.isSuccess) {
+            Log.d("ChatViewModel", "Connection successful $result")
+        } else if (result.isFailure) {
+            Log.e("ChatViewModel", "Connection failed: ${result.exceptionOrNull()}")
+        }
+    }
+}
+```
+
+
+#### SendMessage
+```kotlin
+fun sendMessage(text: String) {
+    viewModelScope.launch {
+        if (text.isNotEmpty()) {
+            val result = chatSession.sendMessage(ContentType.RICH_TEXT, text)
+            result.onSuccess {
+                // Handle success - update UI or state as needed
+            }.onFailure { exception ->
+                // Handle failure - update UI or state, log error, etc.
+                Log.e("ChatViewModel", "Error sending message: ${exception.message}")
+            }
+        }
+    }
+}
+```
+
+
+#### How to receive messages
+```
+chatSession.onMessageReceived = { transcriptItem ->
+    // Handle received websocket message if needed
+}
+
+chatSession.onTranscriptUpdated = { transcriptList ->
+    Log.d("ChatViewModel", "Transcript onTranscriptUpdated last 3 items: ${transcriptList.takeLast(3)}")
+    viewModelScope.launch {
+        onUpdateTranscript(transcriptList)
+    }
+}
+```
+
+#### SendEvent
+```kotlin
+fun sendEvent(content: String = "", contentType: ContentType) {
+    viewModelScope.launch {
+        val result = chatSession.sendEvent(contentType, content)
+        result.onSuccess {
+            // Handle success - update UI or state as needed
+        }.onFailure { exception ->
+            // Handle failure - update UI or state, log error, etc.
+            Log.e("ChatViewModel", "Error sending event: ${exception.message}")
+        }
+    }
+}
+```
+#### GetTranscript
+```kotlin
+fun fetchTranscript(onCompletion: (Boolean) -> Unit) {
+    viewModelScope.launch {
+        chatSession.getTranscript(ScanDirection.BACKWARD, SortKey.DESCENDING, 30, null, messages?.get(0)?.id).onSuccess {
+            Log.d("ChatViewModel", "Transcript fetched successfully")
+            onCompletion(true)
+        }.onFailure {
+            Log.e("ChatViewModel", "Error fetching transcript: ${it.message}")
+            onCompletion(false)
+        }
+    }
+}
+```
+#### Disconnect
+```kotlin
+fun endChat() {
+    clearParticipantToken()
+    viewModelScope.launch {
+        chatSession.disconnect() // Disconnect from chat session
+    }
+}
+```
+
+#### Setting Up Chat Event Handlers
+The ChatSession object also exposes handlers for common chat events for users to build on. Here is an example code block that demonstrates how you can register event handlers to chat events.
+
+```kotlin
+private suspend fun setupChatHandlers(chatSession: ChatSession) {
+    chatSession.onConnectionEstablished = {
+        Log.d("ChatViewModel", "Connection established.")
+        _isChatActive.value = true
+    }
+
+    chatSession.onMessageReceived = { transcriptItem ->
+        // Handle received websocket message if needed
+    }
+
+    chatSession.onTranscriptUpdated = { transcriptList ->
+        Log.d("ChatViewModel", "Transcript onTranscriptUpdated last 3 items: ${transcriptList.takeLast(3)}")
+        viewModelScope.launch {
+            onUpdateTranscript(transcriptList)
+        }
+    }
+
+    chatSession.onChatEnded = {
+       Log.d("ChatViewModel", "Chat ended.")
+        _isChatActive.value = false
+    }
+
+    chatSession.onConnectionBroken = {
+        Log.d("ChatViewModel", "Connection broken.")
+    }
+
+    chatSession.onConnectionReEstablished = {
+        Log.d("ChatViewModel", "Connection re-established.")
+        _isChatActive.value = true
+    }
+
+    chatSession.onChatSessionStateChanged = {
+        Log.d("ChatViewModel", "Chat session state changed: $it")
+        _isChatActive.value = it
+    }
+
+    chatSession.onDeepHeartBeatFailure = {
+        Log.d("ChatViewModel", "Deep heartbeat failure")
+    }
+}
+```
 
 ## Specifications
 
