@@ -20,4 +20,28 @@ struct AppConfiguration {
 }
 ```
 
-You can now build and run the iOS application.  
+You can now build and run the iOS application.
+
+## Persistent Chat Example
+
+In the WebView example, persistent chat will allow the chat widget to re-connect to an existing chat contact as long as the chat contact is still active. This is great for scenarios where the user closes the app or turns off their phone and want to return to the existing conversation when re-launching the app.  All the persistent chat logic can be found in the `HostedWidgetWebView.swift` file.
+
+### How does it work?
+
+The hosted widget's persistent chat feature is managed via the `persistedChatSession` session storage item. In `HostedWidgetWebView`.  In order to get persistent chat working as an embedded WebView, we need to be able to store the `persistedChatSession` value on the app and then set the `persistedChatSession` key once the WebView loads the widget. The logic for receiving and saving the session storage data as well as setting the session storage data can be found in `HostedWidgetWebView.swift`
+
+### Setup
+
+In order for `persistedChatSession` to work, we also need to update our widget snippet to pass the `persistedChatSession` data back to the native app. We can achieve this by using the `registerCallback` snippet attribute and register callbacks for `CONNECTION_ESTABLISHED` to indicate when the session storage data is ready for retreival and `CHAT_ENDED` to indicate when to clear the session storage data. Here is an example `registerCallback` snippet attribute that will enable the `persistentChatSession` functionality for WebViews.
+
+```
+  amazon_connect('registerCallback', {
+    'CONNECTION_ESTABLISHED': () => {
+      const persistedChatSession = sessionStorage.getItem('persistedChatSession');
+      window?.webkit?.messageHandlers?.persistedChatSessionToken?.postMessage(persistedChatSession);
+    },
+    'CHAT_ENDED': () => {
+      window?.webkit?.messageHandlers?.clearPersistedChatSessionToken?.postMessage(null);
+    }
+  });
+```

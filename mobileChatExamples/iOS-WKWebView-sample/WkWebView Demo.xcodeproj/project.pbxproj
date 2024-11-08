@@ -15,6 +15,7 @@
 		AB6EDCEF264C633600E41625 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6EDCEE264C633500E41625 /* SceneDelegate.swift */; };
 		AB6EDCF3264C634500E41625 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6EDCF2264C634500E41625 /* AppDelegate.swift */; };
 		AB7E4FEF2673FCEE00E6351A /* WkWebView_DemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7E4FEE2673FCEE00E6351A /* WkWebView_DemoUITests.swift */; };
+		F7256A4F2CDDA52600CA5329 /* HostedWidgetWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7256A4E2CDDA52600CA5329 /* HostedWidgetWebView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		AB7E4FEC2673FCEE00E6351A /* WkWebView DemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WkWebView DemoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB7E4FEE2673FCEE00E6351A /* WkWebView_DemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WkWebView_DemoUITests.swift; sourceTree = "<group>"; };
 		AB7E4FF02673FCEE00E6351A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F7256A4E2CDDA52600CA5329 /* HostedWidgetWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostedWidgetWebView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				AB0109882639FCD000F39AB0 /* LaunchScreen.storyboard */,
 				AB01098B2639FCD000F39AB0 /* Info.plist */,
 				AB2F0632264B339C00F68923 /* AppConfiguration.swift */,
+				F7256A4E2CDDA52600CA5329 /* HostedWidgetWebView.swift */,
 			);
 			path = "WkWebView Demo";
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 				AB2F0633264B339C00F68923 /* AppConfiguration.swift in Sources */,
 				AB0109822639FCCD00F39AB0 /* HomeViewController.swift in Sources */,
 				AB6EDCF3264C634500E41625 /* AppDelegate.swift in Sources */,
+				F7256A4F2CDDA52600CA5329 /* HostedWidgetWebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

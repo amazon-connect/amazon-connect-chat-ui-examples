@@ -11,27 +11,18 @@ import UIKit
 import WebKit
 
 class HomeViewController: UIViewController {
-    private let webView: WKWebView = {
-        let preferences = WKWebpagePreferences()
-        let configuration = WKWebViewConfiguration()
-        configuration.allowsInlineMediaPlayback = true
-        configuration.allowsPictureInPictureMediaPlayback = true
-        configuration.defaultWebpagePreferences = preferences
-        let webView = WKWebView(frame: .zero, configuration: configuration)
-        return webView
-    }()
+    private let hostedWidgetWebView = HostedWidgetWebView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let targetUrl = AppConfiguration.url
-        guard let url = URL(string: targetUrl) else {
-            return
-        }
-        webView.load(URLRequest(url: url))
-        view.addSubview(webView)
+        view.addSubview(hostedWidgetWebView)
     }
     
     override func viewDidAppear(_: Bool) {
+        getPermissionStates()
+    }
+    
+    func getPermissionStates() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized: // The user has previously granted access to the camera.
             return
@@ -85,6 +76,6 @@ class HomeViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        webView.frame = view.bounds
+        hostedWidgetWebView.frame = view.bounds
     }
 }
