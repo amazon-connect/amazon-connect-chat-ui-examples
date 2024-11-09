@@ -32,7 +32,7 @@ The hosted widget's persistent chat feature is managed via the `persistedChatSes
 
 ### Setup
 
-In order for `persistedChatSession` to work, we also need to update our widget snippet to pass the `persistedChatSession` data back to the native app. We can achieve this by using the `registerCallback` snippet attribute and register callbacks for `CONNECTION_ESTABLISHED` to indicate when the session storage data is ready for retreival and `CHAT_ENDED` to indicate when to clear the session storage data. Here is an example `registerCallback` snippet attribute that will enable the `persistentChatSession` functionality for WebViews.  See [Supported widget snippet fields in Amazon Connect that are customizable
+In order for `persistedChatSession` to work, we also need to update our widget snippet to pass the `persistedChatSession` data back to the native app. We can achieve this by using the `registerCallback` snippet attribute and register callbacks for `CONNECTION_ESTABLISHED` to indicate when the session storage data is ready for retrieval and `CHAT_ENDED` to indicate when to clear the session storage data. Here is an example `registerCallback` snippet attribute that will enable the `persistentChatSession` functionality for WebViews.  See [Supported widget snippet fields in Amazon Connect that are customizable
 ](https://docs.aws.amazon.com/connect/latest/adminguide/supported-snippet-fields.html) for more details on snippet attributes.
 
 ```
@@ -44,5 +44,13 @@ In order for `persistedChatSession` to work, we also need to update our widget s
     'CHAT_ENDED': () => {
       window?.webkit?.messageHandlers?.clearPersistedChatSessionToken?.postMessage(null);
     }
+  });
+```
+
+As a note, if you want your widget to auto-launch when navigating to your WebView, you can add this attribute to your widget snippet:
+
+```
+  amazon_connect('customLaunchBehavior', {
+    skipIconButtonAndAutoLaunch: true
   });
 ```

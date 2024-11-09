@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  HostedWidgetViewController.swift
 //  WkWebView Demo
 //
 //  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
@@ -10,7 +10,7 @@ import AVFoundation
 import UIKit
 import WebKit
 
-class HomeViewController: UIViewController {
+class HostedWidgetViewController: UIViewController {
     private let hostedWidgetWebView = HostedWidgetWebView()
     
     override func viewDidLoad() {
