@@ -2,7 +2,8 @@
 //  StartViewController.swift
 //  WkWebView Demo
 //
-//  Created by Liao, Michael on 11/8/24.
+//  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+//  SPDX-License-Identifier: MIT-0
 //
 
 import Foundation
