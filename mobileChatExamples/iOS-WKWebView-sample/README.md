@@ -24,6 +24,8 @@ You can now build and run the iOS application.
 
 ## Persistent Chat Example
 
+https://github.com/user-attachments/assets/eb10d365-9491-4e71-8204-072330bd64c3
+
 In the WebView example, persistent chat will allow the chat widget to re-connect to an existing chat contact as long as the chat contact is still active. This is great for scenarios where the user closes the app or turns off their phone and want to return to the existing conversation when re-launching the app.  All the persistent chat logic can be found in the [`HostedWidgetWebView.swift`](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/mikeliao/ios-webview-persistent-chat/mobileChatExamples/iOS-WKWebView-sample/WkWebView%20Demo/HostedWidgetWebView.swift) file.
 
 ### How does it work?
