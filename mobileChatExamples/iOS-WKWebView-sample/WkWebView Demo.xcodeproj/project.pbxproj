@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AB0109822639FCCD00F39AB0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0109812639FCCD00F39AB0 /* HomeViewController.swift */; };
+		AB0109822639FCCD00F39AB0 /* ConnectWidgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0109812639FCCD00F39AB0 /* ConnectWidgetViewController.swift */; };
 		AB0109852639FCCD00F39AB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB0109832639FCCD00F39AB0 /* Main.storyboard */; };
 		AB0109872639FCD000F39AB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB0109862639FCD000F39AB0 /* Assets.xcassets */; };
 		AB01098A2639FCD000F39AB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB0109882639FCD000F39AB0 /* LaunchScreen.storyboard */; };
@@ -15,6 +15,8 @@
 		AB6EDCEF264C633600E41625 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6EDCEE264C633500E41625 /* SceneDelegate.swift */; };
 		AB6EDCF3264C634500E41625 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6EDCF2264C634500E41625 /* AppDelegate.swift */; };
 		AB7E4FEF2673FCEE00E6351A /* WkWebView_DemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7E4FEE2673FCEE00E6351A /* WkWebView_DemoUITests.swift */; };
+		F7256A4F2CDDA52600CA5329 /* ConnectWidgetWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7256A4E2CDDA52600CA5329 /* ConnectWidgetWebView.swift */; };
+		F7256A512CDED85E00CA5329 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7256A502CDED85E00CA5329 /* StartViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,7 +31,7 @@
 
 /* Begin PBXFileReference section */
 		AB01097A2639FCCD00F39AB0 /* WkWebView Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WkWebView Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB0109812639FCCD00F39AB0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		AB0109812639FCCD00F39AB0 /* ConnectWidgetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectWidgetViewController.swift; sourceTree = "<group>"; };
 		AB0109842639FCCD00F39AB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AB0109862639FCD000F39AB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB0109892639FCD000F39AB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -40,6 +42,8 @@
 		AB7E4FEC2673FCEE00E6351A /* WkWebView DemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WkWebView DemoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB7E4FEE2673FCEE00E6351A /* WkWebView_DemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WkWebView_DemoUITests.swift; sourceTree = "<group>"; };
 		AB7E4FF02673FCEE00E6351A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F7256A4E2CDDA52600CA5329 /* ConnectWidgetWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectWidgetWebView.swift; sourceTree = "<group>"; };
+		F7256A502CDED85E00CA5329 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,12 +87,14 @@
 			children = (
 				AB6EDCEE264C633500E41625 /* SceneDelegate.swift */,
 				AB6EDCF2264C634500E41625 /* AppDelegate.swift */,
-				AB0109812639FCCD00F39AB0 /* HomeViewController.swift */,
+				AB0109812639FCCD00F39AB0 /* ConnectWidgetViewController.swift */,
 				AB0109832639FCCD00F39AB0 /* Main.storyboard */,
 				AB0109862639FCD000F39AB0 /* Assets.xcassets */,
 				AB0109882639FCD000F39AB0 /* LaunchScreen.storyboard */,
 				AB01098B2639FCD000F39AB0 /* Info.plist */,
 				AB2F0632264B339C00F68923 /* AppConfiguration.swift */,
+				F7256A4E2CDDA52600CA5329 /* ConnectWidgetWebView.swift */,
+				F7256A502CDED85E00CA5329 /* StartViewController.swift */,
 			);
 			path = "WkWebView Demo";
 			sourceTree = "<group>";
@@ -204,8 +210,10 @@
 			files = (
 				AB6EDCEF264C633600E41625 /* SceneDelegate.swift in Sources */,
 				AB2F0633264B339C00F68923 /* AppConfiguration.swift in Sources */,
-				AB0109822639FCCD00F39AB0 /* HomeViewController.swift in Sources */,
+				AB0109822639FCCD00F39AB0 /* ConnectWidgetViewController.swift in Sources */,
 				AB6EDCF3264C634500E41625 /* AppDelegate.swift in Sources */,
+				F7256A4F2CDDA52600CA5329 /* ConnectWidgetWebView.swift in Sources */,
+				F7256A512CDED85E00CA5329 /* StartViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,13 +382,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 324G6572KE;
 				INFOPLIST_FILE = "WkWebView Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "amazonchimesdk.WkWebView-Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = mikeliao.webview.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -395,13 +403,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 324G6572KE;
 				INFOPLIST_FILE = "WkWebView Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "amazonchimesdk.WkWebView-Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = mikeliao.webview.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

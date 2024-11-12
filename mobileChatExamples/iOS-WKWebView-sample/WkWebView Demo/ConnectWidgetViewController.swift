@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  ConnectWidgetViewController.swift
 //  WkWebView Demo
 //
 //  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
@@ -10,28 +10,19 @@ import AVFoundation
 import UIKit
 import WebKit
 
-class HomeViewController: UIViewController {
-    private let webView: WKWebView = {
-        let preferences = WKWebpagePreferences()
-        let configuration = WKWebViewConfiguration()
-        configuration.allowsInlineMediaPlayback = true
-        configuration.allowsPictureInPictureMediaPlayback = true
-        configuration.defaultWebpagePreferences = preferences
-        let webView = WKWebView(frame: .zero, configuration: configuration)
-        return webView
-    }()
+class ConnectWidgetViewController: UIViewController {
+    private let connectWidgetWebView = ConnectWidgetWebView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let targetUrl = AppConfiguration.url
-        guard let url = URL(string: targetUrl) else {
-            return
-        }
-        webView.load(URLRequest(url: url))
-        view.addSubview(webView)
+        view.addSubview(connectWidgetWebView)
     }
     
     override func viewDidAppear(_: Bool) {
+        getPermissionStates()
+    }
+    
+    func getPermissionStates() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized: // The user has previously granted access to the camera.
             return
@@ -85,6 +76,6 @@ class HomeViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        webView.frame = view.bounds
+        connectWidgetWebView.frame = view.bounds
     }
 }
