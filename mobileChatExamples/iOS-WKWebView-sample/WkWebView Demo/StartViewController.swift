@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class StartViewController: UIViewController {
-    // Create a reference to the HostedWidgetView so it doesn't get destroyed when we navigate away.
-    private var hostedWidgetViewController: HostedWidgetViewController?
+    // Create a reference to the ConnectWidgetView so it doesn't get destroyed when we navigate away.
+    private var connectWidgetViewController: ConnectWidgetViewController?
     
     
     override func viewDidLoad() {
@@ -20,7 +20,7 @@ class StartViewController: UIViewController {
         title = "Main View"
 
         let button = UIButton(type: .system)
-        button.setTitle("Go to Hosted Widget WebView", for: .normal)
+        button.setTitle("Go to Connect Widget WebView", for: .normal)
         button.addTarget(self, action: #selector(goToSecondView), for: .touchUpInside)
         
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -32,12 +32,12 @@ class StartViewController: UIViewController {
     }
 
     @objc func goToSecondView() {
-        // Create hosted widget view if it doesn't already exist
-        if hostedWidgetViewController == nil {
-            hostedWidgetViewController = HostedWidgetViewController()
+        // Create connect widget view if it doesn't already exist
+        if connectWidgetViewController == nil {
+            connectWidgetViewController = ConnectWidgetViewController()
         }
         
-        if let homeVC = hostedWidgetViewController {
+        if let homeVC = connectWidgetViewController {
             navigationController?.pushViewController(homeVC, animated: true)
         }
     }

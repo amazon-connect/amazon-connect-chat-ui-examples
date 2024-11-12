@@ -1,5 +1,5 @@
 //
-//  HostedWidgetViewController.swift
+//  ConnectWidgetViewController.swift
 //  WkWebView Demo
 //
 //  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
@@ -10,12 +10,12 @@ import AVFoundation
 import UIKit
 import WebKit
 
-class HostedWidgetViewController: UIViewController {
-    private let hostedWidgetWebView = HostedWidgetWebView()
+class ConnectWidgetViewController: UIViewController {
+    private let connectWidgetWebView = ConnectWidgetWebView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(hostedWidgetWebView)
+        view.addSubview(connectWidgetWebView)
     }
     
     override func viewDidAppear(_: Bool) {
@@ -76,6 +76,6 @@ class HostedWidgetViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        hostedWidgetWebView.frame = view.bounds
+        connectWidgetWebView.frame = view.bounds
     }
 }

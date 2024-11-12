@@ -46,11 +46,3 @@ In order for `persistedChatSession` to work, we also need to update our widget s
     }
   });
 ```
-
-As a note, if you want your widget to auto-launch when navigating to your WebView, you can add this attribute to your widget snippet:
-
-```
-  amazon_connect('customLaunchBehavior', {
-    skipIconButtonAndAutoLaunch: true
-  });
-```
