@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Amazon Connect Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input,
+        button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #123456;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0e2a47;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="chatForm" onsubmit="return submitForm()">
+        <input type="text" id="firstName" placeholder="Enter your first name" required>
+        <button id="launch-widget-btn" type="submit">Start Chat</button>
+    </form>
+
+     <!-- EXAMPLE SNIPPET - Edit all '<REPLACE_ME>' values -->
+    <script type="text/javascript">
+        function submitForm() {
+            (function (w, d, x, id) {
+                s = d.createElement('script');
+                s.src = 'https://<REPLACE_ME>.cloudfront.net/amazon-connect-chat-interface-client.js';
+                s.async = 1;
+                s.id = id;
+                d.getElementsByTagName('head')[0].appendChild(s);
+                w[x] = w[x] || function () { (w[x].ac = w[x].ac || []).push(arguments) };
+            })(window, document, 'amazon_connect', '<REPLACE_ME>' /* Connect Widget ID */);
+
+            amazon_connect('styles', { openChat: { color: '#ffffff', backgroundColor: '#123456' }, closeChat: { color: '#ffffff', backgroundColor: '#123456' } });
+            amazon_connect('snippetId', '<REPLACE_ME>' /* Connect Widget Snippet ID */);
+            amazon_connect('supportedMessagingContentTypes', ['text/plain', 'text/markdown']);
+
+            const customerName = document.getElementById('firstName').value;
+
+            // Pass customer name as contact attribute
+            amazon_connect('contactAttributes', {
+                customer_name: customerName
+            });
+
+            amazon_connect('customerDisplayName', function (callback) {
+                callback(customerName);
+            });
+
+            amazon_connect("customLaunchBehavior", {
+                skipIconButtonAndAutoLaunch: true,
+            });
+
+            //Make the page doesn't refresh on form submission
+            return false;
+        };
+
+    </script>
+</body>
+
+</html>
