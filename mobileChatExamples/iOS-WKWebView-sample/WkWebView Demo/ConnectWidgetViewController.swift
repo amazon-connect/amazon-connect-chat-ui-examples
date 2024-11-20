@@ -11,8 +11,8 @@ import UIKit
 import WebKit
 
 class ConnectWidgetViewController: UIViewController {
-    private let connectWidgetWebView = ConnectWidgetWebView()
-    
+    private let connectWidgetWebView: ConnectWidgetWebView = ConnectWidgetWebView()
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(connectWidgetWebView)
