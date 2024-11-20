@@ -167,7 +167,8 @@ struct ReceiverChatBubble: View {
     
     var attributedText: AttributedString {
         do {
-            return try AttributedString(markdown: message.text)
+            return try AttributedString(markdown: message.text,
+                                        options: .init(interpretedSyntax: .inlineOnlyPreservingWhitespace))
         } catch {
             print("Error parsing markdown for message text: \(error)")
             return AttributedString(message.text)
