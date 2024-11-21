@@ -8,6 +8,8 @@
 
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script type="text/javascript" src="js/backendEndpoints.js"></script>
 </head>
 
 <body>
@@ -258,7 +260,8 @@
             $(function() {
                 $('#contactDetails').submit(function(e) {
                     e.preventDefault();
-                    var enableAttachments = "${enableAttachments}";
+                    var attachmentsFeatureEnabled = false; // Prerequisite: https://docs.aws.amazon.com/connect/latest/adminguide/enable-attachments.html
+
                     var customerName = $('#firstName').val();
                     var username = $('#username').val();
                     if (!customerName || !username) {
@@ -272,15 +275,15 @@
                         connect.ChatInterface.initiateChat({
                             name: customerName,
                             username: username,
-                            region: "${region}",
-                            apiGatewayEndpoint: "https://${apiId}.execute-api.${region}.amazonaws.com/Prod",
+                            region: region, // set it "backendEndpoints.js"
+                            apiGatewayEndpoint: apiGatewayEndpoint, // set it "backendEndpoints.js"
                             contactAttributes: JSON.stringify({
                                 "customerName": customerName
                             }),
-                            contactFlowId: "${contactFlowId}",
-                            instanceId: "${instanceId}",
+                            contactFlowId: contactFlowId, // set in "backendEndpoints.js"
+                            instanceId: instanceId, // set in "backendEndpoints.js"
                             featurePermissions: {
-                                "ATTACHMENTS": enableAttachments === 'true', // this is the override flag from user for attachments
+                                "ATTACHMENTS": attachmentsFeatureEnabled,
                                 "MESSAGING_MARKDOWN": true // enable rich messaging toolbar and text formatting
                             },
                             supportedMessagingContentTypes: "text/plain,text/markdown", // include 'text/markdown' for rich messaging support
