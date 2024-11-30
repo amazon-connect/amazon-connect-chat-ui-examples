@@ -21,3 +21,24 @@ struct AppConfiguration {
 ```
 
 You can now build and run the Android application.  
+
+### Integrate Amazon Connect API to enable Push Notification
+
+1. Follow [FCM doc](https://firebase.google.com/docs/cloud-messaging) to enable push notification capability and register the end-user's device token.
+1. Follow Amazon Connect [admin doc](add doc) to register push notification after a chat is started on the hosted widget.
+1. To modify the notification content, update `MyFirebaseMessagingService.kt` to configure the notification title, body and other behaviors.
+
+Push Notifications are by default sent for all the agent and bot messages.
+Example of push notification Payload for a chat message:
+```
+{
+    "data": {
+        "title": "",
+        "body": "<connect message body>",
+        "initialContactId": "initialContactId",
+        "messageId": "messageId",
+        "messageType": "MESSAGE",
+        "contentType": "text/plain",
+    }
+}
+```
