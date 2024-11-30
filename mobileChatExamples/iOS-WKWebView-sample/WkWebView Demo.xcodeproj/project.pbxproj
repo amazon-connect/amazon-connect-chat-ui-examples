@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21D3F7AF2CFAC1A80055DAB4 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D3F7AE2CFAC1A80055DAB4 /* NotificationService.swift */; };
+		21D3F7B32CFAC1A80055DAB4 /* PushNotificationExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 21D3F7AC2CFAC1A80055DAB4 /* PushNotificationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AB0109822639FCCD00F39AB0 /* ConnectWidgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0109812639FCCD00F39AB0 /* ConnectWidgetViewController.swift */; };
 		AB0109852639FCCD00F39AB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB0109832639FCCD00F39AB0 /* Main.storyboard */; };
 		AB0109872639FCD000F39AB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB0109862639FCD000F39AB0 /* Assets.xcassets */; };
@@ -20,6 +22,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		21D3F7B12CFAC1A80055DAB4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB0109722639FCCD00F39AB0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 21D3F7AB2CFAC1A80055DAB4;
+			remoteInfo = PushNotificationExtension;
+		};
 		AB7E4FF12673FCEE00E6351A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AB0109722639FCCD00F39AB0 /* Project object */;
@@ -29,7 +38,25 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		21D3F7B72CFAC1A80055DAB4 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				21D3F7B32CFAC1A80055DAB4 /* PushNotificationExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		21D3F7AC2CFAC1A80055DAB4 /* PushNotificationExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PushNotificationExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		21D3F7AE2CFAC1A80055DAB4 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		21D3F7B02CFAC1A80055DAB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21D3F7B82CFAC21A0055DAB4 /* WkWebView Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WkWebView Demo.entitlements"; sourceTree = "<group>"; };
 		AB01097A2639FCCD00F39AB0 /* WkWebView Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WkWebView Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB0109812639FCCD00F39AB0 /* ConnectWidgetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectWidgetViewController.swift; sourceTree = "<group>"; };
 		AB0109842639FCCD00F39AB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -47,6 +74,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		21D3F7A92CFAC1A80055DAB4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AB0109772639FCCD00F39AB0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -64,11 +98,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21D3F7AD2CFAC1A80055DAB4 /* PushNotificationExtension */ = {
+			isa = PBXGroup;
+			children = (
+				21D3F7AE2CFAC1A80055DAB4 /* NotificationService.swift */,
+				21D3F7B02CFAC1A80055DAB4 /* Info.plist */,
+			);
+			path = PushNotificationExtension;
+			sourceTree = "<group>";
+		};
 		AB0109712639FCCD00F39AB0 = {
 			isa = PBXGroup;
 			children = (
 				AB01097C2639FCCD00F39AB0 /* WkWebView Demo */,
 				AB7E4FED2673FCEE00E6351A /* WkWebView DemoUITests */,
+				21D3F7AD2CFAC1A80055DAB4 /* PushNotificationExtension */,
 				AB01097B2639FCCD00F39AB0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -78,6 +122,7 @@
 			children = (
 				AB01097A2639FCCD00F39AB0 /* WkWebView Demo.app */,
 				AB7E4FEC2673FCEE00E6351A /* WkWebView DemoUITests.xctest */,
+				21D3F7AC2CFAC1A80055DAB4 /* PushNotificationExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -85,6 +130,7 @@
 		AB01097C2639FCCD00F39AB0 /* WkWebView Demo */ = {
 			isa = PBXGroup;
 			children = (
+				21D3F7B82CFAC21A0055DAB4 /* WkWebView Demo.entitlements */,
 				AB6EDCEE264C633500E41625 /* SceneDelegate.swift */,
 				AB6EDCF2264C634500E41625 /* AppDelegate.swift */,
 				AB0109812639FCCD00F39AB0 /* ConnectWidgetViewController.swift */,
@@ -111,6 +157,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		21D3F7AB2CFAC1A80055DAB4 /* PushNotificationExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 21D3F7B42CFAC1A80055DAB4 /* Build configuration list for PBXNativeTarget "PushNotificationExtension" */;
+			buildPhases = (
+				21D3F7A82CFAC1A80055DAB4 /* Sources */,
+				21D3F7A92CFAC1A80055DAB4 /* Frameworks */,
+				21D3F7AA2CFAC1A80055DAB4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PushNotificationExtension;
+			productName = PushNotificationExtension;
+			productReference = 21D3F7AC2CFAC1A80055DAB4 /* PushNotificationExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		AB0109792639FCCD00F39AB0 /* WkWebView Demo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB0109A42639FCD000F39AB0 /* Build configuration list for PBXNativeTarget "WkWebView Demo" */;
@@ -118,10 +181,12 @@
 				AB0109762639FCCD00F39AB0 /* Sources */,
 				AB0109772639FCCD00F39AB0 /* Frameworks */,
 				AB0109782639FCCD00F39AB0 /* Resources */,
+				21D3F7B72CFAC1A80055DAB4 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				21D3F7B22CFAC1A80055DAB4 /* PBXTargetDependency */,
 			);
 			name = "WkWebView Demo";
 			productName = "WkWebView Demo";
@@ -152,9 +217,12 @@
 		AB0109722639FCCD00F39AB0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
+					21D3F7AB2CFAC1A80055DAB4 = {
+						CreatedOnToolsVersion = 15.4;
+					};
 					AB0109792639FCCD00F39AB0 = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -179,11 +247,19 @@
 			targets = (
 				AB0109792639FCCD00F39AB0 /* WkWebView Demo */,
 				AB7E4FEB2673FCEE00E6351A /* WkWebView DemoUITests */,
+				21D3F7AB2CFAC1A80055DAB4 /* PushNotificationExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		21D3F7AA2CFAC1A80055DAB4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AB0109782639FCCD00F39AB0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -204,6 +280,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		21D3F7A82CFAC1A80055DAB4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				21D3F7AF2CFAC1A80055DAB4 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AB0109762639FCCD00F39AB0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -228,6 +312,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		21D3F7B22CFAC1A80055DAB4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 21D3F7AB2CFAC1A80055DAB4 /* PushNotificationExtension */;
+			targetProxy = 21D3F7B12CFAC1A80055DAB4 /* PBXContainerItemProxy */;
+		};
 		AB7E4FF22673FCEE00E6351A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AB0109792639FCCD00F39AB0 /* WkWebView Demo */;
@@ -255,6 +344,71 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		21D3F7B52CFAC1A80055DAB4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7N8D4W3RYX;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PushNotificationExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PushNotificationExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blitz.Chat.PushNotificationExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		21D3F7B62CFAC1A80055DAB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7N8D4W3RYX;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PushNotificationExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PushNotificationExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blitz.Chat.PushNotificationExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		AB0109A22639FCD000F39AB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -378,17 +532,19 @@
 		AB0109A52639FCD000F39AB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "WkWebView Demo/WkWebView Demo.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 324G6572KE;
+				DEVELOPMENT_TEAM = 7N8D4W3RYX;
 				INFOPLIST_FILE = "WkWebView Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = mikeliao.webview.demo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blitz.Chat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -399,17 +555,19 @@
 		AB0109A62639FCD000F39AB0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "WkWebView Demo/WkWebView Demo.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 324G6572KE;
+				DEVELOPMENT_TEAM = 7N8D4W3RYX;
 				INFOPLIST_FILE = "WkWebView Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = mikeliao.webview.demo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.blitz.Chat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -422,13 +580,14 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7N8D4W3RYX;
 				INFOPLIST_FILE = "WkWebView DemoUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "amazonchimesdk.WkWebView-DemoUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.blitz.Chat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -441,13 +600,14 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7N8D4W3RYX;
 				INFOPLIST_FILE = "WkWebView DemoUITests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "amazonchimesdk.WkWebView-DemoUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.blitz.Chat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -458,6 +618,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		21D3F7B42CFAC1A80055DAB4 /* Build configuration list for PBXNativeTarget "PushNotificationExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21D3F7B52CFAC1A80055DAB4 /* Debug */,
+				21D3F7B62CFAC1A80055DAB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		AB0109752639FCCD00F39AB0 /* Build configuration list for PBXProject "WkWebView Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
