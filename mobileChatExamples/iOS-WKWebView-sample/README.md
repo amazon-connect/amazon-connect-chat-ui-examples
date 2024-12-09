@@ -48,3 +48,28 @@ In order for `persistedChatSession` to work, we also need to update our widget s
     }
   });
 ```
+
+### Integrate Amazon Connect API to enable Push Notification
+
+1. Follow [APNS doc](https://developer.apple.com/documentation/usernotifications/registering-your-app-with-apns) to enable push notification capability and register the end-user's device token.
+1. Follow Amazon Connect [admin doc](add doc) to register push notification after a chat is started on the hosted widget.
+1. To modify the notification content, use [UNNotificationServiceExtension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension). Update `PushNotificationExtension/NotificationService.swift` to configure the notification title, body and other behaviors.
+
+Push Notifications are by default sent for all the agent and bot messages.
+Example of push notification Payload for a chat message:
+```
+{
+    "aps": {
+        "alert": {
+            "title": "",
+            "body": "<connect message body>",
+        },
+        "mutable-content": 1,
+        "content-available": 0
+    },
+    "initialContactId": "initialContactId",
+    "messageId": "messageId",
+    "messageType": "MESSAGE",
+    "contentType": "text/plain",
+};
+```
