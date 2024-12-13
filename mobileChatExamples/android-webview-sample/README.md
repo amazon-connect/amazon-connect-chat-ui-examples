@@ -25,8 +25,8 @@ You can now build and run the Android application.
 ### Integrate Amazon Connect API to enable Push Notification
 
 1. Follow [FCM doc](https://firebase.google.com/docs/cloud-messaging) to enable push notification capability and register the end-user's device token.
-1. Follow Amazon Connect [admin doc](add doc) to register push notification after a chat is started on the hosted widget.
-1. To modify the notification content, update `MyFirebaseMessagingService.kt` to configure the notification title, body and other behaviors.
+1. Follow Amazon Connect [admin doc](https://docs.aws.amazon.com/connect/latest/adminguide/enable-push-notifications-for-mobile-chat.html) to register push notification after a chat is started on the hosted widget.
+1. To modify the notification content, update `MyFirebaseMessagingService.kt` to configure the notification title, body and other behaviors. See [Receive messages in an Android app](https://firebase.google.com/docs/cloud-messaging/android/receive) in FCM documentation for more details.
 
 Push Notifications are by default sent for all the agent and bot messages.
 Example of push notification Payload for a chat message:
