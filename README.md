@@ -143,6 +143,38 @@ If your instance was created before the release of the chat feature, here's an o
 8. For instances created prior to October 12, 2018, the Test Chat experience in the Amazon Connect website is not available. Please follow instructions in the [asyncCustomerChatUX solution](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/cloudformationTemplates/asyncCustomerChatUX) to deploy your own sample customer UI and test chat.
 9. Enable interactive messages for your chat widget in Amazon Connect by reading the blog on how to [easily set up interactive messages for your Amazon Connect chatbot](https://aws.amazon.com/blogs/contact-center/easily-set-up-interactive-messages-for-your-amazon-connect-chatbot/) for detailed instructions.
 
+## Enabling Agent-to-Agent Communication in an Existing Contact Center
+
+Amazon Connect Agent worksapce supports 3P app integration (more details in [Getting started with third-party applications](https://aws.amazon.com/blogs/contact-center/getting-started-with-third-party-applications-in-the-agent-workspace/)), which can be leveraged to setup Agent-to-Agent chat/video/voice/screen-share integrations. You can chat with other agents, seek advise, setup routing rules, create agent groups, supervise agents or inform of a customer call transfer and, much more.
+
+<video src="https://github.com/user-attachments/assets/544f2bcd-2fbd-4462-a549-c3c6ed5db845"></video>
+
+https://github.com/mhiaror/amazon-connect-chat-ui-examples/blob/master/.github/screenshots/AgentWorkspaceChatDemo.mp4
+
+To integrate agent-to-agent chat, you need a chat initiator application (which an Agent can use to initiate a chat) and a chat receiver application (which an Agent can use to accept internal chat).
+   1. To create a chat initiator application for Agents, you can either [create a new connect instance](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-instances.html) or use the same connect instance. Login to your connect instance.
+   2. Next, we need to setup internal contact center for agent-to-agent contact. Follow the steps to a/ Setup your channels (Voice, Chat, Video, Screen-share etc) b/ Add users and agents c/ Setup routing etc. Detailed setup can be found at [Get Started : Setup your contact center](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-contact-centers.html).
+   3. To create a *Chat Initiator application*, you have 2 options
+      1. Create a communication widget within your connect instance by following the documentation, [Add a chat user interface to your website](https://docs.aws.amazon.com/connect/latest/adminguide/add-chat-to-website.html). You can Embed the generated code snippet from the communication widget page into your webpage/website.
+      2. Use the test-chat page as Agent Chat Initiator https://<instance-alias>.my.connect.aws/test-chat and, share ContactFlowId with Agents so they can initiate contact.
+      3. You can integrate *Chat Initiator application* within existing Agent workspace as a third-party application. Above video demo shows how Agents can open the 3P application within Agent workspace.
+   4. For the *Chat receiver application*, you can use the default CCP Client,  Agent workspace or Test chat page itself. Note: You can use the https://<instance-alias>.my.connect.aws/test-chat page and integrate it as a third-party application within existing Agent workspace.
+   
+   ### How to integrate Test Chat page as a third party application within Agent workspace
+
+   ![](./.github/screenshots/3P%20Integration.png)
+
+   1. Open the Amazon Connect [console]((https://console.aws.amazon.com/connect/))
+   2. Enable *Third party applications* on the left hand side, select *Add application*
+   ![](./.github/screenshots/3P-Console-1.png)
+   3. Add the application Name, description and provide test-chat page url https://<instance-alias>.my.connect.aws/test-chat
+   ![](./.github/screenshots/3P-Console-2.png)
+   4. Associate your application to your Amazon Connect instances.
+   5. Add security profile permissions for Agent to access third-party application
+   ![](./.github/screenshots/3P Security profile permission.png)
+   6. Use the Agent workspace app launcher, to access third-party application you created above. The app launcher should show the list of applications an Agent has access to (configured using security profile in step#5)
+
+
 ## Troubleshooting and Support
 
 Review the resources given in the README files for guidance on how to develop on this library. Additionally, search our [issues database](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/issues) to see if your issue is already addressed. If not please cut us an [issue](https://github.com/amazon-connect/amazon-connect-chat-interface/issues/new/choose) using the provided templates.
