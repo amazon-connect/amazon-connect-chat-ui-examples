@@ -22,9 +22,11 @@ struct AppConfiguration {
 
 You can now build and run the iOS application.
 
-### Communication Widget Configurations for WebView
+## Communication Widget Configurations for WebView
 
-#### WebView DisplayType
+https://github.com/user-attachments/assets/fa260675-7f45-4beb-96ce-57564664fd67
+
+### WebView DisplayType
 
 For a more tailored Communication Widget WebView experience, try adding the `WEBVIEW` displayType snippet field in your widget script that is hosted by the WebView.
 
@@ -34,14 +36,26 @@ Here are the differences when using the `WEBVIEW` displayType:
 * The widget will auto-launch upon initialization
 * The widget will auto-launch upon becoming visible
 
-Example code snippet:
+Here is an example code snippet to set the widget to use `WEBVIEW` displayType.
 ```
 amazon_connect('displayType', 'WEBVIEW');
 ```
 
-#### Navigation on Widget Frame Close
+### Navigation on Widget Frame Close
 
 For a more integrated WebView experience, consider adding navigation controls when the communication widget closes.
+
+In this WebView example, the function to navigate on frame close is passed from `ConnectWidgetViewController.swift` into `ConnectWidgetWebView.swift` via `ConnectWidgetWebView`'s `onWidgetFrameClose` property. The trigger to execute the navigation is handled by the `widgetFrameClosed` content controller event in `ConnectWidgetWebView.swift`. This event needs to be triggered from within the WebView when the widget frame closes.
+
+To emit the `widgetFrameClosed` event, we need to modify the `registerCallback` snippet field in the snippet code. Here is an example code snippet used to emit `widgetFrameClosed` from within the WebView:
+
+```
+amazon_connect('registerCallback', {
+  'WIDGET_FRAME_CLOSED': () => {
+    window?.webkit?.messageHandlers?.widgetFrameClosed?.postMessage(null)
+  },
+});
+```
 
 See [Supported widget snippet fields in Amazon Connect that are customizable
 ](https://docs.aws.amazon.com/connect/latest/adminguide/supported-snippet-fields.html) for more details on snippet fields.
