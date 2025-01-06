@@ -22,6 +22,30 @@ struct AppConfiguration {
 
 You can now build and run the iOS application.
 
+### Communication Widget Configurations for WebView
+
+#### WebView DisplayType
+
+For a more tailored Communication Widget WebView experience, try adding the `WEBVIEW` displayType snippet field in your widget script that is hosted by the WebView.
+
+Here are the differences when using the `WEBVIEW` displayType:
+* The widget will always render in fullscreen mode
+* The widget will no longer have a minimize button
+* The widget will auto-launch upon initialization
+* The widget will auto-launch upon becoming visible
+
+Example code snippet:
+```
+amazon_connect('displayType', 'WEBVIEW');
+```
+
+#### Navigation on Widget Frame Close
+
+For a more integrated WebView experience, consider adding navigation controls when the communication widget closes.
+
+See [Supported widget snippet fields in Amazon Connect that are customizable
+](https://docs.aws.amazon.com/connect/latest/adminguide/supported-snippet-fields.html) for more details on snippet fields.
+
 ## Persistent Chat Example
 
 https://github.com/user-attachments/assets/eb10d365-9491-4e71-8204-072330bd64c3
@@ -35,7 +59,7 @@ The hosted widget's persistent chat feature is managed via the `persistedChatSes
 ### Setup
 
 In order for `persistedChatSession` to work, we also need to update our widget snippet to pass the `persistedChatSession` data back to the native app. We can achieve this by using the `registerCallback` snippet attribute and register callbacks for `CONNECTION_ESTABLISHED` to indicate when the session storage data is ready for retrieval and `CHAT_ENDED` to indicate when to clear the session storage data. Here is an example `registerCallback` snippet attribute that will enable the `persistentChatSession` functionality for WebViews.  See [Supported widget snippet fields in Amazon Connect that are customizable
-](https://docs.aws.amazon.com/connect/latest/adminguide/supported-snippet-fields.html) for more details on snippet attributes.
+](https://docs.aws.amazon.com/connect/latest/adminguide/supported-snippet-fields.html) for more details on snippet fields.
 
 ```
   amazon_connect('registerCallback', {

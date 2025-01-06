@@ -10,6 +10,8 @@ import Foundation
 import WebKit
 
 class ConnectWidgetWebView: WKWebView, WKScriptMessageHandler, WKNavigationDelegate {
+    var onWidgetFrameClose: (() -> Void)?
+    
     init() {
         // Initialize configuration and user content controller
         let configuration = WKWebViewConfiguration()
@@ -24,6 +26,7 @@ class ConnectWidgetWebView: WKWebView, WKScriptMessageHandler, WKNavigationDeleg
             
         contentController.add(self, name: "persistedChatSessionToken")
         contentController.add(self, name: "clearPersistedChatSessionToken")
+        contentController.add(self, name: "widgetFrameClosed")
         
         
         // Uncomment below code to print WebView's console.log statements into XCode terminal
@@ -90,6 +93,8 @@ class ConnectWidgetWebView: WKWebView, WKScriptMessageHandler, WKNavigationDeleg
             UserDefaults.standard.set(persistedChatSession, forKey: "persistedChatSession")
         } else if message.name == "clearPersistedChatSessionToken" {
             UserDefaults.standard.removeObject(forKey: "persistedChatSession")
+        } else if message.name == "widgetFrameClosed" {
+            onWidgetFrameClose?()
         }
     }
 }

@@ -15,6 +15,9 @@ class ConnectWidgetViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        connectWidgetWebView.onWidgetFrameClose = { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
         view.addSubview(connectWidgetWebView)
     }
     
