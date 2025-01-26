@@ -1,0 +1,77 @@
+{
+    "requestAttributes": {
+        "x-amz-lex:accept-content-types": "PlainText"
+    },
+    "sessionId": "7675eb4f-acfb-4f00-b73e-a313f00d13f7",
+    "inputTranscript": "End chat",
+    "interpretations": [
+        {
+            "intent": {
+                "slots": {
+                    "action": {
+                        "shape": "Scalar",
+                        "value": {
+                            "originalValue": "End chat",
+                            "resolvedValues": [
+                                "End chat"
+                            ],
+                            "interpretedValue": "End chat"
+                        }
+                    },
+                    "appointment": null,
+                    "department": null,
+                    "interactiveOption": null
+                },
+                "confirmationState": "None",
+                "name": "InteractiveMessageIntent",
+                "state": "InProgress"
+            },
+            "nluConfidence": 1
+        },
+        {
+            "intent": {
+                "slots": {},
+                "confirmationState": "None",
+                "name": "FallbackIntent",
+                "state": "InProgress"
+            }
+        }
+    ],
+    "responseContentType": "text/plain; charset=utf-8",
+    "sessionState": {
+        "sessionAttributes": {},
+        "activeContexts": [],
+        "intent": {
+            "slots": {
+                "action": {
+                    "shape": "Scalar",
+                    "value": {
+                        "originalValue": "End chat",
+                        "resolvedValues": [
+                            "End chat"
+                        ],
+                        "interpretedValue": "End chat"
+                    }
+                },
+                "appointment": null,
+                "department": null,
+                "interactiveOption": null
+            },
+            "confirmationState": "None",
+            "name": "InteractiveMessageIntent",
+            "state": "InProgress"
+        },
+        "originatingRequestId": "ce8438dd-244d-4646-946f-d23d04ce1c81"
+    },
+    "invocationSource": "DialogCodeHook",
+    "messageVersion": "1.0",
+    "bot": {
+        "aliasName": "TestBotAlias",
+        "aliasId": "TSTALIASID",
+        "name": "interactive-messaging-lexv2",
+        "version": "DRAFT",
+        "localeId": "en_US",
+        "id": "VGKIKY0S9G"
+    },
+    "inputMode": "Text"
+}
