@@ -10,6 +10,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 
+    <script type="text/javascript" src="js/backendEndpoints.js"></script>
     <script type="text/javascript" src="js/amazon-connect-chat-min.js"></script>
 </head>
 
@@ -53,7 +54,7 @@
 
     <script>
         connect.ChatSession.setGlobalConfig({
-            region: "" // TODO: Fill in with your region, such as 'us-west-2'
+            region: region, // set in "backendEndpoints.js"
         });
 
         var session;
@@ -84,9 +85,7 @@
                 if (!customerName) {
                     alert('you must enter a name');
                 } else {
-                    var contactFlowId = ""; // TODO: Fill in. You can find the contact flow id when viewing a contact flow. For example, if the arn for your flow is 'arn:aws:connect:us-west-2:123456789012:instance/11111111-1111-1111-1111-111111111111/contact-flow/22222222-2222-2222-2222-222222222222', the contact flow id is '22222222-2222-2222-2222-222222222222'
-                    var instanceId = ""; // TODO: Fill in You can find the instance id when viewing a contact flow. For example, if the arn for your flow is 'arn:aws:connect:us-west-2:123456789012:instance/11111111-1111-1111-1111-111111111111/contact-flow/22222222-2222-2222-2222-222222222222', the instance id is '11111111-1111-1111-1111-111111111111'
-                    var apiGatewayEndpoint = ""; // TODO: Fill in with the API Gateway endpoint created by your CloudFormation template. It should look like this: https://${apiId}.execute-api.${region}.amazonaws.com/Prod
+                    var attachmentsFeatureEnabled = false; // Prerequisite: https://docs.aws.amazon.com/connect/latest/adminguide/enable-attachments.html
 
                     console.log("this is the first name:" + customerName);
                     document.getElementById("contactDetails").reset();
@@ -95,8 +94,8 @@
                         ParticipantDetails: {
                             DisplayName: customerName
                         },
-                        ContactFlowId: contactFlowId,
-                        InstanceId: instanceId,
+                        ContactFlowId: contactFlowId, // set in "backendEndpoints.js"
+                        InstanceId: instanceId, // set in "backendEndpoints.js"
                         // Enable rich messaging support: https://docs.aws.amazon.com/connect/latest/adminguide/enable-text-formatting-chat.html
                         SupportedMessagingContentTypes: ["text/plain", "text/markdown"], // include 'text/markdown',
                         // Set optional chat duration: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html#connect-StartChatContact-request-ChatDurationInMinutes
@@ -104,7 +103,7 @@
                     };
 
                     $.ajax({
-                        url: apiGatewayEndpoint,
+                        url: apiGatewayEndpoint, // set in "backendEndpoints.js"
                         type: "POST",
                         async: false,
                         data: JSON.stringify(initiateChatRequest),
