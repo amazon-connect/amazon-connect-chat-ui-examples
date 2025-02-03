@@ -9,12 +9,14 @@ struct CreateStartChatRequest: Codable {
     let connectInstanceId: String
     let contactFlowId: String
     let participantDetails: ParticipantDetails
+    let persistantChat: PersistentChat?
     let SupportedMessagingContentTypes : [String] = ["text/plain", "text/markdown"]
 
     enum CodingKeys: String, CodingKey {
         case connectInstanceId = "ConnectInstanceId"
         case contactFlowId = "ContactFlowId"
         case participantDetails = "ParticipantDetails"
+        case persistantChat = "PersistentChat"
         case SupportedMessagingContentTypes = "SupportedMessagingContentTypes"
     }
 }

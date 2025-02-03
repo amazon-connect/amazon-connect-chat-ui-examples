@@ -18,6 +18,10 @@ struct ContentView: View {
             Spacer()
             participantTokenSection
             clearParticipantTokenButton
+            Spacer()
+            contactIdSection
+            clearContactIdButton
+            Spacer()
             chatButton
         }
         .preferredColorScheme(.light)
@@ -59,6 +63,19 @@ struct ContentView: View {
             }
         }
     }
+    
+    private var contactIdSection: some View {
+        Group {
+            if chatManager.contactIdExists {
+                Text("Contact Id exists in storage.")
+                    .foregroundColor(.green)
+                Text(UserDefaults.standard.string(forKey: "contactId") ?? "").lineLimit(2).truncationMode(.tail).padding()
+            } else {
+                Text("No Contact Id token found in storage.")
+                    .foregroundColor(.red)
+            }
+        }
+    }
 
     private func detailRow(label: String, value: String) -> some View {
         HStack {
@@ -83,6 +100,19 @@ struct ContentView: View {
             print("Participant token cleared.")
         }) {
             Text("Clear Participant Token")
+                .foregroundColor(.white)
+                .padding()
+                .background(Color.blue)
+                .cornerRadius(8)
+        }
+    }
+
+    private var clearContactIdButton: some View {
+        Button(action: {
+            chatManager.removeContactId()
+            print("Contact Id cleared.")
+        }) {
+            Text("Clear Contact Id")
                 .foregroundColor(.white)
                 .padding()
                 .background(Color.blue)
