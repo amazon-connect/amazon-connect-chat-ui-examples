@@ -13,11 +13,18 @@ class ChatManager: ObservableObject {
     @Published var isChatEnded: Bool? = false // Indicates if the chat has ended
     @Published var isChatActive: Bool = false // Indicates if the chat is currently active
     @Published var participantTokenExists: Bool = UserDefaults.standard.string(forKey: Constants.participantTokenKey) != nil // Checks if a participant token exists in UserDefaults
+    @Published var contactIdExists: Bool = UserDefaults.standard.string(forKey: Constants.contactIdKey) != nil // Checks if a contactId exists in UserDefaults
     
     // Property to hold the participant token, which triggers a handler when changed
     var participantToken: String? {
         didSet {
             handleParticipantTokenChange()
+        }
+    }
+    
+    var contactId: String? {
+        didSet {
+            handleContactIdChange()
         }
     }
     
@@ -143,7 +150,16 @@ class ChatManager: ObservableObject {
     private func startChatContact(name: String, completion: @escaping (Bool) -> Void) {
         // Attributes to be sent with the chat initiation request
         let attributes = ["DisplayName": name, "City": "Seattle"]
-        networkManager.startChat(endpoint: config.startChatEndPoint, connectInstanceId: config.instanceId, contactFlowId: config.contactFlowId, displayName: name, attributes: attributes) { response in
+        
+        // Create PersistentChat only if previousContactId is not null
+       var persistentChat: PersistentChat? = nil
+        if let previousId = UserDefaults.standard.string(forKey: Constants.contactIdKey), !previousId.isEmpty {
+           print("previous contact Id is : \(previousId)")
+           persistentChat = PersistentChat(SourceContactId: previousId,
+                                           RehydrationType: "ENTIRE_PAST_SESSION") // Or "FROM_SEGMENT"
+       }
+        
+        networkManager.startChat(endpoint: config.startChatEndPoint, connectInstanceId: config.instanceId, contactFlowId: config.contactFlowId, displayName: name, attributes: attributes, persistantChat: persistentChat) { response in
             self.handleStartChatResponse(response, completion: completion)
         } onFailure: { error in
             self.handleStartChatFailure(error, completion: completion)
@@ -156,6 +172,7 @@ class ChatManager: ObservableObject {
             let response = response.data.startChatResult
             // Save the participant token
             self.participantToken = response.participantToken
+            self.contactId = response.contactId
             let chatDetails = ChatDetails(contactId: response.contactId, participantId: response.participantId, participantToken: response.participantToken)
             // Create a participant connection with the chat details
             self.createParticipantConnection(usingSavedToken: false, chatDetails: chatDetails, completion: completion)
@@ -178,6 +195,13 @@ class ChatManager: ObservableObject {
             switch result {
             case .success:
                 print("Participant connection successfully created.")
+                self?.fetchTranscript { success in
+                    if success {
+                        print("All transcripts fetched successfully")
+                    } else {
+                        print("Failed to fetch transcripts")
+                    }
+                }
                 completion(true)
             case .failure(let error):
                 self?.handleConnectionFailure(error, completion: completion)
@@ -279,25 +303,32 @@ class ChatManager: ObservableObject {
         }
     }
     
-    /// Fetches the chat transcript
-    func fetchTranscript() {
-        self.chatSession.getTranscript(scanDirection: .backward, sortOrder: .descending, maxResults: 30, nextToken: nil, startPosition: self.messages.first?.id) { [weak self] result in
-            self?.handleFetchTranscriptResult(result)
-        }
-    }
-    
-    // Handles the result of fetching the chat transcript
-    private func handleFetchTranscriptResult(_ result: Result<TranscriptResponse, Error>) {
-        DispatchQueue.main.async {
-            switch result {
-            case .success(let response):
-                print("Transcript loaded successfully")
-            case .failure(let error):
-                self.error = ErrorMessage(message: "Error fetching transcript: \(error.localizedDescription)")
+    /// Fetches the chat transcript recursively
+    func fetchTranscript(nextToken: String? = nil, onCompletion: @escaping (Bool) -> Void) {
+        self.chatSession.getTranscript(scanDirection: .backward, sortOrder: .descending, maxResults: 30, nextToken: nextToken, startPosition: nil) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    print("Transcript fetched successfully")
+                    
+                    // Check if nextToken is not empty
+                    if !response.nextToken.isEmpty {
+                        // Call fetchTranscript again with the nextToken
+                        self?.fetchTranscript(nextToken: response.nextToken, onCompletion: onCompletion)
+                    } else {
+                        onCompletion(true)
+                    }
+                    
+                case .failure(let error):
+                    print("Error fetching transcript: \(error.localizedDescription)")
+                    self?.error = ErrorMessage(message: "Error fetching transcript: \(error.localizedDescription)")
+                    onCompletion(false)
+                }
             }
         }
     }
-    
+
+
     // MARK: - Helpers
     /// Sends a read receipt for the specified message if it is a plain text message
     func sendReadEventOnAppear(message: Message) {
@@ -326,6 +357,28 @@ class ChatManager: ObservableObject {
         }
     }
     
+    // MARK: - Contact Id Management
+    /// Saves the contact Id to UserDefaults
+    private func saveContactId(_ id: String) {
+        UserDefaults.standard.set(id, forKey: Constants.contactIdKey)
+        contactIdExists = true
+    }
+    
+    /// Removes the contact Id from User Defaults
+    func removeContactId() {
+        UserDefaults.standard.removeObject(forKey: Constants.contactIdKey)
+        contactIdExists = false
+    }
+    
+    /// Handles changes to contact Id
+    private func handleContactIdChange() {
+        if let id = contactId {
+            saveContactId(id)
+        } else {
+            contactIdExists = false
+        }
+    }
+    
     // MARK: - ErrorMessage Struct
     struct ErrorMessage: Identifiable, Equatable {
         let id = UUID() // Unique identifier for the error message
@@ -336,4 +389,5 @@ class ChatManager: ObservableObject {
 // MARK: - Constants
 private struct Constants {
     static let participantTokenKey = "participantToken" // Key for saving the participant token in UserDefaults
+    static let contactIdKey = "contactId" // Key for saving the contact ID in UserDefaults
 }

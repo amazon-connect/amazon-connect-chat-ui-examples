@@ -96,7 +96,14 @@ struct ChatView: View {
                         
                     }
                     .refreshable {
-                        chatManager.fetchTranscript()
+                        chatManager.fetchTranscript { success in
+                            isRefreshing = false
+                            if success {
+                                print("All transcripts fetched successfully")
+                            } else {
+                                print("Failed to fetch transcripts")
+                            }
+                        }
                         isRefreshing = true
                     }
                     .onChange(of: messages) { _ in
