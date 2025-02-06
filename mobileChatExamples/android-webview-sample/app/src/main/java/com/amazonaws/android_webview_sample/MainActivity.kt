@@ -12,19 +12,15 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import android.webkit.WebView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
-import androidx.navigation.Navigation
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
+import androidx.fragment.app.Fragment
 import com.amazonaws.android_webview_sample.databinding.ActivityMainBinding
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : AppCompatActivity() {
-    private val appBarConfiguration: AppBarConfiguration? = null
     companion object {
         var pushEnabled = true;
     }
@@ -33,23 +29,73 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(
             layoutInflater
         )
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         setContentView(binding.root)
+
+        setSupportActionBar(findViewById(R.id.toolbar))
 
         askNotificationPermission()
 
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
-                return@OnCompleteListener
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WebView.setWebContentsDebuggingEnabled(true)
+        }
 
-            // Get new FCM registration token
-            val token = task.result
+        binding.launchWebviewButton.setOnClickListener {
+            replaceFragment(WebViewFragment(), addToBackStack = true)
+        }
 
-            // Log and toast
-            Log.d(TAG, "Device token: ${token}")
-            Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
-        })
+        supportFragmentManager.addOnBackStackChangedListener {
+            updateBackButton()
+        }
+
+
+        /*
+         Uncomment this to test push notification
+         Make sure to uncomment google services dependencies and plugin in build.gradle files
+         Also do not forget to add google-services.json to src
+        */
+
+//        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+//            if (!task.isSuccessful) {
+//                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+//                return@OnCompleteListener
+//            }
+//
+//            // Get new FCM registration token
+//            val token = task.result
+//
+//            // Log and toast
+//            Log.d(TAG, "Device token: ${token}")
+//            Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
+//        })
+    }
+
+    /**
+     * Replace fragment inside the FrameLayout
+     */
+    private fun replaceFragment(fragment: Fragment, addToBackStack: Boolean) {
+        val transaction = supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+
+        if (addToBackStack) {
+            transaction.addToBackStack(null)
+        }
+
+        transaction.commit()
+    }
+
+    /**
+     * Show/hide the Back Button based on active fragment
+     */
+    private fun updateBackButton() {
+        val showBackButton = supportFragmentManager.backStackEntryCount > 0
+        supportActionBar?.setDisplayHomeAsUpEnabled(showBackButton)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+        return true
     }
 
     // Declare the launcher at the top of your Activity/Fragment:
@@ -115,11 +161,5 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG,"Lifecycle event received: onResume");
         // stop notification
         pushEnabled = false;
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main)
-        return (NavigationUI.navigateUp(navController, appBarConfiguration!!)
-                || super.onSupportNavigateUp())
     }
 }
