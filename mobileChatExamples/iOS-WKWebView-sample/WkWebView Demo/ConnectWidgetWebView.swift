@@ -46,11 +46,31 @@ class ConnectWidgetWebView: WKWebView, WKScriptMessageHandler, WKNavigationDeleg
 //        let consoleLogScript = WKUserScript(source: jsCode, injectionTime: .atDocumentStart, forMainFrameOnly: false)
 //        configuration.userContentController.addUserScript(consoleLogScript)
         
-        let targetUrl = AppConfiguration.url
-        guard let url = URL(string: targetUrl) else {
-            return
+        // Choose between loading a JS snippet or a remote URL.
+        if AppConfiguration.loadJS {
+            // Build a complete HTML document that embeds the snippet directly.
+            let html = """
+            <!DOCTYPE html>
+            <html>
+              <head>
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <title>Chat</title>
+              </head>
+              <body>
+                \(AppConfiguration.jsSnippet)
+              </body>
+            </html>
+            """
+            self.loadHTMLString(html, baseURL: URL(string: AppConfiguration.BASE_URL) )
+        } else {
+            // Load a remote URL.
+            let targetUrl = AppConfiguration.url
+            guard let url = URL(string: targetUrl) else {
+                print("Invalid URL string: \(targetUrl)")
+                return
+            }
+            self.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData))
         }
-        self.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData))
     }
     
     required init?(coder: NSCoder) {

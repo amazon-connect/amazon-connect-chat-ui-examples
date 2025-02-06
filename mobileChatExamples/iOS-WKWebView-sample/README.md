@@ -1,28 +1,56 @@
-# Amazon Connect Communication Widget WKWebView Sample
-This is a fork of [amazon-chime-sdk iOS webview sample](https://github.com/aws-samples/amazon-chime-sdk/tree/main/apps/iOS-WKWebView-sample).
-
-## Summary
+# Amazon Connect Communication Widget WebView Sample for iOS
 
 This sample shows how to run a communication widget application inside an iOS WKWebView. The sample itself is a bare-bones iOS app that loads a WKWebView, which then navigates to a specified URL. iOS 14.3 or later version is required if VoIP channel is enabled for the widget.
 
 ### Pre-requisites:
 - XCode 12.3+ installed on your machine
 
-### Create a communication widget and embed it 
+## Create a communication widget and embed it 
 If you'd like to use a communication widget from within a WKWebView in iOS, you first need to embed it in a browser so that the widget appears when you load the WKWebView. Follow the instructions for the [Amazon Connect Communication Widget Documentation](https://docs.aws.amazon.com/connect/latest/adminguide/add-chat-to-website.html) in order to create and embed a communication widget.
 
-After you've embedded a communication widget, copy the URL of the webpage where the widget is embedded, then replace the variable `url` in `./AppConfiguration.swift` with it. 
+After you've embedded a communication widget, there are two ways you can use this example:
+
+### Option 1: Use widget's script
+You can directly copy widget's script inside `AppConfiguration.swift` and toggle `loadJS` to `true`.
+
+```swift
+struct AppConfiguration {
+    /// Set to `true` to load the JavaScript snippet mode.
+    /// Set to `false` to load the remote URL.
+    static let loadJS = true
+    
+    /// Your JavaScript snippet that already includes <script> tags.
+    static let jsSnippet = """
+        <script type="text/javascript">
+          (function(w, d, x, id){
+            ....
+        </script>
+    """
+    ...
+}
+
+```
+
+### Option 2: Use widget's URL
+Copy the URL of the webpage where the widget is embedded, then replace the variable `url` in `AppConfiguration.swift` with it.
 
 For example:
-```
+```swift
 struct AppConfiguration {
-    static let url = "https://your-website"
+    /// Set to `true` to load the JavaScript snippet mode.
+    /// Set to `false` to load the remote URL.
+    static let loadJS = false
+    
+    ...
+    
+    /// The remote URL to load if loadJS is false.
+    static let url = "WIDGET_URL_HERE"
 }
 ```
 
 You can now build and run the iOS application.
 
-## Communication Widget Configurations for WebView
+#### Communication Widget Configurations for WebView
 
 https://github.com/user-attachments/assets/fa260675-7f45-4beb-96ce-57564664fd67
 
@@ -87,7 +115,7 @@ In order for `persistedChatSession` to work, we also need to update our widget s
   });
 ```
 
-### Integrate Amazon Connect API to enable Push Notification
+## Integrate Amazon Connect API to enable Push Notification
 
 1. Follow [APNS doc](https://developer.apple.com/documentation/usernotifications/registering-your-app-with-apns) to enable push notification capability and register the end-user's device token.
 1. Follow Amazon Connect [admin doc](https://docs.aws.amazon.com/connect/latest/adminguide/enable-push-notifications-for-mobile-chat.html) to register push notification after a chat is started on the hosted widget.

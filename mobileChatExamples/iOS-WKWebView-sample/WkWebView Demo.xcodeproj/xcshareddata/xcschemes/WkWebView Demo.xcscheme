@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AB6EDCF8264C63C200E41625"
+               BlueprintIdentifier = "AB7E4FEB2673FCEE00E6351A"
                BuildableName = "WkWebView DemoUITests.xctest"
                BlueprintName = "WkWebView DemoUITests"
                ReferencedContainer = "container:WkWebView Demo.xcodeproj">
