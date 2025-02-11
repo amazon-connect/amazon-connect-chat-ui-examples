@@ -24,7 +24,7 @@ Resources:
     Properties:
       CodeUri: interactive-messaging-lex-codehook/
       Handler: app.lambdaHandler
-      Runtime: nodejs18.x
+      Runtime: nodejs20.x
  
 Outputs:
   InteractiveMessagingLambdaFunction:
