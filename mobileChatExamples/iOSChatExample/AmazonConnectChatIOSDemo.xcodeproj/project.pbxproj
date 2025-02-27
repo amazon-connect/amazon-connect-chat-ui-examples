@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E2F2CAE2D4C597400695431 /* AmazonConnectChatIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E2F2CAD2D4C597400695431 /* AmazonConnectChatIOS.framework */; };
+		7E2F2CAF2D4C597400695431 /* AmazonConnectChatIOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7E2F2CAD2D4C597400695431 /* AmazonConnectChatIOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7E2F2CB22D517C7200695431 /* PersistentChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2F2CB12D517C7200695431 /* PersistentChat.swift */; };
 		7E829D4C2C22587B00DCB00E /* AttachmentMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E829D4B2C22587B00DCB00E /* AttachmentMessageView.swift */; };
 		7E829D4E2C24CF2000DCB00E /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E829D4D2C24CF2000DCB00E /* ChatManager.swift */; };
 		7E91591C2BBE674200821C05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E91591B2BBE674200821C05 /* Assets.xcassets */; };
@@ -34,7 +37,6 @@
 		7E9159772BBE67D500821C05 /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E91595D2BBE67D500821C05 /* HttpHeader.swift */; };
 		7E9159782BBE67D500821C05 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E91595E2BBE67D500821C05 /* HttpClient.swift */; };
 		7E9159792BBE67D500821C05 /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E91595F2BBE67D500821C05 /* CommonUtils.swift */; };
-		7E9A4D8E2C45D8B600CD6CFF /* AmazonConnectChatIOS in Frameworks */ = {isa = PBXBuildFile; productRef = 7E9A4D8D2C45D8B600CD6CFF /* AmazonConnectChatIOS */; };
 		7EC369E42C405D620039CA2D /* AWSConnectParticipant in Frameworks */ = {isa = PBXBuildFile; productRef = 7EC369E32C405D620039CA2D /* AWSConnectParticipant */; };
 		7EC369E62C405D620039CA2D /* AWSCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7EC369E52C405D620039CA2D /* AWSCore */; };
 		7EFB7A342C210E7700D6B9EE /* AttachmentTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB7A332C210E7700D6B9EE /* AttachmentTextView.swift */; };
@@ -44,6 +46,7 @@
 		F72A640E2BD3160000881A24 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72A640D2BD315FF00881A24 /* Notifications.swift */; };
 		F72A640F2BD3160000881A24 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72A640D2BD315FF00881A24 /* Notifications.swift */; };
 		F72A64102BD3160000881A24 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72A640D2BD315FF00881A24 /* Notifications.swift */; };
+		F796A3D42CBF4EA000EC5FCE /* CustomLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F796A3D32CBF4EA000EC5FCE /* CustomLogger.swift */; };
 		F7B4A1242C115455005C7921 /* AttachmentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B4A1232C115455005C7921 /* AttachmentButton.swift */; };
 		F7B4A1252C115455005C7921 /* AttachmentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B4A1232C115455005C7921 /* AttachmentButton.swift */; };
 		F7B4A1262C115455005C7921 /* AttachmentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B4A1232C115455005C7921 /* AttachmentButton.swift */; };
@@ -69,9 +72,25 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		7E2F2CB02D4C597400695431 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7E2F2CAF2D4C597400695431 /* AmazonConnectChatIOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		7E160C9E2BFECEF9001E5D31 /* AmazonConnectChatIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AmazonConnectChatIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E21727A2C407B0D00C3624F /* AmazonConnectChatIOS.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:94KV3E626L:AMZN Mobile LLC"; lastKnownFileType = wrapper.xcframework; name = AmazonConnectChatIOS.xcframework; path = "../../../../release-sort-final/amazon-connect-chat-ios/signed-sdk/AmazonConnectChatIOS.xcframework"; sourceTree = "<group>"; };
+		7E2F2CAD2D4C597400695431 /* AmazonConnectChatIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AmazonConnectChatIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E2F2CB12D517C7200695431 /* PersistentChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentChat.swift; sourceTree = "<group>"; };
 		7E30ADA22C3FD4C900F6DC44 /* AmazonConnectChatIOS.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:94KV3E626L:AMZN Mobile LLC"; lastKnownFileType = wrapper.xcframework; name = AmazonConnectChatIOS.xcframework; path = "../../../../release-sort-final/scripts/sign-sdk-output/1.0.5-public/AmazonConnectChatIOS.xcframework"; sourceTree = "<group>"; };
 		7E30ADA72C3FD76200F6DC44 /* AmazonConnectChatIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AmazonConnectChatIOS.framework; sourceTree = "<group>"; };
 		7E30ADA82C3FD76200F6DC44 /* AmazonConnectChatIOS.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = AmazonConnectChatIOS.framework.dSYM; sourceTree = "<group>"; };
@@ -130,10 +149,10 @@
 		7EC369F02C406E9F0039CA2D /* AmazonConnectChatIOS.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:94KV3E626L:AMZN Mobile LLC"; lastKnownFileType = wrapper.xcframework; name = AmazonConnectChatIOS.xcframework; path = "../../../../release-sort-final/scripts/sign-sdk-output/final/1.0.5-public 2/AmazonConnectChatIOS.xcframework"; sourceTree = "<group>"; };
 		7EF438462BFEE92F00E7F8E9 /* AmazonConnectChatIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AmazonConnectChatIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EFB7A332C210E7700D6B9EE /* AttachmentTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentTextView.swift; sourceTree = "<group>"; };
-		7EFCCA712C02E860004CE110 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7EFF832C2C30045F00865E09 /* AmazonConnectChatIOSDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AmazonConnectChatIOSDemo.entitlements; sourceTree = "<group>"; };
 		F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectionManager.swift; sourceTree = "<group>"; };
 		F72A640D2BD315FF00881A24 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		F796A3D32CBF4EA000EC5FCE /* CustomLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLogger.swift; sourceTree = "<group>"; };
 		F7B4A1232C115455005C7921 /* AttachmentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentButton.swift; sourceTree = "<group>"; };
 		F7B4A1292C13B7D5005C7921 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -144,7 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7EC369E62C405D620039CA2D /* AWSCore in Frameworks */,
-				7E9A4D8E2C45D8B600CD6CFF /* AmazonConnectChatIOS in Frameworks */,
+				7E2F2CAE2D4C597400695431 /* AmazonConnectChatIOS.framework in Frameworks */,
 				7EC369E42C405D620039CA2D /* AWSConnectParticipant in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -169,6 +188,7 @@
 		697C8D19CE221ADB8478DD5D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7E2F2CAD2D4C597400695431 /* AmazonConnectChatIOS.framework */,
 				7E30ADC12C40420E00F6DC44 /* AmazonConnectChatIOS.xcframework */,
 				7EC369D12C40436A0039CA2D /* AmazonConnectChatIOS.xcframework */,
 				7EC369DB2C4053610039CA2D /* AmazonConnectChatIOS.xcframework */,
@@ -261,7 +281,6 @@
 		7E9159162BBE674100821C05 /* AmazonConnectChatIOSDemo */ = {
 			isa = PBXGroup;
 			children = (
-				7EFCCA712C02E860004CE110 /* Info.plist */,
 				7E91594A2BBE67D500821C05 /* ChatApp.swift */,
 				7E91594B2BBE67D500821C05 /* Common */,
 				7E91594F2BBE67D500821C05 /* Models */,
@@ -331,6 +350,8 @@
 		7E91594F2BBE67D500821C05 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7E2F2CB12D517C7200695431 /* PersistentChat.swift */,
+				F796A3D32CBF4EA000EC5FCE /* CustomLogger.swift */,
 				F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */,
 				7E9159512BBE67D500821C05 /* CreateStartChatResponse.swift */,
 				7E9159532BBE67D500821C05 /* NetworkManager.swift */,
@@ -378,6 +399,7 @@
 				7E9159102BBE674100821C05 /* Sources */,
 				7E9159112BBE674100821C05 /* Frameworks */,
 				7E9159122BBE674100821C05 /* Resources */,
+				7E2F2CB02D4C597400695431 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -387,7 +409,6 @@
 			packageProductDependencies = (
 				7EC369E32C405D620039CA2D /* AWSConnectParticipant */,
 				7EC369E52C405D620039CA2D /* AWSCore */,
-				7E9A4D8D2C45D8B600CD6CFF /* AmazonConnectChatIOS */,
 			);
 			productName = iOSChatExample;
 			productReference = 7E9159142BBE674100821C05 /* AmazonConnectChatIOSDemo.app */;
@@ -464,7 +485,6 @@
 			mainGroup = 7E91590B2BBE674100821C05;
 			packageReferences = (
 				7EC369E22C405D620039CA2D /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */,
-				7E9A4D8C2C45D8B600CD6CFF /* XCRemoteSwiftPackageReference "amazon-connect-chat-ios" */,
 			);
 			productRefGroup = 7E9159152BBE674100821C05 /* Products */;
 			projectDirPath = "";
@@ -509,6 +529,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7B4A12A2C13B7D5005C7921 /* UIView.swift in Sources */,
+				7E2F2CB22D517C7200695431 /* PersistentChat.swift in Sources */,
 				F712DCA62BCF4A28009FC568 /* NetworkConnectionManager.swift in Sources */,
 				7EFB7A342C210E7700D6B9EE /* AttachmentTextView.swift in Sources */,
 				7E9159792BBE67D500821C05 /* CommonUtils.swift in Sources */,
@@ -516,6 +537,7 @@
 				7E91596A2BBE67D500821C05 /* AppDelegate.swift in Sources */,
 				7E9159642BBE67D500821C05 /* ChatMessageView.swift in Sources */,
 				7E9159612BBE67D500821C05 /* TestView.swift in Sources */,
+				F796A3D42CBF4EA000EC5FCE /* CustomLogger.swift in Sources */,
 				7E829D4E2C24CF2000DCB00E /* ChatManager.swift in Sources */,
 				F72A640E2BD3160000881A24 /* Notifications.swift in Sources */,
 				7E9159662BBE67D500821C05 /* ContentView.swift in Sources */,
@@ -717,7 +739,6 @@
 					"$(PROJECT_DIR)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = AmazonConnectChatIOSDemo/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Amazon Connect Chat IOS Demo";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -779,7 +800,6 @@
 					"$(PROJECT_DIR)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = AmazonConnectChatIOSDemo/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Amazon Connect Chat IOS Demo";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -939,14 +959,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		7E9A4D8C2C45D8B600CD6CFF /* XCRemoteSwiftPackageReference "amazon-connect-chat-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/amazon-connect/amazon-connect-chat-ios";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		7EC369E22C405D620039CA2D /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/aws-amplify/aws-sdk-ios-spm";
@@ -958,11 +970,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		7E9A4D8D2C45D8B600CD6CFF /* AmazonConnectChatIOS */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7E9A4D8C2C45D8B600CD6CFF /* XCRemoteSwiftPackageReference "amazon-connect-chat-ios" */;
-			productName = AmazonConnectChatIOS;
-		};
 		7EC369E32C405D620039CA2D /* AWSConnectParticipant */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7EC369E22C405D620039CA2D /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;

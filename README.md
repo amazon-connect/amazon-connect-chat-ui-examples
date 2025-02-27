@@ -2,7 +2,60 @@
 
 This repo contains examples on how to implement the customer side of Amazon Connect chat. Please refer to the README under each solution to see the complete details as to what each solution does and how to deploy it.
 
-**New to Amazon Connect and looking to onboard with Chat/Messaging capabilities?** Refer to the [“Amazon Connect Chat Open Source Walkthrough”](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/.github/docs/AmazonConnectChatOpenSourceWalkthrough.md) documentation, and [“Hosted Widget vs Custom Builder Solution”](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/.github/docs/HostedWidgetVSCustomBuilderSolution.md) if building a customer-facing chat interface.
+**New to Amazon Connect and looking to onboard with Chat/Messaging capabilities?** Refer to the [“Amazon Connect Chat Open Source Walkthrough”](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/.github/docs/AmazonConnectChatOpenSourceWalkthrough.md) documentation. We have the following three approaches to get started:
+
+## Approaches
+
+### Option 1: Pre-built Amazon Connect Hosted Widget Snippet
+
+> Follow the Admin Guide Documentation: https://docs.aws.amazon.com/connect/latest/adminguide/add-chat-to-website.html
+
+Add a chat widget to your website that is hosted by Amazon Connect. You can configure the chat widget in the Amazon Connect console: customize the font and colors, and secure the widget so that it can be launched only from your website. As a result, you will have a short code snippet that you add to your website, with latest version always live on your website.
+
+```html
+<script type="text/javascript">
+  (function(w, d, x, id){s=d.createElement('script');s.src='https://1234lbvr0vu.cloudfront.net/amazon-connect-chat-interface-client.js';s.async=1;s.id=id;d.getElementsByTagName('head')[0].appendChild(s);w[x]=w[x]||function(){(w[x].ac=w[x].ac||[]).push(arguments)}})(window, document, 'amazon_connect', '360f3075-asfd-asfd-asdf-asdf');
+  
+  amazon_connect('styles', { openChat: { color: '#ffffff', backgroundColor: '#07b62a'}, closeChat: { color: '#ffffff', backgroundColor: '#07b62a'} });
+  amazon_connect('snippetId', 'asdf1234asdf1234adsf1234=');
+  amazon_connect('supportedMessagingContentTypes', [ 'text/plain', 'text/markdown' ]);
+</script>
+```
+
+![Hosted Widget Snippet UI](/.github/screenshots/hosted-widget-chat-interface-screenshot.png)
+
+### Option 2: Hosted Widget Snippet Integrated Custom UI (S3 Bucket/CDN)
+
+> Fork the [amazon-connect-chat-interface](https://github.com/amazon-connect/amazon-connect-chat-interface) open source code, and follow steps listed in [HostedSnippetCustomBundleFileSetup.md](https://github.com/amazon-connect/amazon-connect-chat-interface/blob/master/.github/docs/HostedSnippetCustomBundleFileSetup.md) for a full setup walkthrough
+
+Integrate a fully customized chat interface UI in the pre-built Hosted Widget, with all configurations available in the Connect Admin Console. The hosted widget can handle all of the logic to render the widget on your website and start chat sessions.
+
+Host your own `amazon-connect-chat-interface.js` bundle file and provide the link in the widget snippet configuration. 
+
+```diff
+<script type="text/javascript">
+  (function(w, d, x, id){s=d.createElement('script');s.src='https://1234lbvr0vu.cloudfront.net/amazon-connect-chat-interface-client.js';s.async=1;s.id=id;d.getElementsByTagName('head')[0].appendChild(s);w[x]=w[x]||function(){(w[x].ac=w[x].ac||[]).push(arguments)}})(window, document, 'amazon_connect', '360f3075-asdf-asdf-asdf-sadfsadf1234');
+  
+  amazon_connect('styles', { openChat: { color: '#ffffff', backgroundColor: '#07b62a'}, closeChat: { color: '#ffffff', backgroundColor: '#07b62a'} });
+  amazon_connect('snippetId', 'asdf1234asdf1234adsf1234=');
+  amazon_connect('supportedMessagingContentTypes', [ 'text/plain', 'text/markdown' ]);
++ amazon_connect('customerChatInterfaceUrl', 'https://...'); # TODO: put in your link to amazon-connect-chat-interface.js
+</script>
+```
+
+![Host Widget Snippet Integrated Custom UI](/.github/screenshots/custom-chat-widget-interface-screenshot.png)
+
+### Option 3: Customized Widget and Chat Interface UI (Self-Hosted)
+
+> Refer to the [customChatWidget example](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/customChatWidget) code, and follow steps listed in [CustomChatAndWidgetSelfHostedSetup.md](https://github.com/amazon-connect/amazon-connect-chat-interface/blob/master/.github/docs/CustomChatAndWidgetSelfHostedSetup.md) for a full setup walkthrough
+
+Fully customize the chat interface UI for your website, add a form to collect user info, and customize how the widget is rendered. Host and manage the bundle file yourself, importing it with a `<script src="amazon-connect-chat-interface.js"></script>` tag.
+
+![Custom Widget Experience](/.github/screenshots/custom-chat-widget-interface-screenshot.png)
+
+**NOTE:** This approach requires a custom backend to invoke the Amazon Connect Public [StartChatContact](https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html) API. Refer to the [startChatContactAPI CloudFormation Template](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/cloudformationTemplates/startChatContactAPI) to deploy an API Gateway proxy solution.
+
+![Custom Widget Experience Backend](/.github/screenshots/StartChatContactCFNTemplateArchitecture.png)
 
 ## Solutions
 
@@ -44,59 +97,6 @@ Here are a few resources to help you implement chat in your contact center:
   - [Amazon Connect Service](https://cocoapods.org/pods/AWSConnect)
 - [Android SDK](https://github.com/aws-amplify/aws-sdk-android)
 - [Open source code for the Chat Interface](https://github.com/amazon-connect/amazon-connect-chat-interface)
-
-## Approaches
-
-### Option 0: Pre-built Amazon Connect Hosted Widget Snippet
-
-> Follow the Admin Guide Documentation: https://docs.aws.amazon.com/connect/latest/adminguide/add-chat-to-website.html
-
-Add a chat widget to your website that is hosted by Amazon Connect. You can configure the chat widget in the Amazon Connect console: customize the font and colors, and secure the widget so that it can be launched only from your website. As a result, you will have a short code snippet that you add to your website, with latest version always live on your website.
-
-```html
-<script type="text/javascript">
-  (function(w, d, x, id){s=d.createElement('script');s.src='https://1234lbvr0vu.cloudfront.net/amazon-connect-chat-interface-client.js';s.async=1;s.id=id;d.getElementsByTagName('head')[0].appendChild(s);w[x]=w[x]||function(){(w[x].ac=w[x].ac||[]).push(arguments)}})(window, document, 'amazon_connect', '360f3075-asfd-asfd-asdf-asdf');
-  
-  amazon_connect('styles', { openChat: { color: '#ffffff', backgroundColor: '#07b62a'}, closeChat: { color: '#ffffff', backgroundColor: '#07b62a'} });
-  amazon_connect('snippetId', 'asdf1234asdf1234adsf1234=');
-  amazon_connect('supportedMessagingContentTypes', [ 'text/plain', 'text/markdown' ]);
-</script>
-```
-
-![Hosted Widget Snippet UI](/.github/screenshots/hosted-widget-chat-interface-screenshot.png)
-
-### Option 1: Hosted Widget Snippet Integrated Custom UI (S3 Bucket/CDN)
-
-> Fork the [amazon-connect-chat-interface](https://github.com/amazon-connect/amazon-connect-chat-interface) open source code, and follow steps listed in [HostedSnippetCustomBundleFileSetup.md](https://github.com/amazon-connect/amazon-connect-chat-interface/blob/master/.github/docs/HostedSnippetCustomBundleFileSetup.md) for a full setup walkthrough
-
-Integrate a fully customized chat interface UI in the pre-built Hosted Widget, with all configurations available in the Connect Admin Console. The hosted widget can handle all of the logic to render the widget on your website and start chat sessions.
-
-Host your own `amazon-connect-chat-interface.js` bundle file and provide the link in the widget snippet configuration. 
-
-```diff
-<script type="text/javascript">
-  (function(w, d, x, id){s=d.createElement('script');s.src='https://1234lbvr0vu.cloudfront.net/amazon-connect-chat-interface-client.js';s.async=1;s.id=id;d.getElementsByTagName('head')[0].appendChild(s);w[x]=w[x]||function(){(w[x].ac=w[x].ac||[]).push(arguments)}})(window, document, 'amazon_connect', '360f3075-asdf-asdf-asdf-sadfsadf1234');
-  
-  amazon_connect('styles', { openChat: { color: '#ffffff', backgroundColor: '#07b62a'}, closeChat: { color: '#ffffff', backgroundColor: '#07b62a'} });
-  amazon_connect('snippetId', 'asdf1234asdf1234adsf1234=');
-  amazon_connect('supportedMessagingContentTypes', [ 'text/plain', 'text/markdown' ]);
-+ amazon_connect('customerChatInterfaceUrl', 'https://...'); # TODO: put in your link to amazon-connect-chat-interface.js
-</script>
-```
-
-![Host Widget Snippet Integrated Custom UI](/.github/screenshots/custom-bundle-file-interface.png)
-
-### Option 2: Customized Widget and Chat Interface UI (Self-Hosted)
-
-> Refer to the [customChatWidget example](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/customChatWidget) code, and follow steps listed in [CustomChatAndWidgetSelfHostedSetup.md](https://github.com/amazon-connect/amazon-connect-chat-interface/blob/master/.github/docs/CustomChatAndWidgetSelfHostedSetup.md) for a full setup walkthrough
-
-Fully customize the chat interface UI for your website, add a form to collect user info, and customize how the widget is rendered. Host and manage the bundle file yourself, importing it with a `<script src="amazon-connect-chat-interface.js"></script>` tag.
-
-![Custom Widget Experience](/.github/screenshots/custom-chat-widget-interface-screenshot.png)
-
-**NOTE:** This approach requires a proxy to invoke the Amazon Connect Public [StartChatContact](https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html) API. Refer to the [startChatContactAPI CloudFormation Template](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/cloudformationTemplates/startChatContactAPI) to deploy an API Gateway proxy solution.
-
-![Custom Widget Experience Backend](/.github/screenshots/StartChatContactCFNTemplateArchitecture.png)
 
 ## Enabling Chat in an Existing Amazon Connect Contact Center
 
@@ -142,6 +142,38 @@ If your instance was created before the release of the chat feature, here's an o
 7. When you're ready to deploy the updated CCP, give the URL for it to those agents who are going handle voice and chat contacts, or only chat contacts. Those agents who are only handling voice contacts can continue using the original CCP. To learn more about the updated CCP interface, see [Chat with Contacts](https://docs.aws.amazon.com/connect/latest/adminguide/work-with-chats.html).
 8. For instances created prior to October 12, 2018, the Test Chat experience in the Amazon Connect website is not available. Please follow instructions in the [asyncCustomerChatUX solution](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/cloudformationTemplates/asyncCustomerChatUX) to deploy your own sample customer UI and test chat.
 9. Enable interactive messages for your chat widget in Amazon Connect by reading the blog on how to [easily set up interactive messages for your Amazon Connect chatbot](https://aws.amazon.com/blogs/contact-center/easily-set-up-interactive-messages-for-your-amazon-connect-chatbot/) for detailed instructions.
+
+## Enabling Agent-to-Agent Communication in an Existing Contact Center
+
+Amazon Connect Agent worksapce supports 3P app integration (more details in [Getting started with third-party applications](https://aws.amazon.com/blogs/contact-center/getting-started-with-third-party-applications-in-the-agent-workspace/)), which can be leveraged to setup Agent-to-Agent chat/video/voice/screen-share integrations. You can chat with other agents, seek advise, setup routing rules, create agent groups, supervise agents or inform of a customer call transfer and, much more.
+
+<video src="https://github.com/user-attachments/assets/544f2bcd-2fbd-4462-a549-c3c6ed5db845"></video>
+
+https://github.com/mhiaror/amazon-connect-chat-ui-examples/blob/master/.github/screenshots/AgentWorkspaceChatDemo.mp4
+
+To integrate agent-to-agent chat, you need a chat initiator application (which an Agent can use to initiate a chat) and a chat receiver application (which an Agent can use to accept internal chat).
+   1. To create a chat initiator application for Agents, you can either [create a new connect instance](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-instances.html) or use the same connect instance. Login to your connect instance.
+   2. Next, we need to setup internal contact center for agent-to-agent contact. Follow the steps to a/ Setup your channels (Voice, Chat, Video, Screen-share etc) b/ Add users and agents c/ Setup routing etc. Detailed setup can be found at [Get Started : Setup your contact center](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-contact-centers.html).
+   3. To create a *Chat Initiator application*, you have 2 options
+      1. Create a communication widget within your connect instance by following the documentation, [Add a chat user interface to your website](https://docs.aws.amazon.com/connect/latest/adminguide/add-chat-to-website.html). You can Embed the generated code snippet from the communication widget page into your webpage/website.
+      2. Use the test-chat page as Agent Chat Initiator https://<instance-alias>.my.connect.aws/test-chat and, share ContactFlowId with Agents so they can initiate contact.
+      3. You can integrate *Chat Initiator application* within existing Agent workspace as a third-party application. Above video demo shows how Agents can open the 3P application within Agent workspace.
+   4. For the *Chat receiver application*, you can use the default CCP Client,  Agent workspace or Test chat page itself. Note: You can use the https://<instance-alias>.my.connect.aws/test-chat page and integrate it as a third-party application within existing Agent workspace.
+   
+   ### How to integrate Test Chat page as a third party application within Agent workspace
+
+   ![](./.github/screenshots/3P%20Integration.png)
+
+   1. Open the Amazon Connect [console]((https://console.aws.amazon.com/connect/))
+   2. Enable *Third party applications* on the left hand side, select *Add application*
+   ![](./.github/screenshots/3P-Console-1.png)
+   3. Add the application Name, description and provide test-chat page url https://<instance-alias>.my.connect.aws/test-chat
+   ![](./.github/screenshots/3P-Console-2.png)
+   4. Associate your application to your Amazon Connect instances.
+   5. Add security profile permissions for Agent to access third-party application
+   ![](./.github/screenshots/3P Security profile permission.png)
+   6. Use the Agent workspace app launcher, to access third-party application you created above. The app launcher should show the list of applications an Agent has access to (configured using security profile in step#5)
+
 
 ## Troubleshooting and Support
 

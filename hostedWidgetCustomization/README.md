@@ -64,6 +64,11 @@ New to Amazon Connect Open Source? Follow the [open source walkthrough](https://
 
 ![](./customFloatingWidgetLaunchIcon/customFloatingWidgetLaunchIcon.gif)
 
+### Submit form to launch a new chat
+[formSubmitLaunchChat](./formSubmitLaunchChat): submit a form to launch a new chat and pass in values as contact attributes.
+
+![](./formSubmitLaunchChat/formSubmitLaunchChat.gif)
+
 ### Hyperlink support
 
 [hyperlinkSupportWidget](./hyperlinkSupportWidget): support a plain-text URL that launches the widget on page load.
@@ -81,3 +86,8 @@ New to Amazon Connect Open Source? Follow the [open source walkthrough](https://
 [launchChatBrowserWindow](./launchChatBrowserWindow): make the widget launch in a new browser window.
 
 ![](./launchChatBrowserWindow/launchChatBrowserWindow.gif)
+
+### Persistent chat
+[persistentChat](./persistentChat): resume previous conversations with the context, metadata, and transcripts.
+
+![](./persistentChat/persistentChat.gif)

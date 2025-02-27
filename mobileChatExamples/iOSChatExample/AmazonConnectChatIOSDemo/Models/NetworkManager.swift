@@ -17,12 +17,14 @@ class NetworkManager {
                    contactFlowId: String,
                    displayName: String,
                    attributes: [String: String],
+                   persistantChat : PersistentChat?,
                    onSuccess: @escaping (_ response: CreateStartChatResponse) -> Void,
                    onFailure: @escaping (_ error: Error) -> Void) {
         let url = endpoint
         let body = CreateStartChatRequest(connectInstanceId: connectInstanceId,
                                           contactFlowId: contactFlowId,
-                                          participantDetails: ParticipantDetails(DisplayName: displayName))
+                                          participantDetails: ParticipantDetails(DisplayName: displayName),
+                                          persistantChat : persistantChat)
         
         self.httpClient.postJson(url, nil, body) { (data : CreateStartChatResponse) in
             onSuccess(data)
