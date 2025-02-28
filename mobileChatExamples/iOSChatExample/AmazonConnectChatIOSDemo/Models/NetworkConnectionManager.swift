@@ -17,10 +17,8 @@ class NetworkConnectionManager: ObservableObject {
             DispatchQueue.main.async {
                 if (path.status == .satisfied) {
                     self?.isConnected = true
-                    NotificationCenter.default.post(name: .networkConnected, object: nil)
                 } else {
                     self?.isConnected = false
-                    NotificationCenter.default.post(name: .networkDisconnected, object: nil)
                 }
             }
         }
