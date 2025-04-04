@@ -102,9 +102,9 @@ class ChatManager: ObservableObject {
             // This callback can be leveraged if you choose to integrate/handle the transcript on your own.
         }
             
-        self.chatSession.onTranscriptUpdated = { [weak self] transcript in
+        self.chatSession.onTranscriptUpdated = { [weak self] transcriptData in
             // Apply transcript updates
-            self?.updateTranscript(transcript)
+            self?.updateTranscript(transcriptData.transcriptList)
         }
         
         self.chatSession.onChatEnded = { [weak self] in
