@@ -1,3 +1,10 @@
+> ### **📢 Annoucement:** Amazon Lex V1 will reach end of life on September 15, 2025.
+> Please switch to the Lex V2 samTemplate: [samTemplates/amazon-connect-interactive-messages-example-lex-v2](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/samTemplates/amazon-connect-interactive-messages-example-lex-v2) or follow this migration guide: https://docs.aws.amazon.com/lexv2/latest/dg/migration.html
+>
+> ![Maintenance](https://img.shields.io/badge/Maintenance-Deprecating_Soon-yellow)
+
+---
+
 # A Lambda function code hook for Amazon Connect Chat Interactive Messaging [Lex V1]
 
 Set up this AWS Lambda code hook to provide interactive message responses to an Amazon Lex chat bot

@@ -3,6 +3,11 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.4] - 2025-04-08
+
+### Added
+ - [samTemplates/amazon-connect-interactive-messages-example-lex-v2](./samTemplates/amazon-connect-interactive-messages-example-lex-v2) - new **AWS Serverless Application Model (AWS SAM) template** to deploy an **Amazon Lex V2** bot for interactive messages in Chat.
+
 ## [1.4.3] - 2023-11-07
 ### Added
  - [iOSChatExample](mobileChatExamples/iOSChatExample/README.md) - iOS example of the AWS Connect chat widget is designed for easy integration with a focus on customization.

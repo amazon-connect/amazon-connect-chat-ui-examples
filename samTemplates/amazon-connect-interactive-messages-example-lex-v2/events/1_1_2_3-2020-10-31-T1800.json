@@ -1,0 +1,101 @@
+{
+  "requestAttributes": {
+    "x-amz-lex:accept-content-types": "PlainText"
+  },
+  "sessionId": "5d11c7ca-6eb1-48d1-b5f2-58510e9ae6c3",
+  "inputTranscript": "2020-10-31T18:00+00:00",
+  "interpretations": [
+    {
+      "intent": {
+        "slots": {
+          "action": {
+            "shape": "Scalar",
+            "value": {
+              "originalValue": "Check self-service options",
+              "resolvedValues": ["Check self-service options"],
+              "interpretedValue": "Check self-service options"
+            }
+          },
+          "appointment": {
+            "shape": "Scalar",
+            "value": {
+              "originalValue": "2020-10-31T18:00+00:00",
+              "resolvedValues": [],
+              "interpretedValue": "2020-10-31T18:00+00:00"
+            }
+          },
+          "department": null,
+          "interactiveOption": {
+            "shape": "Scalar",
+            "value": {
+              "originalValue": "Schedule a meeting with an agent",
+              "resolvedValues": ["Schedule a meeting with an agent"],
+              "interpretedValue": "Schedule a meeting with an agent"
+            }
+          }
+        },
+        "confirmationState": "None",
+        "name": "InteractiveMessageIntent",
+        "state": "InProgress"
+      },
+      "nluConfidence": 1
+    },
+    {
+      "intent": {
+        "slots": {},
+        "confirmationState": "None",
+        "name": "FallbackIntent",
+        "state": "InProgress"
+      }
+    }
+  ],
+  "responseContentType": "text/plain; charset=utf-8",
+  "sessionState": {
+    "sessionAttributes": {},
+    "activeContexts": [],
+    "intent": {
+      "slots": {
+        "action": {
+          "shape": "Scalar",
+          "value": {
+            "originalValue": "Check self-service options",
+            "resolvedValues": ["Check self-service options"],
+            "interpretedValue": "Check self-service options"
+          }
+        },
+        "appointment": {
+          "shape": "Scalar",
+          "value": {
+            "originalValue": "2020-10-31T18:00+00:00",
+            "resolvedValues": [],
+            "interpretedValue": "2020-10-31T18:00+00:00"
+          }
+        },
+        "department": null,
+        "interactiveOption": {
+          "shape": "Scalar",
+          "value": {
+            "originalValue": "Schedule a meeting with an agent",
+            "resolvedValues": ["Schedule a meeting with an agent"],
+            "interpretedValue": "Schedule a meeting with an agent"
+          }
+        }
+      },
+      "confirmationState": "None",
+      "name": "InteractiveMessageIntent",
+      "state": "InProgress"
+    },
+    "originatingRequestId": "abc2cbc8-4e60-4649-83c7-c317d4d21824"
+  },
+  "invocationSource": "DialogCodeHook",
+  "messageVersion": "1.0",
+  "inputMode": "Text",
+  "bot": {
+    "aliasName": "TestBotAlias",
+    "aliasId": "TSTALIASID",
+    "name": "interactive-messaging-lexv2",
+    "version": "DRAFT",
+    "localeId": "en_US",
+    "id": "VGKIKY0S9G"
+  }
+}
