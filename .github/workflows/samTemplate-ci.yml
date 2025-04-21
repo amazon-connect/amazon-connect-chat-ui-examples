@@ -1,0 +1,29 @@
+name: Validate SAM Template
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'samTemplates/amazon-connect-interactive-messages-example-lex-v2/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.x'
+    - name: Install SAM CLI
+      run: |
+        pip install aws-sam-cli
+    - name: Validate SAM template
+      run: |
+        cd samTemplates/amazon-connect-interactive-messages-example-lex-v2
+        sam validate --region us-west-2 --lint
+    - name: Build SAM template
+      run: |
+        cd samTemplates/amazon-connect-interactive-messages-example-lex-v2
+        sam build

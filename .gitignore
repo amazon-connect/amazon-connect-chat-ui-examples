@@ -2,3 +2,5 @@
 .DS_Store
 .vscode
 .idea
+.aws-sam
+node_modules

@@ -68,19 +68,22 @@ At the moment, these are the solutions in this repo:
 3. **[samTemplates/amazon-connect-interactive-messages-example](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/samTemplates/amazon-connect-interactive-messages-example)**
    Interactive messages in Amazon Connect Chat allow contact centers to provide personalized prompts and response options that customers can easily select from. This serverless application is a sample lambda function which implements Amazon Connect interactive message templates (lists, lists with images, and a time picker) as described in the AWS Contact Center blog post [How to enable interactive messages in Amazon Connect chat](https://aws.amazon.com/blogs/contact-center/easily-set-up-interactive-messages-for-your-amazon-connect-chatbot/).
 
-4. **[customChatWidget](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/customChatWidget)**
+4. **[samTemplates/amazon-connect-interactive-messages-example-lex-v2](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/samTemplates/amazon-connect-interactive-messages-example-lex-v2)**
+   Interactive messages in Amazon Connect Chat allow contact centers to provide personalized prompts and response options that customers can easily select from. This serverless application is a sample lambda function which implements Amazon Connect interactive message templates (lists, lists with images, and a time picker).
+
+5. **[customChatWidget](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/customChatWidget)**
    Custom Chat Widget for Amazon Connect, with a Chat Form that can be easily plugged into a webpage. This solution helps customers to have Amazon Connect Custom Chat Widget in their website, by applying simple configuration parameters. It also makes customizing the `amazon-connect-interface.js` file easier, and can be used as an easy way to host custom widget on a webpage.
 
-5. **[connectReactNativeChat](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/mobileChatExamples/connectReactNativeChat)**
+6. **[connectReactNativeChat](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/mobileChatExamples/connectReactNativeChat)**
    React Native demo Chat application for Amazon Connect. This cross-platform solution implements basic Chat JS functionality and is fully customizable. Follow the provided documentation to build with [`amazon-connect-chatjs@^1.5.0`](https://github.com/amazon-connect/amazon-connect-chatjs).
-   
-6. **[startChatContactAPILocalProxy](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/startChatContactAPILocalProxy)**
+
+7. **[startChatContactAPILocalProxy](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/startChatContactAPILocalProxy)**
    Solution to run local proxy server for the Amazon Connect [StartChatContact](https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html) Public API. Can be used during local development when building a custom chat interface, prior to deploying a production CloudFormation chat backend.
 
-6. **[hostedWidgetCustomization](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/hostedWidgetCustomization)**
+8. **[hostedWidgetCustomization](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/hostedWidgetCustomization)**
    Additional ways to configure the Amazon Connect Hosted Widget on your website and further personalize the branding. This sample code covers several common use cases for customizing the widget snippet code. [Learn more](https://docs.aws.amazon.com/connect/latest/adminguide/add-chat-to-website.html)
 
-7. **[mobileChatExamples](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/mobileChatExamples)**
+9. **[mobileChatExamples](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/mobileChatExamples)**
    These native mobile examples of the AWS Connect chat widget are designed for easy integration with a focus on customization. Out-of-the-box ready yet fully adaptable, they offer developers the perfect starting point for incorporating a chat feature that can be fine-tuned to any customer’s requirements.
 
 
