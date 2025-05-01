@@ -4,7 +4,7 @@ An AWS [Serverless Application Model](https://docs.aws.amazon.com/serverless-app
 
 Interactive messages are pre-configured responses that your users can select from, making it easy for your customers to quickly resolve their issues through chat. Interactive messages can be designed using the new Amazon Connect Chat templates, which include several different customer display options (shared below), and are sent by Amazon Connect Chat using **Amazon Lex** chatbots.
 
-![Interactive Messages Thumbnail](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/samTemplates/amazon-connect-interactive-messages-example-lex-v2/docs/AmazonConnectLexLambdaArchitecture.png)
+![Interactive Messages Thumbnail](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/samTemplates/amazon-connect-interactive-messages-example-lex-v2/docs/AmazonConnectLexLambdaArchitecture.png)
 
 ## Specifications
 
@@ -75,21 +75,21 @@ Interactive messages are pre-configured responses that your users can select fro
 2. Open settings and set it to use your new contact flow: "InteractiveMessaging".
 3. Launch the chat widget and type `help` to test the interaction.
 
-![Lex Bot Message on Test Chat Page](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/samTemplates/amazon-connect-interactive-messages-example-lex-v2/docs/TestChatPageExample.png)
+![Lex Bot Message on Test Chat Page](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/samTemplates/amazon-connect-interactive-messages-example-lex-v2/docs/TestChatPageExample.png)
 
 ## Diagrams
 
 Interactive Message System Diagram
 
-![Interactive Message System Diagram](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/samTemplates/amazon-connect-interactive-messages-example-lex-v2/docs/interactive-message-diagram.png)
+![Interactive Message System Diagram](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/samTemplates/amazon-connect-interactive-messages-example-lex-v2/docs/interactive-message-diagram.png)
 
 Interactive Message Flow Chart
 
-![Interactive Message Flow Chart](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/samTemplates/amazon-connect-interactive-messages-example-lex-v2/docs/InteractiveMessageUIExample_FlowChart.png)
+![Interactive Message Flow Chart](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/samTemplates/amazon-connect-interactive-messages-example-lex-v2/docs/InteractiveMessageUIExample_FlowChart.png)
 
 Interactive Message Chat Experience
 
-![Interactive Message Chat Experience](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/samTemplates/amazon-connect-interactive-messages-example-lex-v2/docs/InteractiveMessageChatFlow.png)
+![Interactive Message Chat Experience](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/samTemplates/amazon-connect-interactive-messages-example-lex-v2/docs/InteractiveMessageChatFlow.png)
 
 ## Supported Regions
 
