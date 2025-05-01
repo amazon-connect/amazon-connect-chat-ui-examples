@@ -1,0 +1,321 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "9bfd8327-37c7-4741-95d6-29275053d6b3",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": -150.4,
+      "y": 37.6
+    },
+    "ActionMetadata": {
+      "9bfd8327-37c7-4741-95d6-29275053d6b3": {
+        "position": {
+          "x": -31.2,
+          "y": 36
+        }
+      },
+      "843006c4-8f70-40b5-982a-75afaae5f5b1": {
+        "position": {
+          "x": 169.6,
+          "y": 36.8
+        }
+      },
+      "fb4adf6e-42b3-4592-808c-92d430b4b1ac": {
+        "position": {
+          "x": 1489.6,
+          "y": 411.2
+        }
+      },
+      "fa5837dc-2a5b-46ec-ba5d-966fe30c77b2": {
+        "position": {
+          "x": 388,
+          "y": 37.6
+        }
+      },
+      "93a7e3d5-d0e1-48f5-863d-822efdeb5c30": {
+        "position": {
+          "x": 608.8,
+          "y": 42.4
+        },
+        "parameters": {
+          "LexV2Bot": {
+            "AliasArn": {
+              "displayName": "ProductionAlias",
+              "useLexBotDropdown": true,
+              "lexV2BotName": "ThirdPartyBotBoilerplateLexV2"
+            }
+          }
+        },
+        "useLexBotDropdown": true,
+        "lexV2BotName": "ThirdPartyBotBoilerplateLexV2",
+        "lexV2BotAliasName": "ProductionAlias",
+        "conditionMetadata": []
+      },
+      "5e4099f2-d12d-44b8-84ce-f342b457c72e": {
+        "position": {
+          "x": 824,
+          "y": 43.2
+        }
+      },
+      "dd605cb6-2ec7-4bc9-9de2-2d7268e8f330": {
+        "position": {
+          "x": 1055.2,
+          "y": 39.2
+        }
+      },
+      "980e2ba8-8c90-4a64-b26f-5fd34a4d0dc9": {
+        "position": {
+          "x": 1982.4,
+          "y": 407.2
+        }
+      },
+      "43d3c5d0-a405-49f9-99c2-b5b59b1d1736": {
+        "position": {
+          "x": 1737.6,
+          "y": 408.8
+        }
+      },
+      "c13cda17-4502-4344-90af-deda66afaee2": {
+        "position": {
+          "x": 1731.2,
+          "y": 39.2
+        },
+        "parameters": {
+          "ContactFlowId": {
+            "displayName": "Sample queue configurations flow"
+          }
+        },
+        "ContactFlow": {
+          "text": "Sample queue configurations flow"
+        }
+      },
+      "4b285797-4592-42f9-b9c1-cd21f48ed508": {
+        "position": {
+          "x": 1274.4,
+          "y": 37.6
+        },
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "46bf15c9-1c26-4f0a-b48f-74c5df4c7070",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "true"
+          }
+        ]
+      },
+      "43a37d7f-6ea7-42b9-a6c1-ffefe41d82bd": {
+        "position": {
+          "x": 1500.8,
+          "y": 37.6
+        }
+      }
+    },
+    "Annotations": [],
+    "name": "ThirdPartyBotBoilerplateFlow",
+    "description": "",
+    "type": "contactFlow",
+    "status": "published",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {
+        "FlowLoggingBehavior": "Enabled"
+      },
+      "Identifier": "9bfd8327-37c7-4741-95d6-29275053d6b3",
+      "Type": "UpdateFlowLoggingBehavior",
+      "Transitions": {
+        "NextAction": "843006c4-8f70-40b5-982a-75afaae5f5b1"
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "Initializing the contact flow\n\nTo edit, please visit: https://<instance-alias>.my.connect.aws/contact-flows\n\nname: \"ThirdPartyBotBoilerplateFlow\""
+      },
+      "Identifier": "843006c4-8f70-40b5-982a-75afaae5f5b1",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "fa5837dc-2a5b-46ec-ba5d-966fe30c77b2",
+        "Errors": [
+          {
+            "NextAction": "fa5837dc-2a5b-46ec-ba5d-966fe30c77b2",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "An error or timeout occured during the bot interaction. Terminating session. Please review Lambda/CloudWatch logs for more details"
+      },
+      "Identifier": "fb4adf6e-42b3-4592-808c-92d430b4b1ac",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "980e2ba8-8c90-4a64-b26f-5fd34a4d0dc9",
+        "Errors": [
+          {
+            "NextAction": "980e2ba8-8c90-4a64-b26f-5fd34a4d0dc9",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "Routing to chat bot (Lex V2)\n\nSee \"Get customer input\" block in the contact flow."
+      },
+      "Identifier": "fa5837dc-2a5b-46ec-ba5d-966fe30c77b2",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "93a7e3d5-d0e1-48f5-863d-822efdeb5c30",
+        "Errors": [
+          {
+            "NextAction": "93a7e3d5-d0e1-48f5-863d-822efdeb5c30",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LexInitializationData": {
+          "InitialMessage": "help"
+        },
+        "LexV2Bot": {
+          "AliasArn": "arn:aws:lex:us-west-2:112008460156:bot-alias/OA8JL1Y1UM/XHE7BBHU2G"
+        }
+      },
+      "Identifier": "93a7e3d5-d0e1-48f5-863d-822efdeb5c30",
+      "Type": "ConnectParticipantWithLexBot",
+      "Transitions": {
+        "NextAction": "fb4adf6e-42b3-4592-808c-92d430b4b1ac",
+        "Errors": [
+          {
+            "NextAction": "5e4099f2-d12d-44b8-84ce-f342b457c72e",
+            "ErrorType": "NoMatchingCondition"
+          },
+          {
+            "NextAction": "fb4adf6e-42b3-4592-808c-92d430b4b1ac",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "Chat bot session complete (Lex V2)"
+      },
+      "Identifier": "5e4099f2-d12d-44b8-84ce-f342b457c72e",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "dd605cb6-2ec7-4bc9-9de2-2d7268e8f330",
+        "Errors": [
+          {
+            "NextAction": "dd605cb6-2ec7-4bc9-9de2-2d7268e8f330",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "Checking the contact attributes returned by Lex bot.\n\n$Lex. SessionAttributes.['shouldRouteToAgent']: \" $.Lex.SessionAttributes.['shouldRouteToAgent'] \""
+      },
+      "Identifier": "dd605cb6-2ec7-4bc9-9de2-2d7268e8f330",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "4b285797-4592-42f9-b9c1-cd21f48ed508",
+        "Errors": [
+          {
+            "NextAction": "4b285797-4592-42f9-b9c1-cd21f48ed508",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "980e2ba8-8c90-4a64-b26f-5fd34a4d0dc9",
+      "Type": "EndFlowExecution",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "Text": "Routing contact attribute was false or undefined. Terminating contact flow.\n\n$Lex. SessionAttributes.['shouldRouteToAgent']: \" $.Lex.SessionAttributes.['shouldRouteToAgent'] \""
+      },
+      "Identifier": "43d3c5d0-a405-49f9-99c2-b5b59b1d1736",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "980e2ba8-8c90-4a64-b26f-5fd34a4d0dc9",
+        "Errors": [
+          {
+            "NextAction": "980e2ba8-8c90-4a64-b26f-5fd34a4d0dc9",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ContactFlowId": "arn:aws:connect:us-west-2:112008460156:instance/62d1b489-30e5-4fcf-a424-adb5de646f03/contact-flow/5e138191-aa92-46bc-9d80-54bce5233d5d"
+      },
+      "Identifier": "c13cda17-4502-4344-90af-deda66afaee2",
+      "Type": "TransferToFlow",
+      "Transitions": {
+        "NextAction": "980e2ba8-8c90-4a64-b26f-5fd34a4d0dc9",
+        "Errors": [
+          {
+            "NextAction": "980e2ba8-8c90-4a64-b26f-5fd34a4d0dc9",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ComparisonValue": "$.Lex.SessionAttributes.shouldRouteToAgent"
+      },
+      "Identifier": "4b285797-4592-42f9-b9c1-cd21f48ed508",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "43d3c5d0-a405-49f9-99c2-b5b59b1d1736",
+        "Conditions": [
+          {
+            "NextAction": "43a37d7f-6ea7-42b9-a6c1-ffefe41d82bd",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "true"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "43d3c5d0-a405-49f9-99c2-b5b59b1d1736",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "Transferring to \"Sample queue configuration\" Contact Flow => \"BasicQueue\" Queue => \"Agent\" User"
+      },
+      "Identifier": "43a37d7f-6ea7-42b9-a6c1-ffefe41d82bd",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "c13cda17-4502-4344-90af-deda66afaee2",
+        "Errors": [
+          {
+            "NextAction": "c13cda17-4502-4344-90af-deda66afaee2",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    }
+  ]
+}
