@@ -97,7 +97,6 @@ struct ChatView: View {
                     }
                     .refreshable {
                         chatManager.fetchTranscript { success in
-                            isRefreshing = false
                             if success {
                                 print("All transcripts fetched successfully")
                             } else {
@@ -124,9 +123,7 @@ struct ChatView: View {
                             }
                             if messages.count > 0 {
                                 DispatchQueue.main.async {
-                                    withAnimation {
-                                        scrollView.scrollTo(messages.last?.id, anchor: .bottom)
-                                    }
+                                    scrollView.scrollTo(messages.last?.id, anchor: .bottom)
                                 }
                             }
                         }

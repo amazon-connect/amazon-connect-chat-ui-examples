@@ -32,6 +32,8 @@ class ChatManager: ObservableObject {
     private var config = Config() // Configuration for the chat
     private let networkManager: NetworkManager // Handles network operations
     var chatSession: ChatSessionProtocol // The chat session protocol instance
+    var previousTranscriptNextToken: String?
+    var initialLoad = true
     
     // MARK: - Initializer
     init() {
@@ -103,6 +105,7 @@ class ChatManager: ObservableObject {
         }
             
         self.chatSession.onTranscriptUpdated = { [weak self] transcriptData in
+            self?.previousTranscriptNextToken = transcriptData.previousTranscriptNextToken
             // Apply transcript updates
             self?.updateTranscript(transcriptData.transcriptList)
         }
@@ -195,13 +198,6 @@ class ChatManager: ObservableObject {
             switch result {
             case .success:
                 print("Participant connection successfully created.")
-                self?.fetchTranscript { success in
-                    if success {
-                        print("All transcripts fetched successfully")
-                    } else {
-                        print("Failed to fetch transcripts")
-                    }
-                }
                 completion(true)
             case .failure(let error):
                 self?.handleConnectionFailure(error, completion: completion)
@@ -305,19 +301,14 @@ class ChatManager: ObservableObject {
     
     /// Fetches the chat transcript recursively
     func fetchTranscript(nextToken: String? = nil, onCompletion: @escaping (Bool) -> Void) {
-        self.chatSession.getTranscript(scanDirection: .backward, sortOrder: .descending, maxResults: 30, nextToken: nextToken, startPosition: nil) { [weak self] result in
+        self.chatSession.getTranscript(scanDirection: .backward, sortOrder: .descending, maxResults: 10, nextToken: self.previousTranscriptNextToken, startPosition: nil) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):
                     print("Transcript fetched successfully")
                     
                     // Check if nextToken is not empty
-                    if !response.nextToken.isEmpty {
-                        // Call fetchTranscript again with the nextToken
-                        self?.fetchTranscript(nextToken: response.nextToken, onCompletion: onCompletion)
-                    } else {
-                        onCompletion(true)
-                    }
+                    onCompletion(true)
                     
                 case .failure(let error):
                     print("Error fetching transcript: \(error.localizedDescription)")
