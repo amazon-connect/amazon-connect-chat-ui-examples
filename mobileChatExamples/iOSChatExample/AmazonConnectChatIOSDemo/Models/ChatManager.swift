@@ -33,7 +33,6 @@ class ChatManager: ObservableObject {
     private let networkManager: NetworkManager // Handles network operations
     var chatSession: ChatSessionProtocol // The chat session protocol instance
     var previousTranscriptNextToken: String?
-    var initialLoad = true
     
     // MARK: - Initializer
     init() {
@@ -305,11 +304,8 @@ class ChatManager: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):
-                    print("Transcript fetched successfully")
-                    
-                    // Check if nextToken is not empty
+                    print("Transcript fetched successfully")                    
                     onCompletion(true)
-                    
                 case .failure(let error):
                     print("Error fetching transcript: \(error.localizedDescription)")
                     self?.error = ErrorMessage(message: "Error fetching transcript: \(error.localizedDescription)")
