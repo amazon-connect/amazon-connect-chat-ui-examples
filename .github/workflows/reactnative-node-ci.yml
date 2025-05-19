@@ -1,45 +1,49 @@
 name: React Native Chat CI
-#   - Install, lint, test, and build production Expo application 
-#   - Runs only on changes to connectReactNativeChat/ folder
+
+env:
+  WORKING_DIRECTORY: ./mobileChatExamples/connectReactNativeChat
 
 on:
   workflow_dispatch:
   push:
     branches: [ master ]
-    paths: 'connectReactNativeChat/**'
+    paths: 'mobileChatExamples/connectReactNativeChat/**'
   pull_request:
     branches: [ master ]
-    paths: 'connectReactNativeChat/**'
+    paths: 'mobileChatExamples/connectReactNativeChat/**'
+
+permissions:
+  contents: read
 
 jobs:
   build:
-    runs-on: macos-12
-    strategy:
-      matrix:
-        node-version: [20.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./MobileChatExamples/connectReactNativeChat
+        working-directory: ${{ env.WORKING_DIRECTORY }}
 
     steps:
     - uses: actions/checkout@v3
-    
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+
+    - name: Read Node version for CI from package.json
+      id: node-version
+      run: |
+        NODE_VERSION=$(jq -r '.ci.node' package.json)
+        echo "node_version=$NODE_VERSION" >> $GITHUB_OUTPUT
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: ${{ steps.node-version.outputs.node_version }}
 
     - name: Install Expo app dependencies
-      run: yarn
-
-    - run: yarn lint
+      run: npm install --force
 
     - name: Create endpoint.js config
       run: |
         cp endpoints.sample.js endpoints.js || echo "no endpoint.sample.js found"
 
-    - run: yarn test
+    - run: npm test
 
     - name: Create app.json config
       run: |
@@ -47,5 +51,5 @@ jobs:
         cp app.prod.json app.json
 
     - name: Build the Expo application
-      run: CI=1 npx expo prebuild --platform all
+      run: npm run ci:build
 

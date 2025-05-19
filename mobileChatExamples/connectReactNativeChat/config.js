@@ -1,21 +1,4 @@
-import ENDPOINTS from "./endpoints";
-
 export const ENABLE_REACTNATIVE_LOGBOX = false;
-export const ENABLE_CHATJS_LOGS = true;
-
-export const loggerConfig = {
-  useDefaultLogger: true,
-};
-
-export const supportMessageContentTypes = ["text/plain"];
-export const startChatRequestInput = {
-  ...ENDPOINTS,
-  name: "John",
-  contactAttributes: JSON.stringify({
-    customerName: "John",
-  }),
-  supportedMessagingContentTypes: supportMessageContentTypes.join(","),
-};
 
 export const CUSTOMER_USER = {
   _id: 1,
