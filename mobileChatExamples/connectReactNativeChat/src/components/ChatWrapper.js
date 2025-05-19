@@ -6,9 +6,39 @@ import Spinner from 'react-native-loading-spinner-overlay'
 
 import ChatSession from '../components/ChatSession'
 import initiateChat from '../api/initiateChat'
-import { startChatRequestInput } from '../../config'
 import filterIncomingMessages from '../utils/filterIncomingMessages'
 import NetInfo from '@react-native-community/netinfo'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
+const storeData = async (key, value) => {
+  try {
+    // Convert objects/arrays to JSON strings before storing
+    const jsonValue = typeof value === 'string' ? value : JSON.stringify(value)
+    await AsyncStorage.setItem(key, jsonValue)
+    return true
+  } catch (error) {
+    console.error('Error storing data:', error)
+    return false
+  }
+}
+
+// Retrieve data function
+const getData = async (key) => {
+  try {
+    const value = await AsyncStorage.getItem(key)
+    if (value === null) return null
+
+    try {
+      // Try to parse as JSON, return original string if not valid JSON
+      return JSON.parse(value)
+    } catch (e) {
+      return value
+    }
+  } catch (error) {
+    console.error('Error retrieving data:', error)
+    return null
+  }
+}
 
 /**
  * `amazon-connect-websocket-manager.js` depencency will use `navigator.onLine`
@@ -65,11 +95,20 @@ const ChatWrapper = ({ navigation, ChatWidgetComponent }) => {
   const submitChatInitiation = async () => {
     // Create chat session connection
     setLoading(true)
-    const chatDetails = await initiateChat(startChatRequestInput, handleStartChatFailure)
+    const customerName = 'Joe Shmoe'
+
+    let chatDetails
+    const ongoingChatDetails = getData('chatjs-ongoing-chat-session-details')
+    if (ongoingChatDetails && ongoingChatDetails.ContactId) {
+      chatDetails = ongoingChatDetails
+    } else {
+      const newChatDetails = await initiateChat(customerName, handleStartChatFailure)
+      chatDetails = newChatDetails
+      storeData('chatjs-ongoing-chat-session-details', newChatDetails)
+    }
+
     const chatSession = new ChatSession(
       chatDetails,
-      startChatRequestInput.name,
-      startChatRequestInput.region,
       customIsNetworkOnline // pass down the custom "isNetworkOnline" function
     )
     await chatSession.openChatSession().then(handleStartChatSuccess).catch(handleStartChatFailure)
