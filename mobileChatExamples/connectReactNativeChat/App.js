@@ -8,7 +8,6 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import ChatWrapper from "./src/components/ChatWrapper";
 import GiftedChatWidget from "./src/components/ChatWidget";
-import DebuggerWidget from "./src/components/DebuggerWidget";
 import ChatForm from "./src/components/ChatForm";
 
 import { LogBox } from "react-native";
@@ -46,8 +45,6 @@ const HomeScreen = ({ navigation }) => (
     />
 
     <ChatForm openChatScreen={() => navigation.navigate("Chat")} />
-
-    <DebuggerWidget />
   </View>
 );
 

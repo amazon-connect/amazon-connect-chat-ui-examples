@@ -6,17 +6,36 @@ import Spinner from 'react-native-loading-spinner-overlay'
 
 import ChatSession from '../components/ChatSession'
 import initiateChat from '../api/initiateChat'
-import { startChatRequestInput } from '../../config'
 import filterIncomingMessages from '../utils/filterIncomingMessages'
 import NetInfo from '@react-native-community/netinfo'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
-/**
- * `amazon-connect-websocket-manager.js` depencency will use `navigator.onLine`
- * Unsupported or mobile runtime will return `null/undefined` - preventing websocket connections
- * Legacy browsers will always return `true` [ref: caniuse.com/netinfo]
- */
-let isOnline = true
-const customIsNetworkOnline = () => isOnline
+const storeData = async (key, value) => {
+  try {
+    const jsonValue = typeof value === 'string' ? value : JSON.stringify(value)
+    await AsyncStorage.setItem(key, jsonValue)
+    return true
+  } catch (error) {
+    console.error('Error storing data:', error)
+    return false
+  }
+}
+
+const getData = async (key) => {
+  try {
+    const value = await AsyncStorage.getItem(key)
+    if (value === null) return null
+
+    try {
+      return JSON.parse(value)
+    } catch (e) {
+      return value
+    }
+  } catch (error) {
+    console.error('Error retrieving data:', error)
+    return null
+  }
+}
 
 /*
  * Wrapper to manage ChatJS Session and pass messages down to GiftedChat component
@@ -28,20 +47,20 @@ const ChatWrapper = ({ navigation, ChatWidgetComponent }) => {
   const [loading, setLoading] = useState(false)
   const [session, setSession] = useState(null)
   const [messages, setMessages] = useState([])
+  const [deviceIsOnline, setDeviceIsOnline] = useState(true);
 
   const openHomeScreen = () => navigation.navigate('Home')
 
-  /**
-   * Network event listener native to device
-   * Will update `isOnline` value asynchronously whenever network calls are made
-   */
-  const unsubscribeNetworkEventListener = NetInfo.addEventListener((state) => {
-    isOnline = state.isConnected
-  })
+  const getNetworkStatus = () => deviceIsOnline;
 
   useEffect(() => {
-    return unsubscribeNetworkEventListener()
-  }, [])
+    // Subscribe to network status updates
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      setDeviceIsOnline(state.isConnected);
+    });
+
+    return () => { unsubscribe(); }; // Cleanup to prevent memory leaks
+  }, []);
 
   useEffect(() => {
     if (!loading && !connected) {
@@ -65,12 +84,21 @@ const ChatWrapper = ({ navigation, ChatWidgetComponent }) => {
   const submitChatInitiation = async () => {
     // Create chat session connection
     setLoading(true)
-    const chatDetails = await initiateChat(startChatRequestInput, handleStartChatFailure)
+    const customerName = 'Joe Shmoe'
+
+    let chatDetails
+    const ongoingChatDetails = getData('chatjs-ongoing-chat-session-details')
+    if (ongoingChatDetails && ongoingChatDetails.ContactId) {
+      chatDetails = ongoingChatDetails
+    } else {
+      const newChatDetails = await initiateChat(customerName, handleStartChatFailure)
+      chatDetails = newChatDetails
+      storeData('chatjs-ongoing-chat-session-details', newChatDetails)
+    }
+
     const chatSession = new ChatSession(
       chatDetails,
-      startChatRequestInput.name,
-      startChatRequestInput.region,
-      customIsNetworkOnline // pass down the custom "isNetworkOnline" function
+      getNetworkStatus // pass down the custom "isNetworkOnline" function
     )
     await chatSession.openChatSession().then(handleStartChatSuccess).catch(handleStartChatFailure)
     setSession(chatSession)

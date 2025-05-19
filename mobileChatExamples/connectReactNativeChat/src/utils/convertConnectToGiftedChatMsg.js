@@ -4,7 +4,6 @@
 import {
   CUSTOMER_USER,
   AGENT_USER,
-  // supportMessageContentTypes
 } from '../../config'
 
 const isValidConnectChatMessage = (msg) => {
@@ -16,7 +15,6 @@ const isValidConnectChatMessage = (msg) => {
     !Array.isArray(msg.content) &&
     msg.content.data &&
     typeof msg.content.data === 'string' &&
-    // supportMessageContentTypes.some((messageType) => msg.content.type === messageType) &&
     msg.transportDetails &&
     typeof msg.transportDetails === 'object' &&
     !Array.isArray(msg.transportDetails) &&
