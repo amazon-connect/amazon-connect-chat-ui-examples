@@ -6,40 +6,46 @@ on:
   workflow_dispatch:
   push:
     branches: [ master ]
-    paths: 'connectReactNativeChat/**'
+    paths: 'mobileChatExamples/connectReactNativeChat/**'
   pull_request:
     branches: [ master ]
-    paths: 'connectReactNativeChat/**'
+    paths: 'mobileChatExamples/connectReactNativeChat/**'
+
+env:
+  WORKING_DIRECTORY: ./mobileChatExamples/connectReactNativeChat
+
+permissions:
+  contents: read
 
 jobs:
   build:
-    runs-on: macos-12
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [20.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     defaults:
       run:
-        working-directory: ./MobileChatExamples/connectReactNativeChat
+        working-directory: ${{ env.WORKING_DIRECTORY }}
 
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
 
     - name: Install Expo app dependencies
-      run: yarn
+      run: npm install
 
-    - run: yarn lint
+    - run: npm run lint
 
     - name: Create endpoint.js config
       run: |
         cp endpoints.sample.js endpoints.js || echo "no endpoint.sample.js found"
 
-    - run: yarn test
+    - run: npm test
 
     - name: Create app.json config
       run: |
@@ -47,5 +53,5 @@ jobs:
         cp app.prod.json app.json
 
     - name: Build the Expo application
-      run: CI=1 npx expo prebuild --platform all
+      run: npm run ci:build
 
