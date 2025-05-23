@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-connect": "~3.624.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  }
+}
