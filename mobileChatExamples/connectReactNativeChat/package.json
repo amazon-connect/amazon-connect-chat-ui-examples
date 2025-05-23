@@ -2,6 +2,9 @@
   "name": "amazon-connect-react-native-chat-js",
   "version": "1.0.0",
   "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "start": "expo start",
     "android": "expo run:android",
@@ -22,7 +25,7 @@
     "@react-native/assets-registry": "^0.79.1",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/stack": "^6.3.16",
-    "amazon-connect-chatjs": ">=1.5.0",
+    "amazon-connect-chatjs": "^3.0.6",
     "axios": "^1.8.2",
     "expo": "~51.0.25",
     "prop-types": "^15.8.1",
@@ -48,11 +51,12 @@
     "eslint": "^7.32.0 || ^8.2.0",
     "eslint-plugin-react": "^7.28.0",
     "husky": ">=6",
-    "jest": "^27.5.1",
+    "jest": "^27",
     "jest-environment-jsdom": "^27",
     "jest-react-native": "^18.0.0",
     "lint-staged": ">=10",
     "prettier": "^2.8.4",
+    "prop-types": "^15.8.1",
     "react-test-renderer": "^18.2.0"
   },
   "lint-staged": {
