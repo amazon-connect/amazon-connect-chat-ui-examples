@@ -37,7 +37,7 @@ https://github.com/amazon-connect/amazon-connect-chat-ui-examples/assets/6090337
 
 ## Mobile Support
 
-Additional configuration is required to support ChatJS in React Native applications. Use `amazon-connect-chatjs@^1.5.0` and apply the changes below:
+Additional configuration is required to support ChatJS in React Native applications. Use `amazon-connect-chatjs@^1.5.0` (`>=1.5.0 <=3.0.2`) and apply the changes below:
 
 Install the supported ChatJS library using either Yarn:
 
