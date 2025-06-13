@@ -1,5 +1,7 @@
 #  Lambda forAmazon Connect Chat Interactive Messaging [Lex V2]
 
+> 🔗 Link: https://serverlessrepo.aws.amazon.com/applications/us-west-2/533267401313/amazon-connect-interactive-messages-example-lex-v2
+
 An AWS [Serverless Application Model](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) (AWS SAM) template to deploy a boilerplate **AWS Lambda** and **Amazon Lex** V2 bot, enabling interactive message in Amazon Connect chat.
 
 Interactive messages are pre-configured responses that your users can select from, making it easy for your customers to quickly resolve their issues through chat. Interactive messages can be designed using the new Amazon Connect Chat templates, which include several different customer display options (shared below), and are sent by Amazon Connect Chat using **Amazon Lex** chatbots.
@@ -9,7 +11,7 @@ Interactive messages are pre-configured responses that your users can select fro
 ## Specifications
 
 - Amazon Lex V2
-- AWS Lambda Runtime: `nodejs18.x`
+- AWS Lambda Runtime: `nodejs22.x`
 
 ## Prerequisites
 
@@ -106,6 +108,10 @@ Interactive Message Chat Experience
 
 ## [Maintainers Only] Publish New Serverless Application Repository Version
 
+This SAM template is manually published to one account/region. You can view the **Serverless Application Repository** here: https://console.aws.amazon.com/serverlessrepo/home?region=us-west-2#/published-applications/arn:aws:serverlessrepo:us-west-2:533267401313:applications~amazon-connect-interactive-messages-example-lex-v2
+
+This is published live here: https://serverlessrepo.aws.amazon.com/applications/us-west-2/533267401313/amazon-connect-interactive-messages-example-lex-v2
+
 ### Prerequisites
 
 - Install SAM CLI (`brew install aws-sam-cli`)
@@ -152,6 +158,9 @@ export AWS_SESSION_TOKEN="your-session-token"
 6. Create a pull request
 
 7. Publish the **Serverless Application Repository**:
+
+> ⚠️ Notice: only run this command under **Two Person Review**
+
    ```bash
    sam publish --template packaged.yaml --region us-west-2
    ```
