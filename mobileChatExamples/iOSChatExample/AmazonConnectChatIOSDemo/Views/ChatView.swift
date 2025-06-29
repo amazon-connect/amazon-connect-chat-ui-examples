@@ -150,10 +150,13 @@ struct ChatView: View {
                     
                     Button(action: {
                         if let fileURL = selectedFileURL {
+                            print("ChatView: Sending attachment: \(fileURL.lastPathComponent)")
                             chatManager.sendAttachment(file: fileURL)
+                            print("ChatView: Attachment send request initiated, clearing selectedFileURL")
                             selectedFileURL = nil
                         }
                         if newMessageText != ""{
+                            print("ChatView: Sending text message: \(newMessageText)")
                             chatManager.sendChatMessage(messageContent: newMessageText)
                             newMessageText = ""
                         }
@@ -166,6 +169,7 @@ struct ChatView: View {
                     }.padding(.bottom,4)
                     
                     AttachmentButton { file in
+                        print("ChatView: File selected from AttachmentButton: \(file.lastPathComponent)")
                         selectedFileURL = file
                     }.padding(.bottom,4)
                 }

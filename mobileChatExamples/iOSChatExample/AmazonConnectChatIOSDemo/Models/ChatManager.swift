@@ -234,21 +234,57 @@ class ChatManager: ObservableObject {
     
     /// Sends an attachment file
     func sendAttachment(file: URL) {
+        print("ChatManager: Starting to send attachment: \(file.lastPathComponent)")
+        print("ChatManager: File size: \(try? file.resourceValues(forKeys: [.fileSizeKey]).fileSize ?? 0) bytes")
+        print("ChatManager: File type: \(file.pathExtension)")
+
+        // Debug information about the file
+        do {
+            let resourceValues = try file.resourceValues(forKeys: [.isReadableKey, .isWritableKey])
+            print("ChatManager: File is readable: \(resourceValues.isReadable ?? false)")
+            print("ChatManager: File is writable: \(resourceValues.isWritable ?? false)")
+        } catch {
+            print("ChatManager: Error getting resource values: \(error.localizedDescription)")
+        }
+
+        print("ChatManager: About to call ChatSession.sendAttachment()")
         self.chatSession.sendAttachment(file: file) { result in
+            print("ChatManager: Received callback from sendAttachment")
             self.handleAttachmentSendResult(result)
             // Release access to the file
+            print("ChatManager: Stopping access to security-scoped resource")
             file.stopAccessingSecurityScopedResource()
         }
+        print("ChatManager: sendAttachment call completed")
     }
     
     // Handles the result of sending an attachment
     private func handleAttachmentSendResult(_ result: Result<Void, Error>) {
         DispatchQueue.main.async {
+            print("ChatManager: handleAttachmentSendResult on main queue")
             switch result {
             case .success:
-                print("Attachment sent successfully.")
+                print("ChatManager: Attachment sent successfully!")
             case .failure(let error):
-                print("Error sending attachment: \(error.localizedDescription)")
+                print("ChatManager: ERROR sending attachment: \(error.localizedDescription)")
+
+                // Additional error logging for more detailed debug info
+                print("ChatManager: Error type: \(type(of: error))")
+
+                if let nsError = error as NSError? {
+                    print("ChatManager: NSError domain: \(nsError.domain)")
+                    print("ChatManager: NSError code: \(nsError.code)")
+
+                    // Special check for the specific AWS 500 error the customer reported
+                    if nsError.domain == "aws.amazon.com" && nsError.code == 500 {
+                        print("DETECTED CRITICAL AWS ERROR: Attachment upload failed with 500 server error")
+                        print("This matches the exact error pattern the customer reported")
+                    }
+
+                    print("ChatManager: NSError userInfo: \(nsError.userInfo)")
+                }
+
+                self.error = ErrorMessage(message: "Error sending attachment: \(error.localizedDescription)")
             }
         }
     }

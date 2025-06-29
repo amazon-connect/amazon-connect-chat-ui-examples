@@ -44,6 +44,14 @@ class CustomLogger: SDKLoggerProtocol {
     func logError(_ message: @autoclosure () -> String) {
         let logMessage = "ERROR: \(message())"
         print(logMessage)
+        // Special case for SDK errors as they're critical for debugging
+        if logMessage.contains("attachment") || logMessage.contains("file") {
+            print("CRITICAL SDK ERROR: \(logMessage)")
+            // Also log the stack trace for critical errors
+            Thread.callStackSymbols.forEach { symbol in
+                print("Stack: \(symbol)")
+            }
+        }
         writeToAppTempFile(content: logMessage)
     }
     
@@ -73,7 +81,7 @@ class CustomLogger: SDKLoggerProtocol {
                     fileHandle.write(data)
                 }
             } catch {
-                print("ERROR")
+                print("ERROR in logger: \(error.localizedDescription)")
             }
         }
     }

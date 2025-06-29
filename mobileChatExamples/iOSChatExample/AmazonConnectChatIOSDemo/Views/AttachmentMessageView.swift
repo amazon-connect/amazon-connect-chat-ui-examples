@@ -33,16 +33,21 @@ struct AttachmentMessageView: View {
             VStack(alignment: .leading) {
                 Button(action: {
                     isDownloading = true
+                    print("AttachmentMessageView: Starting to download attachment with ID: \(message.attachmentId ?? "nil"), filename: \(message.text)")
                     chatManager.downloadAttachment(attachmentId: message.attachmentId!, filename: message.text) { result in
                         isDownloading = false
+                        print("AttachmentMessageView: Download completion callback received")
                         switch result {
                         case .success(let tempUrl):
                             previewItem = tempUrl
-                            print("Temp file stored locally: \(tempUrl)")
+                            print("AttachmentMessageView: Attachment downloaded successfully")
+                            print("AttachmentMessageView: Temp file stored locally: \(tempUrl)")
                             showPreview = true
                         case .failure(let error):
                             downloadError = "Failed to download attachment: \(String(describing: error))"
-                            print(downloadError!)
+                            print("AttachmentMessageView: \(downloadError!)")
+                            print("AttachmentMessageView: Error details - \(error)")
+                            print("AttachmentMessageView: Error type - \(type(of: error))")
                         }
                     }
                 }) {
