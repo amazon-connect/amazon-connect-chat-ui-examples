@@ -43,9 +43,6 @@
 		F712DCA62BCF4A28009FC568 /* NetworkConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */; };
 		F712DCA72BCF4A28009FC568 /* NetworkConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */; };
 		F712DCA82BCF4A28009FC568 /* NetworkConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */; };
-		F72A640E2BD3160000881A24 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72A640D2BD315FF00881A24 /* Notifications.swift */; };
-		F72A640F2BD3160000881A24 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72A640D2BD315FF00881A24 /* Notifications.swift */; };
-		F72A64102BD3160000881A24 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72A640D2BD315FF00881A24 /* Notifications.swift */; };
 		F796A3D42CBF4EA000EC5FCE /* CustomLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F796A3D32CBF4EA000EC5FCE /* CustomLogger.swift */; };
 		F7B4A1242C115455005C7921 /* AttachmentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B4A1232C115455005C7921 /* AttachmentButton.swift */; };
 		F7B4A1252C115455005C7921 /* AttachmentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B4A1232C115455005C7921 /* AttachmentButton.swift */; };
@@ -151,7 +148,6 @@
 		7EFB7A332C210E7700D6B9EE /* AttachmentTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentTextView.swift; sourceTree = "<group>"; };
 		7EFF832C2C30045F00865E09 /* AmazonConnectChatIOSDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AmazonConnectChatIOSDemo.entitlements; sourceTree = "<group>"; };
 		F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectionManager.swift; sourceTree = "<group>"; };
-		F72A640D2BD315FF00881A24 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		F796A3D32CBF4EA000EC5FCE /* CustomLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLogger.swift; sourceTree = "<group>"; };
 		F7B4A1232C115455005C7921 /* AttachmentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentButton.swift; sourceTree = "<group>"; };
 		F7B4A1292C13B7D5005C7921 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -356,7 +352,6 @@
 				7E9159512BBE67D500821C05 /* CreateStartChatResponse.swift */,
 				7E9159532BBE67D500821C05 /* NetworkManager.swift */,
 				7E9159542BBE67D500821C05 /* CreateStartChatRequest.swift */,
-				F72A640D2BD315FF00881A24 /* Notifications.swift */,
 				7E829D4D2C24CF2000DCB00E /* ChatManager.swift */,
 			);
 			path = Models;
@@ -539,7 +534,6 @@
 				7E9159612BBE67D500821C05 /* TestView.swift in Sources */,
 				F796A3D42CBF4EA000EC5FCE /* CustomLogger.swift in Sources */,
 				7E829D4E2C24CF2000DCB00E /* ChatManager.swift in Sources */,
-				F72A640E2BD3160000881A24 /* Notifications.swift in Sources */,
 				7E9159662BBE67D500821C05 /* ContentView.swift in Sources */,
 				7E91596F2BBE67D500821C05 /* NetworkManager.swift in Sources */,
 				7E9159622BBE67D500821C05 /* QuickReplyContentView.swift in Sources */,
@@ -565,7 +559,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7B4A1252C115455005C7921 /* AttachmentButton.swift in Sources */,
-				F72A640F2BD3160000881A24 /* Notifications.swift in Sources */,
 				F712DCA72BCF4A28009FC568 /* NetworkConnectionManager.swift in Sources */,
 				F7B4A12B2C13B7D5005C7921 /* UIView.swift in Sources */,
 				7E9159292BBE674200821C05 /* AmazonConnectChatIOSDemoTests.swift in Sources */,
@@ -576,7 +569,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F72A64102BD3160000881A24 /* Notifications.swift in Sources */,
 				F712DCA82BCF4A28009FC568 /* NetworkConnectionManager.swift in Sources */,
 				F7B4A12C2C13B7D5005C7921 /* UIView.swift in Sources */,
 				7E9159332BBE674200821C05 /* AmazonConnectChatIOSDemoUITests.swift in Sources */,
