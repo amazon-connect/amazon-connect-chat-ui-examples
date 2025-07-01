@@ -78,9 +78,25 @@ struct AttachmentMessageView: View {
             .cornerRadius(8)
             .frame(maxWidth: UIScreen.main.bounds.size.width * 0.75, alignment: .leading)
             
-            if message.messageDirection == .Outgoing, let metadata = message.metadata, message.id == recentOutgoingMessageID {
+            if message.messageDirection == .Outgoing, let metadata = message.metadata {
                 HStack(spacing: 2) {
-                    Text(CommonUtils.customMessageStatus(for: metadata.status)).font(.caption2).foregroundColor(.gray)
+                    // Show status for recent outgoing message or failed messages
+                    if message.id == recentOutgoingMessageID || metadata.status == .Failed {
+                        Text(CommonUtils.customMessageStatus(for: metadata.status)).font(.caption2).foregroundColor(.gray)
+                        
+                        // Show retry button for failed attachments
+                        if metadata.status == .Failed {
+                            Button(action: {
+                                chatManager.resendFailedMessage(messageId: message.id)
+                            }) {
+                                Text("Retry")
+                                    .font(.caption2)
+                                    .foregroundColor(.blue)
+                                    .underline()
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                    }
                 }.frame(maxWidth: UIScreen.main.bounds.size.width * 0.75, alignment: .trailing)
             }
             

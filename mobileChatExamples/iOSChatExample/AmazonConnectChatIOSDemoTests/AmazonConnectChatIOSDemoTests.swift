@@ -28,5 +28,17 @@ final class AmazonConnectChatIOSDemoTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    func testChatManagerHasResendFailedMessageMethod() throws {
+        // Test that ChatManager has the resendFailedMessage method
+        let chatManager = ChatManager()
+        
+        // This test verifies that the method exists and can be called
+        // In a real scenario, this would require a proper chat session setup
+        let testMessageId = "test-message-id"
+        
+        // The method should exist and be callable (though it may fail without proper setup)
+        XCTAssertNoThrow(chatManager.resendFailedMessage(messageId: testMessageId))
+    }
 
 }

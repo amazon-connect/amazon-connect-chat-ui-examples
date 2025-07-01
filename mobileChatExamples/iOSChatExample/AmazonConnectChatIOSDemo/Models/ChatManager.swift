@@ -278,6 +278,26 @@ class ChatManager: ObservableObject {
         }
     }
     
+    /// Resends a failed message using the SDK's resendFailedMessage API
+    func resendFailedMessage(messageId: String) {
+        self.chatSession.resendFailedMessage(messageId: messageId) { [weak self] result in
+            self?.handleMessageResendResult(result, messageId: messageId)
+        }
+    }
+    
+    // Handles the result of resending a failed message
+    private func handleMessageResendResult(_ result: Result<Void, Error>, messageId: String) {
+        DispatchQueue.main.async {
+            switch result {
+            case .success:
+                print("Message resent successfully for messageId: \(messageId)")
+            case .failure(let error):
+                print("Error resending message: \(error.localizedDescription)")
+                self.error = ErrorMessage(message: "Error resending message: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     /// Disconnects the chat session
     func disconnectChat() {
         // Remove the participant token

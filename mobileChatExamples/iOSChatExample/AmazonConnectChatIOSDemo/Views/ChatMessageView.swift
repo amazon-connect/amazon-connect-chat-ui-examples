@@ -19,7 +19,7 @@ struct ChatMessageView: View {
                         if message.attachmentId != nil {
                             AttachmentMessageView(message: message, chatManager: chatManager, recentOutgoingMessageID: $recentOutgoingMessageID)
                         } else {
-                            SenderChatBubble(message: message, recentOutgoingMessageID: $recentOutgoingMessageID)
+                            SenderChatBubble(message: message, chatManager: chatManager, recentOutgoingMessageID: $recentOutgoingMessageID)
                         }
                     }
                 } else if message.messageDirection == .Incoming {
@@ -77,6 +77,7 @@ struct ChatMessageView: View {
 
 struct SenderChatBubble: View {
     @ObservedObject var message: AmazonConnectChatIOS.Message
+    @ObservedObject var chatManager: ChatManager
     @Binding var recentOutgoingMessageID: String?
     
     var body: some View {
@@ -109,9 +110,25 @@ struct SenderChatBubble: View {
             .foregroundColor(.white)
             .frame(maxWidth: UIScreen.main.bounds.size.width * 0.75, alignment: .trailing)
             
-            if let metadata = message.metadata, message.id == recentOutgoingMessageID {
+            if let metadata = message.metadata {
                 HStack(spacing: 2) {
-                    Text(CommonUtils.customMessageStatus(for: metadata.status)).font(.caption2).foregroundColor(.gray)
+                    // Show status for recent outgoing message or failed messages
+                    if message.id == recentOutgoingMessageID || metadata.status == .Failed {
+                        Text(CommonUtils.customMessageStatus(for: metadata.status)).font(.caption2).foregroundColor(.gray)
+                        
+                        // Show retry button for failed messages
+                        if metadata.status == .Failed {
+                            Button(action: {
+                                chatManager.resendFailedMessage(messageId: message.id)
+                            }) {
+                                Text("Retry")
+                                    .font(.caption2)
+                                    .foregroundColor(.blue)
+                                    .underline()
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                    }
                 }.frame(maxWidth: UIScreen.main.bounds.size.width * 0.75, alignment: .trailing)
             }
         }
