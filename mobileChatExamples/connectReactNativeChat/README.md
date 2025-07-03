@@ -62,7 +62,7 @@ This step is already provided in the demo app, feel free to skip to the next sec
 
 ChatJS relies on browser's `window.navigator.onLine` for network monitoring, which isn't available in React Native (Hermes JS Engine). Instead, you'll need to configure ChatJS to use React Native's NetInfo API for network status checks.
 
-> 📌 Important: ensure you are using `amazon-connect-chatjs >= v1.5.0` (`>=1.5.0 <=3.0.2`)
+> 📌 Important: ensure you are using `amazon-connect-chatjs >= v1.5.0`
 
 ```diff
 // MyComponents.jsx
@@ -104,7 +104,19 @@ const MyComponent = () => {
 }
 ```
 
-6. Run locally
+6. Configure polyfills for missing Web APIs in React Native environment.
+
+For `amazon-connect-chatjs >= v3.0.3`, you need to configure polyfills to support certain Web APIs. These include:
+ * Crypto
+ * ReadableStream
+ * TextEncoding
+ * ArrayBuffer
+
+If you're using the demo app, you can skip this step. The necessary polyfill configuration is already included in the  `src/polyfills.js` file.
+
+However, if you're building a React Native application that relies on ChatJS, you'll need to set up these polyfills yourself.
+
+7. Run locally
 
 ```sh
 # run on http://localhost:PORT

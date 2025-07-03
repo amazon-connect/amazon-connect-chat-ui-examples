@@ -1,3 +1,4 @@
+import './src/polyfills';
 import React from 'react';
 import ChatUI from "./src/ChatUI";
 
