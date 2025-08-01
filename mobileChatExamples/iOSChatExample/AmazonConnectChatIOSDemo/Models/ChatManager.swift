@@ -105,6 +105,28 @@ class ChatManager: ObservableObject {
             
         self.chatSession.onTranscriptUpdated = { [weak self] transcriptData in
             self?.previousTranscriptNextToken = transcriptData.previousTranscriptNextToken
+            
+            // Log transcript items for debugging
+            print("🔍 TRANSCRIPT_LOG: === TRANSCRIPT UPDATED ===")
+            print("🔍 TRANSCRIPT_LOG: Total items: \(transcriptData.transcriptList.count)")
+            for (index, item) in transcriptData.transcriptList.enumerated() {
+                if let event = item as? Event {
+                    print("🔍 TRANSCRIPT_LOG: [\(index)] EVENT - ContentType: \(event.contentType), Text: \(event.text ?? "nil"), DisplayName: \(event.displayName ?? "nil"), Participant: \(event.participant ?? "nil")")
+                    
+                    // Special logging for idle-related events
+                    if event.contentType.contains("participant.idle") || 
+                       event.contentType.contains("participant.returned") || 
+                       event.contentType.contains("participant.autodisconnection") {
+                        print("🚨 IDLE_EVENT: \(event.contentType) - \(event.displayName ?? "Unknown") - \(event.text ?? "")")
+                    }
+                } else if let message = item as? Message {
+                    print("🔍 TRANSCRIPT_LOG: [\(index)] MESSAGE - Text: \(message.text), DisplayName: \(message.displayName ?? "nil"), Participant: \(message.participant ?? "nil")")
+                } else {
+                    print("🔍 TRANSCRIPT_LOG: [\(index)] OTHER - Type: \(type(of: item)), ID: \(item.id)")
+                }
+            }
+            print("🔍 TRANSCRIPT_LOG: === END TRANSCRIPT ===")
+            
             // Apply transcript updates
             self?.updateTranscript(transcriptData.transcriptList)
         }
@@ -122,6 +144,18 @@ class ChatManager: ObservableObject {
         
         self.chatSession.onDeepHeartbeatFailure = {
             print("Received deep heartbeat failure.")
+        }
+        
+        self.chatSession.onParticipantIdle = { displayName in
+            print("\(displayName) has gone idle.")
+        }
+        
+        self.chatSession.onParticipantReturned = { displayName in
+            print("\(displayName) has returned from idle.")
+        }
+        
+        self.chatSession.onAutoDisconnection = { displayName in
+            print("\(displayName) was automatically disconnected.")
         }
     }
     

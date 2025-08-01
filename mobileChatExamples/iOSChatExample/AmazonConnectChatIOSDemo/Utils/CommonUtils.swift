@@ -71,6 +71,15 @@ struct CommonUtils {
         case ContentType.ended.rawValue:
             event.text = "The chat has ended"
             event.participant = "System"
+        case ContentType.participantIdle.rawValue:
+            event.text = "\(displayNameOrParticipant) has gone idle"
+            event.participant = "System"
+        case ContentType.participantReturned.rawValue:
+            event.text = "\(displayNameOrParticipant) has returned"
+            event.participant = "System"
+        case ContentType.autoDisconnection.rawValue:
+            event.text = "\(displayNameOrParticipant) was automatically disconnected"
+            event.participant = "System"
         default:
             break
         }
