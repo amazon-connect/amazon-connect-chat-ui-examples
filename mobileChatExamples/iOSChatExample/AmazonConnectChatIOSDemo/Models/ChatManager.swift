@@ -146,38 +146,167 @@ class ChatManager: ObservableObject {
             print("Received deep heartbeat failure.")
         }
         
+        // MARK: - Participant State Events
+        
         self.chatSession.onParticipantIdle = { eventData in
             let displayName = eventData.displayName ?? "Unknown"
             let participantRole = eventData.participantRole ?? "Unknown"
-            print("\(displayName) (\(participantRole)) has gone idle.")
+            let participantId = eventData.participantId ?? "Unknown"
+            let timestamp = eventData.absoluteTime ?? "Unknown"
+            print("😴 PARTICIPANT IDLE: \(displayName) (\(participantRole)) went idle [ID: \(participantId)] at \(timestamp)")
             
             // Example: Check if it's an agent who went idle
             if eventData.participantRole == "AGENT" {
-                print("Agent went idle - consider showing notification to customer")
+                print("   → Agent went idle - show 'Agent is away' notification to customer")
+                print("   → Consider offering callback option or queue position")
+            } else if eventData.participantRole == "CUSTOMER" {
+                print("   → Customer went idle - update status in agent dashboard")
+                print("   → Set idle timer for potential auto-disconnect")
             }
         }
         
         self.chatSession.onParticipantReturned = { eventData in
             let displayName = eventData.displayName ?? "Unknown"
             let participantRole = eventData.participantRole ?? "Unknown"
-            print("\(displayName) (\(participantRole)) has returned from idle.")
+            let participantId = eventData.participantId ?? "Unknown"
+            let timestamp = eventData.absoluteTime ?? "Unknown"
+            print("🔄 PARTICIPANT RETURNED: \(displayName) (\(participantRole)) returned from idle [ID: \(participantId)] at \(timestamp)")
             
             // Example: Check if it's an agent who returned
             if eventData.participantRole == "AGENT" {
-                print("Agent returned - customer can continue chatting")
+                print("   → Agent returned - hide 'Agent is away' notification")
+                print("   → Customer can continue chatting normally")
+            } else if eventData.participantRole == "CUSTOMER" {
+                print("   → Customer returned - update status to active in agent dashboard")
+                print("   → Cancel any pending auto-disconnect timers")
             }
         }
         
         self.chatSession.onAutoDisconnection = { eventData in
             let displayName = eventData.displayName ?? "Unknown"
             let participantRole = eventData.participantRole ?? "Unknown"
-            print("\(displayName) (\(participantRole)) was automatically disconnected.")
+            let participantId = eventData.participantId ?? "Unknown"
+            let timestamp = eventData.absoluteTime ?? "Unknown"
+            print("🚪 AUTO DISCONNECTION: \(displayName) (\(participantRole)) was automatically disconnected [ID: \(participantId)] at \(timestamp)")
             
             // Example: Handle different participant types
             if eventData.participantRole == "CUSTOMER" {
-                print("Customer was disconnected due to inactivity")
+                print("   → Customer disconnected due to inactivity")
+                print("   → Show reconnection options and chat transcript")
+                print("   → Offer callback or email transcript options")
             } else if eventData.participantRole == "AGENT" {
-                print("Agent was disconnected - chat may need to be transferred")
+                print("   → Agent disconnected - initiate chat transfer process")
+                print("   → Notify customer of agent change")
+                print("   → Queue chat for next available agent")
+            }
+        }
+        
+        // MARK: - Communication Events
+        
+        self.chatSession.onTyping = { eventData in
+            let displayName = eventData.displayName ?? "Unknown"
+            let participantRole = eventData.participantRole ?? "Unknown"
+            let participantId = eventData.participantId ?? "Unknown"
+            print("🔤 TYPING: \(displayName) (\(participantRole)) is typing... [ID: \(participantId)]")
+            
+            // Example: Show typing indicator in UI
+            if eventData.participantRole == "AGENT" {
+                print("   → Show agent typing indicator in chat UI")
+            } else if eventData.participantRole == "CUSTOMER" {
+                print("   → Show customer typing indicator in agent dashboard")
+            }
+        }
+        
+        self.chatSession.onReadReceipt = { eventData in
+            let displayName = eventData.displayName ?? "Unknown"
+            let participantRole = eventData.participantRole ?? "Unknown"
+            let messageId = eventData.messageId ?? "Unknown"
+            let timestamp = eventData.absoluteTime ?? "Unknown"
+            print("✅ READ RECEIPT: Message \(messageId) read by \(displayName) (\(participantRole)) at \(timestamp)")
+            
+            // Example: Update message status in UI
+            if eventData.participantRole == "AGENT" {
+                print("   → Update message status to 'Read by Agent' in customer view")
+            } else if eventData.participantRole == "CUSTOMER" {
+                print("   → Update message status to 'Read by Customer' in agent dashboard")
+            }
+        }
+        
+        self.chatSession.onDeliveredReceipt = { eventData in
+            let displayName = eventData.displayName ?? "Unknown"
+            let participantRole = eventData.participantRole ?? "Unknown"
+            let messageId = eventData.messageId ?? "Unknown"
+            let timestamp = eventData.absoluteTime ?? "Unknown"
+            print("📬 DELIVERED RECEIPT: Message \(messageId) delivered to \(displayName) (\(participantRole)) at \(timestamp)")
+            
+            // Example: Update message status in UI
+            if eventData.participantRole == "AGENT" {
+                print("   → Update message status to 'Delivered to Agent'")
+            } else if eventData.participantRole == "CUSTOMER" {
+                print("   → Update message status to 'Delivered to Customer'")
+            }
+        }
+        
+        // MARK: - Participant Management Events
+        
+        self.chatSession.onParticipantInvited = { eventData in
+            let displayName = eventData.displayName ?? "Unknown"
+            let participantRole = eventData.participantRole ?? "Unknown"
+            let participantId = eventData.participantId ?? "Unknown"
+            let timestamp = eventData.absoluteTime ?? "Unknown"
+            print("👋 PARTICIPANT INVITED: \(displayName) (\(participantRole)) joined the chat [ID: \(participantId)] at \(timestamp)")
+            
+            // Example: Handle different participant types
+            if eventData.participantRole == "AGENT" {
+                print("   → New agent joined - show 'Agent \(displayName) joined' message in chat")
+                print("   → Update participant list in UI")
+            } else if eventData.participantRole == "SUPERVISOR" {
+                print("   → Supervisor joined for monitoring - show supervisor presence indicator")
+                print("   → Enable supervisor-specific features")
+            } else if eventData.participantRole == "CUSTOMER" {
+                print("   → Additional customer joined - enable multi-customer chat features")
+            }
+        }
+        
+        self.chatSession.onParticipantDisplayNameUpdated = { eventData in
+            let newDisplayName = eventData.displayName ?? "Unknown"
+            let participantRole = eventData.participantRole ?? "Unknown"
+            let participantId = eventData.participantId ?? "Unknown"
+            let timestamp = eventData.absoluteTime ?? "Unknown"
+            print("✏️ DISPLAY NAME UPDATED: Participant \(participantId) (\(participantRole)) changed name to '\(newDisplayName)' at \(timestamp)")
+            
+            // Example: Update participant name in UI
+            print("   → Update participant name in conversation view")
+            print("   → Refresh participant list and message history")
+            print("   → Show 'Name changed to \(newDisplayName)' notification")
+            
+            // Role-specific handling
+            if eventData.participantRole == "AGENT" {
+                print("   → Update agent name in customer chat interface")
+            } else if eventData.participantRole == "CUSTOMER" {
+                print("   → Update customer name in agent dashboard")
+            }
+        }
+        
+        // MARK: - Advanced Events
+        
+        self.chatSession.onChatRehydrated = { eventData in
+            let timestamp = eventData.absoluteTime ?? "Unknown"
+            let contactId = eventData.initialContactId ?? "Unknown"
+            print("🔄 CHAT REHYDRATED: Previous chat session restored at \(timestamp) [Contact: \(contactId)]")
+            
+            // Example: Handle chat rehydration
+            print("   → Loading previous conversation history...")
+            print("   → Restoring chat state and participant information")
+            print("   → Show 'Previous conversation restored' message to user")
+            print("   → Re-establish connection with existing participants")
+            
+            // Additional context
+            if let contentType = eventData.contentType {
+                print("   → Event type: \(contentType)")
+            }
+            if let messageId = eventData.messageId {
+                print("   → Rehydration event ID: \(messageId)")
             }
         }
     }
