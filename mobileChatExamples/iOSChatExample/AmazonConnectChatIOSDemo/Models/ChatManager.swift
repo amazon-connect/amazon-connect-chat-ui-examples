@@ -146,16 +146,39 @@ class ChatManager: ObservableObject {
             print("Received deep heartbeat failure.")
         }
         
-        self.chatSession.onParticipantIdle = { displayName in
-            print("\(displayName) has gone idle.")
+        self.chatSession.onParticipantIdle = { eventData in
+            let displayName = eventData.displayName ?? "Unknown"
+            let participantRole = eventData.participantRole ?? "Unknown"
+            print("\(displayName) (\(participantRole)) has gone idle.")
+            
+            // Example: Check if it's an agent who went idle
+            if eventData.participantRole == "AGENT" {
+                print("Agent went idle - consider showing notification to customer")
+            }
         }
         
-        self.chatSession.onParticipantReturned = { displayName in
-            print("\(displayName) has returned from idle.")
+        self.chatSession.onParticipantReturned = { eventData in
+            let displayName = eventData.displayName ?? "Unknown"
+            let participantRole = eventData.participantRole ?? "Unknown"
+            print("\(displayName) (\(participantRole)) has returned from idle.")
+            
+            // Example: Check if it's an agent who returned
+            if eventData.participantRole == "AGENT" {
+                print("Agent returned - customer can continue chatting")
+            }
         }
         
-        self.chatSession.onAutoDisconnection = { displayName in
-            print("\(displayName) was automatically disconnected.")
+        self.chatSession.onAutoDisconnection = { eventData in
+            let displayName = eventData.displayName ?? "Unknown"
+            let participantRole = eventData.participantRole ?? "Unknown"
+            print("\(displayName) (\(participantRole)) was automatically disconnected.")
+            
+            // Example: Handle different participant types
+            if eventData.participantRole == "CUSTOMER" {
+                print("Customer was disconnected due to inactivity")
+            } else if eventData.participantRole == "AGENT" {
+                print("Agent was disconnected - chat may need to be transferred")
+            }
         }
     }
     
