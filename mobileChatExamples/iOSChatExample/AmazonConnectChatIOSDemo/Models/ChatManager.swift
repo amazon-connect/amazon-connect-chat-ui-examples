@@ -218,45 +218,27 @@ class ChatManager: ObservableObject {
         }
         
         self.chatSession.onReadReceipt = { event in
-            let participantInfo = event.displayName ?? "Unknown Participant"
             let participantId = event.participant ?? "Unknown ID"
             let messageId = event.id
             let timestamp = event.timeStamp
             
-            // Try to get more specific role info from serializedContent
-            let participantRole = event.serializedContent?["participantRole"] as? String ?? participantInfo
-            
-            print("✅ READ RECEIPT: Message \(messageId) read by \(participantInfo) [\(participantId)] at \(timestamp)")
+            print("✅ READ RECEIPT: Message \(messageId) read by participant \(participantId) at \(timestamp)")
             
             // Example: Update message status in UI
-            if participantRole.contains("AGENT") {
-                print("   → Update message status to 'Read by Agent' in customer view")
-            } else if participantRole.contains("CUSTOMER") {
-                print("   → Update message status to 'Read by Customer' in agent dashboard")
-            } else {
-                print("   → Update message status to 'Read by \(participantRole)'")
-            }
+            print("   → Update message status to 'Read' in conversation view")
+            print("   → Show read indicator next to message")
         }
         
         self.chatSession.onDeliveredReceipt = { event in
-            let participantInfo = event.displayName ?? "Unknown Participant"
             let participantId = event.participant ?? "Unknown ID"
             let messageId = event.id
             let timestamp = event.timeStamp
             
-            // Try to get more specific role info from serializedContent
-            let participantRole = event.serializedContent?["participantRole"] as? String ?? participantInfo
-            
-            print("📬 DELIVERED RECEIPT: Message \(messageId) delivered to \(participantInfo) [\(participantId)] at \(timestamp)")
+            print("📬 DELIVERED RECEIPT: Message \(messageId) delivered to participant \(participantId) at \(timestamp)")
             
             // Example: Update message status in UI
-            if participantRole.contains("AGENT") {
-                print("   → Update message status to 'Delivered to Agent'")
-            } else if participantRole.contains("CUSTOMER") {
-                print("   → Update message status to 'Delivered to Customer'")
-            } else {
-                print("   → Update message status to 'Delivered to \(participantRole)'")
-            }
+            print("   → Update message status to 'Delivered' in conversation view")
+            print("   → Show delivered indicator next to message")
         }
         
         // MARK: - Participant Management Events
@@ -277,26 +259,6 @@ class ChatManager: ObservableObject {
                 print("   → Enable supervisor-specific features")
             } else if event.participant == "CUSTOMER" {
                 print("   → Additional customer joined - enable multi-customer chat features")
-            }
-        }
-        
-        self.chatSession.onParticipantDisplayNameUpdated = { event in
-            let newDisplayName = event.displayName ?? "Unknown"
-            let participantRole = event.participant ?? "Unknown"
-            let participantId = event.participant ?? "Unknown"
-            let timestamp = event.timeStamp
-            print("✏️ DISPLAY NAME UPDATED: Participant \(participantId) (\(participantRole)) changed name to '\(newDisplayName)' at \(timestamp)")
-            
-            // Example: Update participant name in UI
-            print("   → Update participant name in conversation view")
-            print("   → Refresh participant list and message history")
-            print("   → Show 'Name changed to \(newDisplayName)' notification")
-            
-            // Role-specific handling
-            if event.participant == "AGENT" {
-                print("   → Update agent name in customer chat interface")
-            } else if event.participant == "CUSTOMER" {
-                print("   → Update customer name in agent dashboard")
             }
         }
         
