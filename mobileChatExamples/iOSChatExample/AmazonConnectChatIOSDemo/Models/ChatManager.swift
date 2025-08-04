@@ -105,29 +105,6 @@ class ChatManager: ObservableObject {
             
         self.chatSession.onTranscriptUpdated = { [weak self] transcriptData in
             self?.previousTranscriptNextToken = transcriptData.previousTranscriptNextToken
-            
-            // Log transcript items for debugging
-            print("🔍 TRANSCRIPT_LOG: === TRANSCRIPT UPDATED ===")
-            print("🔍 TRANSCRIPT_LOG: Total items: \(transcriptData.transcriptList.count)")
-            for (index, item) in transcriptData.transcriptList.enumerated() {
-                if let event = item as? Event {
-                    print("🔍 TRANSCRIPT_LOG: [\(index)] EVENT - ContentType: \(event.contentType), Text: \(event.text ?? "nil"), DisplayName: \(event.displayName ?? "nil"), Participant: \(event.participant ?? "nil")")
-                    
-                    // Special logging for idle-related events
-                    if event.contentType.contains("participant.idle") || 
-                       event.contentType.contains("participant.returned") || 
-                       event.contentType.contains("participant.autodisconnection") {
-                        print("🚨 IDLE_EVENT: \(event.contentType) - \(event.displayName ?? "Unknown") - \(event.text ?? "")")
-                    }
-                } else if let message = item as? Message {
-                    print("🔍 TRANSCRIPT_LOG: [\(index)] MESSAGE - Text: \(message.text), DisplayName: \(message.displayName ?? "nil"), Participant: \(message.participant ?? "nil")")
-                } else {
-                    print("🔍 TRANSCRIPT_LOG: [\(index)] OTHER - Type: \(type(of: item)), ID: \(item.id)")
-                }
-            }
-            print("🔍 TRANSCRIPT_LOG: === END TRANSCRIPT ===")
-            
-            // Apply transcript updates
             self?.updateTranscript(transcriptData.transcriptList)
         }
         
@@ -149,41 +126,41 @@ class ChatManager: ObservableObject {
         // MARK: - Participant State Events
         
         self.chatSession.onParticipantIdle = { event in
-            print("😴 PARTICIPANT IDLE: \(event.displayName!) (\(event.participant!)) went idle at \(event.timeStamp)")
+            print("PARTICIPANT IDLE: \(event.displayName!) (\(event.participant!)) went idle at \(event.timeStamp)")
         }
         
         self.chatSession.onParticipantReturned = { event in
-            print("🔄 PARTICIPANT RETURNED: \(event.displayName!) (\(event.participant!)) returned at \(event.timeStamp)")
+            print("PARTICIPANT RETURNED: \(event.displayName!) (\(event.participant!)) returned at \(event.timeStamp)")
         }
         
         self.chatSession.onAutoDisconnection = { event in
-            print("🚪 AUTO DISCONNECTION: \(event.displayName!) (\(event.participant!)) was disconnected at \(event.timeStamp)")
+            print("AUTO DISCONNECTION: \(event.displayName!) (\(event.participant!)) was disconnected at \(event.timeStamp)")
         }
         
         // MARK: - Communication Events
         
         self.chatSession.onTyping = { event in
-            print("🔤 TYPING: \(event.displayName!) (\(event.participant!)) is typing...")
+            print("TYPING: \(event.displayName!) (\(event.participant!)) is typing...")
         }
         
         self.chatSession.onReadReceipt = { event in
-            print("✅ READ RECEIPT: Message \(event.id) read by participant \(event.participant!) at \(event.timeStamp)")
+            print("READ RECEIPT: Message \(event.id) read by participant \(event.participant!) at \(event.timeStamp)")
         }
         
         self.chatSession.onDeliveredReceipt = { event in
-            print("📬 DELIVERED RECEIPT: Message \(event.id) delivered to participant \(event.participant!) at \(event.timeStamp)")
+            print("DELIVERED RECEIPT: Message \(event.id) delivered to participant \(event.participant!) at \(event.timeStamp)")
         }
         
         // MARK: - Participant Management Events
         
         self.chatSession.onParticipantInvited = { event in
-            print("👋 PARTICIPANT INVITED: \(event.displayName!) (\(event.participant!)) joined at \(event.timeStamp)")
+            print("PARTICIPANT INVITED: \(event.displayName!) (\(event.participant!)) joined at \(event.timeStamp)")
         }
         
         // MARK: - Advanced Events
         
         self.chatSession.onChatRehydrated = { event in
-            print("🔄 CHAT REHYDRATED: Chat session restored at \(event.timeStamp)")
+            print("CHAT REHYDRATED: Chat session restored at \(event.timeStamp)")
         }
     }
     
