@@ -162,6 +162,14 @@ class ChatManager: ObservableObject {
         self.chatSession.onChatRehydrated = { event in
             print("CHAT REHYDRATED: Chat session restored at \(event.timeStamp)")
         }
+        
+        self.chatSession.onTransferSucceeded = { event in
+            print("TRANSFER SUCCEEDED: Transfer completed successfully at \(event.timeStamp)")
+        }
+        
+        self.chatSession.onTransferFailed = { event in
+            print("TRANSFER FAILED: Transfer failed at \(event.timeStamp)")
+        }
     }
     
     // MARK: - Message Handling
