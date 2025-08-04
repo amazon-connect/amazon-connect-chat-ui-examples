@@ -149,136 +149,41 @@ class ChatManager: ObservableObject {
         // MARK: - Participant State Events
         
         self.chatSession.onParticipantIdle = { event in
-            let displayName = event.displayName ?? "Unknown"
-            let participantRole = event.participant ?? "Unknown"
-            let participantId = event.participant ?? "Unknown"
-            let timestamp = event.timeStamp
-            print("😴 PARTICIPANT IDLE: \(displayName) (\(participantRole)) went idle [ID: \(participantId)] at \(timestamp)")
-            
-            // Example: Check if it's an agent who went idle
-            if event.participant == "AGENT" {
-                print("   → Agent went idle - show 'Agent is away' notification to customer")
-                print("   → Consider offering callback option or queue position")
-            } else if event.participant == "CUSTOMER" {
-                print("   → Customer went idle - update status in agent dashboard")
-                print("   → Set idle timer for potential auto-disconnect")
-            }
+            print("😴 PARTICIPANT IDLE: \(event.displayName!) (\(event.participant!)) went idle at \(event.timeStamp)")
         }
         
         self.chatSession.onParticipantReturned = { event in
-            let displayName = event.displayName ?? "Unknown"
-            let participantRole = event.participant ?? "Unknown"
-            let participantId = event.participant ?? "Unknown"
-            let timestamp = event.timeStamp
-            print("🔄 PARTICIPANT RETURNED: \(displayName) (\(participantRole)) returned from idle [ID: \(participantId)] at \(timestamp)")
-            
-            // Example: Check if it's an agent who returned
-            if event.participant == "AGENT" {
-                print("   → Agent returned - hide 'Agent is away' notification")
-                print("   → Customer can continue chatting normally")
-            } else if event.participant == "CUSTOMER" {
-                print("   → Customer returned - update status to active in agent dashboard")
-                print("   → Cancel any pending auto-disconnect timers")
-            }
+            print("🔄 PARTICIPANT RETURNED: \(event.displayName!) (\(event.participant!)) returned at \(event.timeStamp)")
         }
         
         self.chatSession.onAutoDisconnection = { event in
-            let displayName = event.displayName ?? "Unknown"
-            let participantRole = event.participant ?? "Unknown"
-            let participantId = event.participant ?? "Unknown"
-            let timestamp = event.timeStamp
-            print("🚪 AUTO DISCONNECTION: \(displayName) (\(participantRole)) was automatically disconnected [ID: \(participantId)] at \(timestamp)")
-            
-            // Example: Handle different participant types
-            if event.participant == "CUSTOMER" {
-                print("   → Customer disconnected due to inactivity")
-                print("   → Show reconnection options and chat transcript")
-                print("   → Offer callback or email transcript options")
-            } else if event.participant == "AGENT" {
-                print("   → Agent disconnected - initiate chat transfer process")
-                print("   → Notify customer of agent change")
-                print("   → Queue chat for next available agent")
-            }
+            print("🚪 AUTO DISCONNECTION: \(event.displayName!) (\(event.participant!)) was disconnected at \(event.timeStamp)")
         }
         
         // MARK: - Communication Events
         
         self.chatSession.onTyping = { event in
-            let displayName = event.displayName ?? "Unknown"
-            let participantRole = event.participant ?? "Unknown"
-            let participantId = event.participant ?? "Unknown"
-            print("🔤 TYPING: \(displayName) (\(participantRole)) is typing... [ID: \(participantId)]")
-            
-            // Example: Show typing indicator in UI
-            if event.participant == "AGENT" {
-                print("   → Show agent typing indicator in chat UI")
-            } else if event.participant == "CUSTOMER" {
-                print("   → Show customer typing indicator in agent dashboard")
-            }
+            print("🔤 TYPING: \(event.displayName!) (\(event.participant!)) is typing...")
         }
         
         self.chatSession.onReadReceipt = { event in
-            let participantId = event.participant ?? "Unknown ID"
-            let messageId = event.id
-            let timestamp = event.timeStamp
-            
-            print("✅ READ RECEIPT: Message \(messageId) read by participant \(participantId) at \(timestamp)")
-            
-            // Example: Update message status in UI
-            print("   → Update message status to 'Read' in conversation view")
-            print("   → Show read indicator next to message")
+            print("✅ READ RECEIPT: Message \(event.id) read by participant \(event.participant!) at \(event.timeStamp)")
         }
         
         self.chatSession.onDeliveredReceipt = { event in
-            let participantId = event.participant ?? "Unknown ID"
-            let messageId = event.id
-            let timestamp = event.timeStamp
-            
-            print("📬 DELIVERED RECEIPT: Message \(messageId) delivered to participant \(participantId) at \(timestamp)")
-            
-            // Example: Update message status in UI
-            print("   → Update message status to 'Delivered' in conversation view")
-            print("   → Show delivered indicator next to message")
+            print("📬 DELIVERED RECEIPT: Message \(event.id) delivered to participant \(event.participant!) at \(event.timeStamp)")
         }
         
         // MARK: - Participant Management Events
         
         self.chatSession.onParticipantInvited = { event in
-            let displayName = event.displayName ?? "Unknown"
-            let participantRole = event.participant ?? "Unknown"
-            let participantId = event.participant ?? "Unknown"
-            let timestamp = event.timeStamp
-            print("👋 PARTICIPANT INVITED: \(displayName) (\(participantRole)) joined the chat [ID: \(participantId)] at \(timestamp)")
-            
-            // Example: Handle different participant types
-            if event.participant == "AGENT" {
-                print("   → New agent joined - show 'Agent \(displayName) joined' message in chat")
-                print("   → Update participant list in UI")
-            } else if event.participant == "SUPERVISOR" {
-                print("   → Supervisor joined for monitoring - show supervisor presence indicator")
-                print("   → Enable supervisor-specific features")
-            } else if event.participant == "CUSTOMER" {
-                print("   → Additional customer joined - enable multi-customer chat features")
-            }
+            print("👋 PARTICIPANT INVITED: \(event.displayName!) (\(event.participant!)) joined at \(event.timeStamp)")
         }
         
         // MARK: - Advanced Events
         
         self.chatSession.onChatRehydrated = { event in
-            let timestamp = event.timeStamp
-            let contactId = event.serializedContent?["InitialContactId"] as? String ?? "Unknown"
-            print("🔄 CHAT REHYDRATED: Previous chat session restored at \(timestamp) [Contact: \(contactId)]")
-            
-            // Example: Handle chat rehydration
-            print("   → Loading previous conversation history...")
-            print("   → Restoring chat state and participant information")
-            print("   → Show 'Previous conversation restored' message to user")
-            print("   → Re-establish connection with existing participants")
-            
-            // Additional context
-            print("   → Event type: \(event.contentType)")
-            let messageId = event.id
-            print("   → Rehydration event ID: \(messageId)")
+            print("🔄 CHAT REHYDRATED: Chat session restored at \(event.timeStamp)")
         }
     }
     
