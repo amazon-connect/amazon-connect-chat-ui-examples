@@ -126,49 +126,89 @@ class ChatManager: ObservableObject {
         // MARK: - Participant State Events
         
         self.chatSession.onParticipantIdle = { event in
-            print("PARTICIPANT IDLE: \(event.displayName!) (\(event.participant!)) went idle at \(event.timeStamp)")
+            if let event = event {
+                print("PARTICIPANT IDLE: \(event.displayName!) (\(event.participant!)) went idle at \(event.timeStamp)")
+            } else {
+                print("PARTICIPANT IDLE: A participant went idle")
+            }
         }
         
         self.chatSession.onParticipantReturned = { event in
-            print("PARTICIPANT RETURNED: \(event.displayName!) (\(event.participant!)) returned at \(event.timeStamp)")
+            if let event = event {
+                print("PARTICIPANT RETURNED: \(event.displayName!) (\(event.participant!)) returned at \(event.timeStamp)")
+            } else {
+                print("PARTICIPANT RETURNED: A participant returned")
+            }
         }
         
         self.chatSession.onAutoDisconnection = { event in
-            print("AUTO DISCONNECTION: \(event.displayName!) (\(event.participant!)) was disconnected at \(event.timeStamp)")
+            if let event = event {
+                print("AUTO DISCONNECTION: \(event.displayName!) (\(event.participant!)) was disconnected at \(event.timeStamp)")
+            } else {
+                print("AUTO DISCONNECTION: A participant was disconnected")
+            }
         }
         
         // MARK: - Communication Events
         
         self.chatSession.onTyping = { event in
-            print("TYPING: \(event.displayName!) (\(event.participant!)) is typing...")
+            if let event = event {
+                print("TYPING: \(event.displayName!) (\(event.participant!)) is typing...")
+            } else {
+                print("TYPING: Someone is typing...")
+            }
         }
         
         self.chatSession.onReadReceipt = { event in
-            print("READ RECEIPT: Message \(event.id) read by participant \(event.participant!) at \(event.timeStamp)")
+            if let event = event {
+                print("READ RECEIPT: Message \(event.id) read by participant \(event.participant!) at \(event.timeStamp)")
+            } else {
+                print("READ RECEIPT: A message was read")
+            }
         }
         
         self.chatSession.onDeliveredReceipt = { event in
-            print("DELIVERED RECEIPT: Message \(event.id) delivered to participant \(event.participant!) at \(event.timeStamp)")
+            if let event = event {
+                print("DELIVERED RECEIPT: Message \(event.id) delivered to participant \(event.participant!) at \(event.timeStamp)")
+            } else {
+                print("DELIVERED RECEIPT: A message was delivered")
+            }
         }
         
         // MARK: - Participant Management Events
         
         self.chatSession.onParticipantInvited = { event in
-            print("PARTICIPANT INVITED: \(event.displayName!) (\(event.participant!)) joined at \(event.timeStamp)")
+            if let event = event {
+                print("PARTICIPANT INVITED: \(event.displayName!) (\(event.participant!)) joined at \(event.timeStamp)")
+            } else {
+                print("PARTICIPANT INVITED: A participant joined")
+            }
         }
         
         // MARK: - Advanced Events
         
         self.chatSession.onChatRehydrated = { event in
-            print("CHAT REHYDRATED: Chat session restored at \(event.timeStamp)")
+            if let event = event {
+                print("CHAT REHYDRATED: Chat session restored at \(event.timeStamp)")
+            } else {
+                print("CHAT REHYDRATED: Chat session restored")
+            }
         }
         
         self.chatSession.onTransferSucceeded = { event in
-            print("TRANSFER SUCCEEDED: Transfer completed successfully at \(event.timeStamp)")
+            if let event = event {
+                print("TRANSFER SUCCEEDED: Transfer completed successfully at \(event.timeStamp)")
+            } else {
+                print("TRANSFER SUCCEEDED: Transfer completed successfully")
+            }
         }
         
         self.chatSession.onTransferFailed = { event in
-            print("TRANSFER FAILED: Transfer failed at \(event.timeStamp)")
+            if let event = event {
+                print("TRANSFER FAILED: Transfer failed at \(event.timeStamp)")
+            } else {
+                print("TRANSFER FAILED: Transfer failed")
+            }
         }
     }
     
