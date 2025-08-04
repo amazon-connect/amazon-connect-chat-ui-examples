@@ -45,7 +45,74 @@ Host your own `amazon-connect-chat-interface.js` bundle file and provide the lin
 
 ![Host Widget Snippet Integrated Custom UI](/.github/screenshots/custom-chat-widget-interface-screenshot.png)
 
-### Option 3: Hosted widget UI with custom Start Chat API
+### Option 3: Customized Widget UI with Hosted Widget Backend
+Fully customize the chat interface UI for your website and call the Amazon-hosted backend without setting up your own start chat backend.
+
+### Steps
+#### Part 1 - How to customize the widget
+1.1 Clone the [amazon-connect-chat-interface](https://github.com/amazon-connect/amazon-connect-chat-interface/tree/master) public repository from Github with the following command:
+```
+$ git clone https://github.com/amazon-connect/amazon-connect-chat-interface.git
+$ cd amazon-connect-chat-interface
+$ npm install
+$ npm run release
+```
+
+1.2 You can customize any of the UI components in `src/components` according to your business requirements.
+
+1.3 Simply make your local modifications to the amazon-connect-chat-interface package, then run `npm install && npm run build`. This command will generate `amazon-connect-chat-interface.js` bundle file within `build/dist/static/js` folder.
+
+1.4 In your website's html code, import the `amazon-connect-chat-interface.js` bundle file with a `<script src="amazon-connect-chat-interface.js"></script>` tag.
+
+#### Part 2 - How to setup Hosted Widget Backend
+2.1 To access the Amazon-hosted backend endpoint, you must have a communication widget set up. If you haven't created one yet, please follow the steps in the [Admin guide](https://docs.aws.amazon.com/connect/latest/adminguide/config-com-widget1.html) to configure a new hosted widget.
+
+2.2 Hosted Widget Backend Endpoint Required Info
+
+**Required URL Fields for Endpoint Start Chat API**
+
+`https://{instance_alias}.my.connect.aws/connectwidget/api/{widget_id}/start`
+* instance_alias: Refer to [Admin Guide](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-name.html) to find Instance Alias.
+* widget_id: Refer to [Admin Guide](https://docs.aws.amazon.com/connect/latest/adminguide/add-chat-to-website.html#chat-widget-script) to find Widget Id from widget script.
+
+**Required Headers**
+* x-amz-snippet-id: Widget snippet ID found in snippet code
+* x-amz-security-token: JSON Web Token (optional, only when you choose Yes under **Add security for your communications widget** in widget configuration)
+
+
+#### Part 3 - Example Usage
+The [index.html](https://github.com/amazon-connect/amazon-connect-chat-interface/blob/master/local-testing/index.html) within `amazon-connect-chat-interface/local-testing` folder provides an example html page that you use to test your code.
+
+* Import the `amazon-connect-chat-interface.js` bundle file within a `<script>` tag. [Code Ref](https://github.com/amazon-connect/amazon-connect-chat-interface/blob/master/local-testing/index.html#L9)
+* Configure the `apiGatewayEndpoint` in [local-testing/backendEndpoints.js](https://github.com/amazon-connect/amazon-connect-chat-interface/blob/master/local-testing/backendEndpoints.js) and import backendEndpoints.js file within a `<script>` tag. [Code Ref](https://github.com/amazon-connect/amazon-connect-chat-interface/blob/master/local-testing/index.html#L10)
+* (Optional) Following Steps in [Admin Guide](https://docs.aws.amazon.com/connect/latest/adminguide/add-chat-to-website.html#confirm-and-copy-chat-widget-script) to use JWT
+* Within [`connect.ChatInterface.initiateChat` function](https://github.com/amazon-connect/amazon-connect-chat-interface/blob/master/local-testing/index.html#L66-L79), pass the `x-amz-snippet-id` header and `x-amz-security-token` header (optional)
+
+```diff
+connect.ChatInterface.initiateChat({
+   name: customerName,
+   region,
+   apiGatewayEndpoint,
+   contactAttributes: JSON.stringify({
+         "customerName": customerName
+   }),
+   featurePermissions: {
+         "ATTACHMENTS": false,  // this is the override flag from user for attachments
+   },
+   supportedMessagingContentTypes: "text/plain,text/markdown", // enable rich messaging
+   contactFlowId,
+   instanceId,
+
++  headers: new Headers({
++         'x-amz-snippet-id': '', // TODO: Fill in
++         'x-amz-security-token': '' // (Optional, only when you choose to use JWT) TODO: Fill in
++  })
+
+},successHandler, failureHandler);
+```
+
+
+### Option 4: Hosted widget UI with custom Start Chat API
 
 To get help setting up your own start chat backend and calling your own backend to start the chat contact instead of the Amazon-hosted backend, follow the instructions in the [startChatContactAPI](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/cloudformationTemplates/startChatContactAPI) section of the Git repository README to create an API to call the StartChatContact API. Once the API is created, you can call it in the CustomStartChat callback function and send the response back in the widget script.
 
@@ -117,7 +184,7 @@ To get help setting up your own start chat backend and calling your own backend 
 </script>
 ```
 
-### Option 4: Customized Widget and Chat Interface UI (Self-Hosted)
+### Option 5: Customized Widget and Chat Interface UI (Self-Hosted)
 
 > Refer to the [customChatWidget example](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/customChatWidget) code, and follow steps listed in [CustomChatAndWidgetSelfHostedSetup.md](https://github.com/amazon-connect/amazon-connect-chat-interface/blob/master/.github/docs/CustomChatAndWidgetSelfHostedSetup.md) for a full setup walkthrough
 
