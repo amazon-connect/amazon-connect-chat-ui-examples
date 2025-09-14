@@ -1,0 +1,25 @@
+{
+  "name": "amazon-connect-hosted-widget-jwt-testing-setup-nodejs",
+  "version": "1.0.0",
+  "description": "Local testing setup for Amazon Connect Hosted Widget JWT Authentication (NodeJS)",
+  "repository": { 
+    "type": "git", 
+    "url": "https://github.com/spenlep-amzn/amazon-connect-hosted-widget-jwt-testing-setup-nodejs.git" 
+  }, 
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "Spencer Lepine (@spencerlepine)",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "luxon": "^1.27.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}

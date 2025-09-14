@@ -1,0 +1,27 @@
+<script type="text/javascript">
+  (function(w, d, x, id){
+    s=d.createElement('script');
+    s.src='https://asdfasdf.cloudfront.net/amazon-connect-chat-interface-client.js';
+    s.async=1;
+    s.id=id;
+    d.getElementsByTagName('head')[0].appendChild(s);
+    w[x] =  w[x] || function() { (w[x].ac = w[x].ac || []).push(arguments) };
+  })(window, document, 'amazon_connect', '<widgetId_REPLACE_ME>');
+  amazon_connect('styles', { iconType: 'CHAT_VOICE', openChat: { color: '#ffffff', backgroundColor: '#123456' }, closeChat: { color: '#ffffff', backgroundColor: '#123456'} });
+  amazon_connect('snippetId', '<snippetId_REPLACE_ME>');
+  amazon_connect('supportedMessagingContentTypes', [ 'text/plain', 'text/markdown' ]);
+
+  amazon_connect('authenticate', function(callback) {
+    const widgetId = '<widgetId_REPLACE_ME>';
+    window.fetch(`/token?widgetId=${widgetId}`).then(res => {
+      res.json().then(data => {
+        console.log(data.data);
+        callback(data.data);
+      });
+    });
+  });  
+
+  amazon_connect('contactAttributes', {
+    verificationCode: 'foobar'
+  })
+</script>
