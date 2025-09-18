@@ -11,6 +11,25 @@ Mappings:
       S3Bucket: "amazon-connect-advanced-customer-chat-cfn"
       S3Key: "deployment/"
       SolutionID: "AC0001"
+  AllowedRegions:
+    us-east-1:
+      Allowed: "true"
+    us-west-2:
+      Allowed: "true"
+    ap-southeast-2:
+      Allowed: "true"
+    ap-northeast-1:
+      Allowed: "true"
+    eu-central-1:
+      Allowed: "true"
+    eu-west-2:
+      Allowed: "true"
+    ap-southeast-1:
+      Allowed: "true"
+    ca-central-1:
+      Allowed: "true"
+    ap-northeast-2:
+      Allowed: "true"
 
 Parameters:
   WebsiteS3BucketName:
@@ -68,11 +87,13 @@ Parameters:
 
 Conditions:
   AnonymousUsageMetrics: !Equals [!Ref allowAnonymousUsageMetrics, "Yes"]
+  IsAllowedRegion: !Equals [!FindInMap [AllowedRegions, !Ref "AWS::Region", Allowed], "true"]
 
 Resources:
   #### Lambda #####
   ChatSDKLayer:
     Type: AWS::Lambda::LayerVersion
+    Condition: IsAllowedRegion
     Properties:
       CompatibleRuntimes:
         - "nodejs14.x"
@@ -90,6 +111,7 @@ Resources:
 
   InitiateChatLambda:
     Type: "AWS::Lambda::Function"
+    Condition: IsAllowedRegion
     Properties:
       Description: AWS Lambda Function to initiate the chat with the end user
       Handler: "startChatContact.handler"
@@ -122,6 +144,7 @@ Resources:
 
   InitiateChatLambdaExecutionRole:
     Type: "AWS::IAM::Role"
+    Condition: IsAllowedRegion
     Properties:
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
@@ -162,6 +185,7 @@ Resources:
 
   UpdateDdbWithS3LocationLambda:
     Type: "AWS::Lambda::Function"
+    Condition: IsAllowedRegion
     Properties:
       Description: AWS Lambda Function to update the DDB with the S3 location of the chat transcript
       Handler: "updateChatDdbWithS3Key.handler"
@@ -189,6 +213,7 @@ Resources:
 
   UpdateDdbWithS3LocationLambdaExecutionRole:
     Type: "AWS::IAM::Role"
+    Condition: IsAllowedRegion
     Properties:
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
@@ -221,6 +246,7 @@ Resources:
   #### S3 Lambda Trigger ####
   ExistingBucketConfiguration:
     Type: Custom::LoadLambda
+    Condition: IsAllowedRegion
     DependsOn:
       - BucketPermission
     Properties:
@@ -232,6 +258,7 @@ Resources:
 
   S3BucketConfigurationLambda:
     Type: AWS::Lambda::Function
+    Condition: IsAllowedRegion
     Properties:
       Description: S3 Object Custom Resource
       Handler: S3NotificationConfiguration.handler
@@ -254,6 +281,7 @@ Resources:
 
   S3BucketConfigurationLambdaExecutionRole:
     Type: "AWS::IAM::Role"
+    Condition: IsAllowedRegion
     Properties:
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
@@ -289,6 +317,7 @@ Resources:
 
   BucketPermission:
     Type: AWS::Lambda::Permission
+    Condition: IsAllowedRegion
     Properties:
       Action: "lambda:InvokeFunction"
       FunctionName: !Ref UpdateDdbWithS3LocationLambda
@@ -299,6 +328,7 @@ Resources:
   #### DynamoDb ####
   chatContactDataTable:
     Type: AWS::DynamoDB::Table
+    Condition: IsAllowedRegion
     Properties:
       AttributeDefinitions:
         - AttributeName: "contactId"
@@ -332,6 +362,7 @@ Resources:
   #### Website #####
   CreateWebsiteS3Bucket:
     Type: "AWS::S3::Bucket"
+    Condition: IsAllowedRegion
     Properties:
       BucketName: !Ref WebsiteS3BucketName
       AccessControl: LogDeliveryWrite
@@ -360,6 +391,7 @@ Resources:
 
   s3BucketPolicy:
     Type: AWS::S3::BucketPolicy
+    Condition: IsAllowedRegion
     Properties:
       Bucket: !Ref CreateWebsiteS3Bucket
       PolicyDocument:
@@ -375,6 +407,7 @@ Resources:
 
   CustomResourceHelper:
     Type: AWS::Lambda::Function
+    Condition: IsAllowedRegion
     Properties:
       Code:
         S3Bucket: !Join
@@ -398,6 +431,7 @@ Resources:
 
   CustomResourceHelperIamRole:
     Type: "AWS::IAM::Role"
+    Condition: IsAllowedRegion
     Properties:
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
@@ -444,6 +478,7 @@ Resources:
 
   ConfigureWebsite:
     Type: Custom::LoadLambda
+    Condition: IsAllowedRegion
     DependsOn:
       - CreateWebsiteS3Bucket
     Properties:
@@ -475,6 +510,7 @@ Resources:
 
   SolutionUuid:
     Type: "Custom::LoadLambda"
+    Condition: IsAllowedRegion
     Properties:
       ServiceToken: !GetAtt CustomResourceHelper.Arn
       Region: !Ref AWS::Region
@@ -482,12 +518,14 @@ Resources:
 
   CloudFrontDistributionAccessIdentity:
     Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+    Condition: IsAllowedRegion
     Properties:
       CloudFrontOriginAccessIdentityConfig:
         Comment: "CloudFront OAI for Amazon Connect Chat"
 
   CloudFrontDistribution:
     Type: AWS::CloudFront::Distribution
+    Condition: IsAllowedRegion
     DependsOn:
       - CustomResourceHelper
     Properties:
@@ -533,12 +571,14 @@ Resources:
 
   ApiGatewayRestAPI: #DONE
     Type: AWS::ApiGateway::RestApi
+    Condition: IsAllowedRegion
     Properties:
       Name: "initiateChatConnection"
       Description: "API to initiate chat with Amazon Connect"
 
   LambdaApiGatewayInvokePermission: #DONE
     Type: AWS::Lambda::Permission
+    Condition: IsAllowedRegion
     Properties:
       Action: "lambda:InvokeFunction"
       FunctionName: !GetAtt InitiateChatLambda.Arn
@@ -547,6 +587,7 @@ Resources:
 
   ApiGatewayDeployment:
     Type: AWS::ApiGateway::Deployment
+    Condition: IsAllowedRegion
     DependsOn:
       - ApiGatewayRootMethod
     Properties:
@@ -555,6 +596,7 @@ Resources:
 
   ApiGatewayRootMethod: #DONE
     Type: AWS::ApiGateway::Method
+    Condition: IsAllowedRegion
     DependsOn: LambdaApiGatewayInvokePermission
     Properties:
       AuthorizationType: "NONE"
@@ -580,6 +622,7 @@ Resources:
 
   ApiGatewayOptionsMethod: #DONE
     Type: AWS::ApiGateway::Method
+    Condition: IsAllowedRegion
     Properties:
       ResourceId: !GetAtt ApiGatewayRestAPI.RootResourceId
       RestApiId: !Ref ApiGatewayRestAPI
@@ -612,6 +655,7 @@ Resources:
 
   ChatUXCreator:
     Type: "AWS::Lambda::Function"
+    Condition: IsAllowedRegion
     Properties:
       Description: >
         AWS Lambda Function that will create the chat UX and upload it to the S3 bucket
@@ -636,6 +680,7 @@ Resources:
 
   InvokeChatUXCreator:
     Type: Custom::CreateChatUX
+    Condition: IsAllowedRegion
     DependsOn:
       - CreateWebsiteS3Bucket
     Properties:
@@ -649,6 +694,7 @@ Resources:
 
   ChatUXCreatorRole:
     Type: "AWS::IAM::Role"
+    Condition: IsAllowedRegion
     Properties:
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
@@ -680,20 +726,26 @@ Resources:
 
 Outputs:
   cloudFrontDistribution:
+    Condition: IsAllowedRegion
     Description: The domain name of the CloudFront Distribution to host the chat website
     Value: !GetAtt CloudFrontDistribution.DomainName
   initiateChatLambda:
+    Condition: IsAllowedRegion
     Description: The ARN of the Lambda function created to initiate chat
     Value: !GetAtt InitiateChatLambda.Arn
   apiGatewayEndpoint:
+    Condition: IsAllowedRegion
     Description: The ARN of the API Gateway endpoint that triggers the Lambda function to initiate the chat
     Value: !Ref ApiGatewayRestAPI
   InitiateChatLambdaExecutionRole:
+    Condition: IsAllowedRegion
     Description: The ARN of the IAM role used by the Lambda function to initiate the chat
     Value: !GetAtt InitiateChatLambdaExecutionRole.Arn
   websiteS3Bucket:
+    Condition: IsAllowedRegion
     Description: The ARN of the S3 Bucket used to host the website
     Value: !GetAtt CreateWebsiteS3Bucket.Arn
   chatContactDataTable:
+    Condition: IsAllowedRegion
     Description: Name of the new table to store the contact data related to chats.
     Value: !Ref chatContactDataTable

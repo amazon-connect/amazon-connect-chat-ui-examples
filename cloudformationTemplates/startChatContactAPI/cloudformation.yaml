@@ -10,6 +10,25 @@ Mappings:
       S3Bucket: "start-chat-contact-proxy-cfn"
       S3Key: "deployment/"
       SolutionID: "AC0002"
+  AllowedRegions:
+    us-east-1:
+      Allowed: "true"
+    us-west-2:
+      Allowed: "true"
+    ap-southeast-2:
+      Allowed: "true"
+    ap-northeast-1:
+      Allowed: "true"
+    eu-central-1:
+      Allowed: "true"
+    eu-west-2:
+      Allowed: "true"
+    ap-southeast-1:
+      Allowed: "true"
+    ca-central-1:
+      Allowed: "true"
+    ap-northeast-2:
+      Allowed: "true"
 
 Parameters:
   contactFlowId:
@@ -32,15 +51,19 @@ Parameters:
 
 Conditions:
   AnonymousUsageMetrics: !Equals [!Ref allowAnonymousUsageMetrics, "Yes"]
+  IsAllowedRegion: !Equals [!FindInMap [AllowedRegions, !Ref "AWS::Region", Allowed], "true"]
 
 Outputs:
   StartChatLambda:
+    Condition: IsAllowedRegion
     Description: The ARN of the Lambda function created to initiate chat
     Value: !GetAtt StartChatLambda.Arn
   ApiGatewayEndoint:
+    Condition: IsAllowedRegion
     Description: The ARN of the API Gateway endpoint that triggers the Lambda function to initiate the chat
     Value: !Ref ApiGatewayRestAPI
   StartChatLambdaExecutionRole:
+    Condition: IsAllowedRegion
     Description: The ARN of the IAM role used by the Lambda function to initiate the chat
     Value: !GetAtt StartChatLambdaExecutionRole.Arn
 
@@ -48,6 +71,7 @@ Resources:
   #### Lambda #####
   ChatSDKLayer:
     Type: AWS::Lambda::LayerVersion
+    Condition: IsAllowedRegion
     Properties:
       CompatibleRuntimes:
         - "nodejs18.x"
@@ -66,6 +90,7 @@ Resources:
 
   StartChatLambda:
     Type: "AWS::Lambda::Function"
+    Condition: IsAllowedRegion
     Properties:
       Description: AWS Lambda Function to initiate the chat with the end user
       Handler: "startChatContact.handler"
@@ -96,6 +121,7 @@ Resources:
 
   StartChatLambdaExecutionRole:
     Type: "AWS::IAM::Role"
+    Condition: IsAllowedRegion
     Properties:
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
@@ -131,12 +157,14 @@ Resources:
 
   ApiGatewayRestAPI:
     Type: AWS::ApiGateway::RestApi
+    Condition: IsAllowedRegion
     Properties:
       Name: "StartChatContact"
       Description: "API to initiate chat with Amazon Connect"
 
   LambdaApiGatewayInvokePermission:
     Type: AWS::Lambda::Permission
+    Condition: IsAllowedRegion
     Properties:
       Action: "lambda:InvokeFunction"
       FunctionName: !GetAtt StartChatLambda.Arn
@@ -145,6 +173,7 @@ Resources:
 
   ApiGatewayDeployment:
     Type: AWS::ApiGateway::Deployment
+    Condition: IsAllowedRegion
     DependsOn:
       - ApiGatewayRootMethod
     Properties:
@@ -153,6 +182,7 @@ Resources:
 
   ApiGatewayRootMethod:
     Type: AWS::ApiGateway::Method
+    Condition: IsAllowedRegion
     DependsOn: LambdaApiGatewayInvokePermission
     Properties:
       AuthorizationType: "NONE"
@@ -180,6 +210,7 @@ Resources:
 
   ApiGatewayOptionsMethod:
     Type: AWS::ApiGateway::Method
+    Condition: IsAllowedRegion
     Properties:
       ResourceId: !GetAtt ApiGatewayRestAPI.RootResourceId
       RestApiId: !Ref ApiGatewayRestAPI
@@ -211,6 +242,7 @@ Resources:
   #### Metrics ####
   CustomResourceHelper:
     Type: AWS::Lambda::Function
+    Condition: IsAllowedRegion
     Properties:
       Code:
         S3Bucket: !Join
@@ -234,6 +266,7 @@ Resources:
 
   CustomResourceHelperIamRole:
     Type: "AWS::IAM::Role"
+    Condition: IsAllowedRegion
     Properties:
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
@@ -289,6 +322,7 @@ Resources:
 
   SolutionUuid:
     Type: "Custom::LoadLambda"
+    Condition: IsAllowedRegion
     Properties:
       ServiceToken:
         Fn::GetAtt:
