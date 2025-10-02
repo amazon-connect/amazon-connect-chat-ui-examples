@@ -22,13 +22,13 @@ Launch the widget from a floating icon rendered anywhere on your website.
 </div>
 ```
 
-2. Configure the `programaticLaunch` function (in the widet snippet code)
+2. Configure the `programmaticLaunch` function (in the widet snippet code)
 
 ```js
 amazon_connect("customLaunchBehavior", {
   skipIconButtonAndAutoLaunch: true,
   alwaysHideWidgetButton: true,
-  programaticLaunch: function (launchCallback) {
+  programmaticLaunch: function (launchCallback) {
     var launchWidgetBtn = document.getElementById("launch-widget-btn");
 
     if (launchWidgetBtn) {
@@ -70,7 +70,7 @@ amazon_connect("customLaunchBehavior", {
 + amazon_connect('customLaunchBehavior', {
 +   skipIconButtonAndAutoLaunch: true,
 +   alwaysHideWidgetButton: true,
-+   programaticLaunch: (function (launchCallback) {
++   programmaticLaunch: (function (launchCallback) {
 +     var launchWidgetBtn = document.getElementById('launch-widget-btn');
 +
 +     if (launchWidgetBtn) {
