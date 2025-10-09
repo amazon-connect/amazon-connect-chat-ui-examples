@@ -16,13 +16,13 @@ This option allows you to launch the chat widget when the customer clicks on a b
 <button id="launch-widget-btn">Launch a Chat</button>
 ```
 
-2. Configure the `programaticLaunch` function (in the widget snippet code)
+2. Configure the `programmaticLaunch` function (in the widget snippet code)
 
 ```js
 amazon_connect("customLaunchBehavior", {
   skipIconButtonAndAutoLaunch: true,
   alwaysHideWidgetButton: true,
-  programaticLaunch: function (launchCallback) {
+  programmaticLaunch: function (launchCallback) {
     var launchWidgetBtn = document.getElementById("launch-widget-btn");
     if (launchWidgetBtn) {
       launchWidgetBtn.addEventListener("click", launchCallback);
@@ -58,7 +58,7 @@ amazon_connect("customLaunchBehavior", {
 + amazon_connect('customLaunchBehavior', {
 +   skipIconButtonAndAutoLaunch: true,
 +   alwaysHideWidgetButton: true,
-+   programaticLaunch: (function(launchCallback) {
++   programmaticLaunch: (function(launchCallback) {
 +       var launchWidgetBtn = document.getElementById('launch-widget-btn');
 +       if (launchWidgetBtn) {
 +           launchWidgetBtn.addEventListener('click', launchCallback);
