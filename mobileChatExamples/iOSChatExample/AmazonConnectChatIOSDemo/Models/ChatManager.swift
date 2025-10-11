@@ -105,7 +105,6 @@ class ChatManager: ObservableObject {
             
         self.chatSession.onTranscriptUpdated = { [weak self] transcriptData in
             self?.previousTranscriptNextToken = transcriptData.previousTranscriptNextToken
-            // Apply transcript updates
             self?.updateTranscript(transcriptData.transcriptList)
         }
         
@@ -122,6 +121,94 @@ class ChatManager: ObservableObject {
         
         self.chatSession.onDeepHeartbeatFailure = {
             print("Received deep heartbeat failure.")
+        }
+        
+        // MARK: - Participant State Events
+        
+        self.chatSession.onParticipantIdle = { event in
+            if let event = event {
+                print("Participant became idle: \(event.displayName!) (\(event.participant!)) at \(event.timeStamp)")
+            } else {
+                print("Participant became idle.")
+            }
+        }
+        
+        self.chatSession.onParticipantReturned = { event in
+            if let event = event {
+                print("Participant returned: \(event.displayName!) (\(event.participant!)) at \(event.timeStamp)")
+            } else {
+                print("Participant returned.")
+            }
+        }
+        
+        self.chatSession.onAutoDisconnection = { event in
+            if let event = event {
+                print("Participant was automatically disconnected: \(event.displayName!) (\(event.participant!)) at \(event.timeStamp)")
+            } else {
+                print("Participant was automatically disconnected.")
+            }
+        }
+        
+        // MARK: - Communication Events
+        
+        self.chatSession.onTyping = { event in
+            if let event = event {
+                print("Participant is typing: \(event.displayName!) (\(event.participant!))")
+            } else {
+                print("Participant is typing.")
+            }
+        }
+        
+        self.chatSession.onReadReceipt = { event in
+            if let event = event {
+                print("Message was read: Message \(event.id) by participant \(event.participant!) at \(event.timeStamp)")
+            } else {
+                print("Message was read.")
+            }
+        }
+        
+        self.chatSession.onDeliveredReceipt = { event in
+            if let event = event {
+                print("Message was delivered: Message \(event.id) to participant \(event.participant!) at \(event.timeStamp)")
+            } else {
+                print("Message was delivered.")
+            }
+        }
+        
+        // MARK: - Participant Management Events
+        
+        self.chatSession.onParticipantInvited = { event in
+            if let event = event {
+                print("Participant was invited: \(event.displayName!) (\(event.participant!)) joined at \(event.timeStamp)")
+            } else {
+                print("Participant was invited.")
+            }
+        }
+        
+        // MARK: - Advanced Events
+        
+        self.chatSession.onChatRehydrated = { event in
+            if let event = event {
+                print("Chat session was restored at \(event.timeStamp)")
+            } else {
+                print("Chat session was restored.")
+            }
+        }
+        
+        self.chatSession.onTransferSucceeded = { event in
+            if let event = event {
+                print("Transfer completed successfully at \(event.timeStamp)")
+            } else {
+                print("Transfer completed successfully.")
+            }
+        }
+        
+        self.chatSession.onTransferFailed = { event in
+            if let event = event {
+                print("Transfer failed at \(event.timeStamp)")
+            } else {
+                print("Transfer failed.")
+            }
         }
     }
     
