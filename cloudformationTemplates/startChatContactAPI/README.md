@@ -557,3 +557,161 @@ function startChatContact(body) {
 
 3. Consume the new attribute in the contact flow. Refer to the Admin Guide - ["Use Amazon Connect contact attributes"](https://docs.aws.amazon.com/connect/latest/adminguide/connect-contact-attributes.html)
 
+
+## [Maintainers Only] Publish CloudFormation Stack to S3
+
+Follow these steps to publish the **startChatContactAPI** CloudFormation template.
+
+### Prerequisites
+
+- Install AWS CLI (`aws --version`)
+- Access to AWS account `533267401313` (ask @spenlep-amzn)
+
+### Context
+
+Customers can one-click deploy this CloudFormation template with the following link:
+
+```
+https://us-west-2.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=startChatContactAPI&templateURL=https://s3-us-west-2.amazonaws.com/us-west-2.start-chat-contact-proxy-cfn/cloudformation.yaml
+```
+
+This is acheived by hosting the `cloudformation.yaml` in an S3 bucket for each supported region:
+
+```
+my-s3-bucket
+  |_ cloudformation.yml
+  |_ deployment/
+     |_ ChatSDK.zip
+     |_ start-chat-contact.zip
+        |_ startChatContact.js
+     |_ custom-resource-helper.zip
+        |_ customResourceHelper.js
+        |_ metricsHelper.js
+```
+
+| S3 Bucket Name | Region Name | Region |
+| -- | -- | -- |
+| `ap-northeast-1.start-chat-contact-proxy-cfn` | Asia Pacific (Tokyo) | ap-northeast-1 |
+| `ap-southeast-1.start-chat-contact-proxy-cfn` | Asia Pacific (Singapore) | ap-southeast-1 |
+| `ap-southeast-2.start-chat-contact-proxy-cfn` | Asia Pacific (Sydney) | ap-southeast-2 |
+| `ca-central-1.start-chat-contact-proxy-cfn` | Canada (Central) | ca-central-1 |
+| `eu-central-1.start-chat-contact-proxy-cfn` | EU (Frankfurt) | eu-central-1 |
+| `eu-west-2.start-chat-contact-proxy-cfn` | EU (London) | eu-west-2 |
+| `us-east-1.start-chat-contact-proxy-cfn` | US East (N. Virginia) | us-east-1 |
+| `us-west-2.start-chat-contact-proxy-cfn` | US West (Oregon) | us-west-2 |
+
+### Instructions - Publishing Changes to the S3 buckets
+
+1. Installation
+
+```sh
+git clone https://github.com/amazon-connect/amazon-connect-chat-ui-examples.git
+cd amazon-connect-chat-ui-examples
+cd cloudformationTemplates/startChatContactAPI
+```
+
+2. All source code changes and `cloudformation.yaml` are merged to `master` branch
+
+```diff
+// js/startChatContact.js
+
+exports.handler = (event, context, callback) => {
+  // ...
+
++ // some new change
+}
+```
+
+```sh
+git add startChatContact.js cloudformation.yaml
+git commit ...
+git merge ...
+```
+
+3. Prepare the S3 bucket files
+
+```sh
+mkdir -p deployment
+cp ChatSDK.zip deployment/ChatSDK.zip
+
+zip -j custom-resource-helper.zip js/customResourceHelper.js js/metricsHelper.js
+cp custom-resource-helper.zip deployment/custom-resource-helper.zip
+
+cp js/startChatContact.js startChatContact.js
+zip start-chat-contact.zip startChatContact.js
+cp start-chat-contact.zip deployment/start-chat-contact.zip
+```
+
+4. Configure AWS CLI credentials for publishing
+
+```sh
+export AWS_ACCESS_KEY_ID="your-access-key-id"
+export AWS_SECRET_ACCESS_KEY="your-secret-access-key"
+export AWS_SESSION_TOKEN="your-session-token"
+```
+
+Check if the you have permissions to the account/bucket:
+
+```sh
+export S3_BUCKET="us-west-2.start-chat-contact-proxy-cfn"
+
+aws s3api head-bucket --bucket $S3_BUCKET
+# {
+#    "BucketRegion": "us-west-2",
+#   "AccessPointAlias": false
+# }
+```
+
+Run a dry-run file upload:
+
+```sh
+export S3_ARN="s3://${S3_BUCKET}"
+export FILE_NAME="cloudformation.yaml"
+export FILE_PATH="./${FILE_NAME}"
+
+aws s3 cp ${FILE_PATH} ${S3_ARN} --dryrun
+# (dryrun) upload: ./cloudformation.yaml to s3://us-west-2.start-chat-contact-proxy-cfn/cloudformation.yaml
+```
+
+5. Publish CloudFormation files to S3
+
+Upload the files to all S3 buckets - ⚠️ only run this command under **Two Person Review**
+
+```sh
+S3_BUCKETS=("ap-northeast-1.start-chat-contact-proxy-cfn" "ap-southeast-1.start-chat-contact-proxy-cfn" "ap-southeast-2.start-chat-contact-proxy-cfn" "ca-central-1.start-chat-contact-proxy-cfn" "eu-central-1.start-chat-contact-proxy-cfn" "eu-west-2.start-chat-contact-proxy-cfn" "us-east-1.start-chat-contact-proxy-cfn" "us-west-2.start-chat-contact-proxy-cfn") && \
+S3_BUCKET_FILES=("deployment/start-chat-contact.zip") && \
+for S3_BUCKET in "${S3_BUCKETS[@]}"; do \
+    export S3_ARN="s3://${S3_BUCKET}" && \
+    echo "Processing bucket: ${S3_BUCKET}" && \
+    for FILE_NAME in "${S3_BUCKET_FILES[@]}"; do \
+        export FILE_PATH="./${FILE_NAME}" && \
+        echo "Uploading ${FILE_NAME}..." && \
+        aws s3 cp "${FILE_PATH}" "${S3_ARN}/${FILE_NAME}" && \
+        aws s3api put-object-acl --bucket "${S3_BUCKET}" --key "${FILE_NAME}" --acl public-read; \
+    done; \
+done
+```
+
+6. (Optional) Check the S3 bucket and public access
+
+After you've successfully uploaded the files to S3, verify the **"Last modified"** date has been updated.
+
+https://us-west-2.console.aws.amazon.com/s3/buckets/us-west-2.start-chat-contact-proxy-cfn?region=us-west-2
+
+Verify the files have public read-only permissions, ensure you can access this link:
+
+https://s3-us-west-2.amazonaws.com/us-west-2.start-chat-contact-proxy-cfn/cloudformation.yaml
+
+7. (Optional) Test the Cloudformation deployment in your personal account
+
+```sh
+aws cloudformation deploy --template-file ./cloudformation.yaml --stack-name startChatContactAPI --parameter-overrides instanceId=YOUR_INSTANCE_ID contactFlowId=YOUR_CONTACT_FLOW_ID --capabilities CAPABILITY_IAM
+```
+
+8. Deploy the live CloudFormation stack
+
+You can now create an updated stack in that region:
+
+```
+https://us-west-2.console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=startChatContactAPI&templateURL=https://s3-us-west-2.amazonaws.com/us-west-2.start-chat-contact-proxy-cfn/cloudformation.yaml
+```
