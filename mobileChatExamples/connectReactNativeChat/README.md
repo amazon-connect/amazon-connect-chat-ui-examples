@@ -156,12 +156,21 @@ Please refer to the ChatJS README: https://github.com/amazon-connect/amazon-conn
 
 ## Components
 
-ChatScreen includes these main components:
+The demo app uses these main components:
 
-- `initiateChat.js`: handles HTTP request to your personal chat backend
-- `ChatSession.js`: low-level abstraction on top of ChatJS
-- `ChatWrapper.js`: manages chat state at the UI level, handling loading/disconnect
-- `ChatWidget.js`: renders chat composer and transcript
+- `ChatUI.js`: layout component that renders GiftedChatUI component
+- `ChatContext.js`: a context hook managing all ChatJS business logic and state
+
+```tree
+App.js
+└── ChatUIWrapper (src/ChatUI.js)
+    └── ChatProvider (Context Provider from src/ChatContext.js)
+        └── ChatUI (Main UI Component)
+            ├── Header Section
+            │   ├── Title
+            │   └── Button (Launch Chat/End Chat)
+            └── GiftedChat (Chat UI from react-native-gifted-chat)
+```
 
 ## Additional Features
 
