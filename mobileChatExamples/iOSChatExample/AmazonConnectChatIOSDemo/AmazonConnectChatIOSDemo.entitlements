@@ -8,5 +8,8 @@
    Copyright (c) 2024 ___ORGANIZATIONNAME___. All rights reserved.
 -->
 <plist version="1.0">
-<dict/>
+<dict>
+	<key>aps-environment</key>
+	<string>development</string>
+</dict>
 </plist>

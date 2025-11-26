@@ -11,6 +11,7 @@ struct ContentView: View {
     @State var isLoading = false
     @State private var showRestoreSessionAlert = false
     @State private var selectedInstanceIndex = 0
+    @State private var showConsole = false
     
     var body: some View {
         VStack {       
@@ -23,6 +24,29 @@ struct ContentView: View {
             clearContactIdButton
             Spacer()
             chatButton
+            Spacer()
+                            
+            Button(action: { showConsole.toggle() }) {
+                HStack {
+                    Image(systemName: "terminal")
+                    Text(showConsole ? "Hide Console" : "Show Console")
+                }
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+            }
+            .padding()
+        }
+        .navigationTitle("Debug Logger")
+        .sheet(isPresented: $showConsole) {
+            NavigationView {
+                ConsoleView()
+                    .navigationBarItems(trailing: Button("Done") {
+                        showConsole = false
+                    })
+            }
         }
         .preferredColorScheme(.light)
         .onChange(of: chatManager.isChatActive) { isActive in

@@ -1,0 +1,62 @@
+// MARK: - Console View
+struct ConsoleView: View {
+    @ObservedObject var logger = ConsoleLogger.shared
+    @State private var autoScroll = true
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            // Header
+            HStack {
+                Text("Debug Console")
+                    .font(.headline)
+                
+                Spacer()
+                
+                Button(action: { logger.clear() }) {
+                    Image(systemName: "trash")
+                        .foregroundColor(.red)
+                }
+            }
+            .padding()
+            .background(Color(UIColor.secondarySystemBackground))
+            
+            Divider()
+            
+            // Logs
+            ScrollViewReader { proxy in
+                ScrollView {
+                    LazyVStack(alignment: .leading, spacing: 4) {
+                        ForEach(logger.logs) { entry in
+                            LogEntryView(entry: entry)
+                                .id(entry.id)
+                        }
+                    }
+                    .padding()
+                }
+                .onChange(of: logger.logs.count) { _ in
+                    if autoScroll, let lastLog = logger.logs.last {
+                        withAnimation {
+                            proxy.scrollTo(lastLog.id, anchor: .bottom)
+                        }
+                    }
+                }
+            }
+            .background(Color(UIColor.systemBackground))
+            
+            // Footer
+            HStack {
+                Text("\(logger.logs.count) logs")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                
+                Spacer()
+                
+                Toggle("Auto-scroll", isOn: $autoScroll)
+                    .labelsHidden()
+                    .toggleStyle(SwitchToggleStyle(tint: .blue))
+            }
+            .padding()
+            .background(Color(UIColor.secondarySystemBackground))
+        }
+    }
+}
