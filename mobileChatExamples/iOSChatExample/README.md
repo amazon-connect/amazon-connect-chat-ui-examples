@@ -57,6 +57,14 @@ https://github.com/user-attachments/assets/90622e9a-dcdd-4e12-a0c6-f989338d850e
 
 5. Once everything looks okay, Run the app by clicking on ▶️ button on top left or hit `Cmd + R`.
 
+> Note - If facing build failures related to Notification capability not allowed/enabled, remove:
+>  * `NotificationExtension` folder
+>  * in `AppDelegate.swift`:
+>   * `UserNotifications` import
+>   * `UNUserNotificationCenterDelegate` from class definition
+>   * `UNUserNotificationCenter` from launch callback method
+>   * `userNotificationCenter` methods
+
 ## Implementation
 
 The first step to leveraging the Amazon Connect Chat SDK after installation is to import the library into your file. The first step is to call the `StartChatContact` API and pass the response details into the SDK’s `ChatSession` object. Here are some examples of how we would set this up in Swift. For reference, you can visit the `iOSChatExample` demo within the Amazon Connect Chat UI Examples GitHub repository.
