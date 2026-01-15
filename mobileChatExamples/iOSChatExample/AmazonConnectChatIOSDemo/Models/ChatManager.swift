@@ -38,8 +38,24 @@ class ChatManager: ObservableObject {
     init() {
         // Initialize the network manager with a default HTTP client
         networkManager = NetworkManager(httpClient: DefaultHttpClient())
-        // Create a global configuration with the region from the config
-        let globalConfig = GlobalConfig(region: config.region)
+        
+        // MARK: - Custom Client Configuration (Optional)
+        // Uncomment one of the examples below to enable custom client functionality
+        // See PartialCustomClient.swift and CompleteCustomClient.swift for implementation details
+        
+        let globalConfig: GlobalConfig
+        
+        // Default: Use standard AWS client
+        globalConfig = GlobalConfig(region: config.region)
+        
+        // Example 1: Partial Override - Override only specific methods (e.g., for logging/monitoring)
+        // let customClient = PartialCustomClient()
+        // globalConfig = GlobalConfig(region: config.region, customAWSClient: customClient)
+        
+        // Example 2: Complete Override - Override all methods (e.g., for proxy routing)
+        // let customClient = CompleteCustomClient()
+        // globalConfig = GlobalConfig(region: config.region, customAWSClient: customClient)
+        
         // Assign the shared chat session instance
         self.chatSession = ChatSession.shared
         // Configure the chat session with the global configuration
@@ -50,7 +66,7 @@ class ChatManager: ObservableObject {
         let customLogger = CustomLogger()
         SDKLogger.configureLogger(customLogger)
     }
-    
+
     // MARK: - Init Chat
     /// Initiates a chat session, either by starting a new one or restoring a previous session
     func initiateChat(with config: Config, completion: @escaping (Bool) -> Void) {

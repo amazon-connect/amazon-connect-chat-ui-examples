@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -40,6 +40,8 @@
 		7EC369E42C405D620039CA2D /* AWSConnectParticipant in Frameworks */ = {isa = PBXBuildFile; productRef = 7EC369E32C405D620039CA2D /* AWSConnectParticipant */; };
 		7EC369E62C405D620039CA2D /* AWSCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7EC369E52C405D620039CA2D /* AWSCore */; };
 		7EFB7A342C210E7700D6B9EE /* AttachmentTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB7A332C210E7700D6B9EE /* AttachmentTextView.swift */; };
+		856795342F197EA2008F6604 /* PartialCustomClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856795332F197EA2008F6604 /* PartialCustomClient.swift */; };
+		856795362F197EAA008F6604 /* CompleteCustomClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856795352F197EAA008F6604 /* CompleteCustomClient.swift */; };
 		F712DCA62BCF4A28009FC568 /* NetworkConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */; };
 		F712DCA72BCF4A28009FC568 /* NetworkConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */; };
 		F712DCA82BCF4A28009FC568 /* NetworkConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */; };
@@ -156,6 +158,8 @@
 		7EF438462BFEE92F00E7F8E9 /* AmazonConnectChatIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AmazonConnectChatIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EFB7A332C210E7700D6B9EE /* AttachmentTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentTextView.swift; sourceTree = "<group>"; };
 		7EFF832C2C30045F00865E09 /* AmazonConnectChatIOSDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AmazonConnectChatIOSDemo.entitlements; sourceTree = "<group>"; };
+		856795332F197EA2008F6604 /* PartialCustomClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialCustomClient.swift; sourceTree = "<group>"; };
+		856795352F197EAA008F6604 /* CompleteCustomClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteCustomClient.swift; sourceTree = "<group>"; };
 		F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectionManager.swift; sourceTree = "<group>"; };
 		F796A3D32CBF4EA000EC5FCE /* CustomLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLogger.swift; sourceTree = "<group>"; };
 		F7B4A1232C115455005C7921 /* AttachmentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentButton.swift; sourceTree = "<group>"; };
@@ -363,6 +367,8 @@
 		7E91594F2BBE67D500821C05 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				856795352F197EAA008F6604 /* CompleteCustomClient.swift */,
+				856795332F197EA2008F6604 /* PartialCustomClient.swift */,
 				7E2F2CB12D517C7200695431 /* PersistentChat.swift */,
 				F796A3D32CBF4EA000EC5FCE /* CustomLogger.swift */,
 				F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */,
@@ -607,9 +613,11 @@
 				7E9159602BBE67D500821C05 /* TypingIndicator.swift in Sources */,
 				7E9159762BBE67D500821C05 /* HttpMethod.swift in Sources */,
 				F7B4A1242C115455005C7921 /* AttachmentButton.swift in Sources */,
+				856795362F197EAA008F6604 /* CompleteCustomClient.swift in Sources */,
 				4166D1692ED651A70058E041 /* LogEntryView.swift in Sources */,
 				4166D1632ED651630058E041 /* ConsoleLogger.swift in Sources */,
 				7E91596D2BBE67D500821C05 /* CreateStartChatResponse.swift in Sources */,
+				856795342F197EA2008F6604 /* PartialCustomClient.swift in Sources */,
 				7E9159772BBE67D500821C05 /* HttpHeader.swift in Sources */,
 				7E829D4C2C22587B00DCB00E /* AttachmentMessageView.swift in Sources */,
 				7E9159672BBE67D500821C05 /* FloatingButton.swift in Sources */,
