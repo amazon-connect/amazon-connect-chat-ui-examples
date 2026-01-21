@@ -4,7 +4,6 @@
 import Foundation
 import SwiftUI
 import AmazonConnectChatIOS
-import AWSConnectParticipant
 
 class ChatManager: ObservableObject {
     // MARK: - Published Properties
@@ -318,18 +317,21 @@ class ChatManager: ObservableObject {
     }
     
     // Handles the result of describing a view
-    private func handleDescribeViewResult(_ result: Result<AWSConnectParticipantDescribeViewResponse, Error>) {
+    private func handleDescribeViewResult(_ result: Result<ViewResource, Error>) {
         DispatchQueue.main.async {
             switch result {
-            case .success(let response):
-                if let view = response.view {
-                    print("View retrieved successfully")
-                    print("View ID: \(view.identifier ?? "N/A")")
-                    print("View Name: \(view.name ?? "N/A")")
-                    print("View ARN: \(view.arn ?? "N/A")")
-                    // In a real app, you would render the view content here
+            case .success(let viewResource):
+                print("View retrieved successfully")
+                print("View ID: \(viewResource.id ?? "N/A")")
+                print("View Name: \(viewResource.name ?? "N/A")")
+                print("View ARN: \(viewResource.arn ?? "N/A")")
+                print("View Version: \(viewResource.version ?? 0)")
+                if let content = viewResource.content {
+                    print("View Content: \(content)")
                 }
+                // In a real app, you would render the view content here
             case .failure(let error):
+                print("Error retrieving view: \(error.localizedDescription)")
                 self.error = ErrorMessage(message: "Error retrieving view: \(error.localizedDescription)")
             }
         }
