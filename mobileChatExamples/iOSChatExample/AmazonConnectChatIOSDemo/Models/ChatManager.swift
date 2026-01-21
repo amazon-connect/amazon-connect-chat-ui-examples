@@ -4,6 +4,7 @@
 import Foundation
 import SwiftUI
 import AmazonConnectChatIOS
+import AWSConnectParticipant
 
 class ChatManager: ObservableObject {
     // MARK: - Published Properties
@@ -154,6 +155,16 @@ class ChatManager: ObservableObject {
                 }
                 
                 if let message = item as? Message {
+                    // Check for interactive message with view token
+                    if message.contentType == "application/vnd.amazonaws.connect.message.interactive",
+                       let contentData = message.text.data(using: .utf8),
+                       let contentJson = try? JSONSerialization.jsonObject(with: contentData) as? [String: Any],
+                       let data = contentJson["data"] as? [String: Any],
+                       let content = data["content"] as? [String: Any],
+                       let viewToken = content["viewToken"] as? String {
+                        self.describeView(viewToken: viewToken)
+                    }
+                    
                     // Send message receipt
                     self.chatSession.sendMessageReceipt(for: message, eventType: .messageDelivered)
                 }
@@ -290,6 +301,36 @@ class ChatManager: ObservableObject {
         DispatchQueue.main.async {
             if case .failure(let error) = result {
                 self.error = ErrorMessage(message: "Error sending event: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    /// Retrieves a view resource object for rendering interactive views
+    /// - Parameter viewToken: An encrypted token from a ShowView block operation
+    func describeView(viewToken: String) {
+        guard let chatSession = self.chatSession as? ChatSession else {
+            self.error = ErrorMessage(message: "Chat session not available")
+            return
+        }
+        chatSession.describeView(viewToken: viewToken) { [weak self] result in
+            self?.handleDescribeViewResult(result)
+        }
+    }
+    
+    // Handles the result of describing a view
+    private func handleDescribeViewResult(_ result: Result<AWSConnectParticipantDescribeViewResponse, Error>) {
+        DispatchQueue.main.async {
+            switch result {
+            case .success(let response):
+                if let view = response.view {
+                    print("View retrieved successfully")
+                    print("View ID: \(view.identifier ?? "N/A")")
+                    print("View Name: \(view.name ?? "N/A")")
+                    print("View ARN: \(view.arn ?? "N/A")")
+                    // In a real app, you would render the view content here
+                }
+            case .failure(let error):
+                self.error = ErrorMessage(message: "Error retrieving view: \(error.localizedDescription)")
             }
         }
     }

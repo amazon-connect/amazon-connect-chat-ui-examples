@@ -38,6 +38,11 @@ struct ChatMessageView: View {
                             } else {
                                 Text("Unsupported message type, View is missing")
                             }
+                        } else if message.contentType == "application/vnd.amazonaws.connect.message.interactive" {
+                            Text("View retrieved: Check console logs for details")
+                                .padding()
+                                .background(Color.gray.opacity(0.1))
+                                .cornerRadius(8)
                         } else {
                             Text("This message type is not supported yet, Please use serialized content to parse it and build UI")
                         }
