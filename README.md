@@ -224,6 +224,12 @@ At the moment, these are the solutions in this repo:
 
 9. **[mobileChatExamples](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/mobileChatExamples)**
    These native mobile examples of the AWS Connect chat widget are designed for easy integration with a focus on customization. Out-of-the-box ready yet fully adaptable, they offer developers the perfect starting point for incorporating a chat feature that can be fine-tuned to any customer’s requirements.
+   
+   **Custom Client Support (iOS)**: The iOS example includes custom client implementations that allow you to override AWS Connect Participant Service (ACPS) API methods ([feature commit](https://github.com/amazon-connect/amazon-connect-chat-ios/commit/bde5ea42aa83be826b61ac04e3b9b619d7b8adf9)):
+   - **PartialCustomClient**: Override specific methods for logging, monitoring, or analytics while using default AWS implementation for others
+   - **CompleteCustomClient**: Override all methods for full control over API routing (e.g., corporate proxy, custom authentication, custom headers)
+   
+   See `CustomClientExamples.swift` in the iOS example for implementation details.
 
 
 ## Resources
