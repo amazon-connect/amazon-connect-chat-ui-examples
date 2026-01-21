@@ -229,7 +229,7 @@ At the moment, these are the solutions in this repo:
    - **PartialCustomClient**: Override specific methods for logging, monitoring, or analytics while using default AWS implementation for others
    - **CompleteCustomClient**: Override all methods for full control over API routing (e.g., corporate proxy, custom authentication, custom headers)
    
-   See `PartialCustomClient.swift` and `CompleteCustomClient.swift` in the iOS example for implementation details.
+   See `CustomClientExamples.swift` in the iOS example for implementation details.
 
 
 ## Resources

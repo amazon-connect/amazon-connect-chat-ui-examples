@@ -11,7 +11,6 @@
 		4166D1672ED651860058E041 /* ConsoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4166D1662ED651860058E041 /* ConsoleView.swift */; };
 		4166D1692ED651A70058E041 /* LogEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4166D1682ED651A10058E041 /* LogEntryView.swift */; };
 		417B162D2ED11E480078618E /* AmazonConnectChatIOS in Frameworks */ = {isa = PBXBuildFile; productRef = 417B162C2ED11E480078618E /* AmazonConnectChatIOS */; };
-		41E15BAD2ED67069001531C7 /* NotificationExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 41E15BA62ED67069001531C7 /* NotificationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		7E2F2CB22D517C7200695431 /* PersistentChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2F2CB12D517C7200695431 /* PersistentChat.swift */; };
 		7E829D4C2C22587B00DCB00E /* AttachmentMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E829D4B2C22587B00DCB00E /* AttachmentMessageView.swift */; };
 		7E829D4E2C24CF2000DCB00E /* ChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E829D4D2C24CF2000DCB00E /* ChatManager.swift */; };
@@ -40,8 +39,7 @@
 		7EC369E42C405D620039CA2D /* AWSConnectParticipant in Frameworks */ = {isa = PBXBuildFile; productRef = 7EC369E32C405D620039CA2D /* AWSConnectParticipant */; };
 		7EC369E62C405D620039CA2D /* AWSCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7EC369E52C405D620039CA2D /* AWSCore */; };
 		7EFB7A342C210E7700D6B9EE /* AttachmentTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB7A332C210E7700D6B9EE /* AttachmentTextView.swift */; };
-		856795342F197EA2008F6604 /* PartialCustomClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856795332F197EA2008F6604 /* PartialCustomClient.swift */; };
-		856795362F197EAA008F6604 /* CompleteCustomClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856795352F197EAA008F6604 /* CompleteCustomClient.swift */; };
+		854FC3D52F204E680093B478 /* CustomClientExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854FC3D42F204E680093B478 /* CustomClientExamples.swift */; };
 		F712DCA62BCF4A28009FC568 /* NetworkConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */; };
 		F712DCA72BCF4A28009FC568 /* NetworkConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */; };
 		F712DCA82BCF4A28009FC568 /* NetworkConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */; };
@@ -55,13 +53,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		41E15BAB2ED67069001531C7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7E91590C2BBE674100821C05 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 41E15BA52ED67069001531C7;
-			remoteInfo = NotificationExtension;
-		};
 		7E9159252BBE674200821C05 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7E91590C2BBE674100821C05 /* Project object */;
@@ -85,7 +76,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				41E15BAD2ED67069001531C7 /* NotificationExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -97,7 +87,6 @@
 		4166D1622ED651610058E041 /* ConsoleLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleLogger.swift; sourceTree = "<group>"; };
 		4166D1662ED651860058E041 /* ConsoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleView.swift; sourceTree = "<group>"; };
 		4166D1682ED651A10058E041 /* LogEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEntryView.swift; sourceTree = "<group>"; };
-		41E15BA62ED67069001531C7 /* NotificationExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E160C9E2BFECEF9001E5D31 /* AmazonConnectChatIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AmazonConnectChatIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E21727A2C407B0D00C3624F /* AmazonConnectChatIOS.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:94KV3E626L:AMZN Mobile LLC"; lastKnownFileType = wrapper.xcframework; name = AmazonConnectChatIOS.xcframework; path = "../../../../release-sort-final/amazon-connect-chat-ios/signed-sdk/AmazonConnectChatIOS.xcframework"; sourceTree = "<group>"; };
 		7E2F2CAD2D4C597400695431 /* AmazonConnectChatIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AmazonConnectChatIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,36 +147,18 @@
 		7EF438462BFEE92F00E7F8E9 /* AmazonConnectChatIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AmazonConnectChatIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EFB7A332C210E7700D6B9EE /* AttachmentTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentTextView.swift; sourceTree = "<group>"; };
 		7EFF832C2C30045F00865E09 /* AmazonConnectChatIOSDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AmazonConnectChatIOSDemo.entitlements; sourceTree = "<group>"; };
-		856795332F197EA2008F6604 /* PartialCustomClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialCustomClient.swift; sourceTree = "<group>"; };
-		856795352F197EAA008F6604 /* CompleteCustomClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteCustomClient.swift; sourceTree = "<group>"; };
+		854FC3D42F204E680093B478 /* CustomClientExamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomClientExamples.swift; sourceTree = "<group>"; };
 		F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectionManager.swift; sourceTree = "<group>"; };
 		F796A3D32CBF4EA000EC5FCE /* CustomLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLogger.swift; sourceTree = "<group>"; };
 		F7B4A1232C115455005C7921 /* AttachmentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentButton.swift; sourceTree = "<group>"; };
 		F7B4A1292C13B7D5005C7921 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		41E15BAE2ED67069001531C7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 41E15BA52ED67069001531C7 /* NotificationExtension */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		41E15BA72ED67069001531C7 /* NotificationExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (41E15BAE2ED67069001531C7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = NotificationExtension; sourceTree = "<group>"; };
+		41E15BA72ED67069001531C7 /* NotificationExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = NotificationExtension; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		41E15BA32ED67069001531C7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7E9159112BBE674100821C05 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -303,7 +274,6 @@
 				7E9159142BBE674100821C05 /* AmazonConnectChatIOSDemo.app */,
 				7E9159242BBE674200821C05 /* AmazonConnectChatIOSDemoTests.xctest */,
 				7E91592E2BBE674200821C05 /* AmazonConnectChatIOSDemoUITests.xctest */,
-				41E15BA62ED67069001531C7 /* NotificationExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -367,8 +337,7 @@
 		7E91594F2BBE67D500821C05 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				856795352F197EAA008F6604 /* CompleteCustomClient.swift */,
-				856795332F197EA2008F6604 /* PartialCustomClient.swift */,
+				854FC3D42F204E680093B478 /* CustomClientExamples.swift */,
 				7E2F2CB12D517C7200695431 /* PersistentChat.swift */,
 				F796A3D32CBF4EA000EC5FCE /* CustomLogger.swift */,
 				F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */,
@@ -410,28 +379,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		41E15BA52ED67069001531C7 /* NotificationExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 41E15BAF2ED67069001531C7 /* Build configuration list for PBXNativeTarget "NotificationExtension" */;
-			buildPhases = (
-				41E15BA22ED67069001531C7 /* Sources */,
-				41E15BA32ED67069001531C7 /* Frameworks */,
-				41E15BA42ED67069001531C7 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				41E15BA72ED67069001531C7 /* NotificationExtension */,
-			);
-			name = NotificationExtension;
-			packageProductDependencies = (
-			);
-			productName = NotificationExtension;
-			productReference = 41E15BA62ED67069001531C7 /* NotificationExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		7E9159132BBE674100821C05 /* AmazonConnectChatIOSDemo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7E9159382BBE674200821C05 /* Build configuration list for PBXNativeTarget "AmazonConnectChatIOSDemo" */;
@@ -444,7 +391,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				41E15BAC2ED67069001531C7 /* PBXTargetDependency */,
 			);
 			name = AmazonConnectChatIOSDemo;
 			packageProductDependencies = (
@@ -502,9 +448,6 @@
 				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 1510;
 				TargetAttributes = {
-					41E15BA52ED67069001531C7 = {
-						CreatedOnToolsVersion = 26.0.1;
-					};
 					7E9159132BBE674100821C05 = {
 						CreatedOnToolsVersion = 15.1;
 						LastSwiftMigration = 1510;
@@ -539,19 +482,11 @@
 				7E9159132BBE674100821C05 /* AmazonConnectChatIOSDemo */,
 				7E9159232BBE674200821C05 /* AmazonConnectChatIOSDemoTests */,
 				7E91592D2BBE674200821C05 /* AmazonConnectChatIOSDemoUITests */,
-				41E15BA52ED67069001531C7 /* NotificationExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		41E15BA42ED67069001531C7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7E9159122BBE674100821C05 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -578,13 +513,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		41E15BA22ED67069001531C7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7E9159102BBE674100821C05 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -603,6 +531,7 @@
 				7E9159662BBE67D500821C05 /* ContentView.swift in Sources */,
 				7E91596F2BBE67D500821C05 /* NetworkManager.swift in Sources */,
 				7E9159622BBE67D500821C05 /* QuickReplyContentView.swift in Sources */,
+				854FC3D52F204E680093B478 /* CustomClientExamples.swift in Sources */,
 				7E9159702BBE67D500821C05 /* CreateStartChatRequest.swift in Sources */,
 				7E9159682BBE67D500821C05 /* ChatApp.swift in Sources */,
 				4166D1672ED651860058E041 /* ConsoleView.swift in Sources */,
@@ -613,11 +542,9 @@
 				7E9159602BBE67D500821C05 /* TypingIndicator.swift in Sources */,
 				7E9159762BBE67D500821C05 /* HttpMethod.swift in Sources */,
 				F7B4A1242C115455005C7921 /* AttachmentButton.swift in Sources */,
-				856795362F197EAA008F6604 /* CompleteCustomClient.swift in Sources */,
 				4166D1692ED651A70058E041 /* LogEntryView.swift in Sources */,
 				4166D1632ED651630058E041 /* ConsoleLogger.swift in Sources */,
 				7E91596D2BBE67D500821C05 /* CreateStartChatResponse.swift in Sources */,
-				856795342F197EA2008F6604 /* PartialCustomClient.swift in Sources */,
 				7E9159772BBE67D500821C05 /* HttpHeader.swift in Sources */,
 				7E829D4C2C22587B00DCB00E /* AttachmentMessageView.swift in Sources */,
 				7E9159672BBE67D500821C05 /* FloatingButton.swift in Sources */,
@@ -648,11 +575,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		41E15BAC2ED67069001531C7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 41E15BA52ED67069001531C7 /* NotificationExtension */;
-			targetProxy = 41E15BAB2ED67069001531C7 /* PBXContainerItemProxy */;
-		};
 		7E9159262BBE674200821C05 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 7E9159132BBE674100821C05 /* AmazonConnectChatIOSDemo */;
@@ -666,66 +588,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		41E15BB02ED67069001531C7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 94KV3E626L;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NotificationExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = NotificationExtension;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.amazon.connect.chat.NotificationExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		41E15BB12ED67069001531C7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 94KV3E626L;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NotificationExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = NotificationExtension;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.amazon.connect.chat.NotificationExtension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		7E9159362BBE674200821C05 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -857,7 +719,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AmazonConnectChatIOSDemo/Preview Content\"";
-				DEVELOPMENT_TEAM = 94KV3E626L;
+				DEVELOPMENT_TEAM = W3K7RAXNT2;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -921,7 +783,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AmazonConnectChatIOSDemo/Preview Content\"";
-				DEVELOPMENT_TEAM = 94KV3E626L;
+				DEVELOPMENT_TEAM = W3K7RAXNT2;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1047,15 +909,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		41E15BAF2ED67069001531C7 /* Build configuration list for PBXNativeTarget "NotificationExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				41E15BB02ED67069001531C7 /* Debug */,
-				41E15BB12ED67069001531C7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		7E91590F2BBE674100821C05 /* Build configuration list for PBXProject "AmazonConnectChatIOSDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
