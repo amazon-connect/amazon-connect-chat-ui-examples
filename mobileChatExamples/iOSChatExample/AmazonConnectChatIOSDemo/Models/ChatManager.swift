@@ -154,16 +154,6 @@ class ChatManager: ObservableObject {
                 }
                 
                 if let message = item as? Message {
-                    // Check for interactive message with view token
-                    if message.contentType == "application/vnd.amazonaws.connect.message.interactive",
-                       let contentData = message.text.data(using: .utf8),
-                       let contentJson = try? JSONSerialization.jsonObject(with: contentData) as? [String: Any],
-                       let data = contentJson["data"] as? [String: Any],
-                       let content = data["content"] as? [String: Any],
-                       let viewToken = content["viewToken"] as? String {
-                        self.describeView(viewToken: viewToken)
-                    }
-                    
                     // Send message receipt
                     self.chatSession.sendMessageReceipt(for: message, eventType: .messageDelivered)
                 }
@@ -383,7 +373,25 @@ class ChatManager: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):
-                    print("Transcript fetched successfully")                    
+                    print("Transcript fetched successfully")
+                    
+                    // Check if ViewResource messages have content populated
+                    response.transcript
+                        .compactMap { $0 as? Message }
+                        .filter { $0.contentType == "application/vnd.amazonaws.connect.message.interactive" }
+                        .forEach { message in
+                            guard let contentData = message.text.data(using: .utf8),
+                                  let contentJson = try? JSONSerialization.jsonObject(with: contentData) as? [String: Any],
+                                  contentJson["templateType"] as? String == "ViewResource",
+                                  let data = contentJson["data"] as? [String: Any],
+                                  let content = data["content"] as? [String: Any],
+                                  let viewContent = content["content"] as? [String: Any] else {
+                                return
+                            }
+                            
+                            print("ViewResource content: \(viewContent)")
+                        }
+                    
                     onCompletion(true)
                 case .failure(let error):
                     print("Error fetching transcript: \(error.localizedDescription)")

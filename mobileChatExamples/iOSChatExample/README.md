@@ -44,7 +44,7 @@ https://github.com/user-attachments/assets/90622e9a-dcdd-4e12-a0c6-f989338d850e
   - Add `"application/vnd.amazonaws.connect.message.interactive"` to `SupportedMessagingContentTypes` in `CreateStartChatRequest.swift`
   - The demo app automatically parses ViewResource messages and calls `describeView()` to retrieve view metadata
   - View details (ID, Name, ARN) are logged to console for debugging
-  - **Note:** UI rendering for view content is not yet implemented and is planned for future releases
+  - **Note:** This example demonstrates how to retrieve view metadata. Rendering the view UI is left to your application to implement based on your design requirements
 
 ## Local Development
 
