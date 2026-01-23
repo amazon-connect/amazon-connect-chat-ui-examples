@@ -116,7 +116,18 @@ class ChatManager: ObservableObject {
         }
         
         self.chatSession.onMessageReceived = { [weak self] transcriptItem in
-            // This callback can be leveraged if you choose to integrate/handle the transcript on your own.
+            // Log ViewResource if present
+            if let viewResource = transcriptItem.viewResource {
+                print("ViewResource received in onMessageReceived:")
+                print("  - ID: \(viewResource.id ?? "N/A")")
+                print("  - Name: \(viewResource.name ?? "N/A")")
+                print("  - Version: \(viewResource.version ?? 0)")
+                if let content = viewResource.content {
+                    print("  - Has Actions: \(content["Actions"] != nil)")
+                    print("  - Has InputSchema: \(content["InputSchema"] != nil)")
+                    print("  - Has Template: \(content["Template"] != nil)")
+                }
+            }
         }
             
         self.chatSession.onTranscriptUpdated = { [weak self] transcriptData in
