@@ -444,7 +444,7 @@ function startChatContact(body) {
 | `MESSAGING_MARKDOWN` | Enables rich text formatting toolbar (bold, italic, lists, links, emoji) |
 | `ATTACHMENTS` | Enables file attachment upload/download (requires S3 storage configuration in Connect instance) |
 
-> **Note**: If your Lambda doesn't return `featurePermissions`, the widget will fall back to using the `supportedMessagingContentTypes` from the snippet configuration to determine if rich messaging should be enabled.
+> **Note**: If your Lambda doesn't return `featurePermissions`, rich messaging and attachment features will not be enabled in the widget UI, even if `supportedMessagingContentTypes` is configured in the snippet.
 
 ## Enabling message receipts
 
