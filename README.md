@@ -116,6 +116,8 @@ connect.ChatInterface.initiateChat({
 
 To get help setting up your own start chat backend and calling your own backend to start the chat contact instead of the Amazon-hosted backend, follow the instructions in the [startChatContactAPI](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/cloudformationTemplates/startChatContactAPI) section of the Git repository README to create an API to call the StartChatContact API. Once the API is created, you can call it in the CustomStartChat callback function and send the response back in the widget script.
 
+> **Important**: When implementing a custom StartChat backend, ensure your Lambda response includes `featurePermissions` to enable UI features like rich messaging and attachments. See the [startChatContactAPI documentation](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/cloudformationTemplates/startChatContactAPI#using-custom-startchat-implementation) for implementation details.
+
 ```diff
 <script type="text/javascript">
     (function(w, d, x, id){s=d.createElement('script');s.src='https://${apiId}.cloudfront.net/amazon-connect-chat-interface-client.js';s.async=1;s.id=id;d.getElementsByTagName('head')[0].appendChild(s);w[x]=w[x]||function(){(w[x].ac=w[x].ac||[]).push(arguments)}})(window, document, 'amazon_connect', '360f3075-asfd-asfd-asdf-asdf');
@@ -193,6 +195,8 @@ Fully customize the chat interface UI for your website, add a form to collect us
 ![Custom Widget Experience](/.github/screenshots/custom-chat-widget-interface-screenshot.png)
 
 **NOTE:** This approach requires a custom backend to invoke the Amazon Connect Public [StartChatContact](https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html) API. Refer to the [startChatContactAPI CloudFormation Template](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/cloudformationTemplates/startChatContactAPI) to deploy an API Gateway proxy solution.
+
+> **Important**: When implementing a custom backend, ensure your Lambda response includes `featurePermissions` to enable UI features like rich messaging and attachments. See the [startChatContactAPI documentation](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/cloudformationTemplates/startChatContactAPI#using-custom-startchat-implementation) for implementation details.
 
 ![Custom Widget Experience Backend](/.github/screenshots/StartChatContactCFNTemplateArchitecture.png)
 
