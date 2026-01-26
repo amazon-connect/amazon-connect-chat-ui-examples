@@ -359,24 +359,72 @@ If you want to enable sending attachments for Amazon Connect Chat the customer c
 
 Amazon Connect Chat now allows your agents and customers to use rich text formatting when composing a message, enabling them to quickly add emphasis and structure to messages, improving comprehension. The available formatting options include bold, italics, hyperlinks, bulleted lists, and numbered lists. [Documentation](https://docs.aws.amazon.com/connect/latest/adminguide/enable-text-formatting-chat.html)
 
-1. To enable rich messaging, include the new param when invoking `initiateChat`:
+### Using the Pre-built Chat Widget
+
+To enable rich messaging with the pre-built widget, include `supportedMessagingContentTypes` when invoking `initiateChat`:
 
 ```js
-  connect.ChatInterface.initiateChat({
-    contactFlowId: "${contactFlowId}",
-    instanceId: "${instanceId}",
-    // ...
-    supportedMessagingContentTypes: "text/plain,text/markdown", // include 'text/markdown' for rich messaging support
-    featurePermissions: {
-      ATTACHMENTS: false,
-      MESSAGING_MARKDOWN: true
-    }
-  },successHandler, failureHandler)
+connect.ChatInterface.initiateChat({
+  contactFlowId: "${contactFlowId}",
+  instanceId: "${instanceId}",
+  // ...
+  supportedMessagingContentTypes: "text/plain,text/markdown", // include 'text/markdown' for rich messaging support
+},successHandler, failureHandler)
 ```
 
-2. If updating an exisiting CFN stack, the startChatContact lambda function needs to be updated.
+### Using Custom StartChat Implementation
 
-Be sure to pass `supportedMessagingContentTypes` input to `startChatContact()`:
+If you're using a custom Lambda function to call the StartChatContact API (instead of the default CloudFormation template), your Lambda response should include `featurePermissions` to enable UI features:
+
+#### 1. Update your Lambda to return `featurePermissions`
+
+```js
+function buildFeaturePermissions(body) {
+    const featurePermissions = {};
+    const supportedMessagingContentTypes = body["SupportedMessagingContentTypes"];
+    
+    if (supportedMessagingContentTypes && Array.isArray(supportedMessagingContentTypes)) {
+        featurePermissions["MESSAGING_MARKDOWN"] = supportedMessagingContentTypes.includes("text/markdown");
+    }
+    
+    // Note: Set ATTACHMENTS based on your Connect instance storage configuration
+    // featurePermissions["ATTACHMENTS"] = true; // Uncomment if attachments are enabled
+    
+    return featurePermissions;
+}
+
+function buildSuccessfulResponse(result, featurePermissions) {
+    const response = {
+        statusCode: 200,
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Credentials': true,
+            'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'
+        },
+        body: JSON.stringify({
+            data: {
+                startChatResult: result,
+                featurePermissions: featurePermissions  // Include featurePermissions in response
+            }
+        })
+    };
+    return response;
+}
+
+exports.handler = (event, context, callback) => {
+    var body = JSON.parse(event["body"]);
+    
+    startChatContact(body).then((startChatResult) => {
+        const featurePermissions = buildFeaturePermissions(body);
+        callback(null, buildSuccessfulResponse(startChatResult, featurePermissions));
+    }).catch((err) => {
+        callback(null, buildResponseFailed(err));
+    });
+};
+```
+
+#### 2. Ensure `supportedMessagingContentTypes` is passed to StartChatContact
 
 ```js
 function startChatContact(body) {
@@ -388,6 +436,15 @@ function startChatContact(body) {
     })
 }
 ```
+
+#### Feature Permissions Reference
+
+| Feature | Description |
+|---------|-------------|
+| `MESSAGING_MARKDOWN` | Enables rich text formatting toolbar (bold, italic, lists, links, emoji) |
+| `ATTACHMENTS` | Enables file attachment upload/download (requires S3 storage configuration in Connect instance) |
+
+> **Note**: If your Lambda doesn't return `featurePermissions`, rich messaging and attachment features will not be enabled in the widget UI, even if `supportedMessagingContentTypes` is configured in the snippet.
 
 ## Enabling message receipts
 

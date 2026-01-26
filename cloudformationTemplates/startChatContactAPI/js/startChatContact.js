@@ -7,7 +7,8 @@ exports.handler = (event, context, callback) => {
     var body = JSON.parse(event["body"]);
 
     startChatContact(body).then((startChatResult) => {
-        callback(null, buildSuccessfulResponse(startChatResult));
+        const featurePermissions = buildFeaturePermissions(body);
+        callback(null, buildSuccessfulResponse(startChatResult, featurePermissions));
     }).catch((err) => {
         console.log("caught error " + err);
         callback(null, buildResponseFailed(err));
@@ -62,7 +63,22 @@ function startChatContact(body) {
     });
 }
 
-function buildSuccessfulResponse(result) {
+function buildFeaturePermissions(body) {
+    const featurePermissions = {};
+    const supportedMessagingContentTypes = body["SupportedMessagingContentTypes"];
+    
+    if (supportedMessagingContentTypes && Array.isArray(supportedMessagingContentTypes)) {
+        featurePermissions["MESSAGING_MARKDOWN"] = supportedMessagingContentTypes.includes("text/markdown");
+    }
+    
+    // Note: ATTACHMENTS feature is controlled by Connect instance storage configuration
+    // Uncomment and set to true if attachments are enabled on your instance:
+    // featurePermissions["ATTACHMENTS"] = true;
+    
+    return featurePermissions;
+}
+
+function buildSuccessfulResponse(result, featurePermissions) {
     const response = {
         statusCode: 200,
         headers: {
@@ -72,7 +88,10 @@ function buildSuccessfulResponse(result) {
             'Access-Control-Allow-Headers':'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'
         },
         body: JSON.stringify({
-            data: { startChatResult: result }
+            data: { 
+                startChatResult: result,
+                featurePermissions: featurePermissions
+            }
         })
     };
     console.log("RESPONSE" + JSON.stringify(response));
