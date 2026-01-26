@@ -116,16 +116,17 @@ class ChatManager: ObservableObject {
         }
         
         self.chatSession.onMessageReceived = { [weak self] transcriptItem in
-            // Log ViewResource if present
-            if let viewResource = transcriptItem.viewResource {
+            // Log ViewResource if present (only Messages have viewResource)
+            if let message = transcriptItem as? Message,
+               let viewResource = message.viewResource {
                 print("ViewResource received in onMessageReceived:")
                 print("  - ID: \(viewResource.id ?? "N/A")")
-                print("  - Name: \(viewResource.name ?? "N/A")")
-                print("  - Version: \(viewResource.version ?? 0)")
-                if let content = viewResource.content {
-                    print("  - Has Actions: \(content["Actions"] != nil)")
-                    print("  - Has InputSchema: \(content["InputSchema"] != nil)")
-                    print("  - Has Template: \(content["Template"] != nil)")
+                
+                // Extract viewToken and call describeView to get full schema
+                if let content = viewResource.content,
+                   let viewToken = content["viewToken"] as? String {
+                    print("  - Fetching full schema with describeView...")
+                    self?.describeView(viewToken: viewToken)
                 }
             }
         }
@@ -322,13 +323,24 @@ class ChatManager: ObservableObject {
         DispatchQueue.main.async {
             switch result {
             case .success(let viewResource):
-                print("View retrieved successfully")
-                print("View ID: \(viewResource.id ?? "N/A")")
-                print("View Name: \(viewResource.name ?? "N/A")")
-                print("View ARN: \(viewResource.arn ?? "N/A")")
-                print("View Version: \(viewResource.version ?? 0)")
+                print("ViewResource schema fetched successfully:")
+                print("  - ID: \(viewResource.id ?? "N/A")")
+                print("  - Name: \(viewResource.name ?? "N/A")")
+                print("  - ARN: \(viewResource.arn ?? "N/A")")
+                print("  - Version: \(viewResource.version ?? 0)")
                 if let content = viewResource.content {
-                    print("View Content: \(content)")
+                    print("  - Has Actions: \(content["Actions"] != nil)")
+                    print("  - Has InputSchema: \(content["InputSchema"] != nil)")
+                    print("  - Has Template: \(content["Template"] != nil)")
+                    if let actions = content["Actions"] {
+                        print("  - Actions: \(actions)")
+                    }
+                    if let inputSchema = content["InputSchema"] {
+                        print("  - InputSchema: \(inputSchema)")
+                    }
+                    if let template = content["Template"] {
+                        print("  - Template: \(template)")
+                    }
                 }
                 // In a real app, you would render the view content here
             case .failure(let error):
