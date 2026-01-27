@@ -124,7 +124,6 @@ To get help setting up your own start chat backend and calling your own backend 
 
     amazon_connect('styles', { openChat: { color: '#ffffff', backgroundColor: '#07b62a'}, closeChat: { color: '#ffffff', backgroundColor: '#07b62a'} });
     amazon_connect('snippetId', 'replace_with_snippetId');
-    amazon_connect('supportedMessagingContentTypes', [ 'text/plain', 'text/markdown' ]);
     ....
 +   amazon_connect('customStartChat', async function(callback) {
 +         window.fetch('https://replace_with_your_StartChatContact_api_url', {
@@ -136,6 +135,8 @@ To get help setting up your own start chat backend and calling your own backend 
 +                    DisplayName: "replace_with_testing_displayname",
 +                },
 +                SupportedMessagingContentTypes: ["text/plain", "text/markdown"],
++                // Required to enable markdown formatting; defaults to plain text regardless of snippet configuration
++
 +                // Note: Since this request goes to your backend, you can customize the payload structure.
 +                // The above parameters are examples only - you can modify what information is sent from
 +                // the client and handle the actual StartChatContact API parameters on your backend.
@@ -155,6 +156,10 @@ To get help setting up your own start chat backend and calling your own backend 
 +            //          ContactId: string,           // Unique identifier for the chat contact
 +            //          ParticipantId: string,      // Unique identifier for the participant
 +            //          ParticipantToken: string,   // Authentication token for the chat session
++            //      },
++            //      featurePermissions: {
++            //          MESSAGING_MARKDOWN: boolean, // Enable rich text formatting
++            //          ATTACHMENTS: boolean         // Enable file attachments
 +            //      }
 +            //      ...
 +            //    }
@@ -172,6 +177,10 @@ To get help setting up your own start chat backend and calling your own backend 
 +            //         ContactId: string,           // Unique identifier for the chat contact
 +            //         ParticipantId: string,      // Unique identifier for the participant
 +            //         ParticipantToken: string,   // Authentication token for the chat session
++            //     },
++            //     featurePermissions: {            // Optional but recommended
++            //         MESSAGING_MARKDOWN: boolean, // Enable rich text formatting
++            //         ATTACHMENTS: boolean         // Enable file attachments
 +            //     }
 +            // }
 +
