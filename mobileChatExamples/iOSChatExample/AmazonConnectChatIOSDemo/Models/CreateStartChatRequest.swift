@@ -10,7 +10,7 @@ struct CreateStartChatRequest: Codable {
     let contactFlowId: String
     let participantDetails: ParticipantDetails
     let persistantChat: PersistentChat?
-    let SupportedMessagingContentTypes : [String] = ["text/plain", "text/markdown"]
+    let SupportedMessagingContentTypes : [String] = ["text/plain", "text/markdown", "application/vnd.amazonaws.connect.message.interactive"]
 
     enum CodingKeys: String, CodingKey {
         case connectInstanceId = "ConnectInstanceId"

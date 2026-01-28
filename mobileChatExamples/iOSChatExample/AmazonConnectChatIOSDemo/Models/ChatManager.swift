@@ -116,7 +116,18 @@ class ChatManager: ObservableObject {
         }
         
         self.chatSession.onMessageReceived = { [weak self] transcriptItem in
-            // This callback can be leveraged if you choose to integrate/handle the transcript on your own.
+            // Log ViewResource if present
+            if let message = transcriptItem as? Message,
+               let viewContent = message.content as? ViewResourceContent {
+                print("ViewResource received in onMessageReceived:")
+                print("  - ViewID: \(viewContent.viewId ?? "N/A")")
+                
+                // Extract viewToken and call describeView to get full schema
+                if let viewToken = viewContent.content?["viewToken"] as? String {
+                    print("  - Fetching full schema with describeView...")
+                    self?.describeView(viewToken: viewToken)
+                }
+            }
         }
             
         self.chatSession.onTranscriptUpdated = { [weak self] transcriptData in
@@ -294,6 +305,50 @@ class ChatManager: ObservableObject {
         }
     }
     
+    /// Retrieves a view resource object for rendering interactive views
+    /// - Parameter viewToken: An encrypted token from a ShowView block operation
+    func describeView(viewToken: String) {
+        guard let chatSession = self.chatSession as? ChatSession else {
+            self.error = ErrorMessage(message: "Chat session not available")
+            return
+        }
+        chatSession.describeView(viewToken: viewToken) { [weak self] result in
+            self?.handleDescribeViewResult(result)
+        }
+    }
+    
+    // Handles the result of describing a view
+    private func handleDescribeViewResult(_ result: Result<ViewResource, Error>) {
+        DispatchQueue.main.async {
+            switch result {
+            case .success(let viewResource):
+                print("ViewResource schema fetched successfully:")
+                print("  - ID: \(viewResource.id ?? "N/A")")
+                print("  - Name: \(viewResource.name ?? "N/A")")
+                print("  - ARN: \(viewResource.arn ?? "N/A")")
+                print("  - Version: \(viewResource.version ?? 0)")
+                if let content = viewResource.content {
+                    print("  - Has Actions: \(content["Actions"] != nil)")
+                    print("  - Has InputSchema: \(content["InputSchema"] != nil)")
+                    print("  - Has Template: \(content["Template"] != nil)")
+                    if let actions = content["Actions"] {
+                        print("  - Actions: \(actions)")
+                    }
+                    if let inputSchema = content["InputSchema"] {
+                        print("  - InputSchema: \(inputSchema)")
+                    }
+                    if let template = content["Template"] {
+                        print("  - Template: \(template)")
+                    }
+                }
+                // In a real app, you would render the view content here
+            case .failure(let error):
+                print("Error retrieving view: \(error.localizedDescription)")
+                self.error = ErrorMessage(message: "Error retrieving view: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     /// Resends a failed message using the SDK's resendFailedMessage API
     func resendFailedMessage(messageId: String) {
         self.chatSession.resendFailedMessage(messageId: messageId) { [weak self] result in
@@ -340,7 +395,25 @@ class ChatManager: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):
-                    print("Transcript fetched successfully")                    
+                    print("Transcript fetched successfully")
+                    
+                    // Check if ViewResource messages have content populated
+                    response.transcript
+                        .compactMap { $0 as? Message }
+                        .filter { $0.contentType == "application/vnd.amazonaws.connect.message.interactive" }
+                        .forEach { message in
+                            guard let contentData = message.text.data(using: .utf8),
+                                  let contentJson = try? JSONSerialization.jsonObject(with: contentData) as? [String: Any],
+                                  contentJson["templateType"] as? String == "ViewResource",
+                                  let data = contentJson["data"] as? [String: Any],
+                                  let content = data["content"] as? [String: Any],
+                                  let viewContent = content["content"] as? [String: Any] else {
+                                return
+                            }
+                            
+                            print("ViewResource content: \(viewContent)")
+                        }
+                    
                     onCompletion(true)
                 case .failure(let error):
                     print("Error fetching transcript: \(error.localizedDescription)")

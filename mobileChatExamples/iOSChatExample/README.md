@@ -40,6 +40,12 @@ https://github.com/user-attachments/assets/90622e9a-dcdd-4e12-a0c6-f989338d850e
 - (Optional) Setup interactive messages [guide](https://aws.amazon.com/blogs/contact-center/easily-set-up-interactive-messages-for-your-amazon-connect-chatbot/)
   - If using above, make sure to deploy startChatContact template again with interactive message `contactFlowId` and update down the endpoints.
 
+- (Optional) Setup DescribeView API for ViewResource messages
+  - Add `"application/vnd.amazonaws.connect.message.interactive"` to `SupportedMessagingContentTypes` in `CreateStartChatRequest.swift`
+  - The demo app automatically parses ViewResource messages and calls `describeView()` to retrieve view metadata
+  - View details (ID, Name, ARN) are logged to console for debugging
+  - **Note:** This example demonstrates how to retrieve view metadata. Rendering the view UI is left to your application to implement based on your design requirements
+
 ## Local Development
 
 > Versions: Xcode 15, Swift 5
