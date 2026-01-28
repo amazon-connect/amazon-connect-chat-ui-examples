@@ -116,15 +116,14 @@ class ChatManager: ObservableObject {
         }
         
         self.chatSession.onMessageReceived = { [weak self] transcriptItem in
-            // Log ViewResource if present (only Messages have viewResource)
+            // Log ViewResource if present
             if let message = transcriptItem as? Message,
-               let viewResource = message.viewResource {
+               let viewContent = message.content as? ViewResourceContent {
                 print("ViewResource received in onMessageReceived:")
-                print("  - ID: \(viewResource.id ?? "N/A")")
+                print("  - ViewID: \(viewContent.viewId ?? "N/A")")
                 
                 // Extract viewToken and call describeView to get full schema
-                if let content = viewResource.content,
-                   let viewToken = content["viewToken"] as? String {
+                if let viewToken = viewContent.content?["viewToken"] as? String {
                     print("  - Fetching full schema with describeView...")
                     self?.describeView(viewToken: viewToken)
                 }

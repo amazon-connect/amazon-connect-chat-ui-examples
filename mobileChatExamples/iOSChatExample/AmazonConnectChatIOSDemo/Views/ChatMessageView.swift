@@ -35,6 +35,17 @@ struct ChatMessageView: View {
                                 QuickReplyContentView(message: message, chatManager: chatManager, messageC: quickReplyContent)
                             } else if let listPickerContent = content as? ListPickerContent {
                                 ListPickerContentView(message: message, chatManager: chatManager, content: listPickerContent)
+                            } else if let viewResourceContent = content as? ViewResourceContent {
+                                VStack(alignment: .leading, spacing: 8) {
+                                    Text("View: \(viewResourceContent.viewId ?? "Unknown")")
+                                        .font(.caption)
+                                        .foregroundColor(.gray)
+                                    Text("Check console for full schema")
+                                        .font(.caption2)
+                                }
+                                .padding()
+                                .background(Color.blue.opacity(0.1))
+                                .cornerRadius(8)
                             } else {
                                 Text("Unsupported message type, View is missing")
                             }
