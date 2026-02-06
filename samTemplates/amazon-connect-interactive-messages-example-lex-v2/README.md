@@ -71,9 +71,19 @@ Interactive messages are pre-configured responses that your users can select fro
 
 ### 6. Test the Setup
 
+**Option A: Without Message Streaming (Test Chat)**
+
 1. Visit `https://<YOUR-INSTANCE>.my.connect.aws/test-chat`.
 2. Open settings and set it to use your new contact flow: "InteractiveMessaging".
 3. Launch the chat widget and type `help` to test the interaction.
+
+**Option B: With Message Streaming (Hosted Widget)**
+
+> **Note:** If you have message streaming enabled, you cannot use Test Chat. You must use the Hosted Widget instead.
+
+1. [Set up the hosted widget](https://docs.aws.amazon.com/connect/latest/adminguide/add-chat-to-website.html) for your Amazon Connect instance.
+2. Configure the widget to use your "InteractiveMessaging" contact flow.
+3. Launch the hosted widget and type `help` to test the interaction.
 
 ![Lex Bot Message on Test Chat Page](https://github.com/amazon-connect/amazon-connect-chat-ui-examples/blob/master/samTemplates/amazon-connect-interactive-messages-example-lex-v2/docs/TestChatPageExample.png)
 
