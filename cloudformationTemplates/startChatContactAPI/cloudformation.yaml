@@ -74,7 +74,10 @@ Resources:
     Condition: IsAllowedRegion
     Properties:
       CompatibleRuntimes:
-        - "nodejs18.x"
+        # Lambda Node.js runtime releases: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+        - "nodejs22.x" # until Apr 30, 2027
+        - "nodejs20.x" # until Apr 30, 2026
+        - "nodejs18.x" # until Sep 1, 2025
         - "nodejs16.x"
       Content:
         S3Bucket: !Join
@@ -95,7 +98,8 @@ Resources:
       Description: AWS Lambda Function to initiate the chat with the end user
       Handler: "startChatContact.handler"
       Role: !GetAtt StartChatLambdaExecutionRole.Arn
-      Runtime: "nodejs18.x"
+      # Lambda Node.js runtime releases: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+      Runtime: "nodejs22.x" # until Apr 30, 2027
       MemorySize: 128
       Timeout: 30
       Layers:
@@ -261,7 +265,8 @@ Resources:
       Handler: customResourceHelper.handler
       MemorySize: 256
       Role: !GetAtt CustomResourceHelperIamRole.Arn
-      Runtime: "nodejs18.x"
+      # Lambda Node.js runtime releases: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+      Runtime: "nodejs22.x" # until Apr 30, 2027
       Timeout: 300
 
   CustomResourceHelperIamRole:
@@ -307,6 +312,7 @@ Resources:
   SolutionAnonymousMetric:
     Type: "Custom::LoadLambda"
     Condition: AnonymousUsageMetrics
+    DependsOn: SolutionUuid
     Properties:
       ServiceToken:
         Fn::GetAtt:
