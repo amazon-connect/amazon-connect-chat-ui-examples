@@ -9,7 +9,7 @@ Metadata:
     Author: Amazon Connect Messaging
     SpdxLicenseId: MIT-0
     LicenseUrl: s3://amazon-connect-interactive-message-blog-assets-lex-v2/b974f276fb24c64a763c529eb1fd9a05
-    ReadmeUrl: s3://amazon-connect-interactive-message-blog-assets-lex-v2/55deff029765dcc1c4918a9573e3b6d7
+    ReadmeUrl: s3://amazon-connect-interactive-message-blog-assets-lex-v2/9f0102c2d8c6e2f2f29edc1bc8dcb98a
     Labels:
     - connect
     - chat
@@ -20,7 +20,7 @@ Metadata:
     - bot
     - lex-v2
     HomePageUrl: https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/samTemplates/amazon-connect-interactive-messages-example-lex-v2
-    SemanticVersion: 2.0.1
+    SemanticVersion: 2.0.2
     SourceCodeUrl: https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/samTemplates/amazon-connect-interactive-messages-example-lex-v2
 Globals:
   Function:
@@ -29,9 +29,9 @@ Resources:
   InteractiveMessagingLambdaFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://amazon-connect-interactive-message-blog-assets-lex-v2/b4a4ab219d54e6c1daf877f8ad1c43ac
+      CodeUri: s3://amazon-connect-interactive-message-blog-assets-lex-v2/bddeba7332306200492579b7a378933c
       Handler: app.lambdaHandler
-      Runtime: nodejs18.x
+      Runtime: nodejs22.x
     Metadata:
       SamResourceId: InteractiveMessagingLambdaFunction
 Outputs:
