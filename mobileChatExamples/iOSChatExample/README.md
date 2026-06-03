@@ -48,7 +48,7 @@ https://github.com/user-attachments/assets/90622e9a-dcdd-4e12-a0c6-f989338d850e
 
 ## Local Development
 
-> Versions: Xcode 15, Swift 5
+> Versions: Xcode 26.5, Swift 6.3.2
 <br> Download Xcode: https://developer.apple.com/xcode/
 
 1. Clone this repository: https://github.com/amazon-connect/amazon-connect-chat-ui-examples/tree/master/
@@ -208,8 +208,8 @@ private func setupChatSessionHandlers(chatSession: ChatSessionProtocol) {
 
 ### Technical Specifications
 
-- Language: Swift 5.x
-- Xcode : 15
+- Language: Swift 6.3.2
+- Xcode : 26.5
 - iOS: iOS 16 and Higher (⚠️ Required)
 - Frameworks:
   - SwiftUI: For UI components and layout.
