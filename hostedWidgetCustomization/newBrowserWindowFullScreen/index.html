@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+  <script>
+    // Get the current URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Check if "embeddedWidget" is present and set to "true"
+    if (urlParams.get('embeddedWidget') === 'true') {
+      const style = document.createElement('style');
+      style.textContent = `
+      #amazon-connect-chat-widget {
+        position: fixed !important;
+        z-index: 1000 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 100vh !important;
+      }
+
+      #amazon-connect-chat-widget [class*="acWidgetContainer-"] {
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        display: block !important;
+        max-height: 100vh !important;
+        max-width: 100% !important;
+        height: 100vh !important;
+        width: 100% !important;
+        min-width: 100% !important;
+        overflow: hidden !important;
+      }
+
+      #amazon-connect-chat-widget [class*="acFrameContainer-"] {
+        position: absolute !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        display: block !important;
+        max-height: 100vh !important;
+        max-width: 100% !important;
+        height: 100vh !important;
+        width: 100% !important;
+        min-width: 100% !important;
+        border: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      #amazon-connect-chat-widget-iframe {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        border: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+    `;
+      document.head.appendChild(style);
+    }
+  </script>
+
+</head>
+
+<body>
+  <header>
+    <h1>Company Website</h1>
+  </header>
+
+  <div class="container">
+    <div class="header">
+      <h1>Contact Us</h1>
+      <p>Have any questions? We'd love to hear from you.</p>
+    </div>
+    <div class="content">
+      <div class="card">
+        <h2>Help & Support</h2>
+        <p>
+          Our support team is spread across the globe to give you answers
+          fast.
+        </p>
+        <button id="launch-widget-btn">Launch a Chat</button>
+        <p>OR</p>
+        <br />
+        <a target="_blank" href="/?embeddedWidget=true">/?embeddedWidget=true</a>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+  // Function to check if URL parameter exists
+  function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+  }
+
+  // Check if we're in embedded widget mode
+  if (getUrlParameter('embeddedWidget') === 'true') {
+    // YOUR HOSTED WIDGET SNIPPET CODE
+    // (function (w, d, x, id) {
+    //   s = d.createElement('script');
+    //   s.src = 'example.com';
+    //   s.async = 1;
+    //   s.id = id;
+    //   d.getElementsByTagName('head')[0].appendChild(s);
+    //   w[x] = w[x] || function () { (w[x].ac = w[x].ac || []).push(arguments) };
+    // })(window, document, 'amazon_connect', '<widgetId>');
+    // amazon_connect('styles', { iconType: 'CHAT', openChat: { color: '#ffffff', backgroundColor: '#123456' }, closeChat: { color: '#ffffff', backgroundColor: '#123456' } });
+    // amazon_connect('snippetId', '<snippetId>');
+    // amazon_connect('supportedMessagingContentTypes', ['text/plain', 'text/markdown', 'application/vnd.amazonaws.connect.message.interactive', 'application/vnd.amazonaws.connect.message.interactive.response']);
+
+    // 1. Auto-launch the window right when it loads
+    // https://docs.aws.amazon.com/connect/latest/adminguide/customize-widget-launch.html#load-assets
+    amazon_connect("customLaunchBehavior", {
+      skipIconButtonAndAutoLaunch: true,
+      alwaysHideWidgetButton: true,
+    });
+
+    // Full screen Embedded
+    // https://docs.aws.amazon.com/connect/latest/adminguide/pass-custom-styles.html
+    amazon_connect('customStyles', {
+      global: {
+        // frameWidth: '0',
+        // frameHeight: '0',
+        //  headerHeight: '120px'
+      },
+    });
+
+    // 2. ADDITIONAL CODE
+    // Reconnect to an ongoing chat
+    // Note, must be 'persistedChatSession' to work
+    // https://docs.aws.amazon.com/connect/latest/adminguide/customize-widget-launch.html#chat-persistence-across-tabs
+    amazon_connect('registerCallback', {
+      'CONNECTION_ESTABLISHED': (eventName, { chatDetails, data }) => {
+        document.cookie = `activeChat=${sessionStorage.getItem("persistedChatSession")}; SameSite=None; Secure`;
+      },
+      'CHAT_ENDED': () => {
+        document.cookie = "activeChat=; SameSite=None; Secure";
+      }
+    });
+    const cookie = document.cookie.split('; ').find(c => c.startsWith('activeChat='));
+    if (cookie) {
+      const activeChatValue = cookie.split('=')[1];
+      sessionStorage.setItem('persistedChatSession', activeChatValue);
+    }
+
+  }
+
+  // Function to open a new browser window with specified URL and dimensions
+  function openNewWindow() {
+    var url = `${window.location.href}?embeddedWidget=true`;
+
+    // Define the width and height
+    var width = 300;
+    var height = 540;
+
+    // Calculate the left and top position to center the window
+    var left = (window.innerWidth - width) / 2;
+    var top = (window.innerHeight - height) / 2;
+
+    // Open the new window with the specified URL, dimensions, and position
+    var newWindow = window.open(
+      url,
+      "",
+      `width=${width}, height=${height}, left=${left}, top=${top}`,
+    );
+  }
+
+  // Attach a click event listener to the button
+  document
+    .getElementById("launch-widget-btn")
+    .addEventListener("click", openNewWindow);
+</script>
+
+</html>
