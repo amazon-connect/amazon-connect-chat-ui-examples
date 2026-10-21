@@ -7,7 +7,7 @@
  */
 
 import Foundation
-import AWSCore
+import AmazonConnectChatIOS
 
 class Config: ObservableObject {
     @Published var startChatEndPoint: String = ""

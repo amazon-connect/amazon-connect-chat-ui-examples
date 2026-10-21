@@ -3,7 +3,6 @@
 
 import Foundation
 import AmazonConnectChatIOS
-import AWSConnectParticipant
 
 // MARK: - Partial Custom Client
 
