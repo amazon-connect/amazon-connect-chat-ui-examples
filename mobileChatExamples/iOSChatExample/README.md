@@ -96,7 +96,7 @@ Before using the `chatSession` object, we need to set the config for it via the 
 
 ```swift
 init() {
-    let globalConfig = GlobalConfig(region: .USEast1)
+    let globalConfig = GlobalConfig(region: .usEast1)
     self.chatSession = ChatSession.shared
     chatSession.configure(config: globalConfig)
     ...
