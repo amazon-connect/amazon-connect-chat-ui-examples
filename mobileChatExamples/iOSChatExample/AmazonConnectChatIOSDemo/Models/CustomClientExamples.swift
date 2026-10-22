@@ -35,7 +35,7 @@ class PartialCustomClient: AWSClient {
     }
     
     // Override only sendMessage - add custom behavior then call parent
-    override func sendMessage(connectionToken: String, contentType: ContentType, message: String, completion: @escaping (Result<AWSConnectParticipantSendMessageResponse, Error>) -> Void) {
+    override func sendMessage(connectionToken: String, contentType: ContentType, message: String, completion: @escaping (Result<SendMessageOutput, Error>) -> Void) {
         // CUSTOM LOGIC: Add message filtering, logging, analytics, etc.
         print("[Custom Client] Sending message")
         
@@ -81,7 +81,7 @@ class CompleteCustomClient: AWSClient {
         super.createParticipantConnection(participantToken: participantToken, completion: completion)
     }
     
-    override func sendMessage(connectionToken: String, contentType: ContentType, message: String, completion: @escaping (Result<AWSConnectParticipantSendMessageResponse, Error>) -> Void) {
+    override func sendMessage(connectionToken: String, contentType: ContentType, message: String, completion: @escaping (Result<SendMessageOutput, Error>) -> Void) {
         // CUSTOM LOGIC: Add your proxy routing and custom headers here
         // Example: Add WAF tokens, authentication headers, etc.
         print("[Custom Client] sendMessage - add custom headers here")
@@ -90,7 +90,7 @@ class CompleteCustomClient: AWSClient {
         super.sendMessage(connectionToken: connectionToken, contentType: contentType, message: message, completion: completion)
     }
     
-    override func sendEvent(connectionToken: String, contentType: ContentType, content: String, completion: @escaping (Result<AWSConnectParticipantSendEventResponse, Error>) -> Void) {
+    override func sendEvent(connectionToken: String, contentType: ContentType, content: String, completion: @escaping (Result<SendEventOutput, Error>) -> Void) {
         // CUSTOM LOGIC: Add your proxy routing here
         print("[Custom Client] sendEvent")
         
@@ -98,7 +98,7 @@ class CompleteCustomClient: AWSClient {
         super.sendEvent(connectionToken: connectionToken, contentType: contentType, content: content, completion: completion)
     }
     
-    override func getTranscript(getTranscriptArgs: AWSConnectParticipantGetTranscriptRequest, completion: @escaping (Result<AWSConnectParticipantGetTranscriptResponse, Error>) -> Void) {
+    override func getTranscript(getTranscriptArgs: GetTranscriptInput, completion: @escaping (Result<GetTranscriptOutput, Error>) -> Void) {
         // CUSTOM LOGIC: Add your proxy routing here
         print("[Custom Client] getTranscript")
         
@@ -106,7 +106,7 @@ class CompleteCustomClient: AWSClient {
         super.getTranscript(getTranscriptArgs: getTranscriptArgs, completion: completion)
     }
     
-    override func disconnectParticipantConnection(connectionToken: String, completion: @escaping (Result<AWSConnectParticipantDisconnectParticipantResponse, Error>) -> Void) {
+    override func disconnectParticipantConnection(connectionToken: String, completion: @escaping (Result<DisconnectParticipantOutput, Error>) -> Void) {
         // CUSTOM LOGIC: Add your proxy routing here
         print("[Custom Client] disconnectParticipantConnection")
         
@@ -114,7 +114,7 @@ class CompleteCustomClient: AWSClient {
         super.disconnectParticipantConnection(connectionToken: connectionToken, completion: completion)
     }
     
-    override func startAttachmentUpload(connectionToken: String, contentType: String, attachmentName: String, attachmentSizeInBytes: Int, completion: @escaping (Result<AWSConnectParticipantStartAttachmentUploadResponse, Error>) -> Void) {
+    override func startAttachmentUpload(connectionToken: String, contentType: String, attachmentName: String, attachmentSizeInBytes: Int, completion: @escaping (Result<StartAttachmentUploadOutput, Error>) -> Void) {
         // CUSTOM LOGIC: Add your proxy routing here
         print("[Custom Client] startAttachmentUpload")
         
@@ -122,7 +122,7 @@ class CompleteCustomClient: AWSClient {
         super.startAttachmentUpload(connectionToken: connectionToken, contentType: contentType, attachmentName: attachmentName, attachmentSizeInBytes: attachmentSizeInBytes, completion: completion)
     }
     
-    override func completeAttachmentUpload(connectionToken: String, attachmentIds: [String], completion: @escaping (Result<AWSConnectParticipantCompleteAttachmentUploadResponse, Error>) -> Void) {
+    override func completeAttachmentUpload(connectionToken: String, attachmentIds: [String], completion: @escaping (Result<CompleteAttachmentUploadOutput, Error>) -> Void) {
         // CUSTOM LOGIC: Add your proxy routing here
         print("[Custom Client] completeAttachmentUpload")
         
@@ -130,7 +130,7 @@ class CompleteCustomClient: AWSClient {
         super.completeAttachmentUpload(connectionToken: connectionToken, attachmentIds: attachmentIds, completion: completion)
     }
     
-    override func getAttachment(connectionToken: String, attachmentId: String, completion: @escaping (Result<AWSConnectParticipantGetAttachmentResponse, Error>) -> Void) {
+    override func getAttachment(connectionToken: String, attachmentId: String, completion: @escaping (Result<GetAttachmentOutput, Error>) -> Void) {
         // CUSTOM LOGIC: Add your proxy routing here
         print("[Custom Client] getAttachment")
         
