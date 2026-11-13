@@ -36,8 +36,6 @@
 		7E9159772BBE67D500821C05 /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E91595D2BBE67D500821C05 /* HttpHeader.swift */; };
 		7E9159782BBE67D500821C05 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E91595E2BBE67D500821C05 /* HttpClient.swift */; };
 		7E9159792BBE67D500821C05 /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E91595F2BBE67D500821C05 /* CommonUtils.swift */; };
-		7EC369E42C405D620039CA2D /* AWSConnectParticipant in Frameworks */ = {isa = PBXBuildFile; productRef = 7EC369E32C405D620039CA2D /* AWSConnectParticipant */; };
-		7EC369E62C405D620039CA2D /* AWSCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7EC369E52C405D620039CA2D /* AWSCore */; };
 		7EFB7A342C210E7700D6B9EE /* AttachmentTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB7A332C210E7700D6B9EE /* AttachmentTextView.swift */; };
 		854FC3D52F204E680093B478 /* CustomClientExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854FC3D42F204E680093B478 /* CustomClientExamples.swift */; };
 		F712DCA62BCF4A28009FC568 /* NetworkConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F712DCA52BCF4A28009FC568 /* NetworkConnectionManager.swift */; };
@@ -163,8 +161,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EC369E62C405D620039CA2D /* AWSCore in Frameworks */,
-				7EC369E42C405D620039CA2D /* AWSConnectParticipant in Frameworks */,
 				417B162D2ED11E480078618E /* AmazonConnectChatIOS in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,8 +390,6 @@
 			);
 			name = AmazonConnectChatIOSDemo;
 			packageProductDependencies = (
-				7EC369E32C405D620039CA2D /* AWSConnectParticipant */,
-				7EC369E52C405D620039CA2D /* AWSCore */,
 				417B162C2ED11E480078618E /* AmazonConnectChatIOS */,
 			);
 			productName = iOSChatExample;
@@ -472,7 +466,6 @@
 			);
 			mainGroup = 7E91590B2BBE674100821C05;
 			packageReferences = (
-				7EC369E22C405D620039CA2D /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */,
 				417B16262ED117650078618E /* XCRemoteSwiftPackageReference "amazon-connect-chat-ios" */,
 			);
 			productRefGroup = 7E9159152BBE674100821C05 /* Products */;
@@ -724,7 +717,6 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/AWSCore\"",
 					"$(PROJECT_DIR)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
@@ -745,8 +737,6 @@
 					"$(inherited)",
 					"-l\"sqlite3\"",
 					"-l\"z\"",
-					"-framework",
-					"\"AWSCore\"",
 					"-framework",
 					"\"CoreGraphics\"",
 					"-framework",
@@ -787,7 +777,6 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/AWSCore\"",
 					"$(PROJECT_DIR)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
@@ -808,8 +797,6 @@
 					"$(inherited)",
 					"-l\"sqlite3\"",
 					"-l\"z\"",
-					"-framework",
-					"\"AWSCore\"",
 					"-framework",
 					"\"CoreGraphics\"",
 					"-framework",
@@ -954,14 +941,6 @@
 				kind = branch;
 			};
 		};
-		7EC369E22C405D620039CA2D /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/aws-amplify/aws-sdk-ios-spm";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.36.4;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -969,16 +948,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 417B16262ED117650078618E /* XCRemoteSwiftPackageReference "amazon-connect-chat-ios" */;
 			productName = AmazonConnectChatIOS;
-		};
-		7EC369E32C405D620039CA2D /* AWSConnectParticipant */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7EC369E22C405D620039CA2D /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
-			productName = AWSConnectParticipant;
-		};
-		7EC369E52C405D620039CA2D /* AWSCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7EC369E22C405D620039CA2D /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */;
-			productName = AWSCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

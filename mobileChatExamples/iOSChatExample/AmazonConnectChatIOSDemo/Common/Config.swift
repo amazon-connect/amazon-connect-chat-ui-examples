@@ -7,13 +7,13 @@
  */
 
 import Foundation
-import AWSCore
+import AmazonConnectChatIOS
 
 class Config: ObservableObject {
     @Published var startChatEndPoint: String = ""
     @Published var instanceId: String = ""
     @Published var contactFlowId: String = ""
-    @Published var region: AWSRegionType = .USWest2 // .USEast1 :https://docs.aws.amazon.com/general/latest/gr/rande.html
+    @Published var region: Region = .usWest2 // .usEast1 :https://docs.aws.amazon.com/general/latest/gr/rande.html
     @Published var agentName = "Agent"
     @Published var customerName = "Customer"
     
