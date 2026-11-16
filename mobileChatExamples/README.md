@@ -38,7 +38,7 @@ The Native SDKs for [Android](https://github.com/amazon-connect/amazon-connect-c
 | Platform    | Configuration Steps                                                                                                                                                                                                                 |
 | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Android** | Add the SDK via `build.gradle`, design custom layouts using XML or Jetpack Compose, and implement networking with libraries like Retrofit or OkHttp. Dependency injection (e.g., Hilt or Dagger) can simplify component management. |
-| **iOS**     | Install the SDK via CocoaPods or Swift Package Manager, build interfaces with SwiftUI or UIKit, and use the `StartChatContact` API to initiate and manage the chat session.                                                         |
+| **iOS**     | Install the SDK via Swift Package Manager, build interfaces with SwiftUI or UIKit, and use the `StartChatContact` API to initiate and manage the chat session.                                                                      |
 
 ---
 
