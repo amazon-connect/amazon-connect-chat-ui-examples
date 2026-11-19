@@ -80,8 +80,8 @@ struct AttachmentMessageView: View {
             
             if message.messageDirection == .Outgoing, let metadata = message.metadata {
                 HStack(spacing: 2) {
-                    // Show status for recent outgoing message, failed messages, or sending messages
-                    if message.id == recentOutgoingMessageID || metadata.status == .Failed || metadata.status == .Sending {
+                    // Show status for recent outgoing message, failed messages, sending messages, delivered messages, or read messages
+                    if message.id == recentOutgoingMessageID || metadata.status == .Failed || metadata.status == .Sending || metadata.status == .Delivered || metadata.status == .Read {
                         Text(CommonUtils.customMessageStatus(for: metadata.status)).font(.caption2).foregroundColor(.gray)
                         
                         // Show retry button for failed attachments
